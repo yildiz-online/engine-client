@@ -25,10 +25,7 @@
 
 package be.yildiz.client.game.engine;
 
-import be.yildiz.client.building.ClientBuilding;
-import be.yildiz.client.building.ClientBuildingData;
 import be.yildiz.client.entity.ClientEntity;
-import be.yildiz.client.entity.ClientEntityData;
 import be.yildiz.client.game.engine.gui.TranslatedGuiBuilder;
 import be.yildiz.common.Color;
 import be.yildiz.common.Size;
@@ -71,9 +68,7 @@ import java.util.List;
  *
  * @author Grégory Van den Borre
  */
-public final class GameEngine
-        extends AbstractGameEngine<ClientEntity, ClientBuilding, ClientBuildingData, ClientEntityData>
-        implements MessageSender {
+public final class GameEngine extends AbstractGameEngine implements MessageSender {
 
 
     /**
