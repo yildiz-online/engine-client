@@ -221,6 +221,7 @@ public class ClientEntity implements Entity {
         return this.entity.move(dest);
     }
 
+    @Override
     public void startAction(Action a) {
         this.entity.startAction(a);
     }
@@ -321,6 +322,7 @@ public class ClientEntity implements Entity {
 
     }
 
+    @Override
     public Movable getMaterialization() {
         return this.entity.getMaterialization();
     }

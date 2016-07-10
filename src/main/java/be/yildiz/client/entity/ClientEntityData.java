@@ -52,6 +52,7 @@ public class ClientEntityData implements ClientConstructionData, EntityData {
 
     private final ClientEntityGuiMaterialization guiMaterialization;
 
+    @Override
     public Key getNameKey() {
         return this.guiMaterialization.getNameKey();
     }
@@ -100,8 +101,7 @@ public class ClientEntityData implements ClientConstructionData, EntityData {
 
     @Override
     public TimeToBuild getTimeToBuild() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.data.getTimeToBuild();
     }
 
     @Override

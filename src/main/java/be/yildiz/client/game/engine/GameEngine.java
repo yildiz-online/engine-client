@@ -467,6 +467,7 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
      *
      * @param message Message to send to the server.
      */
+    @Override
     public void sendMessage(final ServerRequest message) {
         this.networkEngine.sendMessage(message);
     }

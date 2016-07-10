@@ -56,6 +56,7 @@ class GuiWrapper<T extends Element> implements Element {
         return this;
     }
 
+    @Override
     public final Element setVisible(boolean visible) {
         this.wrapped.setVisible(visible);
         return this;
