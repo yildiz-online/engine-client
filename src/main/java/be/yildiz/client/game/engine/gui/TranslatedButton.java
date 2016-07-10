@@ -35,15 +35,22 @@ import be.yildiz.module.graphic.Material;
 import be.yildiz.module.graphic.gui.*;
 
 /**
+ * Decorate a button with the ability to translate the text.
  * @author Grégory Van den Borre
  */
 public class TranslatedButton extends TranslatedContainerElementWrapper<Button> implements Button {
 
+    /**
+     * Associated button.
+     */
     private final Button button;
 
+    /**
+     * Component to translate the button text.
+     */
     private final Translation translation;
 
-    TranslatedButton(Button button, Translation translation) {
+    TranslatedButton(final Button button, final Translation translation) {
         super(button);
         this.button = button;
         this.translation = translation;
@@ -72,13 +79,13 @@ public class TranslatedButton extends TranslatedContainerElementWrapper<Button> 
     }
 
     @Override
-    public void setCaptionFont(Font font) {
+    public void setCaptionFont(final Font font) {
         this.button.setCaptionFont(font);
     }
 
     @Override
-    public void setMaterial(ButtonMaterial material) {
-
+    public void setMaterial(final ButtonMaterial material) {
+        this.button.setMaterial(material);
     }
 
     @Override
