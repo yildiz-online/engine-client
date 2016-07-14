@@ -32,41 +32,83 @@ import be.yildiz.module.graphic.gui.GuiContainer;
 import be.yildiz.module.graphic.gui.button.ButtonBuilder;
 
 /**
+ * Build a translated button.
  * @author Grégory Van den Borre
  */
 public class TranslatedButtonBuilder {
 
+    /**
+     * Gui builder to create the effective widget.
+     */
     private final TranslatedGuiBuilder builder;
 
+    /**
+     * Decorated builder to create the wrapped button.
+     */
     private final ButtonBuilder buttonBuilder;
 
+    /**
+     * Create a new TranslatedButtonBuilder to build a TranslatedButton.
+     * @param builder Factory creating the effective widget.
+     * @throws NullPointerException if builder is null.
+     */
     public TranslatedButtonBuilder(TranslatedGuiBuilder builder) {
         super();
         this.builder = builder;
         this.buttonBuilder = new ButtonBuilder(builder.getGuiBuilder());
     }
 
+    /**
+     * Set a name to the button to build.
+     * @param name Name to set, must be unique among the existing buttons.
+     * @return This object for chaining.
+     * @throws NullPointerException if name is null.
+     */
     public TranslatedButtonBuilder withName(final String name) {
         this.buttonBuilder.withName(name);
         return this;
     }
 
-    public TranslatedButtonBuilder withMaterials(final ButtonMaterial m) {
-        this.buttonBuilder.withButtonMaterial(m);
+    /**
+     * Set the different materials to the button to build.
+     * @param materials Materials to set as background, highlight and inactive states.
+     * @return This object for chaining.
+     * @throws NullPointerException if materials is null.
+     */
+    public TranslatedButtonBuilder withMaterials(final ButtonMaterial materials) {
+        this.buttonBuilder.withButtonMaterial(materials);
         return this;
     }
 
-    public TranslatedButtonBuilder withSize(final Size s) {
-        this.buttonBuilder.withSize(s);
+    /**
+     * Set the size of the button to build.
+     * @param size Size values.
+     * @return This object for chaining.
+     * @throws NullPointerException if size is null.
+     */
+    public TranslatedButtonBuilder withSize(final Size size) {
+        this.buttonBuilder.withSize(size);
         return this;
     }
 
-    public TranslatedButtonBuilder atPosition(final Position p) {
-        this.buttonBuilder.atPosition(p);
+    /**
+     * Set the position of the button to build.
+     * @param position Position values.
+     * @return This object for chaining.
+     * @throws NullPointerException if position is null.
+     */
+    public TranslatedButtonBuilder atPosition(final Position position) {
+        this.buttonBuilder.atPosition(position);
         return this;
     }
 
-    public TranslatedButton build(final GuiContainer c) {
-        return this.builder.buildButton(this.buttonBuilder.build(c));
+    /**
+     * Create the effective TranslatedButton from the provided informations.
+     * @param container Container to hold the created button.
+     * @return The created TranslatedButton.
+     * @throws NullPointerException if container is null.
+     */
+    public TranslatedButton build(final GuiContainer container) {
+        return this.builder.buildButton(this.buttonBuilder.build(container));
     }
 }
