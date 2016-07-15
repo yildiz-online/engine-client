@@ -27,6 +27,7 @@ package be.yildiz.client.game.engine.gui;
 
 import be.yildiz.common.Position;
 import be.yildiz.common.Size;
+import be.yildiz.module.graphic.Font;
 import be.yildiz.module.graphic.gui.ButtonMaterial;
 import be.yildiz.module.graphic.gui.GuiContainer;
 import be.yildiz.module.graphic.gui.button.ButtonBuilder;
@@ -103,7 +104,18 @@ public class TranslatedButtonBuilder {
     }
 
     /**
-     * Create the effective TranslatedButton from the provided informations.
+     * Provide a font to the button.
+     * @param font Button font.
+     * @return This object for chaining.
+     * @throws NullPointerException if font is null.
+     */
+    public TranslatedButtonBuilder withFont(final Font font) {
+        this.buttonBuilder.withFont(font);
+        return this;
+    }
+
+    /**
+     * Create the effective TranslatedButton from the provided information.
      * @param container Container to hold the created button.
      * @return The created TranslatedButton.
      * @throws NullPointerException if container is null.

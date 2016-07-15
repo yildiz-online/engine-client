@@ -82,6 +82,13 @@
       <groupId>org.mockito</groupId>
       <artifactId>mockito-all</artifactId>
     </dependency>
+    <dependency>
+      <groupId>be.yildiz-games</groupId>
+      <artifactId>module-graphic</artifactId>
+      <version>${version.module-graphic}</version>
+      <type>test-jar</type>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
   <profiles>
     <profile>
