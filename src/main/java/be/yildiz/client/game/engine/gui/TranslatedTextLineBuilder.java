@@ -57,6 +57,11 @@ public class TranslatedTextLineBuilder {
         return this;
     }
 
+    public TranslatedTextLineBuilder atPosition(final int x, final int y) {
+        this.textLineBuilder.atPosition(x, y);
+        return this;
+    }
+
     public TranslatedTextLineBuilder withSize(final Size size) {
         this.textLineBuilder.withSize(size);
         return this;
