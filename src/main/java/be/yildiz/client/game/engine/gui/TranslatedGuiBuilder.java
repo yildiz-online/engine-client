@@ -814,4 +814,8 @@ public class TranslatedGuiBuilder {
     public Optional<Image> findImage(String name) {
         return this.guiBuilder.findImage(name);
     }
+
+    public TranslatedTextLine buildTextLine(TextLine textLine) {
+        return new TranslatedTextLine(textLine, this.translation);
+    }
 }
