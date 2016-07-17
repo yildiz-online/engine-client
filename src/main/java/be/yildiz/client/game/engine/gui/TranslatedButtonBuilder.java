@@ -29,6 +29,7 @@ import be.yildiz.common.Position;
 import be.yildiz.common.Size;
 import be.yildiz.module.graphic.Font;
 import be.yildiz.module.graphic.gui.ButtonMaterial;
+import be.yildiz.module.graphic.gui.Element;
 import be.yildiz.module.graphic.gui.GuiContainer;
 import be.yildiz.module.graphic.gui.button.ButtonBuilder;
 
@@ -123,6 +124,16 @@ public class TranslatedButtonBuilder {
      */
     public TranslatedButtonBuilder withFont(final Font font) {
         this.buttonBuilder.withFont(font);
+        return this;
+    }
+
+    public TranslatedButtonBuilder withCaptionTextAlignment(final Element.PositionRelativeTop top, final int distance) {
+        this.buttonBuilder.withCaptionTextAlignment(top, distance);
+        return this;
+    }
+
+    public TranslatedButtonBuilder withCaptionTextAlignment(final Element.PositionRelativeLeft left, final int distance) {
+        this.buttonBuilder.withCaptionTextAlignment(left, distance);
         return this;
     }
 
