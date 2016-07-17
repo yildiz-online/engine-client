@@ -104,6 +104,18 @@ public class TranslatedButtonBuilder {
     }
 
     /**
+     * Set the position of the button to build.
+     * @param x Position values.
+     * @param y Position values.
+     * @return This object for chaining.
+     * @throws NullPointerException if position is null.
+     */
+    public TranslatedButtonBuilder atPosition(final int x, final int y) {
+        this.buttonBuilder.atPosition(x, y);
+        return this;
+    }
+
+    /**
      * Provide a font to the button.
      * @param font Button font.
      * @return This object for chaining.
