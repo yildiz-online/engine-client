@@ -39,7 +39,6 @@ import be.yildiz.module.sound.SoundEngine;
 import lombok.AllArgsConstructor;
 
 import java.io.File;
-import java.security.InvalidParameterException;
 import java.util.List;
 
 /**
@@ -84,7 +83,7 @@ public final class FileParser {
     void addResourcePath(final String name, final String path) {
         final File folder = new File(path);
         if (!folder.exists() || !folder.isDirectory()) {
-            throw new InvalidParameterException(folder.getAbsolutePath() + " is not a valid resource path.");
+            throw new IllegalArgumentException(folder.getAbsolutePath() + " is not a valid resource path.");
         }
         final File[] files = folder.listFiles();
         MusicParser musicParser = this.parserFactory.createMusicParser();
