@@ -109,7 +109,6 @@ public class TranslatedButtonBuilder {
      * @param x Position values.
      * @param y Position values.
      * @return This object for chaining.
-     * @throws NullPointerException if position is null.
      */
     public TranslatedButtonBuilder atPosition(final int x, final int y) {
         this.buttonBuilder.atPosition(x, y);
@@ -127,11 +126,25 @@ public class TranslatedButtonBuilder {
         return this;
     }
 
+    /**
+     * Provide a relative position for the caption text.
+     * @param top Vertical relative position.
+     * @param distance Vertical position offset to apply.
+     * @return This object for chaining.
+     * @throws NullPointerException if top is null.
+     */
     public TranslatedButtonBuilder withCaptionTextAlignment(final Element.PositionRelativeTop top, final int distance) {
         this.buttonBuilder.withCaptionTextAlignment(top, distance);
         return this;
     }
 
+    /**
+     * Provide a relative position for the caption text.
+     * @param left Horizontal relative position.
+     * @param distance Horizontal position offset to apply.
+     * @return This object for chaining.
+     * @throws NullPointerException if left is null.
+     */
     public TranslatedButtonBuilder withCaptionTextAlignment(final Element.PositionRelativeLeft left, final int distance) {
         this.buttonBuilder.withCaptionTextAlignment(left, distance);
         return this;

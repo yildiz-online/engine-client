@@ -31,6 +31,7 @@ import be.yildiz.client.game.engine.parser.ParserFactory.ParserType;
 import be.yildiz.common.Position;
 import be.yildiz.common.log.Logger;
 import be.yildiz.module.graphic.*;
+import be.yildiz.module.graphic.gui.ButtonMaterial;
 import be.yildiz.module.graphic.gui.GuiContainer;
 import be.yildiz.module.sound.Music;
 import be.yildiz.module.sound.Playlist;
@@ -139,10 +140,7 @@ public final class FileParser {
             if (s.getName().endsWith(".vew")) {
                 Logger.info("Parsing view script " + s);
                 try {
-                    final List<ContainerDefinition> viewDef = guiParser.parse(s);
-                    for (final ContainerDefinition def : viewDef) {
-                        this.buildView(def);
-                    }
+                    guiParser.parse(s).forEach(this::buildView);
                 } catch (final ParserException pe) {
                     Logger.error(pe);
                 }
@@ -163,11 +161,11 @@ public final class FileParser {
         }
 
         for (final TextLineDefinition td : def.getTextLineList()) {
-            this.guiManager.buildTextLine(td.getName(), new Position(td.getCoordinates()), Font.get(td.getFont()), container);
+            this.guiManager.buildTextLine(td.getName(), td.getCoordinates(), Font.get(td.getFont()), container);
         }
 
         for (final ButtonDefinition bd : def.getButtonList()) {
-            this.guiManager.buildButton(bd.getName(), bd.getCoordinates(), Font.get(bd.getFont()), Material.get(bd.getMaterial()), Material.get(bd.getMaterialHighlight()), container);
+            this.guiManager.buildButton(bd.getName(), bd.getCoordinates(), new ButtonMaterial(Material.get(bd.getMaterial()), Material.get(bd.getMaterialHighlight()), Font.get(bd.getFont())), container);
         }
 
         for (final InputBoxDefinition ibd : def.getInputBoxList()) {

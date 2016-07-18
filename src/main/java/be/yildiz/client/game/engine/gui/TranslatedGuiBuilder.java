@@ -56,120 +56,14 @@ public class TranslatedGuiBuilder {
     /**
      * Build a new widget button.
      *
-     * @param name             Unique button name.
-     * @param coordinates      GuiButton coordinates.
-     * @param font             Font to use for the button label.
-     * @param background       GuiButton background material.
-     * @param backgroundHlight GuiButton background material when focused.
-     * @param container        Container holding the button.
-     * @return The built button.
-     */
-    @Deprecated
-    public final TranslatedButton buildButton(final String name, final BaseCoordinate coordinates, final Font font, final Material background, final Material backgroundHlight, final GuiContainer container) {
-        return new TranslatedButton(this.guiBuilder.buildButton(name, coordinates, font, background, backgroundHlight, container), this.translation);
-    }
-
-    /**
-     * Build a new widget button with a random name.
-     *
-     * @param coordinates      GuiButton coordinates.
-     * @param font             Font to use for the button label.
-     * @param background       GuiButton background material.
-     * @param backgroundHlight GuiButton background material when focused.
-     * @param container        Container holding the button.
-     * @return The built button.
-     */
-    @Deprecated
-    public final TranslatedButton buildButton(final BaseCoordinate coordinates, final Font font, final Material background, final Material backgroundHlight, final GuiContainer container) {
-        return new TranslatedButton(this.guiBuilder.buildButton(coordinates, font, background, backgroundHlight, container), this.translation);
-    }
-
-    /**
-     * Build a new widget button.
-     *
-     * @param name        Unique button name.
-     * @param coordinates GuiButton coordinates.
-     * @param container   Container holding the button.
-     * @return The built button.
-     */
-    @Deprecated
-    public TranslatedButton buildButton(final String name, final Coordinates coordinates, final GuiContainer container) {
-        return new TranslatedButton(this.guiBuilder.buildButton(name, coordinates, container), this.translation);
-    }
-
-    /**
-     * Build a new widget button.
-     *
      * @param name        Unique button name.
      * @param coordinates GuiButton coordinates.
      * @param material    GuiButton materials.
      * @param container   Container holding the button.
      * @return The built button.
      */
-    @Deprecated
     public final TranslatedButton buildButton(final String name, final BaseCoordinate coordinates, final ButtonMaterial material, final GuiContainer container) {
         return new TranslatedButton(this.guiBuilder.buildButton(name, coordinates, material, container), this.translation);
-    }
-
-    /**
-     * Build a new widget button with a random name, empty materials, no coordinates.
-     *
-     * @param container Container holding the button.
-     * @return The built button.
-     */
-    @Deprecated
-    public TranslatedButton buildButton(final GuiContainer container) {
-        return new TranslatedButton(this.guiBuilder.buildButton(container), this.translation);
-    }
-
-    /**
-     * Build a new widget button with a random name.
-     *
-     * @param coordinates GuiButton coordinates.
-     * @param material    GuiButton materials.
-     * @param container   Container holding the button.
-     * @return The built button.
-     */
-    @Deprecated
-    public final TranslatedButton buildButton(final BaseCoordinate coordinates, final ButtonMaterial material, final GuiContainer container) {
-        return new TranslatedButton(this.guiBuilder.buildButton(coordinates, material, container), this.translation);
-    }
-
-    /**
-     * Build a new widget button with a random generated unique name, and an empty material and font.
-     *
-     * @param coordinates GuiButton coordinates.
-     * @param container   Container holding the button.
-     * @return The built button.
-     */
-    @Deprecated
-    public final TranslatedButton buildButton(final BaseCoordinate coordinates, final GuiContainer container) {
-        return new TranslatedButton(this.guiBuilder.buildButton(coordinates, container), this.translation);
-    }
-
-    /**
-     * Build a new widget button, all parameters are set to empty.
-     *
-     * @param name      Unique button name.
-     * @param container Container holding the button.
-     * @return The built button.
-     */
-    @Deprecated
-    public final TranslatedButton buildButton(final String name, final GuiContainer container) {
-        return new TranslatedButton(this.guiBuilder.buildButton(name, container), this.translation);
-    }
-
-    /**
-     * Build a new widget button, parameters are retrieved from another button.
-     *
-     * @param name      Unique button name.
-     * @param model     Other button used to retrieve parameters.
-     * @param container Container holding the button.
-     * @return The built button.
-     */
-    @Deprecated
-    public final TranslatedButton buildButton(final String name, final Button model, final GuiContainer container) {
-        return new TranslatedButton(this.guiBuilder.buildButton(name, model, container), this.translation);
     }
 
     public TranslatedButton buildButton(final Button button) {
@@ -221,52 +115,6 @@ public class TranslatedGuiBuilder {
     }
 
     /**
-     * Build a new image widget.
-     *
-     * @param name        Unique image name.
-     * @param coordinates Image coordinates.
-     * @param container   Container holding the image.
-     * @return The new image widget.
-     */
-    public final Image buildImage(final String name, final BaseCoordinate coordinates, final GuiContainer container) {
-        return this.guiBuilder.buildImage(name, coordinates, container);
-    }
-
-    /**
-     * Build a new image widget.
-     *
-     * @param coordinates Image coordinates.
-     * @param background  Image background material.
-     * @param container   Container holding the image.
-     * @return The new image widget.
-     */
-    public final Image buildImage(final BaseCoordinate coordinates, final Material background, final GuiContainer container) {
-        return this.guiBuilder.buildImage(coordinates, background, container);
-    }
-
-    /**
-     * Build a new image widget.
-     *
-     * @param coordinates Image coordinates.
-     * @param container   Container holding the image.
-     * @return The new image widget.
-     */
-    public final Image buildImage(final BaseCoordinate coordinates, final GuiContainer container) {
-        return this.guiBuilder.buildImage(coordinates, container);
-    }
-
-    /**
-     * Build a new image widget without background.
-     *
-     * @param name      Unique image name.
-     * @param container Container holding the image.
-     * @return The new image widget.
-     */
-    public final Image buildImage(final String name, final GuiContainer container) {
-        return this.guiBuilder.buildImage(name, container);
-    }
-
-    /**
      * Delete an image.
      *
      * @param image Image to delete.
@@ -279,65 +127,13 @@ public class TranslatedGuiBuilder {
      * Build a new line of text widget.
      *
      * @param name      Text line unique name.
-     * @param pos       Text line position.
+     * @param c         Text line coordinates.
      * @param font      Font used for the text.
      * @param container Container holding the text line.
      * @return The new text line.
      */
-    public final TranslatedTextLine buildTextLine(final String name, final Position pos, final Font font, final GuiContainer container) {
-        return new TranslatedTextLine(this.guiBuilder.buildTextLine(name, pos, font, container), this.translation);
-    }
-
-    /**
-     * Build a new line of text widget with a random name.
-     *
-     * @param pos       Text line position.
-     * @param font      Font used for the text.
-     * @param container Container holding the text line.
-     * @return The new text line.
-     */
-    public final TranslatedTextLine buildTextLine(final Position pos, final Font font, final GuiContainer container) {
-        return new TranslatedTextLine(this.guiBuilder.buildTextLine(pos, font, container), this.translation);
-    }
-
-    /**
-     * Build a new line of text widget, all parameters are set to empty.
-     *
-     * @param name      Text line unique name.
-     * @param container Container holding the text line.
-     * @return The new text line.
-     */
-    public final TranslatedTextLine buildTextLine(final String name, final GuiContainer container) {
-        return new TranslatedTextLine(this.guiBuilder.buildTextLine(name, container), this.translation);
-    }
-
-    /**
-     * Build a new line of text widget.
-     *
-     * @param font      Font to use.
-     * @param container Container holding the text line.
-     * @return The new text line.
-     */
-    public final TranslatedTextLine buildTextLine(final Font font, final GuiContainer container) {
-        return new TranslatedTextLine(this.guiBuilder.buildTextLine(font, container), this.translation);
-    }
-
-    /**
-     * Build a new line of text widget, all parameters are set to empty, a unique random name is generated.
-     *
-     * @param container Container holding the text line.
-     * @return The new text line.
-     */
-    public final TranslatedTextLine buildTextLine(final GuiContainer container) {
-        return new TranslatedTextLine(this.guiBuilder.buildTextLine(container), this.translation);
-    }
-
-    public TranslatedTextLine buildTextLineTitle(TextLineTitleTemplate template, GuiContainer background) {
-        return new TranslatedTextLine(this.guiBuilder.buildTextLineTitle(template, background), this.translation);
-    }
-
-    public TranslatedTextLine buildTextLine(TextLineTemplate template, GuiContainer background) {
-        return new TranslatedTextLine(this.guiBuilder.buildTextLine(template, background), this.translation);
+    public final TranslatedTextLine buildTextLine(final String name, final Coordinates c, final Font font, final GuiContainer container) {
+        return new TranslatedTextLine(this.guiBuilder.buildTextLine(name, c, font, container), this.translation);
     }
 
     /**

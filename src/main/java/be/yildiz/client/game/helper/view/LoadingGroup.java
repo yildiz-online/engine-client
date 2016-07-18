@@ -27,7 +27,9 @@ package be.yildiz.client.game.helper.view;
 
 import be.yildiz.client.game.engine.GameEngine;
 import be.yildiz.client.game.engine.gui.TranslatedTextLine;
+import be.yildiz.common.Coordinates;
 import be.yildiz.common.Position;
+import be.yildiz.common.Size;
 import be.yildiz.common.collections.Lists;
 import be.yildiz.common.resource.Resource;
 import be.yildiz.module.graphic.Font;
@@ -73,7 +75,7 @@ public final class LoadingGroup {
         this.engine = engine;
         this.toLoad = Lists.newList();
         GuiContainer container = engine.getGuiManager().buildFullScreenOverlayContainer("loading", background);
-        this.text = engine.getGuiManager().buildTextLine("loadText", new Position(0, 500), font, container);
+        this.text = engine.getGuiManager().buildTextLine("loadText", new Coordinates(new Size(container.getWidth(), 20), new Position(0, 500)), font, container);
         this.text.setText(message);
         this.text.setLeftFromParent(Element.PositionRelativeLeft.CENTER);
         this.window = new SimpleView(container, new Zorder(10));
