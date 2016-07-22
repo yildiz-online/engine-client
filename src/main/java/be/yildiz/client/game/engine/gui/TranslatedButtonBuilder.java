@@ -30,10 +30,7 @@ import be.yildiz.common.Position;
 import be.yildiz.common.Size;
 import be.yildiz.common.translation.Translation;
 import be.yildiz.module.graphic.Font;
-import be.yildiz.module.graphic.gui.ButtonMaterial;
-import be.yildiz.module.graphic.gui.Element;
-import be.yildiz.module.graphic.gui.GuiBuilder;
-import be.yildiz.module.graphic.gui.GuiContainer;
+import be.yildiz.module.graphic.gui.*;
 import be.yildiz.module.graphic.gui.button.ButtonBuilder;
 import lombok.NonNull;
 
@@ -169,6 +166,11 @@ public class TranslatedButtonBuilder {
 
     public TranslatedButtonBuilder withCoordinates(Coordinates coordinates) {
         this.buttonBuilder.withCoordinates(coordinates);
+        return this;
+    }
+
+    public TranslatedButtonBuilder fromOther(Button other) {
+        this.buttonBuilder.fromOther(other);
         return this;
     }
 }
