@@ -68,7 +68,7 @@ public class TranslatedButton extends TranslatedContainerElementWrapper<Button> 
     }
 
     @Override
-    public Button setCaptionText(String text) {
+    public TranslatedButton setCaptionText(String text) {
         this.button.setCaptionText(text);
         return this;
     }
