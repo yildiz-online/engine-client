@@ -153,9 +153,12 @@ public final class FileParser {
      */
     private void buildView(final ContainerDefinition def) {
         final GuiContainer container = this.guiManager.buildOverlayContainer(def.getName(), def.getMaterial(), def.getCoordinates());
-        for (final ImageDefinition id : def.getImageList()) {
-            this.guiManager.buildImage(id.getName(), id.getCoordinates(), id.getMaterial(), container);
-        }
+
+        def.getImageList().forEach(id -> this.guiManager.buildImage()
+                .withName(id.getName())
+                .withBackground(id.getMaterial())
+                .withCoordinates(id.getCoordinates())
+                .build(container));
 
         def.getTextLineList().forEach(td -> this.guiManager.buildTextLine()
                 .withName(td.getName())
