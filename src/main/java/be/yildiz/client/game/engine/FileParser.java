@@ -28,7 +28,6 @@ package be.yildiz.client.game.engine;
 import be.yildiz.client.game.engine.gui.TranslatedGuiBuilder;
 import be.yildiz.client.game.engine.parser.*;
 import be.yildiz.client.game.engine.parser.ParserFactory.ParserType;
-import be.yildiz.common.Position;
 import be.yildiz.common.log.Logger;
 import be.yildiz.module.graphic.*;
 import be.yildiz.module.graphic.gui.ButtonMaterial;
@@ -154,26 +153,32 @@ public final class FileParser {
      */
     private void buildView(final ContainerDefinition def) {
         final GuiContainer container = this.guiManager.buildOverlayContainer(def.getName(), def.getMaterial(), def.getCoordinates());
-        // FIXME use stream
         for (final ImageDefinition id : def.getImageList()) {
             this.guiManager.buildImage(id.getName(), id.getCoordinates(), id.getMaterial(), container);
         }
 
-        for (final TextLineDefinition td : def.getTextLineList()) {
-            this.guiManager.buildTextLine(td.getName(), td.getCoordinates(), Font.get(td.getFont()), container);
-        }
+        def.getTextLineList().forEach(td -> this.guiManager.buildTextLine()
+                .withName(td.getName())
+                .withCoordinates(td.getCoordinates())
+                .withFont(Font.get(td.getFont()))
+                .build(container));
 
-        for (final ButtonDefinition bd : def.getButtonList()) {
-            this.guiManager.buildButton(bd.getName(), bd.getCoordinates(), new ButtonMaterial(Material.get(bd.getMaterial()), Material.get(bd.getMaterialHighlight()), Font.get(bd.getFont())), container);
-        }
+        def.getButtonList().forEach(bd -> this.guiManager.buildButton()
+                .withName(bd.getName())
+                .withCoordinates(bd.getCoordinates())
+                .withButtonMaterial(new ButtonMaterial(Material.get(bd.getMaterial()), Material.get(bd.getMaterialHighlight()), Font.get(bd.getFont())))
+                .build(container));
 
         for (final InputBoxDefinition ibd : def.getInputBoxList()) {
             this.guiManager.buildInputBox(ibd.getName(), ibd.getCoordinates(), ibd.getFont(), ibd.getMaterial(), ibd.getMaterialHighlight(), ibd.getMaterialCursor(), container);
         }
 
-        for (final TextAreaDefinition tad : def.getTextAreaList()) {
-            this.guiManager.buildTextArea(tad.getName(), new Position(tad.getCoordinates()), Font.get(tad.getFont()), Material.get(tad.getMaterial()), 0, container);
-        }
+        def.getTextAreaList().forEach(tad -> this.guiManager.buildTextArea()
+                .withName(tad.getName())
+                .withCoordinates(tad.getCoordinates())
+                .withFont(Font.get(tad.getFont()))
+                .withBackground(Material.get(tad.getMaterial()))
+                .build(container));
     }
 
 }

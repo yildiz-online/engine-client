@@ -33,7 +33,6 @@ import be.yildiz.common.translation.Translation;
 import be.yildiz.module.graphic.Font;
 import be.yildiz.module.graphic.Material;
 import be.yildiz.module.graphic.gui.*;
-import be.yildiz.module.graphic.gui.button.ButtonBuilder;
 import lombok.NonNull;
 
 import java.util.Optional;
@@ -53,25 +52,8 @@ public class TranslatedGuiBuilder {
         this.translation = translation;
     }
 
-    /**
-     * Build a new widget button.
-     *
-     * @param name        Unique button name.
-     * @param coordinates GuiButton coordinates.
-     * @param material    GuiButton materials.
-     * @param container   Container holding the button.
-     * @return The built button.
-     */
-    private final TranslatedButton buildButton(final String name, final BaseCoordinate coordinates, final ButtonMaterial material, final GuiContainer container) {
-        return new TranslatedButton(this.guiBuilder.buildButton(name, coordinates, material, container), this.translation);
-    }
-
-    TranslatedButton buildButton(final Button button) {
-        return new TranslatedButton(button, this.translation);
-    }
-
-    public ButtonBuilder createButton() {
-        return new ButtonBuilder(this.guiBuilder);
+    public TranslatedButtonBuilder buildButton() {
+        return new TranslatedButtonBuilder(this.guiBuilder, this.translation);
     }
 
     /**
@@ -123,17 +105,8 @@ public class TranslatedGuiBuilder {
         this.guiBuilder.delete(image);
     }
 
-    /**
-     * Build a new line of text widget.
-     *
-     * @param name      Text line unique name.
-     * @param c         Text line coordinates.
-     * @param font      Font used for the text.
-     * @param container Container holding the text line.
-     * @return The new text line.
-     */
-    public final TranslatedTextLine buildTextLine(final String name, final Coordinates c, final Font font, final GuiContainer container) {
-        return new TranslatedTextLine(this.guiBuilder.buildTextLine(name, c, font, container), this.translation);
+    public TranslatedTextLineBuilder buildTextLine() {
+        return new TranslatedTextLineBuilder(this.guiBuilder, this.translation);
     }
 
     /**
@@ -540,11 +513,7 @@ public class TranslatedGuiBuilder {
         return this.guiBuilder.findImage(name);
     }
 
-    TranslatedTextLine buildTextLine(TextLine textLine) {
-        return new TranslatedTextLine(textLine, this.translation);
-    }
-
-    TranslatedTextArea buildTextArea(TextArea textLine) {
-        return new TranslatedTextArea(textLine, this.translation);
+    public TranslatedTextAreaBuilder buildTextArea() {
+        return new TranslatedTextAreaBuilder(this.guiBuilder, this.translation);
     }
 }

@@ -26,8 +26,10 @@
 package be.yildiz.client.game.engine.gui;
 
 import be.yildiz.common.Coordinates;
+import be.yildiz.common.translation.Translation;
 import be.yildiz.module.graphic.Font;
 import be.yildiz.module.graphic.Material;
+import be.yildiz.module.graphic.gui.GuiBuilder;
 import be.yildiz.module.graphic.gui.GuiContainer;
 import be.yildiz.module.graphic.gui.textarea.TextAreaBuilder;
 
@@ -39,22 +41,25 @@ public class TranslatedTextAreaBuilder {
     /**
      * Gui builder to create the effective widget.
      */
-    private final TranslatedGuiBuilder builder;
+    private final GuiBuilder builder;
 
     /**
      * Decorated builder to create the wrapped text area.
      */
     private final TextAreaBuilder textAreaBuilder;
 
+    private final Translation translation;
+
     /**
      * Create a new TranslatedButtonBuilder to build a TranslatedButton.
      * @param builder Factory creating the effective widget.
      * @throws NullPointerException if builder is null.
      */
-    TranslatedTextAreaBuilder(TranslatedGuiBuilder builder) {
+    TranslatedTextAreaBuilder(GuiBuilder builder, Translation translation) {
         super();
         this.builder = builder;
-        this.textAreaBuilder = new TextAreaBuilder(builder.getGuiBuilder());
+        this.textAreaBuilder = new TextAreaBuilder(builder);
+        this.translation = translation;
     }
 
     public TranslatedTextAreaBuilder withName(final String name) {
@@ -83,6 +88,6 @@ public class TranslatedTextAreaBuilder {
     }
 
     public TranslatedTextArea build(final GuiContainer container) {
-        return this.builder.buildTextArea(this.textAreaBuilder.build(container));
+        return new TranslatedTextArea(this.textAreaBuilder.build(container), this.translation);
     }
 }

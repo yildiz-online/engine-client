@@ -25,9 +25,12 @@
 
 package be.yildiz.client.game.engine.gui;
 
+import be.yildiz.common.Coordinates;
 import be.yildiz.common.Position;
 import be.yildiz.common.Size;
+import be.yildiz.common.translation.Translation;
 import be.yildiz.module.graphic.Font;
+import be.yildiz.module.graphic.gui.GuiBuilder;
 import be.yildiz.module.graphic.gui.GuiContainer;
 import be.yildiz.module.graphic.gui.textline.TextLineBuilder;
 
@@ -37,14 +40,17 @@ import be.yildiz.module.graphic.gui.textline.TextLineBuilder;
  */
 public class TranslatedTextLineBuilder {
 
-    private final TranslatedGuiBuilder builder;
+    private final GuiBuilder guiBuilder;
+
+    private final Translation translation;
 
     private final TextLineBuilder textLineBuilder;
 
-    TranslatedTextLineBuilder(TranslatedGuiBuilder guiBuilder) {
+    TranslatedTextLineBuilder(GuiBuilder guiBuilder, final Translation translation) {
         super();
-        this.builder = guiBuilder;
-        this.textLineBuilder = new TextLineBuilder(builder.getGuiBuilder());
+        this.guiBuilder = guiBuilder;
+        this.translation = translation;
+        this.textLineBuilder = new TextLineBuilder(this.guiBuilder);
     }
 
     public TranslatedTextLineBuilder withName(final String name) {
@@ -72,7 +78,12 @@ public class TranslatedTextLineBuilder {
         return this;
     }
 
+    public TranslatedTextLineBuilder withCoordinates(Coordinates coordinates) {
+        this.textLineBuilder.withCoordinates(coordinates);
+        return this;
+    }
+
     public TranslatedTextLine build(final GuiContainer container) {
-        return this.builder.buildTextLine(this.textLineBuilder.build(container));
+        return new TranslatedTextLine(this.textLineBuilder.build(container), this.translation);
     }
 }

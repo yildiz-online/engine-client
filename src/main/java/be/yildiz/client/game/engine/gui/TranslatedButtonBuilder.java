@@ -27,9 +27,11 @@ package be.yildiz.client.game.engine.gui;
 
 import be.yildiz.common.Position;
 import be.yildiz.common.Size;
+import be.yildiz.common.translation.Translation;
 import be.yildiz.module.graphic.Font;
 import be.yildiz.module.graphic.gui.ButtonMaterial;
 import be.yildiz.module.graphic.gui.Element;
+import be.yildiz.module.graphic.gui.GuiBuilder;
 import be.yildiz.module.graphic.gui.GuiContainer;
 import be.yildiz.module.graphic.gui.button.ButtonBuilder;
 
@@ -42,22 +44,25 @@ public class TranslatedButtonBuilder {
     /**
      * Gui builder to create the effective widget.
      */
-    private final TranslatedGuiBuilder builder;
+    private final GuiBuilder builder;
 
     /**
      * Decorated builder to create the wrapped button.
      */
     private final ButtonBuilder buttonBuilder;
 
+    private final Translation translation;
+
     /**
      * Create a new TranslatedButtonBuilder to build a TranslatedButton.
      * @param builder Factory creating the effective widget.
      * @throws NullPointerException if builder is null.
      */
-    TranslatedButtonBuilder(TranslatedGuiBuilder builder) {
+    TranslatedButtonBuilder(GuiBuilder builder, final Translation translation) {
         super();
         this.builder = builder;
-        this.buttonBuilder = new ButtonBuilder(builder.getGuiBuilder());
+        this.translation = translation;
+        this.buttonBuilder = new ButtonBuilder(this.builder);
     }
 
     /**
@@ -157,6 +162,6 @@ public class TranslatedButtonBuilder {
      * @throws NullPointerException if container is null.
      */
     public TranslatedButton build(final GuiContainer container) {
-        return this.builder.buildButton(this.buttonBuilder.build(container));
+        return new TranslatedButton(this.buttonBuilder.build(container), this.translation);
     }
 }
