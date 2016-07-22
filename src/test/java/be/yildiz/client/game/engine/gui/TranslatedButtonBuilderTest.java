@@ -41,20 +41,19 @@ public class TranslatedButtonBuilderTest {
 
     private static TranslatedButtonBuilder givenATranslatedButtonBuilder() {
         TranslatedGuiBuilder guiBuilder = new TranslatedGuiBuilder(new DummyGuiBuilder(), new Translation());
-        return new TranslatedButtonBuilder(guiBuilder);
+        return guiBuilder.buildButton();
     }
 
     public static class Constructor {
 
         @Test
         public void happyFlow() {
-            TranslatedGuiBuilder guiBuilder = new TranslatedGuiBuilder(new DummyGuiBuilder(), new Translation());
-            new TranslatedButtonBuilder(guiBuilder);
+            givenATranslatedButtonBuilder();
         }
 
         @Test(expected = NullPointerException.class)
         public void withNullGuiBuilder() {
-            new TranslatedButtonBuilder(null);
+            new TranslatedButtonBuilder(null, new Translation());
         }
 
     }

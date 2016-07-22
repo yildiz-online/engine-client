@@ -75,8 +75,12 @@ public final class LoadingGroup {
         this.engine = engine;
         this.toLoad = Lists.newList();
         GuiContainer container = engine.getGuiManager().buildFullScreenOverlayContainer("loading", background);
-        this.text = engine.getGuiManager().buildTextLine("loadText", new Coordinates(new Size(container.getWidth(), 20), new Position(0, 500)), font, container);
-        this.text.setText(message);
+        this.text = engine.getGuiManager().buildTextLine()
+                .withName("loadText")
+                .withCoordinates(new Coordinates(new Size(container.getWidth(), 20), new Position(0, 500)))
+                .withFont(font)
+                .build(container)
+                .setText(message);
         this.text.setLeftFromParent(Element.PositionRelativeLeft.CENTER);
         this.window = new SimpleView(container, new Zorder(10));
     }

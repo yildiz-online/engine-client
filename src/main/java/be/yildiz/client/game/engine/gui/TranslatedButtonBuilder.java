@@ -25,6 +25,7 @@
 
 package be.yildiz.client.game.engine.gui;
 
+import be.yildiz.common.Coordinates;
 import be.yildiz.common.Position;
 import be.yildiz.common.Size;
 import be.yildiz.common.translation.Translation;
@@ -163,5 +164,10 @@ public class TranslatedButtonBuilder {
      */
     public TranslatedButton build(final GuiContainer container) {
         return new TranslatedButton(this.buttonBuilder.build(container), this.translation);
+    }
+
+    public TranslatedButtonBuilder withCoordinates(Coordinates coordinates) {
+        this.buttonBuilder.withCoordinates(coordinates);
+        return this;
     }
 }

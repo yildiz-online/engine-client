@@ -166,7 +166,7 @@ public final class FileParser {
         def.getButtonList().forEach(bd -> this.guiManager.buildButton()
                 .withName(bd.getName())
                 .withCoordinates(bd.getCoordinates())
-                .withButtonMaterial(new ButtonMaterial(Material.get(bd.getMaterial()), Material.get(bd.getMaterialHighlight()), Font.get(bd.getFont())))
+                .withMaterials(new ButtonMaterial(Material.get(bd.getMaterial()), Material.get(bd.getMaterialHighlight()), Font.get(bd.getFont())))
                 .build(container));
 
         for (final InputBoxDefinition ibd : def.getInputBoxList()) {
