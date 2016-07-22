@@ -33,6 +33,7 @@ import be.yildiz.common.translation.Translation;
 import be.yildiz.module.graphic.Font;
 import be.yildiz.module.graphic.Material;
 import be.yildiz.module.graphic.gui.*;
+import be.yildiz.module.graphic.gui.image.ImageBuilder;
 import lombok.NonNull;
 
 import java.util.Optional;
@@ -65,17 +66,8 @@ public class TranslatedGuiBuilder {
         this.guiBuilder.delete(button);
     }
 
-    /**
-     * Build a new image widget.
-     *
-     * @param name        Unique image name.
-     * @param coordinates Image coordinates.
-     * @param background  Image background material.
-     * @param container   Container holding the image.
-     * @return The new image widget.
-     */
-    public final Image buildImage(final String name, final BaseCoordinate coordinates, final Material background, final GuiContainer container) {
-        return this.guiBuilder.buildImage(name, coordinates, background, container);
+    public final ImageBuilder buildImage() {
+        return new ImageBuilder(this.guiBuilder);
     }
 
     /**
