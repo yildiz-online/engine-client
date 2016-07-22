@@ -25,54 +25,64 @@
 
 package be.yildiz.client.game.engine.gui;
 
-import be.yildiz.common.Position;
-import be.yildiz.common.Size;
+import be.yildiz.common.Coordinates;
 import be.yildiz.module.graphic.Font;
+import be.yildiz.module.graphic.Material;
 import be.yildiz.module.graphic.gui.GuiContainer;
-import be.yildiz.module.graphic.gui.textline.TextLineBuilder;
+import be.yildiz.module.graphic.gui.textarea.TextAreaBuilder;
 
 /**
- * Build a TranslatedTextLine
  * @author Grégory Van den Borre
  */
-public class TranslatedTextLineBuilder {
+public class TranslatedTextAreaBuilder {
 
+    /**
+     * Gui builder to create the effective widget.
+     */
     private final TranslatedGuiBuilder builder;
 
-    private final TextLineBuilder textLineBuilder;
+    /**
+     * Decorated builder to create the wrapped text area.
+     */
+    private final TextAreaBuilder textAreaBuilder;
 
-    TranslatedTextLineBuilder(TranslatedGuiBuilder guiBuilder) {
+    /**
+     * Create a new TranslatedButtonBuilder to build a TranslatedButton.
+     * @param builder Factory creating the effective widget.
+     * @throws NullPointerException if builder is null.
+     */
+    TranslatedTextAreaBuilder(TranslatedGuiBuilder builder) {
         super();
-        this.builder = guiBuilder;
-        this.textLineBuilder = new TextLineBuilder(builder.getGuiBuilder());
+        this.builder = builder;
+        this.textAreaBuilder = new TextAreaBuilder(builder.getGuiBuilder());
     }
 
-    public TranslatedTextLineBuilder withName(final String name) {
-        this.textLineBuilder.withName(name);
+    public TranslatedTextAreaBuilder withName(final String name) {
+        this.textAreaBuilder.withName(name);
         return this;
     }
 
-    public TranslatedTextLineBuilder atPosition(final Position position) {
-        this.textLineBuilder.atPosition(position);
+    public TranslatedTextAreaBuilder withCoordinates(final Coordinates coordinates) {
+        this.textAreaBuilder.withCoordinates(coordinates);
         return this;
     }
 
-    public TranslatedTextLineBuilder atPosition(final int x, final int y) {
-        this.textLineBuilder.atPosition(x, y);
+    public TranslatedTextAreaBuilder withFont(final Font font) {
+        this.textAreaBuilder.withFont(font);
         return this;
     }
 
-    public TranslatedTextLineBuilder withSize(final Size size) {
-        this.textLineBuilder.withSize(size);
+    public TranslatedTextAreaBuilder withBackground(final Material background) {
+        this.textAreaBuilder.withBackground(background);
         return this;
     }
 
-    public TranslatedTextLineBuilder withFont(final Font font) {
-        this.textLineBuilder.withFont(font);
+    public TranslatedTextAreaBuilder withPadding(final int padding) {
+        this.textAreaBuilder.withPadding(padding);
         return this;
     }
 
-    public TranslatedTextLine build(final GuiContainer container) {
-        return this.builder.buildTextLine(this.textLineBuilder.build(container));
+    public TranslatedTextArea build(final GuiContainer container) {
+        return this.builder.buildTextArea(this.textAreaBuilder.build(container));
     }
 }

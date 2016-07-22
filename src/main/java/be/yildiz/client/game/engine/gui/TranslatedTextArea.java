@@ -31,17 +31,16 @@ import be.yildiz.common.translation.Translation;
 import be.yildiz.module.graphic.Font;
 import be.yildiz.module.graphic.Material;
 import be.yildiz.module.graphic.gui.TextArea;
-import be.yildiz.module.graphic.gui.TextAreaGui;
 
 /**
  * @author Grégory Van den Borre
  */
 public class TranslatedTextArea extends GuiWrapper<TextArea> implements TextArea {
 
-    private final TextAreaGui textArea;
+    private final TextArea textArea;
     private final Translation translation;
 
-    public TranslatedTextArea(TextAreaGui textArea, Translation translation) {
+    public TranslatedTextArea(TextArea textArea, Translation translation) {
         super(textArea);
         this.textArea = textArea;
         this.translation = translation;

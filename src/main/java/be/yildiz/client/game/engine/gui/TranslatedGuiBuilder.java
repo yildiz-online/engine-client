@@ -62,11 +62,11 @@ public class TranslatedGuiBuilder {
      * @param container   Container holding the button.
      * @return The built button.
      */
-    public final TranslatedButton buildButton(final String name, final BaseCoordinate coordinates, final ButtonMaterial material, final GuiContainer container) {
+    private final TranslatedButton buildButton(final String name, final BaseCoordinate coordinates, final ButtonMaterial material, final GuiContainer container) {
         return new TranslatedButton(this.guiBuilder.buildButton(name, coordinates, material, container), this.translation);
     }
 
-    public TranslatedButton buildButton(final Button button) {
+    TranslatedButton buildButton(final Button button) {
         return new TranslatedButton(button, this.translation);
     }
 
@@ -143,58 +143,6 @@ public class TranslatedGuiBuilder {
      */
     public final void delete(final TranslatedTextLine textLine) {
         this.guiBuilder.delete(textLine);
-    }
-
-    /**
-     * Build a new multiple line text widget.
-     *
-     * @param name        Unique text area name.
-     * @param coordinates Text area coordinates.
-     * @param font        Font used for the text.
-     * @param background  Background image.
-     * @param textPadding Padding value for the text.
-     * @param container   Container holding the text area.
-     * @return The new text area widget.
-     */
-    public final TranslatedTextArea buildTextArea(final String name, final BaseCoordinate coordinates, final Font font, final Material background, final int textPadding, final GuiContainer container) {
-        return new TranslatedTextArea(this.guiBuilder.buildTextArea(name, coordinates, font, background, textPadding, container), this.translation);
-    }
-
-    /**
-     * Build a new multiple line text widget with a random name.
-     *
-     * @param coordinates Text area coordinates.
-     * @param font        Font used for the text.
-     * @param background  Background image.
-     * @param textPadding Padding value for the text.
-     * @param container   Container holding the text area.
-     * @return The new text area widget.
-     */
-    public final TranslatedTextArea buildTextArea(final BaseCoordinate coordinates, final Font font, final Material background, final int textPadding, final GuiContainer container) {
-        return new TranslatedTextArea(this.guiBuilder.buildTextArea(coordinates, font, background, textPadding, container), this.translation);
-    }
-
-    /**
-     * Build a new multiple line text widget, all parameters are set to empty.
-     *
-     * @param name      Unique text area name.
-     * @param container Container holding the text area.
-     * @return The new text area widget.
-     */
-    public final TranslatedTextArea buildTextArea(final String name, final GuiContainer container) {
-        return new TranslatedTextArea(this.guiBuilder.buildTextArea(name, container), this.translation);
-    }
-
-    /**
-     * Build a new multiple line text widget with a default name, no background, and a padding of 0.
-     *
-     * @param coordinates Text area coordinates.
-     * @param font        Font used for the text.
-     * @param container   Container holding the text area.
-     * @return The new text area widget.
-     */
-    public final TranslatedTextArea buildTextArea(final BaseCoordinate coordinates, final Font font, final GuiContainer container) {
-        return new TranslatedTextArea(this.guiBuilder.buildTextArea(coordinates, font, container), this.translation);
     }
 
     /**
@@ -363,25 +311,6 @@ public class TranslatedGuiBuilder {
     public final TranslatedCheckBox buildCheckBox(@NonNull final String name, @NonNull final BaseCoordinate coordinates, @NonNull final Material background, @NonNull final Material hover,
                                                   @NonNull final Material check, @NonNull final Font font, @NonNull final GuiContainer container) {
         return new TranslatedCheckBox(this.guiBuilder.buildCheckBox(name, coordinates, background, hover, check, font, container), this.translation);
-    }
-
-    public final TranslatedCheckBox buildCheckBox(final String name, final Position pos, final CheckboxDefinition template, final GuiContainer container) {
-        return new TranslatedCheckBox(this.guiBuilder.buildCheckBox(name, pos, template, container), this.translation);
-    }
-
-    public final TranslatedCheckBox buildCheckBox(final String name, final CheckboxDefinition template, final GuiContainer container) {
-        return new TranslatedCheckBox(this.guiBuilder.buildCheckBox(name, template, container), this.translation);
-    }
-
-    /**
-     * Build a new check box widget, all parameters are set to empty.
-     *
-     * @param name      Unique check box name.
-     * @param container Container holding the check box widget.
-     * @return The new check box widget.
-     */
-    public final TranslatedCheckBox buildCheckBox(final String name, final GuiContainer container) {
-        return new TranslatedCheckBox(this.guiBuilder.buildCheckBox(name, container), this.translation);
     }
 
     /**
@@ -611,7 +540,11 @@ public class TranslatedGuiBuilder {
         return this.guiBuilder.findImage(name);
     }
 
-    public TranslatedTextLine buildTextLine(TextLine textLine) {
+    TranslatedTextLine buildTextLine(TextLine textLine) {
         return new TranslatedTextLine(textLine, this.translation);
+    }
+
+    TranslatedTextArea buildTextArea(TextArea textLine) {
+        return new TranslatedTextArea(textLine, this.translation);
     }
 }

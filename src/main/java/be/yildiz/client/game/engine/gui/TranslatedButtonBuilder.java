@@ -54,7 +54,7 @@ public class TranslatedButtonBuilder {
      * @param builder Factory creating the effective widget.
      * @throws NullPointerException if builder is null.
      */
-    public TranslatedButtonBuilder(TranslatedGuiBuilder builder) {
+    TranslatedButtonBuilder(TranslatedGuiBuilder builder) {
         super();
         this.builder = builder;
         this.buttonBuilder = new ButtonBuilder(builder.getGuiBuilder());
