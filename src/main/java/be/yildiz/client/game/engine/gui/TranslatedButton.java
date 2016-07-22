@@ -194,4 +194,24 @@ public class TranslatedButton extends TranslatedContainerElementWrapper<Button> 
     public void setInactiveMaterial(Material material) {
         this.button.setInactiveMaterial(material);
     }
+
+    @Override
+    public PositionRelativeLeft getCaptionHorizontalAlignment() {
+        return this.button.getCaptionHorizontalAlignment();
+    }
+
+    @Override
+    public int getCaptionHorizontalPadding() {
+        return this.button.getCaptionHorizontalPadding();
+    }
+
+    @Override
+    public PositionRelativeTop getCaptionVerticalAlignment() {
+        return this.button.getCaptionVerticalAlignment();
+    }
+
+    @Override
+    public int getCaptionVerticalPadding() {
+        return this.button.getCaptionVerticalPadding();
+    }
 }
