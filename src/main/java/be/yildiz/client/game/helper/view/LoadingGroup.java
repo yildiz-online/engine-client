@@ -74,7 +74,11 @@ public final class LoadingGroup {
         super();
         this.engine = engine;
         this.toLoad = Lists.newList();
-        GuiContainer container = engine.getGuiManager().buildFullScreenOverlayContainer("loading", background);
+        GuiContainer container = engine.getGuiManager().buildContainer()
+                .withName("loading")
+                .withBackground(background)
+                .fullScreen()
+                .build();
         this.text = engine.getGuiManager().buildTextLine()
                 .withName("loadText")
                 .withCoordinates(new Coordinates(new Size(container.getWidth(), 20), new Position(0, 500)))

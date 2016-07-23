@@ -26,13 +26,13 @@
 package be.yildiz.client.game.engine.gui;
 
 import be.yildiz.common.BaseCoordinate;
-import be.yildiz.common.Coordinates;
 import be.yildiz.common.Position;
 import be.yildiz.common.Size;
 import be.yildiz.common.translation.Translation;
 import be.yildiz.module.graphic.Font;
 import be.yildiz.module.graphic.Material;
 import be.yildiz.module.graphic.gui.*;
+import be.yildiz.module.graphic.gui.container.ContainerBuilder;
 import be.yildiz.module.graphic.gui.image.ImageBuilder;
 import lombok.NonNull;
 
@@ -287,163 +287,6 @@ public class TranslatedGuiBuilder {
         this.guiBuilder.delete(checkBox);
     }
 
-    /**
-     * Build a new GUI container, a GUI container is not meant to be used alone, it must be element of a view.
-     *
-     * @param name        Unique container name.
-     * @param background  Material to use as background.
-     * @param coordinates Container size and position.
-     * @return The newly built container.
-     */
-    public final GuiContainer buildOverlayContainer(final String name, final Material background, final BaseCoordinate coordinates) {
-        return this.guiBuilder.buildOverlayContainer(name, background, coordinates);
-    }
-
-    /**
-     * Build a new GUI container, a GUI container is not meant to be used alone, it must be element of a view, a unique random name is generated.
-     *
-     * @param background  Material to use as background.
-     * @param coordinates Container size and position.
-     * @return The newly built container.
-     */
-    public final GuiContainer buildOverlayContainer(final Material background, final BaseCoordinate coordinates) {
-        return this.guiBuilder.buildOverlayContainer(background, coordinates);
-    }
-
-    /**
-     * Build a new GUI container, all parameters are set to empty, a GUI container is not meant to be used alone, it must be element of a view.
-     *
-     * @param name        Unique container name.
-     * @param coordinates Container size and position.
-     * @return The newly built container.
-     */
-    public final GuiContainer buildOverlayContainer(final String name, final BaseCoordinate coordinates) {
-        return this.guiBuilder.buildOverlayContainer(name, coordinates);
-    }
-
-    /**
-     * Build a new GUI container wrapped in a parent container.
-     *
-     * @param name        Unique container name.
-     * @param background  Material to use as background.
-     * @param coordinates Container size and position.
-     * @param parent      Parent container.
-     * @return The newly built container.
-     */
-    public final GuiContainer buildOverlayContainer(final String name, final BaseCoordinate coordinates, final Material background, final GuiContainer parent) {
-        return this.guiBuilder.buildOverlayContainer(name, coordinates, background, parent);
-    }
-
-    /**
-     * Build a new GUI container wrapped in a parent container with a random name.
-     *
-     * @param background  Material to use as background.
-     * @param coordinates Container size and position.
-     * @param parent      Parent container.
-     * @return The newly built container.
-     */
-    public final GuiContainer buildOverlayContainer(final Material background, final BaseCoordinate coordinates, final GuiContainer parent) {
-        return this.guiBuilder.buildOverlayContainer(background, coordinates, parent);
-    }
-
-    /**
-     * Build a new GUI container wrapped in a parent container, position and size are same as parent, no background, z value is same as parent + 1.
-     *
-     * @param name   Unique container name.
-     * @param parent Parent container.
-     * @return The newly built container.
-     */
-    public final GuiContainer buildOverlayContainer(final String name, final GuiContainer parent) {
-        return this.guiBuilder.buildOverlayContainer(name, parent);
-    }
-
-    /**
-     * Build a new GUI container wrapped in a parent container, position and size are same as parent, no background, z value is same as parent + 1, a unique random name is generated.
-     *
-     * @param parent Parent container.
-     * @return The newly built container.
-     */
-    public final GuiContainer buildOverlayContainer(final GuiContainer parent) {
-        return this.guiBuilder.buildOverlayContainer(parent);
-    }
-
-    /**
-     * Build a new GUI container wrapped in a parent container, no background, z value is same as parent + 1, a unique random name is generated.
-     *
-     * @param coordinates Coordinates.
-     * @param parent      Parent container.
-     * @return The newly built container.
-     */
-    public final GuiContainer buildOverlayContainer(final BaseCoordinate coordinates, final GuiContainer parent) {
-        return this.guiBuilder.buildOverlayContainer(coordinates, parent);
-    }
-
-    /**
-     * Build a new GUI container wrapped in a parent container, z value is same as parent + 1.
-     *
-     * @param coordinates Coordinates.
-     * @param background  Container background material.
-     * @param parent      Parent container.
-     * @return The newly built container.
-     */
-    public GuiContainer buildOverlayContainer(final BaseCoordinate coordinates, final Material background, final GuiContainer parent) {
-        return this.guiBuilder.buildOverlayContainer(coordinates, background, parent);
-    }
-
-    /**
-     * Build a new GUI container wrapped in a parent container, no background, z value is same as parent + 1.
-     *
-     * @param name        Container name.
-     * @param coordinates Coordinates.
-     * @param parent      Parent container.
-     * @return The newly built container.
-     */
-    public final GuiContainer buildOverlayContainer(final String name, final BaseCoordinate coordinates, final GuiContainer parent) {
-        return this.guiBuilder.buildOverlayContainer(name, coordinates, parent);
-    }
-
-    /**
-     * Build a new full screen GUI container, the position is set to (0, 0) and the size is the screen size, a GUI container is not meant to be used alone, it must be element of a view.
-     *
-     * @param name       Unique container name.
-     * @param background Container background material.
-     * @return The newly built container.
-     */
-    public final GuiContainer buildFullScreenOverlayContainer(final String name, final Material background) {
-        return this.guiBuilder.buildFullScreenOverlayContainer(name, background);
-    }
-
-    /**
-     * Build a new full screen GUI container, the position is set to (0, 0), there is no material and the size is the screen size, a GUI container is not meant to be used alone, it must be element of
-     * a view.
-     *
-     * @param name Unique container name.
-     * @return The newly built container.
-     */
-    public final GuiContainer buildFullScreenOverlayContainer(final String name) {
-        return this.guiBuilder.buildFullScreenOverlayContainer(name);
-    }
-
-    /**
-     * Build a new full screen GUI container with a random name, the position is set to (0, 0), there is no material and the size is the screen size, a GUI container is not meant to be used alone, it
-     * must be element of a view.
-     *
-     * @return The newly built container.
-     */
-    public final GuiContainer buildFullScreenOverlayContainer() {
-        return this.guiBuilder.buildFullScreenOverlayContainer();
-    }
-
-    /**
-     * Build a new full screen GUI container with a random name, the position is set to (0, 0), there is no material and the size is the screen size, a GUI container is not meant to be used alone, it
-     * must be element of a view.
-     *
-     * @param background Container background material.
-     * @return The newly built container.
-     */
-    public final GuiContainer buildFullScreenOverlayContainer(final Material background) {
-        return this.guiBuilder.buildFullScreenOverlayContainer(background);
-    }
 
     /**
      * Retrieve a GuiContainer from its name, if no name matches, an {@link IllegalArgumentException} is thrown.
@@ -485,10 +328,6 @@ public class TranslatedGuiBuilder {
         return this.guiBuilder.buildTabcontainer(name, titles, coordinates, tabWidth, tabHeight, background, tabMaterial, highlight, pushed, font, container);
     }
 
-    public GuiContainer buildOverlayContainer(Coordinates coordinates) {
-        return this.guiBuilder.buildOverlayContainer(coordinates);
-    }
-
     public Size getScreenSize() {
         return this.guiBuilder.getScreenSize();
     }
@@ -507,5 +346,9 @@ public class TranslatedGuiBuilder {
 
     public TranslatedTextAreaBuilder buildTextArea() {
         return new TranslatedTextAreaBuilder(this.guiBuilder, this.translation);
+    }
+
+    public ContainerBuilder buildContainer() {
+        return new ContainerBuilder(this.guiBuilder);
     }
 }
