@@ -41,7 +41,6 @@ import be.yildiz.shared.entity.action.AbstractAttack;
 import be.yildiz.shared.entity.action.Action;
 import be.yildiz.shared.entity.fields.AttackHitResult;
 import be.yildiz.shared.entity.fields.Target;
-import be.yildiz.shared.entity.module.Module;
 import be.yildiz.shared.entity.module.ModuleGroup;
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
@@ -309,11 +308,6 @@ public class ClientEntity implements Entity {
     @Override
     public ModuleGroup getModules() {
         return this.entity.getModules();
-    }
-
-    @Override
-    public List<Module<? extends Action>> getOther() {
-        return this.entity.getOther();
     }
 
     @Override
