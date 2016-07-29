@@ -26,6 +26,7 @@
 package be.yildiz.client.game.engine;
 
 import be.yildiz.module.network.protocol.ServerRequest;
+import com.google.java.contract.Requires;
 
 /**
  * Can send a request from a client to a server
@@ -39,9 +40,8 @@ public interface MessageSender {
      * Send a request to the server.
      *
      * @param request Request to send.
-     * @Requires request != null.
-     * @Ensures The request is sent to the server.
      */
+    @Requires("request != null")
     void sendMessage(ServerRequest request);
 
 }
