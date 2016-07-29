@@ -192,6 +192,9 @@ public final class ClientBuilding implements Building {
         return this.building.getNextLevelPrice();
     }
 
+    /**
+     * @return The translation key for the building next level description.
+     */
     public String getNextLevelKey() {
         return this.data.getType().name + ".level." + (this.building.getLevel().add(1));
     }
