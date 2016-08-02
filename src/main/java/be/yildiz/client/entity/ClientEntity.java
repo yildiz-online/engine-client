@@ -43,7 +43,6 @@ import be.yildiz.shared.entity.fields.AttackHitResult;
 import be.yildiz.shared.entity.fields.Target;
 import be.yildiz.shared.entity.module.Module;
 import be.yildiz.shared.entity.module.ModuleGroup;
-import lombok.AllArgsConstructor;
 import lombok.NonNull;
 
 import java.util.List;
@@ -53,7 +52,7 @@ import java.util.Set;
 /**
  * @author Grégory Van den Borre
  */
-@AllArgsConstructor
+
 public class ClientEntity implements Entity {
 
     public static final ClientEntity WORLD = new ClientEntity(BaseEntity.WORLD, new ClientEntityData(null, null, null), PlayerId.WORLD);
@@ -64,6 +63,12 @@ public class ClientEntity implements Entity {
     private final ClientEntityData data;
 
     private final PlayerId player;
+
+    public ClientEntity(Entity entity, ClientEntityData data, PlayerId player) {
+        this.entity = entity;
+        this.data = data;
+        this.player = player;
+    }
 
     /**
      * @return The translation key of this entity name.

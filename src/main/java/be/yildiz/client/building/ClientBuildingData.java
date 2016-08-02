@@ -39,7 +39,6 @@ import be.yildiz.shared.data.TimeToBuild;
 import be.yildiz.shared.resources.ResourceValue;
 import be.yildiz.shared.resources.bonus.BonusResources;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
@@ -47,7 +46,6 @@ import lombok.Getter;
  *
  * @author Grégory Van den Borre
  */
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class ClientBuildingData implements ClientConstructionData, BuildingData {
 
     /**
@@ -66,6 +64,12 @@ public class ClientBuildingData implements ClientConstructionData, BuildingData 
      */
     @Getter(value = AccessLevel.PACKAGE)
     private final ClientBuildingGuiMaterialization guiMaterialization;
+
+    protected ClientBuildingData(BuildingData data, ClientBuildingMaterialization materialization, ClientBuildingGuiMaterialization guiMaterialization) {
+        this.data = data;
+        this.materialization = materialization;
+        this.guiMaterialization = guiMaterialization;
+    }
 
     /**
      * Generate the visual 3D materialization.

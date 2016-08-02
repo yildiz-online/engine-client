@@ -35,7 +35,6 @@ import be.yildiz.module.graphic.gui.GuiContainer;
 import be.yildiz.module.sound.Music;
 import be.yildiz.module.sound.Playlist;
 import be.yildiz.module.sound.SoundEngine;
-import lombok.AllArgsConstructor;
 
 import java.io.File;
 import java.util.List;
@@ -45,7 +44,6 @@ import java.util.List;
  *
  * @author Grégory Van den Borre
  */
-@AllArgsConstructor
 public final class FileParser {
 
     /**
@@ -72,6 +70,13 @@ public final class FileParser {
      * Create the music playlist.
      */
     private final SoundEngine soundEngine;
+
+    public FileParser(TranslatedGuiBuilder guiManager, MaterialManager materialManager, GraphicEngine graphicEngine, SoundEngine soundEngine) {
+        this.guiManager = guiManager;
+        this.materialManager = materialManager;
+        this.graphicEngine = graphicEngine;
+        this.soundEngine = soundEngine;
+    }
 
     /**
      * Set the path to get graphic resources and parse the scripts in this folder.

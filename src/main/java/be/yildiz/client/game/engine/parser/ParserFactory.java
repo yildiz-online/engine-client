@@ -26,7 +26,6 @@
 package be.yildiz.client.game.engine.parser;
 
 import be.yildiz.common.Size;
-import lombok.AllArgsConstructor;
 
 import java.security.InvalidParameterException;
 
@@ -35,7 +34,6 @@ import java.security.InvalidParameterException;
  *
  * @author Grégory Van den Borre
  */
-@AllArgsConstructor
 public final class ParserFactory {
 
     public static final String UNKNOWN_TYPE = "Unkonwn type.";
@@ -44,6 +42,10 @@ public final class ParserFactory {
      * Parser type to use.
      */
     private final ParserType parserType;
+
+    public ParserFactory(ParserType parserType) {
+        this.parserType = parserType;
+    }
 
 
     /**

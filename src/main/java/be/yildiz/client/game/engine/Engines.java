@@ -29,8 +29,6 @@ import be.yildiz.module.graphic.GraphicEngine;
 import be.yildiz.module.network.client.AbstractNetworkEngineClient;
 import be.yildiz.module.sound.SoundEngine;
 import be.yildiz.module.window.WindowEngine;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
@@ -39,7 +37,6 @@ import lombok.Getter;
  * @author Grégory Van den Borre
  */
 @Getter
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Engines {
 
     /**
@@ -61,6 +58,13 @@ public class Engines {
      * Engine handling the canvas creation and inputs.
      */
     private final WindowEngine window;
+
+    private Engines(GraphicEngine graphic, SoundEngine audio, AbstractNetworkEngineClient network, WindowEngine window) {
+        this.graphic = graphic;
+        this.audio = audio;
+        this.network = network;
+        this.window = window;
+    }
 
     /**
      * Builder to create a new Engines object.

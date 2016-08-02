@@ -28,14 +28,12 @@ package be.yildiz.client.game.engine;
 import be.yildiz.common.client.debug.DebugListener;
 import be.yildiz.common.framelistener.StartFrameListener;
 import be.yildiz.module.graphic.FpsProvider;
-import lombok.AllArgsConstructor;
 
 /**
  * Provide the application current framerate.
  *
  * @author Grégory Van den Borre
  */
-@AllArgsConstructor
 final class FrameRateDisplayer extends StartFrameListener {
 
     /**
@@ -47,6 +45,11 @@ final class FrameRateDisplayer extends StartFrameListener {
      * Object providing the frame rate.
      */
     private final FpsProvider provider;
+
+    FrameRateDisplayer(DebugListener debugListener, FpsProvider provider) {
+        this.debugListener = debugListener;
+        this.provider = provider;
+    }
 
     @Override
     public boolean frameStarted() {

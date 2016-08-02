@@ -36,14 +36,11 @@ import be.yildiz.shared.data.TimeToBuild;
 import be.yildiz.shared.entity.EntityData;
 import be.yildiz.shared.entity.GameEntityData;
 import be.yildiz.shared.resources.ResourceValue;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
  * @author Grégory van den Borre
  */
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class ClientEntityData implements ClientConstructionData, EntityData {
 
     private final GameEntityData data;
@@ -51,6 +48,12 @@ public class ClientEntityData implements ClientConstructionData, EntityData {
     private final ClientEntityMaterialization materialization;
 
     private final ClientEntityGuiMaterialization guiMaterialization;
+
+    protected ClientEntityData(GameEntityData data, ClientEntityMaterialization materialization, ClientEntityGuiMaterialization guiMaterialization) {
+        this.data = data;
+        this.materialization = materialization;
+        this.guiMaterialization = guiMaterialization;
+    }
 
     @Override
     public Key getNameKey() {

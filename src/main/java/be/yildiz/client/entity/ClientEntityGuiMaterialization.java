@@ -29,12 +29,10 @@ import be.yildiz.client.data.ClientBaseGuiMaterialization;
 import be.yildiz.common.translation.Key;
 import be.yildiz.module.graphic.Material;
 import be.yildiz.module.graphic.gui.ButtonMaterial;
-import lombok.Getter;
 
 /**
  * @author Grégory Van den Borre
  */
-@Getter
 public class ClientEntityGuiMaterialization extends ClientBaseGuiMaterialization {
 
     private final Material animatedIcon;
@@ -48,5 +46,17 @@ public class ClientEntityGuiMaterialization extends ClientBaseGuiMaterialization
         this.animatedIcon = animatedIcon;
         this.mapIcon = mapIcon;
         this.hostileMapIcon = hostileMapIcon;
+    }
+
+    public Material getAnimatedIcon() {
+        return animatedIcon;
+    }
+
+    public Material getMapIcon() {
+        return mapIcon;
+    }
+
+    public Material getHostileMapIcon() {
+        return hostileMapIcon;
     }
 }

@@ -28,7 +28,6 @@ package be.yildiz.client.data;
 import be.yildiz.common.translation.Key;
 import be.yildiz.module.graphic.Material;
 import be.yildiz.module.graphic.gui.ButtonMaterial;
-import lombok.Getter;
 
 /**
  * Common elements for the item GUI materialization.
@@ -44,7 +43,6 @@ import lombok.Getter;
  * @invariant icon != null
  * @invariant constructionButton != null
  */
-@Getter
 public class ClientBaseGuiMaterialization {
 
     /**
@@ -83,6 +81,22 @@ public class ClientBaseGuiMaterialization {
         this.icon = icon;
         this.constructionButton = constructionButton;
         assert this.invariant();
+    }
+
+    public ButtonMaterial getConstructionButton() {
+        return constructionButton;
+    }
+
+    public Key getNameKey() {
+        return nameKey;
+    }
+
+    public Key getDescriptionKey() {
+        return descriptionKey;
+    }
+
+    public Material getIcon() {
+        return icon;
     }
 
     /**

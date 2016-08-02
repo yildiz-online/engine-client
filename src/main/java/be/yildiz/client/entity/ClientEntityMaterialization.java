@@ -29,8 +29,6 @@ import be.yildiz.common.gameobject.GameMaterialization;
 import be.yildiz.common.id.EntityId;
 import be.yildiz.common.vector.Point3D;
 import be.yildiz.module.graphic.ClientWorld;
-import com.google.java.contract.Ensures;
-import com.google.java.contract.Requires;
 
 /**
  * Provide a materialization of an entity for the game view.
@@ -49,8 +47,8 @@ public interface ClientEntityMaterialization {
      * @param position Position to set the built materialization.
      * @return The created materialization.
      */
-    @Requires({"world != null", "id != null", "position != null"})
-    @Ensures({"result != null", "result.id == id", "result.position.equals(position)"})
+    //@Requires({"world != null", "id != null", "position != null"})
+    //@Ensures({"result != null", "result.id == id", "result.position.equals(position)"})
     GameMaterialization generate(ClientWorld world, EntityId id, Point3D position);
 
 }
