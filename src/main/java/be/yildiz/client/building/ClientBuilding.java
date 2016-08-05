@@ -166,6 +166,11 @@ public final class ClientBuilding implements Building {
     }
 
     @Override
+    public boolean exists() {
+        return this.building.exists();
+    }
+
+    @Override
     public boolean isEmpty() {
         return this.building.isEmpty();
     }
