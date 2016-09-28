@@ -31,18 +31,18 @@ import be.yildiz.module.graphic.gui.ButtonMaterial;
 
 /**
  * Common elements for the item GUI materialization.
+ * Immutable class.
  *
  * @author Grégory Van den Borre
- * @immutable
- * @specfield nameKey:Key:Translation key for the name.
- * @specfield descriptionKey:Translation key for the description.
- * @specfield icon:Material:2D representation of the element.
- * @specfield constructionButton:ButtonMaterial:GuiButton to display to build the item.
- * @invariant nameKey != null
- * @invariant descriptionKey != null
- * @invariant icon != null
- * @invariant constructionButton != null
  */
+//@specfield nameKey:Key:Translation key for the name.
+//@specfield descriptionKey:Translation key for the description.
+//@specfield icon:Material:2D representation of the element.
+//@specfield constructionButton:ButtonMaterial:GuiButton to display to build the item.
+//@invariant nameKey != null
+//@invariant descriptionKey != null
+//@invariant icon != null
+//@invariant constructionButton != null
 public class ClientBaseGuiMaterialization {
 
     /**
@@ -69,11 +69,11 @@ public class ClientBaseGuiMaterialization {
      * @param descriptionKey     Translation key for the GUI element description.
      * @param icon               Material to use to display the 2D GUI representation.
      * @param constructionButton ButtonMaterial to use on a button to build the matching element.
-     * @Requires nameKey != null
-     * @Requires descriptionKey != null
-     * @Requires icon != null
-     * @Requires constructionMaterial != null
      */
+    //@Requires nameKey != null
+    //@Requires descriptionKey != null
+    //@Requires icon != null
+    //@Requires constructionMaterial != null
     protected ClientBaseGuiMaterialization(final Key nameKey, final Key descriptionKey, final Material icon, final ButtonMaterial constructionButton) {
         super();
         this.nameKey = nameKey;

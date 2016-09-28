@@ -32,14 +32,14 @@ import be.yildiz.module.graphic.gui.ButtonMaterial;
 
 /**
  * Materialization for a building in the GUI.
+ * Immutable class.
  *
  * @author Grégory Van den Borre
- * @immutable.
- * @specfield nameKey:Key:Translation key for the name.
- * @specfield descriptionKey:Translation key for the description.
- * @specfield icon:Material:2D representation of the element.
- * @specfield constructionButton:ButtonMaterial:GuiButton to display to build the item.
  */
+//@specfield nameKey:Key:Translation key for the name.
+//@specfield descriptionKey:Translation key for the description.
+//@specfield icon:Material:2D representation of the element.
+//@specfield constructionButton:ButtonMaterial:GuiButton to display to build the item.
 public class ClientBuildingGuiMaterialization extends ClientBaseGuiMaterialization {
 
     protected ClientBuildingGuiMaterialization(Key nameKey, Key descriptionKey, Material icon, ButtonMaterial constructionButton) {

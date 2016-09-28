@@ -52,7 +52,6 @@ import java.util.Set;
 /**
  * @author Grégory Van den Borre
  */
-
 public class ClientEntity implements Entity {
 
     public static final ClientEntity WORLD = new ClientEntity(BaseEntity.WORLD, new ClientEntityData(null, null, null), PlayerId.WORLD);
@@ -72,9 +71,8 @@ public class ClientEntity implements Entity {
 
     /**
      * @return The translation key of this entity name.
-     * @Ensures return value != null
      */
-
+    //@Ensures return value != null
     public Key getNameKey() {
         return this.data.getNameKey();
     }

@@ -39,26 +39,26 @@ public interface ClientConstructionData extends ConstructionData {
 
     /**
      * @return The translation key for the name of the item to build.
-     * @Ensures result != null
      */
+    //@Ensures result != null
     Key getNameKey();
 
     /**
      * @return The translation key for the description of the item to build.
-     * @Ensures result != null
      */
+    //@Ensures result != null
     Key getDescriptionKey();
 
     /**
      * @return The material to display on the build icon.
-     * @Ensures result != null
      */
+    //@Ensures result != null
     Material getAnimatedIcon();
 
     /**
      * @return The materials to use on the construction button.
-     * @Ensures result != null
      */
+    //@Ensures result != null
     ButtonMaterial getConstructionButton();
 
 }

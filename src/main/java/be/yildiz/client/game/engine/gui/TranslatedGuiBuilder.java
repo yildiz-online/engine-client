@@ -235,8 +235,8 @@ public class TranslatedGuiBuilder {
      * @param cursorMaterial Material to use for the cursor.
      * @param container      Container holding the input box.
      * @return The new input box widget.
-     * @pre material.font !empty
      */
+    //@requires material.font !empty
     public final TranslatedInputBox buildInputBox(final String name, final BaseCoordinate coordinates, final ButtonMaterial material, final Material cursorMaterial, final GuiContainer container) {
         return new TranslatedInputBox(this.guiBuilder.buildInputBox(name, coordinates, material, cursorMaterial, container), this.translation);
     }

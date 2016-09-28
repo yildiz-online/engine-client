@@ -146,6 +146,7 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
      * @param config      Configuration.
      * @param gameVersion Version of the game.
      * @param engines     Engines to load.
+     * @param translation Translations to use in the GUI.
      */
     public GameEngine(final Configuration config, final Version gameVersion,
                       final Engines engines, final Translation translation) {
@@ -172,18 +173,16 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
 
     /**
      * Pause the rendering.
-     *
-     * @post rendering = false
      */
+    //@ensures rendering = false
     public void pauseRender() {
         this.rendering = false;
     }
 
     /**
      * Restart the rendering.
-     *
-     * @post rendering = true
      */
+    //@ensures rendering = true
     public void startRender() {
         this.rendering = true;
     }
@@ -381,6 +380,7 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
      * Create a new mouse cursor.
      *
      * @param cursor Data to build the cursor.
+     * @return The created cursor.
      */
     public Cursor createCursor(Cursor cursor) {
         this.windowEngine.createCursor(cursor);

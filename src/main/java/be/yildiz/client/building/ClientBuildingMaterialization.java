@@ -41,10 +41,10 @@ public interface ClientBuildingMaterialization {
      *
      * @param world    World used to create the materialization.
      * @param position Position where the materialization will be build.
-     * @Requires world != null
-     * @Requires position != null
-     * @Effect create a materialization of the building in the game view.
      */
+    //@Requires world != null
+    //@Requires position != null
+    //@Effect create a materialization of the building in the game view.
     void generate(ClientWorld world, Point3D position);
 
 }
