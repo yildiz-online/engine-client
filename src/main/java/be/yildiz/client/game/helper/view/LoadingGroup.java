@@ -69,6 +69,9 @@ public final class LoadingGroup {
      * Full constructor.
      *
      * @param engine Game engine.
+     * @param font   Font to use.
+     * @param background Background image to display.
+     * @param message Message to display.
      */
     public LoadingGroup(final GameEngine engine, final Font font, final Material background, final String message) {
         super();
