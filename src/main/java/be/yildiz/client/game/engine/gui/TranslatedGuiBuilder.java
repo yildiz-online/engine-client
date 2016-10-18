@@ -268,6 +268,7 @@ public class TranslatedGuiBuilder {
      * @param name        Unique check box name.
      * @param coordinates Check box coordinates.
      * @param background  Background material.
+     * @param hover       Material to use when the cursor is above the box.
      * @param check       Material when checked.
      * @param font        Font to use for caption.
      * @param container   Container holding the check box widget.
