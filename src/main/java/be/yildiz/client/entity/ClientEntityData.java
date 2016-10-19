@@ -42,7 +42,7 @@ import lombok.Getter;
  * @author Grégory van den Borre
  */
 public class ClientEntityData implements ClientConstructionData, EntityData {
-
+//FIXME move that code to gui materialization
     private final GameEntityData data;
     @Getter
     private final ClientEntityMaterialization materialization;
