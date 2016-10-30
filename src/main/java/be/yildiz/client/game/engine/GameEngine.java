@@ -109,7 +109,9 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
     private final int authenticationPort;
     @Getter
     private final TranslatedGuiBuilder guiManager;
+
     private final String authenticationServer;
+
     /**
      * True if the loop is currently running.
      */
@@ -166,7 +168,7 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
         this.materialManager = new MaterialManager(this.graphicEngine);
         // this.addResourcePath("media/brs.yzk", "engine", FileType.ZIP);
         this.guiManager = new TranslatedGuiBuilder(this.graphicEngine.getGuiBuilder(), translation);
-
+        this.addFrameListener(this.graphicEngine.getGuiBuilder().getAnimationManager());
         this.windowEngine.registerInput(eventDispatcher);
         Logger.info("Client game engine initialized.");
     }

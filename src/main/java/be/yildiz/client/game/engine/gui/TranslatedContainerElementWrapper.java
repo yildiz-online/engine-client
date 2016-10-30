@@ -28,10 +28,7 @@ package be.yildiz.client.game.engine.gui;
 import be.yildiz.common.Rectangle;
 import be.yildiz.common.client.gui.listener.*;
 import be.yildiz.common.vector.Point2D;
-import be.yildiz.module.graphic.gui.BaseElement;
-import be.yildiz.module.graphic.gui.ContainerElement;
-import be.yildiz.module.graphic.gui.GuiContainer;
-import be.yildiz.module.graphic.gui.OnMouseOverListener;
+import be.yildiz.module.graphic.gui.*;
 
 import java.util.Optional;
 
@@ -159,5 +156,15 @@ class TranslatedContainerElementWrapper<T extends ContainerElement> extends GuiW
     @Override
     public int getAbsoluteTop() {
         return this.wrapped.getAbsoluteTop();
+    }
+
+    @Override
+    public void registerAnimation(GuiAnimation anim) {
+        this.wrapped.registerAnimation(anim);
+    }
+
+    @Override
+    public void playAnimation(String animation) {
+        this.wrapped.playAnimation(animation);
     }
 }
