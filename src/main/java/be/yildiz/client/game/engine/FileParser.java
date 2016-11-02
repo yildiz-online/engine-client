@@ -29,6 +29,7 @@ import be.yildiz.client.game.engine.gui.TranslatedGuiBuilder;
 import be.yildiz.client.game.engine.parser.*;
 import be.yildiz.client.game.engine.parser.ParserFactory.ParserType;
 import be.yildiz.common.log.Logger;
+import be.yildiz.common.resource.ResourceUtil;
 import be.yildiz.module.graphic.*;
 import be.yildiz.module.graphic.gui.ButtonMaterial;
 import be.yildiz.module.graphic.gui.GuiContainer;
@@ -89,66 +90,57 @@ public final class FileParser {
         if (!folder.exists() || !folder.isDirectory()) {
             throw new IllegalArgumentException(folder.getAbsolutePath() + " is not a valid resource path.");
         }
-        final File[] files = folder.listFiles();
+        final List<File> files = ResourceUtil.listFile(folder);
         MusicParser musicParser = this.parserFactory.createMusicParser();
         MaterialParser materialParser = this.parserFactory.createMaterialParser(this.graphicEngine.getScreenSize());
         FontParser fontParser = this.parserFactory.createFontParser();
         GuiParser guiParser = this.parserFactory.createGuiParser(this.graphicEngine.getScreenSize());
-        for (final File s : files) {
-            if (s.getName().endsWith(".mat")) {
-                Logger.info("Parsing material script " + s);
-                final List<SimpleMaterialDefinition> matDef = materialParser.parse(s);
-                for (final SimpleMaterialDefinition def : matDef) {
-                    final Material m = this.materialManager.loadSimpleTexture(def.getName(), def.getPath(), def.getTransparency());
-                    if (!def.getPath2().isEmpty()) {
-                        TextureUnit unit = m.getTechnique(0).createTexturePass().getUnit(0);
-                        unit.setTexture(def.getPath2());
-                        m.getTechnique(0).getPass(1).setTransparency(def.getTransparency());
-                    }
-                    if (!def.getGlowFile().isEmpty()) {
-                        m.addGlowTechnique(def.getGlowFile());
-                    }
-                    if (!def.isAffectedByLight()) {
-                        m.disableLight();
-                    }
-                    m.setBlendMode(def.getBlend());
-                    m.setSceneBlend(def.getSceneBlend1(), def.getSceneBlend2());
+        files.stream().filter(s -> s.getName().endsWith(".mat")).forEach(s -> {
+            Logger.info("Parsing material script " + s);
+            final List<SimpleMaterialDefinition> matDef = materialParser.parse(s);
+            for (final SimpleMaterialDefinition def : matDef) {
+                final Material m = this.materialManager.loadSimpleTexture(def.getName(), def.getPath(), def.getTransparency());
+                if (!def.getPath2().isEmpty()) {
+                    TextureUnit unit = m.getTechnique(0).createTexturePass().getUnit(0);
+                    unit.setTexture(def.getPath2());
+                    m.getTechnique(0).getPass(1).setTransparency(def.getTransparency());
+                }
+                if (!def.getGlowFile().isEmpty()) {
+                    m.addGlowTechnique(def.getGlowFile());
+                }
+                if (!def.isAffectedByLight()) {
+                    m.disableLight();
+                }
+                m.setBlendMode(def.getBlend());
+                m.setSceneBlend(def.getSceneBlend1(), def.getSceneBlend2());
+            }
+        });
+        files.stream().filter(s -> s.getName().endsWith(".pll")).forEach(s -> {
+            Logger.info("Parsing playlist script " + s);
+            final List<PlayListDefinition> playListDef = musicParser.parse(s);
+            for (final PlayListDefinition def : playListDef) {
+                final Playlist p = this.soundEngine.createPlaylist(def.getName());
+                for (final MusicDefinition musicDef : def.getMusicList()) {
+                    final Music m = new Music(musicDef.getFile(), musicDef.getName());
+                    p.addMusic(m);
                 }
             }
-        }
-        for (final File s : files) {
-            if (s.getName().endsWith(".pll")) {
-                Logger.info("Parsing playlist script " + s);
-                final List<PlayListDefinition> playListDef = musicParser.parse(s);
-                for (final PlayListDefinition def : playListDef) {
-                    final Playlist p = this.soundEngine.createPlaylist(def.getName());
-                    // FIXME stream
-                    for (final MusicDefinition musicDef : def.getMusicList()) {
-                        final Music m = new Music(musicDef.getFile(), musicDef.getName());
-                        p.addMusic(m);
-                    }
-                }
+        });
+        files.stream().filter(s -> s.getName().endsWith(".fnt")).forEach(s -> {
+            Logger.info("Parsing font script " + s);
+            fontParser
+                    .parse(s)
+                    .forEach(def ->
+                            this.graphicEngine.createFont(def.getName(), def.getPath(), def.getSize()).load());
+        });
+        files.stream().filter(s -> s.getName().endsWith(".vew")).forEach(s -> {
+            Logger.info("Parsing view script " + s);
+            try {
+                guiParser.parse(s).forEach(this::buildView);
+            } catch (final ParserException pe) {
+                Logger.error(pe);
             }
-        }
-        for (final File s : files) {
-            if (s.getName().endsWith(".fnt")) {
-                Logger.info("Parsing font script " + s);
-                final List<FontDefinition> fontDef = fontParser.parse(s);
-                for (final FontDefinition def : fontDef) {
-                    this.graphicEngine.createFont(def.getName(), def.getPath(), def.getSize()).load();
-                }
-            }
-        }
-        for (final File s : files) {
-            if (s.getName().endsWith(".vew")) {
-                Logger.info("Parsing view script " + s);
-                try {
-                    guiParser.parse(s).forEach(this::buildView);
-                } catch (final ParserException pe) {
-                    Logger.error(pe);
-                }
-            }
-        }
+        });
     }
 
     /**
@@ -182,9 +174,15 @@ public final class FileParser {
                 .withMaterials(new ButtonMaterial(Material.get(bd.getMaterial()), Material.get(bd.getMaterialHighlight()), Font.get(bd.getFont())))
                 .build(container));
 
-        for (final InputBoxDefinition ibd : def.getInputBoxList()) {
-            this.guiManager.buildInputBox(ibd.getName(), ibd.getCoordinates(), ibd.getFont(), ibd.getMaterial(), ibd.getMaterialHighlight(), ibd.getMaterialCursor(), container);
-        }
+        def.getInputBoxList().forEach(ibd ->
+            this.guiManager.buildInputBox(
+                    ibd.getName(),
+                    ibd.getCoordinates(),
+                    ibd.getFont(),
+                    ibd.getMaterial(),
+                    ibd.getMaterialHighlight(),
+                    ibd.getMaterialCursor(),
+                    container));
 
         def.getTextAreaList().forEach(tad -> this.guiManager.buildTextArea()
                 .withName(tad.getName())
