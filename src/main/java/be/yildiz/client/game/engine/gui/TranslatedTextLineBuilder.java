@@ -32,6 +32,7 @@ import be.yildiz.common.translation.Translation;
 import be.yildiz.module.graphic.Font;
 import be.yildiz.module.graphic.gui.GuiBuilder;
 import be.yildiz.module.graphic.gui.GuiContainer;
+import be.yildiz.module.graphic.gui.textline.TextAnimation;
 import be.yildiz.module.graphic.gui.textline.TextLineBuilder;
 
 /**
@@ -80,6 +81,11 @@ public class TranslatedTextLineBuilder {
 
     public TranslatedTextLineBuilder withCoordinates(Coordinates coordinates) {
         this.textLineBuilder.withCoordinates(coordinates);
+        return this;
+    }
+
+    public TranslatedTextLineBuilder animate(TextAnimation animation) {
+        this.textLineBuilder.animate(animation);
         return this;
     }
 
