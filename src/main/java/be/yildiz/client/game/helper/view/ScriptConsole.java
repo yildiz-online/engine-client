@@ -145,8 +145,8 @@ public final class ScriptConsole extends Window {
      * @param command Entered command.
      * @return <code>true</code> if the command is recognized as a special command, <code>false</code> otherwise.
      * @throws ScriptException If an exception occurs while parsing or executing the command.
-     * @Requires command != null.
      */
+    //@Requires command != null
     private boolean executeSpecialCommand(final String command) throws ScriptException {
         switch (command) {
             case "clear":
@@ -184,8 +184,8 @@ public final class ScriptConsole extends Window {
      * @param command The command is expected to be 'LOAD fileName'.
      * @return true.
      * @throws ScriptException If the interpreter could not play the script.
-     * @Requires command != null.
      */
+    //@Requires command != null
     private boolean loadCommand(final String command) throws ScriptException {
         String fileName = command.replace(LOAD, "");
         fileName = fileName.trim();
@@ -199,14 +199,16 @@ public final class ScriptConsole extends Window {
      *
      * @param command The command is expected to be 'SAVE fileName'.
      * @return true.
-     * @Requires command != null
      */
-    private boolean saveCommand(final String command) {
+    //@Requires command != null
+    private boolean saveCommand(final String command) throws ScriptException {
         String fileName = command.replace(SAVE, "");
         fileName = fileName.trim();
         File file = new File("script/" + fileName + "." + this.interpreter.getFileExtension());
         try {
-            file.createNewFile();
+            if(!file.exists() && !file.createNewFile()) {
+                throw new ScriptException("File " + file.getAbsolutePath() + " cannot be created.");
+            }
         } catch (IOException e) {
             Logger.error(e);
         }
