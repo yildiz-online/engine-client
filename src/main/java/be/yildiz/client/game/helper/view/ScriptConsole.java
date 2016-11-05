@@ -93,8 +93,8 @@ public final class ScriptConsole extends Window {
      * @param builder  Builder to create the visual console.
      * @param data     Visual data to build the console.
      */
-    public ScriptConsole(final ScriptLanguage language, final GuiBuilder builder, final ScriptConsoleData data) {
-        super(data.container, builder, new Zorder(645));
+    public ScriptConsole(final ScriptLanguage language, final GuiBuilder builder, final ScriptConsoleData data, GuiEventManager eventManager) {
+        super(data.container, builder, new Zorder(645), eventManager);
         this.interpreter = ScriptInterpreterFactory.getInstance().getInterpreter(language);
         this.input = data.input;
         this.console = data.screen;

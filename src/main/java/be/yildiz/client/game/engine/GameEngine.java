@@ -99,6 +99,7 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
     /**
      * Event dispatcher.
      */
+    @Getter
     private final GuiEventManager eventDispatcher = new EventBubblingDispatcher();
     /**
      * Current configuration.
@@ -226,15 +227,6 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
         }
     }
 
-    /**
-     * Register a view to receive inputs.
-     *
-     * @param v View to register.
-     */
-    public void registerView(final View v) {
-        this.eventDispatcher.addView(v);
-    }
-
     public void registerMainView(final View v) {
         this.eventDispatcher.setDefaultView(v);
     }
@@ -310,15 +302,6 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
     public void setDebugListener(final DebugListener listener) {
         this.addFrameListener(new FrameRateDisplayer(listener, this.graphicEngine));
         this.eventDispatcher.setDebugListener(listener);
-    }
-
-    /**
-     * Set the focus on a given View.
-     *
-     * @param view View gaining the focus.
-     */
-    public void setFocus(final View view) {
-        this.eventDispatcher.setFocus(view);
     }
 
     /**

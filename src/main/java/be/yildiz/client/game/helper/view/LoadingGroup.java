@@ -89,7 +89,7 @@ public final class LoadingGroup {
                 .build(container)
                 .setText(message);
         this.text.setLeftFromParent(Element.PositionRelativeLeft.CENTER);
-        this.window = new SimpleView(container, new Zorder(10));
+        this.window = new SimpleView(container, new Zorder(10), null);
     }
 
     /**
