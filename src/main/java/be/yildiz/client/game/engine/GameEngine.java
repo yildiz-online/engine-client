@@ -159,7 +159,7 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
         this.authenticationPort = config.getAuthenticationPort();
         Logger.info("Initializing client game engine...");
         this.graphicEngine = engines.getGraphic();
-        this.windowEngine = engines.getWindow();
+        this.windowEngine = graphicEngine.getWindowEngine();
         Cursor empty = new Cursor("empty", "empty.gif");
         //this.windowEngine.createCursor(empty);
         //this.windowEngine.setCursor(empty);
