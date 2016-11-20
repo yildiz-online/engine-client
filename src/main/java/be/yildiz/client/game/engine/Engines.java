@@ -28,7 +28,6 @@ package be.yildiz.client.game.engine;
 import be.yildiz.module.graphic.GraphicEngine;
 import be.yildiz.module.network.client.AbstractNetworkEngineClient;
 import be.yildiz.module.sound.SoundEngine;
-import be.yildiz.module.window.WindowEngine;
 import lombok.Getter;
 
 /**
@@ -54,16 +53,10 @@ public class Engines {
      */
     private final AbstractNetworkEngineClient network;
 
-    /**
-     * Engine handling the canvas creation and inputs.
-     */
-    private final WindowEngine window;
-
-    private Engines(GraphicEngine graphic, SoundEngine audio, AbstractNetworkEngineClient network, WindowEngine window) {
+    private Engines(GraphicEngine graphic, SoundEngine audio, AbstractNetworkEngineClient network) {
         this.graphic = graphic;
         this.audio = audio;
         this.network = network;
-        this.window = window;
     }
 
     /**
@@ -98,10 +91,8 @@ public class Engines {
          * @return The generated Engines object.
          */
         public final Engines build() {
-            return new Engines(this.getGraphicEngine(), this.getAudioEngine(), this.getNetworkEngine(), this.getWindowEngine());
+            return new Engines(this.getGraphicEngine(), this.getAudioEngine(), this.getNetworkEngine());
         }
-
-        protected abstract WindowEngine getWindowEngine();
 
         protected abstract AbstractNetworkEngineClient getNetworkEngine();
 
