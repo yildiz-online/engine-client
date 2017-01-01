@@ -356,7 +356,7 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
      */
     public void login(final Credentials credential) {
         this.networkEngine
-                .sendMessage(new AuthenticationRequest(credential.getLogin(), credential.getHashedPassword()));
+                .sendMessage(new AuthenticationRequest(credential.getLogin(), credential.getPassword()));
     }
 
     /**
