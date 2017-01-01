@@ -63,10 +63,6 @@
     </dependency>
     <dependency>
       <groupId>be.yildiz-games</groupId>
-      <artifactId>module-network</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>be.yildiz-games</groupId>
       <artifactId>module-graphic</artifactId>
     </dependency>
     <dependency>
