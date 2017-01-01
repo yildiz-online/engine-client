@@ -33,7 +33,6 @@
 
   <packaging>jar</packaging>
   <inceptionYear>2011</inceptionYear>
-  <url>https://bitbucket.org/yildiz-engine-team/engine-client</url>
   <scm>
     <connection>scm:git:https://bitbucket.org/yildiz-engine-team/engine-client</connection>
     <developerConnection>scm:git:https://bitbucket.org/yildiz-engine-team/engine-client</developerConnection>
