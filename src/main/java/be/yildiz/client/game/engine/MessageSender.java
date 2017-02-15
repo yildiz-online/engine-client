@@ -39,7 +39,7 @@ public interface MessageSender {
      *
      * @param request Request to send.
      */
-    @Requires("request != null")
+    //@Requires("request != null")
     void sendMessage(ServerRequest request);
 
 }
