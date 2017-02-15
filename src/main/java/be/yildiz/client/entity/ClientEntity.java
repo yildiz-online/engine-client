@@ -41,7 +41,6 @@ import be.yildiz.shared.entity.fields.AttackHitResult;
 import be.yildiz.shared.entity.fields.Target;
 import be.yildiz.shared.entity.module.Module;
 import be.yildiz.shared.entity.module.ModuleGroup;
-import lombok.NonNull;
 
 import java.util.List;
 import java.util.Optional;
@@ -56,12 +55,14 @@ public class ClientEntity implements Entity {
 
     private final Entity entity;
 
-    @NonNull
     private final ClientEntityData data;
 
     private final PlayerId player;
 
     public ClientEntity(Entity entity, ClientEntityData data, PlayerId player) {
+        assert entity != null;
+        assert data != null;
+        assert player != null;
         this.entity = entity;
         this.data = data;
         this.player = player;
