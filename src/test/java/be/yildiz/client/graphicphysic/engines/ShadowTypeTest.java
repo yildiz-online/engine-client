@@ -38,7 +38,7 @@ public class ShadowTypeTest {
     /**
      * Those values have to keep constant to be coherent with expected value in
      * native code when the ShadowType will be retrieved from its ordinal value
-     * passed in JNI code(YZ::Root::createSceneManager).
+     * passed in JNI code(yz::Root::createSceneManager).
      */
     @Test
     public void test() {
