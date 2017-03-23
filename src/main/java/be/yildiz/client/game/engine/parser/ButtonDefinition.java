@@ -24,7 +24,6 @@
 package be.yildiz.client.game.engine.parser;
 
 import be.yildiz.common.Size;
-import lombok.Getter;
 
 /**
  * Data definition to create a GuiButton from an external resource(i.e parsing a
@@ -39,19 +38,16 @@ public final class ButtonDefinition extends GuiCommonDefinition {
     /**
      * The button background material name.
      */
-    @Getter
     private final String material;
 
     /**
      * The button background material name when focused.
      */
-    @Getter
     private final String materialHighlight;
 
     /**
      * The font name for the button caption text.
      */
-    @Getter
     private final String font;
 
     /**
@@ -67,5 +63,17 @@ public final class ButtonDefinition extends GuiCommonDefinition {
         this.material = background;
         this.materialHighlight = highlight;
         this.font = captionFont;
+    }
+
+    public String getMaterial() {
+        return material;
+    }
+
+    public String getMaterialHighlight() {
+        return materialHighlight;
+    }
+
+    public String getFont() {
+        return font;
     }
 }

@@ -36,8 +36,6 @@ import be.yildiz.shared.data.Level;
 import be.yildiz.shared.data.TimeToBuild;
 import be.yildiz.shared.resources.ResourceValue;
 import be.yildiz.shared.resources.bonus.BonusResources;
-import lombok.AccessLevel;
-import lombok.Getter;
 
 /**
  * Expose Building data and visual materialization.
@@ -54,13 +52,11 @@ public class ClientBuildingData implements ClientConstructionData, BuildingData 
     /**
      * Visual 3D materialisation to be used in the game.
      */
-    @Getter(value = AccessLevel.PACKAGE)
     private final ClientBuildingMaterialization materialization;
 
     /**
      * Visual 2D materialization to be used in the GUI.
      */
-    @Getter(value = AccessLevel.PACKAGE)
     private final ClientBuildingGuiMaterialization guiMaterialization;
 
     protected ClientBuildingData(BuildingData data, ClientBuildingMaterialization materialization, ClientBuildingGuiMaterialization guiMaterialization) {
@@ -172,5 +168,13 @@ public class ClientBuildingData implements ClientConstructionData, BuildingData 
     @Override
     public final Instance getMaxInstances() {
         return Instance.UNIQUE;
+    }
+
+    ClientBuildingMaterialization getMaterialization() {
+        return materialization;
+    }
+
+    ClientBuildingGuiMaterialization getGuiMaterialization() {
+        return guiMaterialization;
     }
 }

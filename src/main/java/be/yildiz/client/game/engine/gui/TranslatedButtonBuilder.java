@@ -30,7 +30,6 @@ import be.yildiz.common.translation.Translation;
 import be.yildiz.module.graphic.Font;
 import be.yildiz.module.graphic.gui.*;
 import be.yildiz.module.graphic.gui.button.ButtonBuilder;
-import lombok.NonNull;
 
 /**
  * Build a translated button.
@@ -55,8 +54,10 @@ public class TranslatedButtonBuilder {
      * @param builder Factory creating the effective widget.
      * @throws NullPointerException if builder is null.
      */
-    TranslatedButtonBuilder(@NonNull GuiBuilder builder, @NonNull final Translation translation) {
+    TranslatedButtonBuilder(GuiBuilder builder, final Translation translation) {
         super();
+        assert builder != null;
+        assert translation != null;
         this.builder = builder;
         this.translation = translation;
         this.buttonBuilder = new ButtonBuilder(this.builder);

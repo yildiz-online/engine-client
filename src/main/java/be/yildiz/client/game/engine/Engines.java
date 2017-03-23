@@ -26,14 +26,12 @@ package be.yildiz.client.game.engine;
 import be.yildiz.module.graphic.GraphicEngine;
 import be.yildiz.module.network.client.AbstractNetworkEngineClient;
 import be.yildiz.module.sound.SoundEngine;
-import lombok.Getter;
 
 /**
  * Provide the engines implementation to use.
  *
  * @author Grégory Van den Borre
  */
-@Getter
 public class Engines {
 
     /**
@@ -55,6 +53,18 @@ public class Engines {
         this.graphic = graphic;
         this.audio = audio;
         this.network = network;
+    }
+
+    public GraphicEngine getGraphic() {
+        return graphic;
+    }
+
+    public SoundEngine getAudio() {
+        return audio;
+    }
+
+    public AbstractNetworkEngineClient getNetwork() {
+        return network;
     }
 
     /**

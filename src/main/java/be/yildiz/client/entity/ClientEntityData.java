@@ -34,7 +34,6 @@ import be.yildiz.shared.data.TimeToBuild;
 import be.yildiz.shared.entity.EntityData;
 import be.yildiz.shared.entity.GameEntityData;
 import be.yildiz.shared.resources.ResourceValue;
-import lombok.Getter;
 
 /**
  * @author Grégory van den Borre
@@ -42,7 +41,7 @@ import lombok.Getter;
 public class ClientEntityData implements ClientConstructionData, EntityData {
 //FIXME move that code to gui materialization
     private final GameEntityData data;
-    @Getter
+
     private final ClientEntityMaterialization materialization;
 
     private final ClientEntityGuiMaterialization guiMaterialization;
@@ -118,5 +117,9 @@ public class ClientEntityData implements ClientConstructionData, EntityData {
     @Override
     public Instance getMaxInstances() {
         return this.data.getMaxInstances();
+    }
+
+    public ClientEntityMaterialization getMaterialization() {
+        return materialization;
     }
 }

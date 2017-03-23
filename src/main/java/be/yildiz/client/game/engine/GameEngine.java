@@ -54,7 +54,6 @@ import be.yildiz.module.window.WindowEngine;
 import be.yildiz.shared.game.engine.AbstractGameEngine;
 import be.yildiz.shared.player.Player;
 import be.yildiz.shared.protocol.request.CloseSession;
-import lombok.Getter;
 import lombok.NonNull;
 
 import java.io.File;
@@ -92,21 +91,18 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
     /**
      * Manager for materials.
      */
-    @Getter
     private final MaterialManager materialManager;
     /**
      * Event dispatcher.
      */
-    @Getter
     private final GuiEventManager eventDispatcher = new EventBubblingDispatcher();
     /**
      * Current configuration.
      */
-    @Getter
     private final Configuration configuration;
     private final WindowEngine windowEngine;
     private final int authenticationPort;
-    @Getter
+
     private final TranslatedGuiBuilder guiManager;
 
     private final String authenticationServer;
@@ -122,7 +118,7 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
     /**
      * Currently active world.
      */
-    @Getter
+
     private ClientWorld activeWorld;
     /**
      * Flag to check if the engines must run in debug mode or not.
@@ -131,13 +127,11 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
     /**
      * Current player.
      */
-    @Getter
     @NonNull
     private Player player;
     /**
      * Flag to check if engine is closed.
      */
-    @Getter
     private boolean closed = false;
     private Cursor defaultCursor;
 
@@ -578,5 +572,33 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
     public void createAndSetDefaultCursor(Cursor cursor) {
         this.defaultCursor = this.createCursor(cursor);
         this.setCursor(defaultCursor);
+    }
+
+    public MaterialManager getMaterialManager() {
+        return materialManager;
+    }
+
+    public GuiEventManager getEventDispatcher() {
+        return eventDispatcher;
+    }
+
+    public Configuration getConfiguration() {
+        return configuration;
+    }
+
+    public TranslatedGuiBuilder getGuiManager() {
+        return guiManager;
+    }
+
+    public ClientWorld getActiveWorld() {
+        return activeWorld;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public boolean isClosed() {
+        return closed;
     }
 }

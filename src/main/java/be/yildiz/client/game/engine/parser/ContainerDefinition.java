@@ -26,7 +26,6 @@ package be.yildiz.client.game.engine.parser;
 import be.yildiz.common.Size;
 import be.yildiz.common.collections.Lists;
 import be.yildiz.module.graphic.Material;
-import lombok.Getter;
 
 import java.util.List;
 
@@ -41,37 +40,30 @@ public final class ContainerDefinition extends GuiCommonDefinition {
     /**
      * List of children image widget.
      */
-    @Getter
     private final List<ImageDefinition> imageList = Lists.newList();
     /**
      * List of children text line widget.
      */
-    @Getter
     private final List<TextLineDefinition> textLineList = Lists.newList();
     /**
      * List of children button widget.
      */
-    @Getter
     private final List<ButtonDefinition> buttonList = Lists.newList();
     /**
      * List of children input box widget.
      */
-    @Getter
     private final List<InputBoxDefinition> inputBoxList = Lists.newList();
     /**
      * List of children text area widget.
      */
-    @Getter
     private final List<TextAreaDefinition> textAreaList = Lists.newList();
     /**
      * Container background material.
      */
-    @Getter
     private Material material = Material.empty();
     /**
      * Container depth value.
      */
-    @Getter
     private int z;
 
     /**
@@ -130,5 +122,33 @@ public final class ContainerDefinition extends GuiCommonDefinition {
      */
     void addTextArea(final TextAreaDefinition textAreaDef) {
         this.textAreaList.add(textAreaDef);
+    }
+
+    public List<ImageDefinition> getImageList() {
+        return imageList;
+    }
+
+    public List<TextLineDefinition> getTextLineList() {
+        return textLineList;
+    }
+
+    public List<ButtonDefinition> getButtonList() {
+        return buttonList;
+    }
+
+    public List<InputBoxDefinition> getInputBoxList() {
+        return inputBoxList;
+    }
+
+    public List<TextAreaDefinition> getTextAreaList() {
+        return textAreaList;
+    }
+
+    public Material getMaterial() {
+        return material;
+    }
+
+    public int getZ() {
+        return z;
     }
 }

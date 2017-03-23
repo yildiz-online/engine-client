@@ -28,7 +28,6 @@ import be.yildiz.common.collections.Lists;
 import be.yildiz.common.collections.Sets;
 import be.yildiz.common.util.Checker;
 import be.yildiz.shared.entity.DestructionListener;
-import lombok.Getter;
 
 import java.util.Collections;
 import java.util.List;
@@ -60,7 +59,6 @@ public final class SelectionManager implements DestructionListener<ClientEntity>
     /**
      * Maximum number of selectable entities.
      */
-    @Getter
     private final int maxSelection;
 
     /**
@@ -196,5 +194,9 @@ public final class SelectionManager implements DestructionListener<ClientEntity>
     @Override
     public void entityDestroyed(final ClientEntity e) {
         this.addSelection(e, false, true);
+    }
+
+    public int getMaxSelection() {
+        return maxSelection;
     }
 }
