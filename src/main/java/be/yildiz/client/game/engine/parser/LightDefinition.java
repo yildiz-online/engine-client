@@ -26,7 +26,6 @@ package be.yildiz.client.game.engine.parser;
 import be.yildiz.common.vector.Point3D;
 import be.yildiz.module.graphic.Material;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -35,7 +34,6 @@ import lombok.Setter;
  *
  * @author Grégory Van den Borre
  */
-@NoArgsConstructor
 final class LightDefinition {
 
     /**
@@ -75,6 +73,10 @@ final class LightDefinition {
      */
     @Getter
     private Material burstMaterial = Material.empty();
+
+    public LightDefinition() {
+        super();
+    }
 
     /**
      * Set the light position X.
