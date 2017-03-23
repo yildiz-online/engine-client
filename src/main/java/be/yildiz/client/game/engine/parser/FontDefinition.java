@@ -23,9 +23,6 @@
 
 package be.yildiz.client.game.engine.parser;
 
-import lombok.Getter;
-import lombok.Setter;
-
 /**
  * Data definition to create a font from an external resource(i.e parsing a
  * script file).
@@ -37,21 +34,16 @@ public final class FontDefinition {
     /**
      * Font height.
      */
-    @Getter
     private int size;
 
     /**
      * Path to the font file.
      */
-    @Getter
-    @Setter
     private String path;
 
     /**
      * Internal font name, must be unique.
      */
-    @Getter
-    @Setter
     private String name;
 
     /**
@@ -68,5 +60,25 @@ public final class FontDefinition {
      */
     void setSize(final String newSize) {
         this.size = Integer.parseInt(newSize);
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

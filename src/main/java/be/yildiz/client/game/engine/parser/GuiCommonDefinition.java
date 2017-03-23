@@ -26,7 +26,6 @@ package be.yildiz.client.game.engine.parser;
 import be.yildiz.common.Coordinates;
 import be.yildiz.common.Size;
 import be.yildiz.common.collections.Maps;
-import lombok.Getter;
 
 import java.util.Map;
 
@@ -65,7 +64,6 @@ class GuiCommonDefinition {
     /**
      * Widget name.
      */
-    @Getter
     private String name = "";
     /**
      * When using relative values for positions(right) instead of absolute in
@@ -277,4 +275,7 @@ class GuiCommonDefinition {
         GuiCommonDefinition.DEFINITION_LIST.put(this.name, this);
     }
 
+    public String getName() {
+        return name;
+    }
 }

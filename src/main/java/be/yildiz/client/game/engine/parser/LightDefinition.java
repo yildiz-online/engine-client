@@ -25,8 +25,6 @@ package be.yildiz.client.game.engine.parser;
 
 import be.yildiz.common.vector.Point3D;
 import be.yildiz.module.graphic.Material;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * Data definition to create a light from an external resource(i.e parsing a
@@ -39,39 +37,31 @@ final class LightDefinition {
     /**
      * Light name, must be unique.
      */
-    @Getter
-    @Setter
     private String name = "";
 
     /**
      * Light type, accepted values are "point" and "directional"..
      */
-    @Getter
-    @Setter
     private String type = "point";
 
     /**
      * Position of the light.
      */
-    @Getter
     private Point3D position = Point3D.ZERO;
 
     /**
      * Material for the light part of the lens flare, if any.
      */
-    @Getter
     private Material lightMaterial = Material.empty();
 
     /**
      * Material for the halo part of the lens flare, if any.
      */
-    @Getter
     private Material haloMaterial = Material.empty();
 
     /**
      * Material for the burst part of the lens flare, if any.
      */
-    @Getter
     private Material burstMaterial = Material.empty();
 
     public LightDefinition() {
@@ -130,5 +120,37 @@ final class LightDefinition {
      */
     void setBurstMaterial(final String burst) {
         this.burstMaterial = Material.get(burst);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public Point3D getPosition() {
+        return position;
+    }
+
+    public Material getLightMaterial() {
+        return lightMaterial;
+    }
+
+    public Material getHaloMaterial() {
+        return haloMaterial;
+    }
+
+    public Material getBurstMaterial() {
+        return burstMaterial;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

@@ -24,8 +24,6 @@
 package be.yildiz.client.game.engine.parser;
 
 import be.yildiz.common.Size;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * Data definition for a text line gui widget.
@@ -37,8 +35,6 @@ public final class TextLineDefinition extends GuiCommonDefinition {
     /**
      * Font to use for the text.
      */
-    @Getter
-    @Setter
     private String font = "";
 
     /**
@@ -48,5 +44,13 @@ public final class TextLineDefinition extends GuiCommonDefinition {
      */
     TextLineDefinition(final Size screen) {
         super(screen);
+    }
+
+    public String getFont() {
+        return font;
+    }
+
+    public void setFont(String font) {
+        this.font = font;
     }
 }

@@ -23,9 +23,6 @@
 
 package be.yildiz.client.game.engine.parser;
 
-import lombok.Getter;
-import lombok.Setter;
-
 /**
  * Data definition to create a Music from an external resource(i.e parsing a
  * script file).
@@ -37,15 +34,11 @@ public final class MusicDefinition {
     /**
      * Music name, must not be unique.
      */
-    @Getter
-    @Setter
     private String name;
 
     /**
      * File to load to play the music.
      */
-    @Getter
-    @Setter
     private String file;
 
     /**
@@ -55,5 +48,21 @@ public final class MusicDefinition {
         super();
         this.name = "";
         this.file = "";
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getFile() {
+        return file;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setFile(String file) {
+        this.file = file;
     }
 }

@@ -26,8 +26,6 @@ package be.yildiz.client.game.engine.parser;
 import be.yildiz.module.graphic.MaterialPass.BlendMode;
 import be.yildiz.module.graphic.MaterialPass.SceneBlend;
 import be.yildiz.module.graphic.MaterialPass.Transparency;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * Data definition for a material.
@@ -39,59 +37,46 @@ public final class SimpleMaterialDefinition {
     /**
      * Material transparent capability.
      */
-    @Getter
     private Transparency transparency;
 
     /**
      * Path to the texture file used with the material.
      */
-    @Getter
-    @Setter
     private String path;
 
     /**
      * Path to the glow mask file used with the material, if any.
      */
-    @Getter
-    @Setter
     private String glowFile;
 
     /**
      * Material name, must be unique.
      */
-    @Getter
-    @Setter
     private String name;
 
     /**
      * <code>true</code> if the material rendering is affected by the lightning.
      */
-    @Getter
     private boolean affectedByLight;
 
     /**
      * Material first pass blend mode.
      */
-    @Getter
     private BlendMode blend;
 
     /**
      * Scene blend value.
      */
-    @Getter
     private SceneBlend sceneBlend1;
 
     /**
      * Second scene blend value.
      */
-    @Getter
     private SceneBlend sceneBlend2;
 
     /**
      * Path for second texture.
      */
-    @Getter
-    @Setter
     private String path2;
 
     /**
@@ -189,5 +174,57 @@ public final class SimpleMaterialDefinition {
                 throw new IllegalArgumentException("unknown value");
         }
 
+    }
+
+    public Transparency getTransparency() {
+        return transparency;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public String getGlowFile() {
+        return glowFile;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean isAffectedByLight() {
+        return affectedByLight;
+    }
+
+    public BlendMode getBlend() {
+        return blend;
+    }
+
+    public SceneBlend getSceneBlend1() {
+        return sceneBlend1;
+    }
+
+    public SceneBlend getSceneBlend2() {
+        return sceneBlend2;
+    }
+
+    public String getPath2() {
+        return path2;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public void setGlowFile(String glowFile) {
+        this.glowFile = glowFile;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPath2(String path2) {
+        this.path2 = path2;
     }
 }

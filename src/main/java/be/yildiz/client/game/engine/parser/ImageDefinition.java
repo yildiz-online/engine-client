@@ -25,7 +25,6 @@ package be.yildiz.client.game.engine.parser;
 
 import be.yildiz.common.Size;
 import be.yildiz.module.graphic.Material;
-import lombok.Getter;
 
 /**
  * Data definition for an image GUI widget.
@@ -37,7 +36,6 @@ public final class ImageDefinition extends GuiCommonDefinition {
     /**
      * Image background.
      */
-    @Getter
     private Material material = Material.empty();
 
     /**
@@ -56,4 +54,7 @@ public final class ImageDefinition extends GuiCommonDefinition {
         this.material = Material.get(materialName);
     }
 
+    public Material getMaterial() {
+        return material;
+    }
 }

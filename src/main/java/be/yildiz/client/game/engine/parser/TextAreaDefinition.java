@@ -25,8 +25,6 @@ package be.yildiz.client.game.engine.parser;
 
 import be.yildiz.common.Size;
 import be.yildiz.module.graphic.Material;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * Data definition to create a TextAreaGui from an external resource(i.e parsing a
@@ -39,15 +37,11 @@ public final class TextAreaDefinition extends GuiCommonDefinition {
     /**
      * The text area background material.
      */
-    @Getter
-    @Setter
     private String material = Material.EMPTY_NAME;
 
     /**
      * The font name for the text area text.
      */
-    @Getter
-    @Setter
     private String font = "";
 
     /**
@@ -57,5 +51,21 @@ public final class TextAreaDefinition extends GuiCommonDefinition {
      */
     TextAreaDefinition(final Size screen) {
         super(screen);
+    }
+
+    public String getMaterial() {
+        return material;
+    }
+
+    public String getFont() {
+        return font;
+    }
+
+    public void setMaterial(String material) {
+        this.material = material;
+    }
+
+    public void setFont(String font) {
+        this.font = font;
     }
 }

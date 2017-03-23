@@ -26,7 +26,6 @@ package be.yildiz.client.game.engine.parser;
 import be.yildiz.common.Size;
 import be.yildiz.module.graphic.Font;
 import be.yildiz.module.graphic.Material;
-import lombok.Getter;
 
 /**
  * Data definition to create an InputBoxGui from an external resource(i.e parsing a
@@ -39,19 +38,16 @@ public final class InputBoxDefinition extends GuiCommonDefinition {
     /**
      * The input box background material.
      */
-    @Getter
     private final Material material;
 
     /**
      * The input box background material when focused.
      */
-    @Getter
     private final Material materialHighlight;
 
     /**
      * The font for the input box text.
      */
-    @Getter
     private final Font font;
 
     /**
@@ -72,5 +68,17 @@ public final class InputBoxDefinition extends GuiCommonDefinition {
     public Material getMaterialCursor() {
         // FIXME implements
         return null;
+    }
+
+    public Material getMaterial() {
+        return material;
+    }
+
+    public Material getMaterialHighlight() {
+        return materialHighlight;
+    }
+
+    public Font getFont() {
+        return font;
     }
 }

@@ -24,8 +24,6 @@
 package be.yildiz.client.game.engine.parser;
 
 import be.yildiz.common.collections.Lists;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.List;
 
@@ -40,22 +38,17 @@ public final class PlayListDefinition {
     /**
      * PlayList music list.
      */
-    @Getter
-    private final List<MusicDefinition> musicList;
+    private final List<MusicDefinition> musicList = Lists.newList();
     /**
      * PlayList name, must be unique.
      */
-    @Getter
-    @Setter
-    private String name;
+    private String name = "";
 
     /**
      * Simple constructor, initialize with empty values.
      */
     PlayListDefinition() {
         super();
-        this.name = "";
-        this.musicList = Lists.newList();
     }
 
     /**
@@ -65,5 +58,17 @@ public final class PlayListDefinition {
      */
     void addMusic(final MusicDefinition musicDef) {
         this.musicList.add(musicDef);
+    }
+
+    public List<MusicDefinition> getMusicList() {
+        return musicList;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
