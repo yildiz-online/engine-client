@@ -32,7 +32,6 @@ import be.yildiz.module.graphic.Material;
 import be.yildiz.module.graphic.gui.*;
 import be.yildiz.module.graphic.gui.container.ContainerBuilder;
 import be.yildiz.module.graphic.gui.image.ImageBuilder;
-import lombok.NonNull;
 
 import java.util.Optional;
 
@@ -272,8 +271,8 @@ public class TranslatedGuiBuilder {
      * @param container   Container holding the check box widget.
      * @return The new check box widget.
      */
-    public final TranslatedCheckBox buildCheckBox(@NonNull final String name, @NonNull final BaseCoordinate coordinates, @NonNull final Material background, @NonNull final Material hover,
-                                                  @NonNull final Material check, @NonNull final Font font, @NonNull final GuiContainer container) {
+    public final TranslatedCheckBox buildCheckBox(final String name, final BaseCoordinate coordinates, final Material background,  final Material hover,
+                                                   final Material check, final Font font, final GuiContainer container) {
         return new TranslatedCheckBox(this.guiBuilder.buildCheckBox(name, coordinates, background, hover, check, font, container), this.translation);
     }
 

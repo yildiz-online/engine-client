@@ -64,7 +64,7 @@ public class TranslatedButtonBuilderTest {
             builder.withName("test");
         }
 
-        @Test(expected = NullPointerException.class)
+        @Test(expected = AssertionError.class)
         public void thatIsNull() {
             TranslatedButtonBuilder builder = givenATranslatedButtonBuilder();
             builder.withName(null);
@@ -80,7 +80,7 @@ public class TranslatedButtonBuilderTest {
             builder.atPosition(new Position(5, 6));
         }
 
-        @Test(expected = NullPointerException.class)
+        @Test(expected = AssertionError.class)
         public void thatIsNull() {
             TranslatedButtonBuilder builder = givenATranslatedButtonBuilder();
             builder.atPosition(null);
@@ -96,7 +96,7 @@ public class TranslatedButtonBuilderTest {
             builder.withSize(new Size(5, 6));
         }
 
-        @Test(expected = NullPointerException.class)
+        @Test(expected = AssertionError.class)
         public void thatIsNull() {
             TranslatedButtonBuilder builder = givenATranslatedButtonBuilder();
             builder.withSize(null);

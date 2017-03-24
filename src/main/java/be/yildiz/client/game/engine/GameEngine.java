@@ -54,7 +54,6 @@ import be.yildiz.module.window.WindowEngine;
 import be.yildiz.shared.game.engine.AbstractGameEngine;
 import be.yildiz.shared.player.Player;
 import be.yildiz.shared.protocol.request.CloseSession;
-import lombok.NonNull;
 
 import java.io.File;
 import java.security.InvalidParameterException;
@@ -127,7 +126,6 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
     /**
      * Current player.
      */
-    @NonNull
     private Player player;
     /**
      * Flag to check if engine is closed.
@@ -530,6 +528,7 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
      * @param player Player to set.
      */
     public void setPlayer(final Player player) {
+        assert player != null;
         if (this.player != null) {
             throw new InvalidParameterException("Already existing player");
         }
