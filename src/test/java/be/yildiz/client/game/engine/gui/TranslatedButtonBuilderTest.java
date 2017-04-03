@@ -49,7 +49,7 @@ public class TranslatedButtonBuilderTest {
             givenATranslatedButtonBuilder();
         }
 
-        @Test(expected = NullPointerException.class)
+        @Test(expected = AssertionError.class)
         public void withNullGuiBuilder() {
             new TranslatedButtonBuilder(null, new Translation());
         }

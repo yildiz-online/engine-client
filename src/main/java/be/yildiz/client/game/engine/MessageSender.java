@@ -24,7 +24,6 @@
 package be.yildiz.client.game.engine;
 
 import be.yildiz.module.network.protocol.ServerRequest;
-import com.google.java.contract.Requires;
 
 /**
  * Can send a request from a client to a server

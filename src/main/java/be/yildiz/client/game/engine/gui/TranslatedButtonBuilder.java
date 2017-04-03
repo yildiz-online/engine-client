@@ -92,6 +92,8 @@ public class TranslatedButtonBuilder {
      * @throws NullPointerException if size is null.
      */
     public TranslatedButtonBuilder withSize(final Size size) {
+        //FIXME should be checked in common-shared
+        assert size != null;
         this.buttonBuilder.withSize(size);
         return this;
     }
