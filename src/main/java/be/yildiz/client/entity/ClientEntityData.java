@@ -33,6 +33,7 @@ import be.yildiz.shared.data.Level;
 import be.yildiz.shared.data.TimeToBuild;
 import be.yildiz.shared.entity.EntityData;
 import be.yildiz.shared.entity.GameEntityData;
+import be.yildiz.shared.entity.module.ModuleGroup;
 import be.yildiz.shared.resources.ResourceValue;
 
 /**
@@ -121,5 +122,9 @@ public class ClientEntityData implements ClientConstructionData, EntityData {
 
     public ClientEntityMaterialization getMaterialization() {
         return materialization;
+    }
+
+    public ModuleGroup getDefaultModules() {
+        return this.data.getDefaultModules();
     }
 }
