@@ -24,6 +24,7 @@
 package be.yildiz.client.game.engine.gui;
 
 import be.yildiz.common.BaseCoordinate;
+import be.yildiz.common.Coordinates;
 import be.yildiz.common.Position;
 import be.yildiz.common.Size;
 import be.yildiz.common.translation.Translation;
@@ -210,6 +211,11 @@ public class TranslatedGuiBuilder {
     public final TranslatedInputBox buildInputBox(final String name, final BaseCoordinate coordinates, final Font font, final Material background, final Material backgroundHlight, final Material cursorMaterial,
                                                   final GuiContainer container) {
         return new TranslatedInputBox(this.guiBuilder.buildInputBox(name, coordinates, font, background, backgroundHlight, cursorMaterial, container), this.translation);
+    }
+
+    public final TranslatedInputBox buildInputBox(final String name, final Position position, final InputBoxGui.InputBoxDefinition definition,
+                                                  final GuiContainer container) {
+        return new TranslatedInputBox(this.guiBuilder.buildInputBox(name, new Coordinates(definition.getSize(), position), definition.getFont(), definition.getMaterial(), definition.getFocus(), definition.getCursor(), container), this.translation);
     }
 
     /**
