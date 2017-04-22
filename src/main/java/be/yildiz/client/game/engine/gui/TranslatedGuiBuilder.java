@@ -215,7 +215,7 @@ public class TranslatedGuiBuilder {
 
     public final TranslatedInputBox buildInputBox(final String name, final Position position, final InputBoxGui.InputBoxDefinition definition,
                                                   final GuiContainer container) {
-        return new TranslatedInputBox(this.guiBuilder.buildInputBox(name, new Coordinates(definition.getSize(), position), definition.getFont(), definition.getMaterial(), definition.getFocus(), definition.getCursor(), container), this.translation);
+        return new TranslatedInputBox(this.guiBuilder.buildInputBox(name, new Coordinates(definition.getSize(), position), definition.getFont(), definition.getCaptionFont(), definition.getMaterial(), definition.getFocus(), definition.getCursor(), container), this.translation);
     }
 
     /**
