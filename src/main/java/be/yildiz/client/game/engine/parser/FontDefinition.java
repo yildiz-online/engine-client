@@ -84,6 +84,7 @@ public final class FontDefinition {
     public void setName(String name) {
         if(name == null) {
             throw new IllegalArgumentException("Name is mandatory");
-        }this.name = name;
+        }
+        this.name = name;
     }
 }
