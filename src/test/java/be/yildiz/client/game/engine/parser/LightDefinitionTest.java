@@ -24,7 +24,6 @@
 package be.yildiz.client.game.engine.parser;
 
 import be.yildiz.common.vector.Point3D;
-import be.yildiz.module.graphic.Material;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -44,9 +43,6 @@ public class LightDefinitionTest {
             Assert.assertEquals("", ld.getName());
             Assert.assertEquals("point", ld.getType());
             Assert.assertEquals(Point3D.ZERO, ld.getPosition());
-            Assert.assertEquals(Material.empty(), ld.getLightMaterial());
-            Assert.assertEquals(Material.empty(), ld.getBurstMaterial());
-            Assert.assertEquals(Material.empty(), ld.getHaloMaterial());
         }
     }
 }
