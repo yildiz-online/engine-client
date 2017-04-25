@@ -75,10 +75,15 @@ public final class FontDefinition {
     }
 
     public void setPath(String path) {
+        if(path == null) {
+            throw new IllegalArgumentException("Path is mandatory");
+        }
         this.path = path;
     }
 
     public void setName(String name) {
-        this.name = name;
+        if(name == null) {
+            throw new IllegalArgumentException("Name is mandatory");
+        }this.name = name;
     }
 }

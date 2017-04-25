@@ -25,19 +25,78 @@ package be.yildiz.client.game.engine.parser;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
 
 /**
  * @author Grégory Van den Borre
  */
+@RunWith(Enclosed.class)
 public final class FontDefinitionTest {
 
-    /***/
-    @Test
-    public void testFontDefinition() {
-        FontDefinition def = new FontDefinition();
-        Assert.assertEquals("Name should be ''", "", def.getName());
-        Assert.assertEquals("Path should be ''", "", def.getPath());
-        Assert.assertEquals("Size should be 0", 0, def.getSize());
+    public static class Constructor {
+
+        @Test
+        public void happyFlow() {
+            FontDefinition def = new FontDefinition();
+            Assert.assertEquals("Name should be ''", "", def.getName());
+            Assert.assertEquals("Path should be ''", "", def.getPath());
+            Assert.assertEquals("Size should be 0", 0, def.getSize());
+        }
+    }
+
+    public static class SetSize {
+
+        @Test
+        public void happyFlow() {
+            FontDefinition def = new FontDefinition();
+            def.setSize("3");
+            Assert.assertEquals(3, def.getSize());
+        }
+
+        @Test(expected = IllegalArgumentException.class)
+        public void fromNull() {
+            FontDefinition def = new FontDefinition();
+            def.setSize(null);
+        }
+
+        @Test(expected = IllegalArgumentException.class)
+        public void fromInvalid() {
+            FontDefinition def = new FontDefinition();
+            def.setSize("3.1");
+        }
+    }
+
+    public static class SetPath {
+
+        @Test
+        public void happyFlow() {
+            FontDefinition def = new FontDefinition();
+            def.setPath("abc");
+            Assert.assertEquals("abc", def.getPath());
+        }
+
+        @Test(expected = IllegalArgumentException.class)
+        public void fromNull() {
+            FontDefinition def = new FontDefinition();
+            def.setPath(null);
+        }
+    }
+
+    public static class SetName {
+
+        @Test
+        public void happyFlow() {
+            FontDefinition def = new FontDefinition();
+            def.setName("abc");
+            Assert.assertEquals("abc", def.getName());
+        }
+
+        @Test(expected = IllegalArgumentException.class)
+        public void fromNull() {
+            FontDefinition def = new FontDefinition();
+            def.setName(null);
+        }
     }
 
 }
