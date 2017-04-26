@@ -35,6 +35,7 @@ import be.yildiz.common.config.Configuration;
 import be.yildiz.common.exeption.ResourceMissingException;
 import be.yildiz.common.log.Logger;
 import be.yildiz.common.resource.FileResource.FileType;
+import be.yildiz.common.resource.ResourcePath;
 import be.yildiz.common.translation.Translation;
 import be.yildiz.common.util.StringUtil;
 import be.yildiz.module.graphic.*;
@@ -253,7 +254,7 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
         }
         this.windowEngine.updateWindow();
         Logger.info("Registering resource group " + name);
-        this.soundEngine.addResourcePath(path);
+        this.soundEngine.addResourcePath(type == FileType.VFS ? ResourcePath.vfs(path) : ResourcePath.directory(path));
         this.graphicEngine.addResourcePath(name, path, type);
         if (type == FileType.FILE) {
             new FileParser(this.guiManager, this.materialManager, this.graphicEngine, this.soundEngine)
