@@ -213,9 +213,8 @@ public class TranslatedGuiBuilder {
         return new TranslatedInputBox(this.guiBuilder.buildInputBox(name, coordinates, font, background, backgroundHlight, cursorMaterial, container), this.translation);
     }
 
-    public final TranslatedInputBox buildInputBox(final String name, final Position position, final InputBoxGui.InputBoxDefinition definition,
-                                                  final GuiContainer container) {
-        return new TranslatedInputBox(this.guiBuilder.buildInputBox(name, new Coordinates(definition.getSize(), position), definition.getFont(), definition.getCaptionFont(), definition.getMaterial(), definition.getFocus(), definition.getCursor(), container), this.translation);
+    public final TranslatedInputBox buildInputBox(final String name, final Position position, final InputBoxGui.InputBoxTemplate template, final GuiContainer container) {
+        return new TranslatedInputBox(this.guiBuilder.buildInputBox(name, new Coordinates(template.getSize(), position), template.getFont(), template.getCaptionFont(), template.getMaterial(), template.getFocus(), template.getCursor(), container), this.translation);
     }
 
     /**
@@ -252,7 +251,7 @@ public class TranslatedGuiBuilder {
      * @param container Container holding the input box.
      * @return The new input box widget.
      */
-    public final TranslatedInputBox buildInputBox(final Position position, final InputBoxGui.InputBoxDefinition def, final GuiContainer container) {
+    public final TranslatedInputBox buildInputBox(final Position position, final InputBoxGui.InputBoxTemplate def, final GuiContainer container) {
         return new TranslatedInputBox(this.guiBuilder.buildInputBox(position, def, container), this.translation);
     }
 

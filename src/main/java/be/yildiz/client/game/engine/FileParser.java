@@ -124,13 +124,14 @@ public final class FileParser {
                 }
             }
         });
-        files.stream().filter(s -> s.getName().endsWith(".fnt")).forEach(s -> {
-            Logger.info("Parsing font script " + s);
-            fontParser
-                    .parse(s)
-                    .forEach(def ->
-                            this.graphicEngine.createFont(def.getName(), def.getPath(), def.getSize()).load());
-        });
+        files
+                .stream()
+                .filter(s -> s.getName().endsWith(".fnt"))
+                .map(fontParser::parse)
+                .forEach(l -> l.forEach(
+                        def ->
+                                this.graphicEngine.createFont(def.getName(), def.getPath(), def.getSize()).load()));
+
         files.stream().filter(s -> s.getName().endsWith(".vew")).forEach(s -> {
             Logger.info("Parsing view script " + s);
             try {
