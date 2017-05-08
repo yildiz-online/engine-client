@@ -320,11 +320,6 @@ public class ClientEntity implements Entity {
     }
 
     @Override
-    public Movable getMaterialization() {
-        return this.entity.getMaterialization();
-    }
-
-    @Override
     public String toString() {
         return this.entity.toString();
     }
