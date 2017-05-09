@@ -377,6 +377,11 @@ public class ClientEntity implements Entity {
     }
 
     @Override
+    public Movable getMaterialization() {
+        return this.entity.getMaterialization();
+    }
+
+    @Override
     public void setDestination(Point3D p) {
         this.entity.setDestination(p);
     }
