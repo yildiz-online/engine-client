@@ -264,21 +264,8 @@ public class TranslatedGuiBuilder {
         this.guiBuilder.delete(inputBox);
     }
 
-    /**
-     * Build a new check box widget.
-     *
-     * @param name        Unique check box name.
-     * @param coordinates Check box coordinates.
-     * @param background  Background material.
-     * @param hover       Material to use when the cursor is above the box.
-     * @param check       Material when checked.
-     * @param font        Font to use for caption.
-     * @param container   Container holding the check box widget.
-     * @return The new check box widget.
-     */
-    public final TranslatedCheckBox buildCheckBox(final String name, final BaseCoordinate coordinates, final Material background,  final Material hover,
-                                                   final Material check, final Font font, final GuiContainer container) {
-        return new TranslatedCheckBox(this.guiBuilder.buildCheckBox(name, coordinates, background, hover, check, font, container), this.translation);
+    public final TranslatedCheckBoxBuilder buildCheckBox() {
+        return new TranslatedCheckBoxBuilder(this.guiBuilder, this.translation);
     }
 
     /**
