@@ -39,17 +39,14 @@ import be.yildiz.module.graphic.gui.textline.TextLineBuilder;
  */
 public class TranslatedTextLineBuilder {
 
-    private final GuiBuilder guiBuilder;
-
     private final Translation translation;
 
     private final TextLineBuilder textLineBuilder;
 
-    TranslatedTextLineBuilder(GuiBuilder guiBuilder, final Translation translation) {
+    TranslatedTextLineBuilder(GuiBuilder builder, final Translation translation) {
         super();
-        this.guiBuilder = guiBuilder;
         this.translation = translation;
-        this.textLineBuilder = new TextLineBuilder(this.guiBuilder);
+        this.textLineBuilder = new TextLineBuilder(builder);
     }
 
     public TranslatedTextLineBuilder withName(final String name) {

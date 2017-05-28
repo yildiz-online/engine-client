@@ -37,11 +37,6 @@ import be.yildiz.module.graphic.gui.textarea.TextAreaBuilder;
 public class TranslatedTextAreaBuilder {
 
     /**
-     * Gui builder to create the effective widget.
-     */
-    private final GuiBuilder builder;
-
-    /**
      * Decorated builder to create the wrapped text area.
      */
     private final TextAreaBuilder textAreaBuilder;
@@ -49,13 +44,12 @@ public class TranslatedTextAreaBuilder {
     private final Translation translation;
 
     /**
-     * Create a new TranslatedButtonBuilder to build a TranslatedButton.
+     * Create a new TranslatedTextAreaBuilder to build a TranslatedTextArea.
      * @param builder Factory creating the effective widget.
      * @throws NullPointerException if builder is null.
      */
     TranslatedTextAreaBuilder(GuiBuilder builder, Translation translation) {
         super();
-        this.builder = builder;
         this.textAreaBuilder = new TextAreaBuilder(builder);
         this.translation = translation;
     }

@@ -38,11 +38,6 @@ import be.yildiz.module.graphic.gui.button.ButtonBuilder;
 public class TranslatedButtonBuilder {
 
     /**
-     * Gui builder to create the effective widget.
-     */
-    private final GuiBuilder builder;
-
-    /**
      * Decorated builder to create the wrapped button.
      */
     private final ButtonBuilder buttonBuilder;
@@ -58,9 +53,8 @@ public class TranslatedButtonBuilder {
         super();
         assert builder != null;
         assert translation != null;
-        this.builder = builder;
         this.translation = translation;
-        this.buttonBuilder = new ButtonBuilder(this.builder);
+        this.buttonBuilder = new ButtonBuilder(builder);
     }
 
     /**
