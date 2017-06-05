@@ -286,13 +286,17 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
     }
 
     /**
-     * Set a debug listener, it will receive the current framerate.
+     * Set a debug listener, it will receive the current framerate, as well as debug information.
+     * The debug listener will only be registered if debug mode is true.
      *
      * @param listener Listener to set.
      */
     public void setDebugListener(final DebugListener listener) {
-        this.addFrameListener(new FrameRateDisplayer(listener, this.graphicEngine));
-        this.eventDispatcher.setDebugListener(listener);
+        assert listener != null;
+        if(this.debug) {
+            this.addFrameListener(new FrameRateDisplayer(listener, this.graphicEngine));
+            this.eventDispatcher.setDebugListener(listener);
+        }
     }
 
     /**
