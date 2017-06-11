@@ -30,6 +30,7 @@ import be.yildiz.common.Position;
 import be.yildiz.common.Size;
 import be.yildiz.common.collections.Lists;
 import be.yildiz.common.resource.Resource;
+import be.yildiz.common.translation.Key;
 import be.yildiz.module.graphic.Font;
 import be.yildiz.module.graphic.Material;
 import be.yildiz.module.graphic.gui.*;
@@ -82,10 +83,10 @@ public final class LoadingGroup {
                 .build();
         this.text = engine.getGuiManager().buildTextLine()
                 .withName("loadText")
-                .withCoordinates(new Coordinates(new Size(container.getWidth(), 20), new Position(0, 500)))
+                .withCoordinates(new Coordinates(new Size(container.getWidth(), 20), new Position(0, engine.getGuiManager().getScreenSize().height >> 1)))
                 .withFont(font)
                 .build(container)
-                .setText(message);
+                .setText(Key.get(message));
         this.text.setLeftFromParent(Element.PositionRelativeLeft.CENTER);
         this.window = new SimpleView(container, new Zorder(10), null);
     }
