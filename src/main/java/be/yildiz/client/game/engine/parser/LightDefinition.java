@@ -78,7 +78,7 @@ final class LightDefinition {
         if(positionX == null) {
             throw new IllegalArgumentException("positionX is mandatory");
         }
-        this.position = Point3D.xyz(Float.parseFloat(positionX), this.position.y, this.position.z);
+        this.position = Point3D.valueOf(Float.parseFloat(positionX), this.position.y, this.position.z);
     }
 
     /**
@@ -91,7 +91,7 @@ final class LightDefinition {
         if(positionY == null) {
             throw new IllegalArgumentException("positionY is mandatory");
         }
-        this.position = Point3D.xyz(this.position.x, Float.parseFloat(positionY), this.position.z);
+        this.position = Point3D.valueOf(this.position.x, Float.parseFloat(positionY), this.position.z);
     }
 
     /**
@@ -104,7 +104,7 @@ final class LightDefinition {
         if(positionZ == null) {
             throw new IllegalArgumentException("positionZ is mandatory");
         }
-        this.position = Point3D.xyz(this.position.x, this.position.y, Float.parseFloat(positionZ));
+        this.position = Point3D.valueOf(this.position.x, this.position.y, Float.parseFloat(positionZ));
     }
 
     /**

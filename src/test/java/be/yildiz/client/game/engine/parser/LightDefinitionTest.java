@@ -102,7 +102,7 @@ public class LightDefinitionTest {
             ld.setX("5");
             ld.setY("3");
             ld.setZ("7");
-            Assert.assertEquals(Point3D.xyz(5,3,7), ld.getPosition());
+            Assert.assertEquals(Point3D.valueOf(5,3,7), ld.getPosition());
         }
 
         @Test(expected = IllegalArgumentException.class)
