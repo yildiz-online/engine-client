@@ -23,8 +23,6 @@
 
 package be.yildiz.client.game.engine;
 
-import be.yildiz.module.network.protocol.ServerRequest;
-
 /**
  * Can send a request from a client to a server
  *
