@@ -49,9 +49,9 @@ public class SelectionManagerTest {
     public void test() {
         SelectionManager s = new SelectionManager(12);
         Assert.assertEquals(12, s.getMaxSelection());
-        this.rule.expect(IllegalArgumentException.class);
+        this.rule.expect(AssertionError.class);
         s = new SelectionManager(0);
-        this.rule.expect(IllegalArgumentException.class);
+        this.rule.expect(AssertionError.class);
         s = new SelectionManager(-1);
     }
 

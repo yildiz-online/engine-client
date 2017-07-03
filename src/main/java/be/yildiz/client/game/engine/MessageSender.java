@@ -23,6 +23,8 @@
 
 package be.yildiz.client.game.engine;
 
+import be.yildiz.module.network.protocol.NetworkMessage;
+
 /**
  * Can send a request from a client to a server
  *
@@ -37,6 +39,6 @@ public interface MessageSender {
      * @param request Request to send.
      */
     //@Requires("request != null")
-    void sendMessage(ServerRequest request);
+    void sendMessage(NetworkMessage request);
 
 }
