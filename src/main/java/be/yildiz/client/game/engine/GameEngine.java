@@ -45,6 +45,7 @@ import be.yildiz.module.graphic.gui.View;
 import be.yildiz.module.network.client.AbstractNetworkEngineClient;
 import be.yildiz.module.network.client.NetworkListener;
 import be.yildiz.module.network.protocol.MessageWrapper;
+import be.yildiz.module.network.protocol.NetworkMessage;
 import be.yildiz.module.sound.Playlist;
 import be.yildiz.module.sound.SoundEngine;
 import be.yildiz.module.sound.SoundSource;
@@ -52,7 +53,7 @@ import be.yildiz.module.window.Cursor;
 import be.yildiz.module.window.WindowEngine;
 import be.yildiz.shared.game.engine.AbstractGameEngine;
 import be.yildiz.shared.player.Player;
-import be.yildiz.shared.protocol.request.CloseSession;
+import be.yildiz.shared.protocol.EngineMessageFactory;
 
 import java.io.File;
 import java.security.InvalidParameterException;
@@ -131,6 +132,8 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
      */
     private boolean closed = false;
     private Cursor defaultCursor;
+
+    private final EngineMessageFactory messageFactory = new EngineMessageFactory();
 
     /**
      * Full constructor, create a default world.
@@ -233,7 +236,7 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
      * Stop the game loop and close the engine.
      */
     public void stopGameLoop() {
-        this.sendMessage(new CloseSession());
+        this.sendMessage(messageFactory.closeSession());
         this.running = false;
     }
 
@@ -446,7 +449,7 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
      * @param message Message to send to the server.
      */
     @Override
-    public void sendMessage(final ServerRequest message) {
+    public void sendMessage(final NetworkMessage message) {
         this.networkEngine.sendMessage(message);
     }
 
