@@ -31,6 +31,7 @@ import be.yildiz.module.graphic.Material;
 import be.yildiz.module.graphic.gui.ButtonMaterial;
 import be.yildiz.shared.building.BaseBuilding;
 import be.yildiz.shared.building.Building;
+import be.yildiz.shared.building.staff.Staff;
 import be.yildiz.shared.data.BuildingPosition;
 import be.yildiz.shared.data.EntityType;
 import be.yildiz.shared.data.Level;
@@ -68,7 +69,7 @@ public final class ClientBuilding implements Building {
      * @throws NullPointerException     If any parameter is null.
      * @throws IllegalArgumentException If any parameter is not in the bounded values(@see BaseBuilding) for rules.
      */
-    public ClientBuilding(EntityId id, ClientBuildingData data, BuildingPosition position, Level level, int staff) {
+    public ClientBuilding(EntityId id, ClientBuildingData data, BuildingPosition position, Level level, Staff staff) {
         super();
         this.building = new BaseBuilding(id, data, position, level, staff);
         this.data = data;
@@ -100,7 +101,7 @@ public final class ClientBuilding implements Building {
     }
 
     @Override
-    public int getMaxPopulation(final Level level) {
+    public Staff getMaxPopulation(final Level level) {
         return this.building.getMaxPopulation(level);
     }
 
@@ -110,12 +111,12 @@ public final class ClientBuilding implements Building {
     }
 
     @Override
-    public int getStaff() {
+    public Staff getStaff() {
         return this.building.getStaff();
     }
 
     @Override
-    public void setStaff(int staff) {
+    public void setStaff(Staff staff) {
         this.building.setStaff(staff);
     }
 
@@ -203,7 +204,7 @@ public final class ClientBuilding implements Building {
     }
 
     @Override
-    public int getOldStaff() {
+    public Staff getOldStaff() {
         return this.building.getOldStaff();
     }
 

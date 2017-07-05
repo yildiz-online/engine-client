@@ -30,6 +30,7 @@ import be.yildiz.module.graphic.ClientWorld;
 import be.yildiz.module.graphic.Material;
 import be.yildiz.module.graphic.gui.ButtonMaterial;
 import be.yildiz.shared.building.BuildingData;
+import be.yildiz.shared.building.staff.Staff;
 import be.yildiz.shared.data.EntityType;
 import be.yildiz.shared.data.Instance;
 import be.yildiz.shared.data.Level;
@@ -106,7 +107,7 @@ public class ClientBuildingData implements ClientConstructionData, BuildingData 
     }
 
     @Override
-    public final int getMaxPopulation(final Level level) {
+    public final Staff getMaxPopulation(final Level level) {
         return this.data.getMaxPopulation(level);
     }
 
@@ -136,7 +137,7 @@ public class ClientBuildingData implements ClientConstructionData, BuildingData 
     }
 
     @Override
-    public final BonusResources getStaffBonus(final int staffAllocated) {
+    public final BonusResources getStaffBonus(final Staff staffAllocated) {
         return this.data.getStaffBonus(staffAllocated);
     }
 
