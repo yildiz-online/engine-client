@@ -44,7 +44,6 @@ import be.yildiz.module.graphic.gui.GuiEventManager;
 import be.yildiz.module.graphic.gui.View;
 import be.yildiz.module.network.client.AbstractNetworkEngineClient;
 import be.yildiz.module.network.client.NetworkListener;
-import be.yildiz.module.network.protocol.Authentication;
 import be.yildiz.module.network.protocol.MessageWrapper;
 import be.yildiz.module.network.protocol.NetworkMessage;
 import be.yildiz.module.sound.Playlist;
@@ -355,7 +354,7 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
      */
     public void login(final Credentials credential) {
         this.networkEngine
-                .sendMessage(messageFactory.authenticationRequest(new Authentication(credential.getLogin(), credential.getPassword())));
+                .sendMessage(messageFactory.authenticationRequest(credential));
     }
 
     /**
