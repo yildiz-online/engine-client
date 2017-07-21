@@ -100,11 +100,8 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
      */
     private final Configuration configuration;
     private final WindowEngine windowEngine;
-    private final int authenticationPort;
 
     private final TranslatedGuiBuilder guiManager;
-
-    private final String authenticationServer;
 
     /**
      * True if the loop is currently running.
@@ -147,8 +144,6 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
                       final Engines engines, final Translation translation) {
         super(gameVersion);
         this.configuration = config;
-        this.authenticationServer = config.getAuthenticationHost();
-        this.authenticationPort = config.getAuthenticationPort();
         Logger.info("Initializing client game engine...");
         this.graphicEngine = engines.getGraphic();
         this.windowEngine = graphicEngine.getWindowEngine();
@@ -190,7 +185,6 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
         Logger.info("Game engine started.");
         if (!this.running) {
             this.running = true;
-            this.networkEngine.connect(this.authenticationServer, this.authenticationPort);
             this.setFrameLimiter(GameEngine.FPS);
             while (this.running) {
                 this.runOneFrame();
