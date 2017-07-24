@@ -23,14 +23,14 @@
 
 package be.yildiz.client.game.engine.gui;
 
-import be.yildiz.common.client.gui.listener.MouseLeftClickListener;
-import be.yildiz.common.client.gui.listener.MouseMoveListener;
 import be.yildiz.common.translation.Key;
 import be.yildiz.common.translation.Translation;
-import be.yildiz.common.vector.Point2D;
 import be.yildiz.module.graphic.Font;
 import be.yildiz.module.graphic.Material;
 import be.yildiz.module.graphic.gui.*;
+import be.yildiz.module.window.input.MouseLeftClickListener;
+import be.yildiz.module.window.input.MouseMoveListener;
+import be.yildiz.module.window.input.MousePosition;
 
 /**
  * Decorate a button with the ability to translate the text.
@@ -122,12 +122,12 @@ public class TranslatedButton extends TranslatedContainerElementWrapper<Button> 
     }
 
     @Override
-    public void mouseLeftClick(int x, int y) {
-        this.button.mouseLeftClick(x, y);
+    public void mouseLeftClick(MousePosition position) {
+        this.button.mouseLeftClick(position);
     }
 
     @Override
-    public boolean contains(Point2D position) {
+    public boolean contains(MousePosition position) {
         return this.button.contains(position);
     }
 
@@ -137,7 +137,7 @@ public class TranslatedButton extends TranslatedContainerElementWrapper<Button> 
     }
 
     @Override
-    public Element setMouseOver(boolean b, Point2D pos) {
+    public Element setMouseOver(boolean b, MousePosition pos) {
         this.button.setMouseOver(b, pos);
         return this;
     }

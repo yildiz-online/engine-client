@@ -23,11 +23,11 @@
 
 package be.yildiz.client.game.engine.gui;
 
-import be.yildiz.common.client.gui.listener.MouseLeftClickListener;
 import be.yildiz.common.translation.Key;
 import be.yildiz.common.translation.Translation;
 import be.yildiz.module.graphic.gui.ButtonList;
 import be.yildiz.module.graphic.gui.ButtonListGui;
+import be.yildiz.module.window.input.MouseLeftClickListener;
 
 /**
  * @author Grégory Van den Borre

@@ -24,9 +24,8 @@
 package be.yildiz.client.game.engine.gui;
 
 import be.yildiz.common.Rectangle;
-import be.yildiz.common.client.gui.listener.*;
-import be.yildiz.common.vector.Point2D;
 import be.yildiz.module.graphic.gui.*;
+import be.yildiz.module.window.input.*;
 
 import java.util.Optional;
 
@@ -127,7 +126,7 @@ class TranslatedContainerElementWrapper<T extends ContainerElement> extends GuiW
     }
 
     @Override
-    public boolean contains(Point2D position) {
+    public boolean contains(MousePosition position) {
         return this.wrapped.contains(position);
     }
 
