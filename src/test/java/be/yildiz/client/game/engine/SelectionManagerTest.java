@@ -27,9 +27,9 @@ import be.yildiz.client.entity.ClientEntity;
 import be.yildiz.client.entity.ClientEntityData;
 import be.yildiz.common.collections.Lists;
 import be.yildiz.common.id.PlayerId;
-import be.yildiz.shared.entity.BaseEntity;
+import be.yildiz.helper.Helper;
+import be.yildiz.shared.entity.Entity;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -50,14 +50,14 @@ public class SelectionManagerTest {
         SelectionManager s = new SelectionManager(12);
         Assert.assertEquals(12, s.getMaxSelection());
         this.rule.expect(AssertionError.class);
-        s = new SelectionManager(0);
+        new SelectionManager(0);
         this.rule.expect(AssertionError.class);
-        s = new SelectionManager(-1);
+        new SelectionManager(-1);
     }
 
-    //FIXME use id
     private ClientEntity aClientEntity(long id) {
-        return new ClientEntity(BaseEntity.WORLD, Mockito.mock(ClientEntityData.class), PlayerId.WORLD);
+        Entity e = Helper.anEntity(id, 5);
+        return new ClientEntity(e, Mockito.mock(ClientEntityData.class), PlayerId.valueOf(5));
     }
 
     @Test
@@ -156,7 +156,6 @@ public class SelectionManagerTest {
         Assert.assertFalse(m.getSelection().isPresent());
     }
 
-    @Ignore
     @Test
     public void testSetMultiSelection() {
         SelectionManager m = new SelectionManager(10);
