@@ -39,7 +39,7 @@ public class ClientMissionGuiMaterialization implements TranslatedValuesProvider
 
     public final Key description;
 
-    private final Material image;
+    public final Material image;
 
     private final List<TranslatedValueProvider> translations = Lists.newList();
 

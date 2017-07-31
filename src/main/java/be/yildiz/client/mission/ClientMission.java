@@ -25,6 +25,7 @@ package be.yildiz.client.mission;
 
 import be.yildiz.common.id.PlayerId;
 import be.yildiz.common.translation.Key;
+import be.yildiz.module.graphic.Material;
 import be.yildiz.shared.mission.Mission;
 import be.yildiz.shared.mission.MissionId;
 import be.yildiz.shared.mission.task.TaskId;
@@ -71,5 +72,9 @@ public class ClientMission implements Mission{
 
     public Key getDescription() {
         return this.materialization.description;
+    }
+
+    public Material getIcon() {
+        return this.materialization.image;
     }
 }
