@@ -64,7 +64,7 @@ import java.util.List;
  *
  * @author Grégory Van den Borre
  */
-public final class GameEngine extends AbstractGameEngine implements MessageSender {
+public class GameEngine extends AbstractGameEngine implements MessageSender {
 
 
     /**
@@ -99,6 +99,7 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
      * Current configuration.
      */
     private final Configuration configuration;
+
     private final WindowEngine windowEngine;
 
     private final TranslatedGuiBuilder guiManager;
@@ -128,6 +129,7 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
      * Flag to check if engine is closed.
      */
     private boolean closed = false;
+
     private Cursor defaultCursor;
 
     private final EngineMessageFactory messageFactory = new EngineMessageFactory();
@@ -165,7 +167,7 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
      * Pause the rendering.
      */
     //@ensures rendering = false
-    public void pauseRender() {
+    public final void pauseRender() {
         this.rendering = false;
     }
 
@@ -173,7 +175,7 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
      * Restart the rendering.
      */
     //@ensures rendering = true
-    public void startRender() {
+    public final void startRender() {
         this.rendering = true;
     }
 
@@ -181,7 +183,7 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
      * Start the game loop.
      */
     @Override
-    public void start() {
+    public final void start() {
         Logger.info("Game engine started.");
         if (!this.running) {
             this.running = true;
@@ -197,7 +199,7 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
      * Run just graphic frame.
      */
     @Override
-    public void runOneFrameImpl() {
+    public final void runOneFrameImpl() {
         this.networkEngine.update();
         this.windowEngine.updateWindow();
         this.soundEngine.update();
@@ -213,7 +215,7 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
         }
     }
 
-    public void registerMainView(final View v) {
+    public final void registerMainView(final View v) {
         this.eventDispatcher.setDefaultView(v);
     }
 
@@ -222,14 +224,14 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
      *
      * @param v View to unregister.
      */
-    public void unregisterView(final View v) {
+    public final void unregisterView(final View v) {
         this.eventDispatcher.removeView(v);
     }
 
     /**
      * Stop the game loop and close the engine.
      */
-    public void stopGameLoop() {
+    public final void stopGameLoop() {
         this.sendMessage(messageFactory.closeSession());
         this.running = false;
     }
@@ -242,7 +244,7 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
      * @param path Path to the resource.
      * @param type Resource type.
      */
-    public void addResourcePath(final String name, final String path, final FileType type) {
+    public final void addResourcePath(final String name, final String path, final FileType type) {
         File f = new File(path);
         if (!f.exists()) {
             throw new ResourceMissingException(f.getAbsolutePath());
@@ -265,7 +267,7 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
      * @param path Path to the textures to use.
      * @return The newly built sky box.
      */
-    public Skybox createSkybox(final String name, final String path) {
+    public final Skybox createSkybox(final String name, final String path) {
         Logger.info("Create skybox.");
         return this.graphicEngine.createSkybox(name, path);
     }
@@ -276,7 +278,7 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
      * @param e Entity to check.
      * @return <code>true</code> if the entity belongs to the current player.
      */
-    public boolean isMine(final ClientEntity e) {
+    public final boolean isMine(final ClientEntity e) {
         return e.getOwner().equals(this.player.id);
     }
 
@@ -286,7 +288,7 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
      *
      * @param listener Listener to set.
      */
-    public void setDebugListener(final DebugListener listener) {
+    public final void setDebugListener(final DebugListener listener) {
         assert listener != null;
         if(this.debug) {
             this.addFrameListener(new FrameRateDisplayer(listener, this.graphicEngine));
@@ -302,7 +304,7 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
      * @param size Size of the font.
      * @return The newly created font.
      */
-    public Font createFont(final String name, final String path, final int size) {
+    public final Font createFont(final String name, final String path, final int size) {
         return this.graphicEngine.createFont(name, path, size);
     }
 
@@ -315,7 +317,7 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
      * @param color Font color.
      * @return The newly created font.
      */
-    public Font createFont(final String name, final String path, final int size, final Color color) {
+    public final Font createFont(final String name, final String path, final int size, final Color color) {
         return this.graphicEngine.createFont(name, path, size, color);
     }
 
@@ -327,7 +329,7 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
      * @param color Font color.
      * @return The newly created font.
      */
-    public Font createFont(final String path, final int size, final Color color) {
+    public final Font createFont(final String path, final int size, final Color color) {
         return this.graphicEngine.createFont(StringUtil.buildRandomString("font"), path, size, color);
     }
 
@@ -336,7 +338,7 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
      *
      * @param listener Listener to add.
      */
-    public void addNetworkListener(final NetworkListener listener) {
+    public final void addNetworkListener(final NetworkListener listener) {
         this.networkEngine.addNetworkListener(listener);
     }
 
@@ -346,7 +348,7 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
      *
      * @param credential User credentials.
      */
-    public void login(final Credentials credential) {
+    public final void login(final Credentials credential) {
         this.networkEngine
                 .sendMessage(messageFactory.authenticationRequest(credential));
     }
@@ -357,7 +359,7 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
      * @param cursor Data to build the cursor.
      * @return The created cursor.
      */
-    public Cursor createCursor(Cursor cursor) {
+    public final Cursor createCursor(Cursor cursor) {
         this.windowEngine.createCursor(cursor);
         return cursor;
     }
@@ -367,21 +369,21 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
      *
      * @param cursor Name of the cursor to use.
      */
-    public void setCursor(final Cursor cursor) {
+    public final void setCursor(final Cursor cursor) {
         this.windowEngine.setCursor(cursor);
     }
 
     /**
      * Set the mouse cursor visible.
      */
-    public void showCursor() {
+    public final void showCursor() {
         this.windowEngine.showCursor();
     }
 
     /**
      * Set the mouse cursor invisible.
      */
-    public void hideCursor() {
+    public final void hideCursor() {
         this.windowEngine.hideCursor();
     }
 
@@ -390,7 +392,7 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
      *
      * @param title Title to print in OS task bar.
      */
-    public void setWindowTitle(final String title) {
+    public final void setWindowTitle(final String title) {
         this.windowEngine.setWindowTitle(title);
     }
 
@@ -399,7 +401,7 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
      *
      * @param file Image file to use to display in the OS task bar.
      */
-    public void setWindowIcon(final String file) {
+    public final void setWindowIcon(final String file) {
         this.windowEngine.setWindowIcon(file);
     }
 
@@ -409,14 +411,14 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
      * @param name PlayList name, must be unique.
      * @return The created PlayList.
      */
-    public Playlist createPlaylist(final String name) {
+    public final Playlist createPlaylist(final String name) {
         return this.soundEngine.createPlaylist(name);
     }
 
     /**
      * Render a graphic frame.
      */
-    public void render() {
+    public final void render() {
         this.graphicEngine.update();
     }
 
@@ -426,14 +428,14 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
      *
      * @param message Message to delay.
      */
-    public void delayMessageToNextFrame(final MessageWrapper message) {
+    public final void delayMessageToNextFrame(final MessageWrapper message) {
         this.networkEngine.delayMessageToNextFrame(message);
     }
 
     /**
      * Take a print screen and save it in a file.
      */
-    public void printScreen() {
+    public final void printScreen() {
         this.graphicEngine.printScreen();
     }
 
@@ -443,7 +445,7 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
      * @param message Message to send to the server.
      */
     @Override
-    public void sendMessage(final NetworkMessage message) {
+    public final void sendMessage(final NetworkMessage message) {
         this.networkEngine.sendMessage(message);
     }
 
@@ -452,7 +454,7 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
      *
      * @param message Message to send to the server.
      */
-    public void sendMessage(final String message) {
+    public final void sendMessage(final String message) {
         this.networkEngine.sendMessage(message);
     }
 
@@ -462,7 +464,7 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
      *
      * @return The newly built world.
      */
-    public ClientWorld createWorld() {
+    public final ClientWorld createWorld() {
         final ClientWorld world = this.graphicEngine.createWorld();
         if (this.debug) {
             world.setDebugMode();
@@ -476,7 +478,7 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
      *
      * @param entity Entity to look at.
      */
-    public void focusCameraOnEntity(final ClientEntity entity) {
+    public final void focusCameraOnEntity(final ClientEntity entity) {
         this.activeWorld.getDefaultCamera().setRelativePosition(entity.getPosition());
     }
 
@@ -484,7 +486,7 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
      * Close all engines.
      */
     @Override
-    public void close() {
+    public final void close() {
         if (!this.closed) {
             Logger.info("Closing engines...");
             this.closed = true;
@@ -501,14 +503,14 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
      *
      * @param listener Listener to add.
      */
-    public void addNotRenderingListener(final NotRenderingListener listener) {
+    public final void addNotRenderingListener(final NotRenderingListener listener) {
         this.notRenderingListenerList.add(listener);
     }
 
     /**
      * @return The game screen size.
      */
-    public Size getScreenSize() {
+    public final Size getScreenSize() {
         return this.windowEngine.getScreenSize();
     }
 
@@ -518,7 +520,7 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
      * @param file File name.
      * @return The created sound.
      */
-    public SoundSource createSound(final String file) {
+    public final SoundSource createSound(final String file) {
         return this.soundEngine.createSound(file);
     }
 
@@ -527,7 +529,7 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
      *
      * @param player Player to set.
      */
-    public void setPlayer(final Player player) {
+    public final void setPlayer(final Player player) {
         assert player != null;
         if (this.player != null) {
             throw new InvalidParameterException("Already existing player");
@@ -538,7 +540,7 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
     /**
      * Load the additional resources group(needed for compositors...).
      */
-    public void addAdditionalResource() {
+    public final void addAdditionalResource() {
         this.addResourcePath("additional", "media/opr.yzk", FileType.ZIP);
     }
 
@@ -549,55 +551,55 @@ public final class GameEngine extends AbstractGameEngine implements MessageSende
      * @param material2 Material to set on rectangle background.
      * @return The created rectangle.
      */
-    public SelectionRectangle createSelectionRectangle(final Material material, final Material material2) {
+    public final SelectionRectangle createSelectionRectangle(final Material material, final Material material2) {
         return this.graphicEngine.createSelectionRectangle(material, material2);
     }
 
     /**
      * Disconnect from the server.
      */
-    public void disconnect() {
+    public final void disconnect() {
         this.networkEngine.disconnect();
     }
 
-    public void connect(final String url, final int port) {
+    public final void connect(final String url, final int port) {
         this.networkEngine.connect(url, port);
     }
 
-    public Cursor getDefaultCursor() {
+    public final Cursor getDefaultCursor() {
         return this.defaultCursor;
     }
 
-    public void createAndSetDefaultCursor(Cursor cursor) {
+    public final void createAndSetDefaultCursor(Cursor cursor) {
         this.defaultCursor = this.createCursor(cursor);
         this.setCursor(defaultCursor);
     }
 
-    public MaterialManager getMaterialManager() {
+    public final MaterialManager getMaterialManager() {
         return materialManager;
     }
 
-    public GuiEventManager getEventDispatcher() {
+    public final GuiEventManager getEventDispatcher() {
         return eventDispatcher;
     }
 
-    public Configuration getConfiguration() {
+    public final Configuration getConfiguration() {
         return configuration;
     }
 
-    public TranslatedGuiBuilder getGuiManager() {
+    public final TranslatedGuiBuilder getGuiManager() {
         return guiManager;
     }
 
-    public ClientWorld getActiveWorld() {
+    public final ClientWorld getActiveWorld() {
         return activeWorld;
     }
 
-    public Player getPlayer() {
+    public final Player getPlayer() {
         return player;
     }
 
-    public boolean isClosed() {
+    public final boolean isClosed() {
         return closed;
     }
 }
