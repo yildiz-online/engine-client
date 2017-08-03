@@ -76,92 +76,97 @@ class TranslatedContainerElementWrapper<T extends ContainerElement> extends GuiW
     }
 
     @Override
-    public void addMouseLeftClickListener(MouseLeftClickListener listener) {
+    public final void addMouseLeftClickListener(MouseLeftClickListener listener) {
         this.wrapped.addMouseLeftClickListener(listener);
     }
 
     @Override
-    public void addMouseDoubleLeftClickListener(MouseDoubleLeftClickListener listener) {
+    public final void addMouseDoubleLeftClickListener(MouseDoubleLeftClickListener listener) {
         this.wrapped.addMouseDoubleLeftClickListener(listener);
     }
 
     @Override
-    public void addMouseReleaseListener(MouseReleaseListener listener) {
+    public final void addMouseReleaseListener(MouseReleaseListener listener) {
         this.wrapped.addMouseReleaseListener(listener);
     }
 
     @Override
-    public void removeAllClickListeners() {
+    public final void removeAllClickListeners() {
         this.wrapped.removeAllClickListeners();
     }
 
     @Override
-    public void addKeyboardListener(KeyboardListener listener) {
+    public final void addKeyboardListener(KeyboardListener listener) {
         this.wrapped.addKeyboardListener(listener);
     }
 
     @Override
-    public void addSpecialKeyListener(SpecialKeyPressedListener listener) {
+    public final void addSpecialKeyListener(SpecialKeyPressedListener listener) {
         this.wrapped.addSpecialKeyListener(listener);
     }
 
     @Override
-    public void addMouseMoveListener(MouseMoveListener listener) {
+    public final void addMouseMoveListener(MouseMoveListener listener) {
         this.wrapped.addMouseMoveListener(listener);
     }
 
     @Override
-    public void addMouseWheelListener(MouseWheelListener listener) {
+    public final void addMouseWheelListener(MouseWheelListener listener) {
         this.wrapped.addMouseWheelListener(listener);
     }
 
     @Override
-    public void addMouseDragListener(MouseDragListener listener) {
+    public final void addMouseDragListener(MouseDragListener listener) {
         this.wrapped.addMouseDragListener(listener);
     }
 
     @Override
-    public void addOnMouseOverListener(OnMouseOverListener listener) {
+    public final void addOnMouseOverListener(OnMouseOverListener listener) {
         this.wrapped.addOnMouseOverListener(listener);
     }
 
     @Override
-    public boolean contains(MousePosition position) {
+    public final boolean contains(MousePosition position) {
         return this.wrapped.contains(position);
     }
 
     @Override
-    public boolean contains(int x, int y) {
+    public final boolean contains(int x, int y) {
         return this.wrapped.contains(x, y);
     }
 
     @Override
-    public void addEmptyZone(Rectangle zone) {
+    public final void addEmptyZone(Rectangle zone) {
         this.wrapped.addEmptyZone(zone);
     }
 
     @Override
-    public void align(Alignment alignement) {
+    public final void align(Alignment alignement) {
         this.wrapped.align(alignement);
     }
 
     @Override
-    public int getAbsoluteLeft() {
+    public final int getAbsoluteLeft() {
         return this.wrapped.getAbsoluteLeft();
     }
 
     @Override
-    public int getAbsoluteTop() {
+    public final int getAbsoluteTop() {
         return this.wrapped.getAbsoluteTop();
     }
 
     @Override
-    public void registerAnimation(GuiAnimation anim) {
+    public final void registerAnimation(GuiAnimation anim) {
         this.wrapped.registerAnimation(anim);
     }
 
     @Override
-    public void playAnimation(String animation) {
+    public final void playAnimation(String animation) {
         this.wrapped.playAnimation(animation);
+    }
+
+    @Override
+    public final void stopAnimation(String animation) {
+        this.wrapped.stopAnimation(animation);
     }
 }

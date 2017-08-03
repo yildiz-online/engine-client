@@ -27,9 +27,10 @@ import be.yildiz.common.translation.Key;
 import be.yildiz.common.translation.Translation;
 import be.yildiz.module.graphic.Font;
 import be.yildiz.module.graphic.Material;
-import be.yildiz.module.graphic.gui.*;
-import be.yildiz.module.window.input.MouseLeftClickListener;
-import be.yildiz.module.window.input.MouseMoveListener;
+import be.yildiz.module.graphic.gui.Button;
+import be.yildiz.module.graphic.gui.ButtonData;
+import be.yildiz.module.graphic.gui.ButtonMaterial;
+import be.yildiz.module.graphic.gui.Element;
 import be.yildiz.module.window.input.MousePosition;
 
 /**
@@ -102,21 +103,6 @@ public class TranslatedButton extends TranslatedContainerElementWrapper<Button> 
     }
 
     @Override
-    public void addOnMouseOverListener(OnMouseOverListener l) {
-        this.button.addOnMouseOverListener(l);
-    }
-
-    @Override
-    public void addMouseMoveListener(MouseMoveListener l) {
-        this.button.addMouseMoveListener(l);
-    }
-
-    @Override
-    public void addMouseLeftClickListener(MouseLeftClickListener l) {
-        this.button.addMouseLeftClickListener(l);
-    }
-
-    @Override
     public void delete() {
         this.button.delete();
     }
@@ -124,11 +110,6 @@ public class TranslatedButton extends TranslatedContainerElementWrapper<Button> 
     @Override
     public void mouseLeftClick(MousePosition position) {
         this.button.mouseLeftClick(position);
-    }
-
-    @Override
-    public boolean contains(MousePosition position) {
-        return this.button.contains(position);
     }
 
     @Override
