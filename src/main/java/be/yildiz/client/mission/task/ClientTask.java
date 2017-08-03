@@ -23,6 +23,7 @@
 
 package be.yildiz.client.mission.task;
 
+import be.yildiz.common.translation.TranslatedValue;
 import be.yildiz.shared.mission.task.Task;
 import be.yildiz.shared.mission.task.TaskId;
 import be.yildiz.shared.mission.task.TaskStatusListener;
@@ -42,22 +43,26 @@ public class ClientTask implements Task{
     }
 
     @Override
-    public void addListener(TaskStatusListener taskStatusListener) {
+    public final void addListener(TaskStatusListener taskStatusListener) {
         this.task.addListener(taskStatusListener);
     }
 
     @Override
-    public TaskId getId() {
+    public final TaskId getId() {
         return this.task.getId();
     }
 
     @Override
-    public boolean isCompleted() {
+    public final boolean isCompleted() {
         return this.task.isCompleted();
     }
 
     @Override
-    public boolean isFailed() {
+    public final boolean isFailed() {
         return this.task.isFailed();
+    }
+
+    public final TranslatedValue getTranslation() {
+        return this.materialization.getTranslatedValue();
     }
 }
