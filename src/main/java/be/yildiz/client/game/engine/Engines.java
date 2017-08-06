@@ -24,8 +24,13 @@
 package be.yildiz.client.game.engine;
 
 import be.yildiz.module.graphic.GraphicEngine;
+import be.yildiz.module.graphic.dummy.DummyGraphicEngine;
 import be.yildiz.module.network.client.AbstractNetworkEngineClient;
+import be.yildiz.module.network.client.DummyNetworkEngine;
+import be.yildiz.module.physics.AbstractPhysicEngine;
+import be.yildiz.module.physics.DummyPhysicEngine;
 import be.yildiz.module.sound.SoundEngine;
+import be.yildiz.module.sound.dummy.DummyAudioEngine;
 
 /**
  * Provide the engines implementation to use.
@@ -49,10 +54,13 @@ public class Engines {
      */
     private final AbstractNetworkEngineClient network;
 
-    private Engines(GraphicEngine graphic, SoundEngine audio, AbstractNetworkEngineClient network) {
+    private final AbstractPhysicEngine physics;
+
+    private Engines(GraphicEngine graphic, SoundEngine audio, AbstractNetworkEngineClient network, AbstractPhysicEngine physicEngine) {
         this.graphic = graphic;
         this.audio = audio;
         this.network = network;
+        this.physics = physicEngine;
     }
 
     public GraphicEngine getGraphic() {
@@ -72,40 +80,61 @@ public class Engines {
      *
      * @author Grégory Van den Borre
      */
-    public static abstract class EnginesTemplate {
+    public static class EnginesBuilder {
+
+        private GraphicEngine graphicEngine = new DummyGraphicEngine();
+
+        private SoundEngine audioEngine = new DummyAudioEngine();
+
+        private AbstractNetworkEngineClient networkEngine = new DummyNetworkEngine();
+
+        private AbstractPhysicEngine physicEngine = new DummyPhysicEngine();
 
         /**
          * Add a graphic engine implementation.
          *
          * @return This object.
          */
-        public abstract EnginesTemplate withGraphicEngine();
+        public final EnginesBuilder withGraphicEngine(GraphicEngine engine) {
+            this.graphicEngine = engine;
+            return this;
+        }
 
         /**
-         * Add an audio engine implemenation.
+         * Add an audio engine implementation.
          *
          * @return This object.
          */
-        public abstract EnginesTemplate withAudioEngine();
+        public final EnginesBuilder withAudioEngine(SoundEngine engine) {
+            this.audioEngine = engine;
+            return this;
+        }
 
         /**
-         * Add a network client implemenation.
+         * Add a network client implementation.
          *
          * @return This object.
          */
-        public abstract EnginesTemplate withNetworkEngine();
+        public final EnginesBuilder withNetworkEngine(AbstractNetworkEngineClient engine) {
+            this.networkEngine = engine;
+            return this;
+        }
+
+        /**
+         * Add a network client implementation.
+         *
+         * @return This object.
+         */
+        public final EnginesBuilder withPhysicEngine(AbstractPhysicEngine engine) {
+            this.physicEngine = engine;
+            return this;
+        }
 
         /**
          * @return The generated Engines object.
          */
         public final Engines build() {
-            return new Engines(this.getGraphicEngine(), this.getAudioEngine(), this.getNetworkEngine());
+            return new Engines(this.graphicEngine, this.audioEngine, this.networkEngine, this.physicEngine);
         }
-
-        protected abstract AbstractNetworkEngineClient getNetworkEngine();
-
-        protected abstract SoundEngine getAudioEngine();
-
-        protected abstract GraphicEngine getGraphicEngine();
     }
 }
