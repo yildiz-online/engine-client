@@ -23,13 +23,11 @@
 
 package be.yildiz.client.game.engine;
 
-import be.yildiz.client.game.engine.gui.TranslatedGuiBuilder;
 import be.yildiz.client.game.engine.parser.*;
 import be.yildiz.client.game.engine.parser.ParserFactory.ParserType;
 import be.yildiz.common.log.Logger;
 import be.yildiz.common.resource.ResourceUtil;
 import be.yildiz.module.graphic.*;
-import be.yildiz.module.graphic.gui.ButtonMaterial;
 import be.yildiz.module.graphic.gui.GuiContainer;
 import be.yildiz.module.sound.Music;
 import be.yildiz.module.sound.Playlist;
@@ -51,11 +49,6 @@ public final class FileParser {
     private final ParserFactory parserFactory = new ParserFactory(ParserType.XML);
 
     /**
-     * Create the widget.
-     */
-    private final TranslatedGuiBuilder guiManager;
-
-    /**
      * Create the materials.
      */
     private final MaterialManager materialManager;
@@ -70,8 +63,7 @@ public final class FileParser {
      */
     private final SoundEngine soundEngine;
 
-    public FileParser(TranslatedGuiBuilder guiManager, MaterialManager materialManager, GraphicEngine graphicEngine, SoundEngine soundEngine) {
-        this.guiManager = guiManager;
+    public FileParser(MaterialManager materialManager, GraphicEngine graphicEngine, SoundEngine soundEngine) {
         this.materialManager = materialManager;
         this.graphicEngine = graphicEngine;
         this.soundEngine = soundEngine;
@@ -148,33 +140,43 @@ public final class FileParser {
      * @param def Data to build the view.
      */
     private void buildView(final ContainerDefinition def) {
-        final GuiContainer container = this.guiManager
-                .buildContainer()
+        final GuiContainer container = graphicEngine
+                .getGuiBuilder()
+                .container()
                 .withName(def.getName())
                 .withBackground(def.getMaterial())
                 .withCoordinates(def.getCoordinates())
                 .build();
 
-        def.getImageList().forEach(id -> this.guiManager.buildImage()
+        def.getImageList().forEach(id -> graphicEngine
+                .getGuiBuilder()
+                .image()
                 .withName(id.getName())
                 .withBackground(id.getMaterial())
                 .withCoordinates(id.getCoordinates())
                 .build(container));
 
-        def.getTextLineList().forEach(td -> this.guiManager.buildTextLine()
+        def.getTextLineList().forEach(td -> graphicEngine
+                .getGuiBuilder()
+                .textLine()
                 .withName(td.getName())
                 .withCoordinates(td.getCoordinates())
                 .withFont(Font.get(td.getFont()))
                 .build(container));
 
-        def.getButtonList().forEach(bd -> this.guiManager.buildButton()
+        def.getButtonList().forEach(bd -> graphicEngine
+                .getGuiBuilder()
+                .button()
                 .withName(bd.getName())
                 .withCoordinates(bd.getCoordinates())
-                .withMaterials(new ButtonMaterial(Material.get(bd.getMaterial()), Material.get(bd.getMaterialHighlight()), Font.get(bd.getFont())))
+                .withMaterial(Material.get(bd.getMaterial()))
+                .withHighlightMaterial(Material.get(bd.getMaterialHighlight()))
+                .withFont(Font.get(bd.getFont()))
                 .build(container));
 
         def.getInputBoxList().forEach(ibd ->
-            this.guiManager.buildInputBox(
+                graphicEngine
+                        .getGuiBuilder().buildInputBox(
                     ibd.getName(),
                     ibd.getCoordinates(),
                     ibd.getFont(),
@@ -183,7 +185,9 @@ public final class FileParser {
                     ibd.getMaterialCursor(),
                     container));
 
-        def.getTextAreaList().forEach(tad -> this.guiManager.buildTextArea()
+        def.getTextAreaList().forEach(tad -> graphicEngine
+                .getGuiBuilder()
+                .textArea()
                 .withName(tad.getName())
                 .withCoordinates(tad.getCoordinates())
                 .withFont(Font.get(tad.getFont()))

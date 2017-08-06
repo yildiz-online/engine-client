@@ -24,7 +24,6 @@
 package be.yildiz.client.game.engine;
 
 import be.yildiz.client.entity.ClientEntity;
-import be.yildiz.client.game.engine.gui.TranslatedGuiBuilder;
 import be.yildiz.common.Color;
 import be.yildiz.common.Size;
 import be.yildiz.common.Version;
@@ -36,10 +35,10 @@ import be.yildiz.common.exeption.ResourceMissingException;
 import be.yildiz.common.log.Logger;
 import be.yildiz.common.resource.FileResource.FileType;
 import be.yildiz.common.resource.ResourcePath;
-import be.yildiz.common.translation.Translation;
 import be.yildiz.common.util.StringUtil;
 import be.yildiz.module.graphic.*;
 import be.yildiz.module.graphic.gui.EventBubblingDispatcher;
+import be.yildiz.module.graphic.gui.GuiBuilder;
 import be.yildiz.module.graphic.gui.GuiEventManager;
 import be.yildiz.module.graphic.gui.View;
 import be.yildiz.module.network.client.AbstractNetworkEngineClient;
@@ -102,7 +101,7 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
 
     private final WindowEngine windowEngine;
 
-    private final TranslatedGuiBuilder guiManager;
+    private final GuiBuilder guiManager;
 
     /**
      * True if the loop is currently running.
@@ -140,10 +139,9 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
      * @param config      Configuration.
      * @param gameVersion Version of the game.
      * @param engines     Engines to load.
-     * @param translation Translations to use in the GUI.
      */
     public GameEngine(final Configuration config, final Version gameVersion,
-                      final Engines engines, final Translation translation) {
+                      final Engines engines) {
         super(gameVersion);
         this.configuration = config;
         Logger.info("Initializing client game engine...");
@@ -157,10 +155,14 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
         this.createWorld();
         this.materialManager = new MaterialManager(this.graphicEngine);
         // this.addResourcePath("media/brs.yzk", "engine", FileType.ZIP);
-        this.guiManager = new TranslatedGuiBuilder(this.graphicEngine.getGuiBuilder(), translation);
+        this.guiManager = this.graphicEngine.getGuiBuilder();
         this.addFrameListener(this.graphicEngine.getGuiBuilder().getAnimationManager());
         this.windowEngine.registerInput(eventDispatcher);
         Logger.info("Client game engine initialized.");
+    }
+
+    public GameEngine(final Version gameVersion, final Engines engines) {
+        this(Configuration.empty(), gameVersion, engines);
     }
 
     /**
@@ -254,7 +256,7 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
         this.soundEngine.addResourcePath(type == FileType.VFS ? ResourcePath.vfs(path) : ResourcePath.directory(path));
         this.graphicEngine.addResourcePath(name, path, type);
         if (type == FileType.FILE) {
-            new FileParser(this.guiManager, this.materialManager, this.graphicEngine, this.soundEngine)
+            new FileParser(this.materialManager, this.graphicEngine, this.soundEngine)
                     .addResourcePath(name, path);
         }
         Logger.info("Resource group " + name + " registered.");
@@ -586,7 +588,7 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
         return configuration;
     }
 
-    public final TranslatedGuiBuilder getGuiManager() {
+    public final GuiBuilder getGuiManager() {
         return guiManager;
     }
 
