@@ -28,6 +28,7 @@ import be.yildiz.client.game.engine.parser.ParserFactory.ParserType;
 import be.yildiz.common.log.Logger;
 import be.yildiz.common.resource.ResourceUtil;
 import be.yildiz.module.graphic.*;
+import be.yildiz.module.graphic.gui.ButtonMaterial;
 import be.yildiz.module.graphic.gui.GuiContainer;
 import be.yildiz.module.sound.Music;
 import be.yildiz.module.sound.Playlist;
@@ -169,9 +170,11 @@ public final class FileParser {
                 .button()
                 .withName(bd.getName())
                 .withCoordinates(bd.getCoordinates())
-                .withMaterial(Material.get(bd.getMaterial()))
-                .withHighlightMaterial(Material.get(bd.getMaterialHighlight()))
-                .withFont(Font.get(bd.getFont()))
+                .withButtonMaterial(new ButtonMaterial(
+                        Material.get(bd.getMaterial()),
+                        Material.get(bd.getMaterialHighlight()),
+                        Font.get(bd.getFont())
+                ))
                 .build(container));
 
         def.getInputBoxList().forEach(ibd ->
