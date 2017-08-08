@@ -37,8 +37,8 @@ public final class GuiButtonDefinitionTest {
     @Test
     public void testButtonDefinition() {
         final ButtonDefinition def = new ButtonDefinition(Material.EMPTY_NAME, Material.EMPTY_NAME, "", new Size(0));
-        Assert.assertEquals("Material should be Material.EMPTY", Material.EMPTY_NAME, def.getMaterial());
-        Assert.assertEquals("Material Highlight should be Material.EMPTY", Material.EMPTY_NAME, def.getMaterialHighlight());
-        Assert.assertEquals("Font should be AbstractFont.EMPTY", "", def.getFont());
+        Assert.assertEquals("Material should be Material.EMPTY_VALUE", Material.EMPTY_NAME, def.getMaterial());
+        Assert.assertEquals("Material Highlight should be Material.EMPTY_VALUE", Material.EMPTY_NAME, def.getMaterialHighlight());
+        Assert.assertEquals("Font should be AbstractFont.EMPTY_VALUE", "", def.getFont());
     }
 }
