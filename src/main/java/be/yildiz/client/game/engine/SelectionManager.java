@@ -40,7 +40,7 @@ import java.util.stream.Collectors;
  *
  * @author Grégory Van den Borre
  */
-public final class SelectionManager implements DestructionListener<ClientEntity> {
+public class SelectionManager implements DestructionListener<ClientEntity> {
 
     /**
      * List of all selected units.
@@ -77,7 +77,7 @@ public final class SelectionManager implements DestructionListener<ClientEntity>
      *
      * @param entity Entity selected.
      */
-    public void setSelection(final ClientEntity entity) {
+    public final void setSelection(final ClientEntity entity) {
         this.addSelection(entity, true, false);
     }
 
@@ -86,7 +86,7 @@ public final class SelectionManager implements DestructionListener<ClientEntity>
      *
      * @param entity Entity to add.
      */
-    public void addToSelection(final ClientEntity entity) {
+    public final void addToSelection(final ClientEntity entity) {
         this.addSelection(entity, true, true);
     }
 
@@ -95,7 +95,7 @@ public final class SelectionManager implements DestructionListener<ClientEntity>
      *
      * @param unit Unit no longer selected.
      */
-    public void removeSelection(final ClientEntity unit) {
+    public final void removeSelection(final ClientEntity unit) {
         this.addSelection(unit, false, true);
     }
 
@@ -144,14 +144,14 @@ public final class SelectionManager implements DestructionListener<ClientEntity>
      *
      * @param listener Listener to add.
      */
-    public void addSelectionListener(final SelectionListener listener) {
+    public final void addSelectionListener(final SelectionListener listener) {
         this.listeners.add(listener);
     }
 
     /**
      * @return The first selected unit.
      */
-    public Optional<ClientEntity> getSelection() {
+    public final Optional<ClientEntity> getSelection() {
         return this.selectionList.stream().findFirst();
     }
 
@@ -160,7 +160,7 @@ public final class SelectionManager implements DestructionListener<ClientEntity>
      *
      * @param list Units selected, if the list is empty, selection is not replaced, if the list is bigger than the max selection, it is cropped.
      */
-    public void setSelection(final List<ClientEntity> list) {
+    public final void setSelection(final List<ClientEntity> list) {
         if (list.size() == 1) {
             this.addToSelection(list.get(0));
         } else if (!list.isEmpty()) {
@@ -177,7 +177,7 @@ public final class SelectionManager implements DestructionListener<ClientEntity>
     /**
      * @return all selected entities.
      */
-    public List<ClientEntity> getSelectionList() {
+    public final List<ClientEntity> getSelectionList() {
         return Lists.newList(this.selectionList);
     }
 
@@ -187,16 +187,16 @@ public final class SelectionManager implements DestructionListener<ClientEntity>
      * @param entity Entity to check.
      * @return <code>true</code> if selected.
      */
-    public boolean isSelected(final ClientEntity entity) {
+    public final boolean isSelected(final ClientEntity entity) {
         return this.selectionList.contains(entity);
     }
 
     @Override
-    public void entityDestroyed(final ClientEntity e) {
+    public final void entityDestroyed(final ClientEntity e) {
         this.addSelection(e, false, true);
     }
 
-    public int getMaxSelection() {
+    public final int getMaxSelection() {
         return maxSelection;
     }
 }
