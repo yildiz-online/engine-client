@@ -23,8 +23,8 @@
 
 package be.yildiz.client.building;
 
+import be.yildiz.client.game.engine.ClientWorld;
 import be.yildiz.common.vector.Point3D;
-import be.yildiz.module.graphic.ClientWorld;
 
 /**
  * Create the materialization of a building at a given place.

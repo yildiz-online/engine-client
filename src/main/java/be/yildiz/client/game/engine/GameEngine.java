@@ -45,6 +45,8 @@ import be.yildiz.module.network.client.AbstractNetworkEngineClient;
 import be.yildiz.module.network.client.NetworkListener;
 import be.yildiz.module.network.protocol.MessageWrapper;
 import be.yildiz.module.network.protocol.NetworkMessage;
+import be.yildiz.module.physics.PhysicEngine;
+import be.yildiz.module.physics.PhysicWorld;
 import be.yildiz.module.sound.Playlist;
 import be.yildiz.module.sound.SoundEngine;
 import be.yildiz.module.sound.SoundSource;
@@ -55,7 +57,6 @@ import be.yildiz.shared.player.Player;
 import be.yildiz.shared.protocol.EngineMessageFactory;
 
 import java.io.File;
-import java.security.InvalidParameterException;
 import java.util.List;
 
 /**
@@ -74,6 +75,9 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
      * Graphic logic.
      */
     private final GraphicEngine graphicEngine;
+
+    private final PhysicEngine physicEngine;
+
     /**
      * Sound logic.
      */
@@ -146,6 +150,7 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
         this.configuration = config;
         Logger.info("Initializing client game engine...");
         this.graphicEngine = engines.getGraphic();
+        this.physicEngine = engines.getPhysics();
         this.windowEngine = graphicEngine.getWindowEngine();
         Cursor empty = new Cursor("empty", "empty.gif");
         //this.windowEngine.createCursor(empty);
@@ -205,6 +210,7 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
         this.networkEngine.update();
         this.windowEngine.updateWindow();
         this.soundEngine.update();
+        this.physicEngine.update();
         if (this.rendering) {
             this.graphicEngine.update();
         } else {
@@ -467,7 +473,10 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
      * @return The newly built world.
      */
     public final ClientWorld createWorld() {
-        final ClientWorld world = this.graphicEngine.createWorld();
+        GraphicWorld graphic = this.graphicEngine.createWorld();
+        PhysicWorld physic = this.physicEngine.createWorld();
+
+        ClientWorld world = new GraphicPhysicWorld(graphic, physic);
         if (this.debug) {
             world.setDebugMode();
         }
@@ -492,6 +501,7 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
             Logger.info("Closing engines...");
             this.closed = true;
             this.graphicEngine.close();
+            this.physicEngine.close();
             this.soundEngine.close();
             this.networkEngine.close();
             Logger.info("Engines closed.");
@@ -533,7 +543,7 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
     public final void setPlayer(final Player player) {
         assert player != null;
         if (this.player != null) {
-            throw new InvalidParameterException("Already existing player");
+            throw new IllegalArgumentException("Already existing player");
         }
         this.player = player;
     }

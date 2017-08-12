@@ -27,7 +27,7 @@ import be.yildiz.module.graphic.GraphicEngine;
 import be.yildiz.module.graphic.dummy.DummyGraphicEngine;
 import be.yildiz.module.network.client.AbstractNetworkEngineClient;
 import be.yildiz.module.network.client.DummyNetworkEngine;
-import be.yildiz.module.physics.AbstractPhysicEngine;
+import be.yildiz.module.physics.PhysicEngine;
 import be.yildiz.module.physics.DummyPhysicEngine;
 import be.yildiz.module.sound.SoundEngine;
 import be.yildiz.module.sound.dummy.DummyAudioEngine;
@@ -54,9 +54,9 @@ public class Engines {
      */
     private final AbstractNetworkEngineClient network;
 
-    private final AbstractPhysicEngine physics;
+    private final PhysicEngine physics;
 
-    private Engines(GraphicEngine graphic, SoundEngine audio, AbstractNetworkEngineClient network, AbstractPhysicEngine physicEngine) {
+    private Engines(GraphicEngine graphic, SoundEngine audio, AbstractNetworkEngineClient network, PhysicEngine physicEngine) {
         this.graphic = graphic;
         this.audio = audio;
         this.network = network;
@@ -65,6 +65,10 @@ public class Engines {
 
     public GraphicEngine getGraphic() {
         return graphic;
+    }
+
+    public PhysicEngine getPhysics() {
+        return physics;
     }
 
     public SoundEngine getAudio() {
@@ -88,7 +92,7 @@ public class Engines {
 
         private AbstractNetworkEngineClient networkEngine = new DummyNetworkEngine();
 
-        private AbstractPhysicEngine physicEngine = new DummyPhysicEngine();
+        private PhysicEngine physicEngine = new DummyPhysicEngine();
 
         /**
          * Add a graphic engine implementation.
@@ -125,7 +129,7 @@ public class Engines {
          *
          * @return This object.
          */
-        public final EnginesBuilder withPhysicEngine(AbstractPhysicEngine engine) {
+        public final EnginesBuilder withPhysicEngine(PhysicEngine engine) {
             this.physicEngine = engine;
             return this;
         }

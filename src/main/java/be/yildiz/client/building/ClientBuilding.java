@@ -23,10 +23,10 @@
 
 package be.yildiz.client.building;
 
+import be.yildiz.client.game.engine.ClientWorld;
 import be.yildiz.common.id.EntityId;
 import be.yildiz.common.translation.Key;
 import be.yildiz.common.vector.Point3D;
-import be.yildiz.module.graphic.ClientWorld;
 import be.yildiz.module.graphic.Material;
 import be.yildiz.module.graphic.gui.ButtonMaterial;
 import be.yildiz.shared.building.BaseBuilding;

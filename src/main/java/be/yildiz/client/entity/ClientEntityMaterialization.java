@@ -23,10 +23,10 @@
 
 package be.yildiz.client.entity;
 
+import be.yildiz.client.game.engine.ClientWorld;
 import be.yildiz.common.gameobject.GameMaterialization;
 import be.yildiz.common.id.EntityId;
 import be.yildiz.common.vector.Point3D;
-import be.yildiz.module.graphic.ClientWorld;
 
 /**
  * Provide a materialization of an entity for the game view.
