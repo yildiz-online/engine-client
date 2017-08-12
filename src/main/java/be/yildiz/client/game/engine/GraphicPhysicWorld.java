@@ -24,7 +24,9 @@
 
 package be.yildiz.client.game.engine;
 
-import be.yildiz.client.game.engine.ClientWorld;
+import be.yildiz.client.entity.ClientGameEntity;
+import be.yildiz.client.entity.ClientGameEntityGraphic;
+import be.yildiz.client.entity.ClientGameEntityGraphicPhysic;
 import be.yildiz.common.Color;
 import be.yildiz.common.id.EntityId;
 import be.yildiz.common.shape.Box;
@@ -32,7 +34,9 @@ import be.yildiz.common.shape.Plane;
 import be.yildiz.common.shape.Sphere;
 import be.yildiz.common.vector.Point3D;
 import be.yildiz.module.graphic.*;
+import be.yildiz.module.physics.KinematicBody;
 import be.yildiz.module.physics.PhysicWorld;
+import be.yildiz.module.physics.StaticBody;
 
 /**
  * @author Grégory Van den Borre
@@ -50,77 +54,127 @@ public class GraphicPhysicWorld implements ClientWorld {
 
     @Override
     public ClientGameEntity createMovableDoodad(Box box, Material material) {
-        return graphicWorld.createMovableDoodad(box, material);
+        return new ClientGameEntityGraphic(graphicWorld.createMovableDoodad(box, material));
     }
 
     @Override
     public ClientGameEntity createMovableDoodad(Sphere sphere, Material material) {
-        return graphicWorld.createMovableDoodad(sphere, material);
+        return new ClientGameEntityGraphic(graphicWorld.createMovableDoodad(sphere, material));
     }
 
     @Override
     public ClientGameEntity createMovableDoodad(Plane plane, Material material) {
-        return graphicWorld.createMovableDoodad(plane, material);
+        return new ClientGameEntityGraphic(graphicWorld.createMovableDoodad(plane, material));
     }
 
     @Override
     public ClientGameEntity createMovableDoodad(GraphicMesh mesh) {
-        return graphicWorld.createMovableDoodad(mesh);
+        return new ClientGameEntityGraphic(graphicWorld.createMovableDoodad(mesh));
     }
 
     @Override
     public ClientGameEntity createStaticDoodad(Box box, Material material, Point3D position, Point3D direction) {
-        return graphicWorld.createStaticDoodad(box, material, position, direction);
+        return new ClientGameEntityGraphic(graphicWorld.createStaticDoodad(box, material, position, direction));
     }
 
     @Override
     public ClientGameEntity createStaticDoodad(Plane plane, Material material, Point3D position, Point3D direction) {
-        return graphicWorld.createStaticDoodad(plane, material, position, direction);
+        return new ClientGameEntityGraphic(graphicWorld.createStaticDoodad(plane, material, position, direction));
     }
 
     @Override
     public ClientGameEntity createStaticDoodad(Sphere sphere, Material material, Point3D position, Point3D direction) {
-        return graphicWorld.createStaticDoodad(sphere, material, position, direction);
+        return new ClientGameEntityGraphic(graphicWorld.createStaticDoodad(sphere, material, position, direction));
     }
 
     @Override
     public ClientGameEntity createStaticDoodad(Sphere sphere, Material material, Point3D position) {
-        return graphicWorld.createStaticDoodad(sphere, material, position);
+        return new ClientGameEntityGraphic(graphicWorld.createStaticDoodad(sphere, material, position));
     }
 
     @Override
     public ClientGameEntity createStaticDoodad(GraphicMesh mesh, Point3D position, Point3D direction) {
-        return graphicWorld.createStaticDoodad(mesh, position, direction);
+        return new ClientGameEntityGraphic(graphicWorld.createStaticDoodad(mesh, position, direction));
     }
 
     @Override
     public ClientGameEntity createStaticObject(EntityId id, Box box, Material material, Point3D position, Point3D direction) {
-        return this.graphicWorld.createStaticObject(id, box, material, position, direction);
+        StaticBody body = this.physicWorld
+                .createObject()
+                .withId(id)
+                .withShape(box)
+                .atPosition(position)
+                .withDirection(direction)
+                .buildStatic();
+        BaseGraphicObject object =  this.graphicWorld.createStaticObject(id, box, material, position, direction);
+        return ClientGameEntityGraphicPhysic.withGraphicMaster(body, object);
     }
 
     @Override
     public ClientGameEntity createStaticObject(EntityId id, Sphere sphere, Material material, Point3D position, Point3D direction) {
-        return this.graphicWorld.createStaticObject(id, sphere, material, position, direction);
+        StaticBody body = this.physicWorld
+                .createObject()
+                .withId(id)
+                .withShape(sphere)
+                .atPosition(position)
+                .withDirection(direction)
+                .buildStatic();
+        BaseGraphicObject object = this.graphicWorld.createStaticObject(id, sphere, material, position, direction);
+        return ClientGameEntityGraphicPhysic.withGraphicMaster(body, object);
     }
 
     @Override
-    public ClientGameEntity createStaticObject(EntityId id, GraphicMesh shape, Point3D position) {
-        return this.graphicWorld.createStaticObject(id, shape, position);
+    public ClientGameEntity createStaticObject(EntityId id, GraphicMesh shape, Point3D position, Point3D direction) {
+        StaticBody body = this.physicWorld
+                .createObject()
+                .withId(id)
+                .withShape(new Sphere(100))
+                .atPosition(position)
+                .withDirection(direction)
+                .buildStatic();
+        BaseGraphicObject object = this.graphicWorld.createStaticObject(id, shape, position, direction);
+        return ClientGameEntityGraphicPhysic.withGraphicMaster(body, object);
+    }
+
+    @Override
+    public ClientGameEntity createStaticObject(EntityId id, GraphicMesh mesh, Point3D position) {
+        return this.createStaticObject(id, mesh, position, Point3D.BASE_DIRECTION);
     }
 
     @Override
     public ClientGameEntity createMovableObject(EntityId id, Box box, Material material, Point3D position) {
-        return this.graphicWorld.createMovableObject(id, box, material, position);
+        KinematicBody body = this.physicWorld
+                .createObject()
+                .withId(id)
+                .withShape(box)
+                .atPosition(position)
+                .buildKinematic();
+        BaseGraphicObject object = this.graphicWorld.createMovableObject(id, box, material, position);
+        return ClientGameEntityGraphicPhysic.withGraphicMaster(body, object);
     }
 
     @Override
     public ClientGameEntity createMovableObject(EntityId id, Sphere sphere, Material material, Point3D position) {
-        return this.graphicWorld.createMovableObject(id, sphere, material, position);
+        KinematicBody body = this.physicWorld
+                .createObject()
+                .withId(id)
+                .withShape(sphere)
+                .atPosition(position)
+                .buildKinematic();
+        BaseGraphicObject object = this.graphicWorld.createMovableObject(id, sphere, material, position);
+        return ClientGameEntityGraphicPhysic.withGraphicMaster(body, object);
     }
 
     @Override
     public ClientGameEntity createMovableObject(EntityId id, GraphicMesh shape, Point3D position) {
-        return this.graphicWorld.createMovableObject(id, shape, position);
+        KinematicBody body = this.physicWorld
+                .createObject()
+                .withId(id)
+                .withShape(new Sphere(100))
+                .atPosition(position)
+                .buildKinematic();
+        BaseGraphicObject object = this.graphicWorld.createMovableObject(id, shape, position);
+        return ClientGameEntityGraphicPhysic.withGraphicMaster(body, object);
     }
 
     @Override
@@ -236,10 +290,5 @@ public class GraphicPhysicWorld implements ClientWorld {
     @Override
     public BillboardSet createBillboardSet(Material material) {
         return this.graphicWorld.createBillboardSet(material);
-    }
-
-    @Override
-    public ClientGameEntity createStaticObject(EntityId id, GraphicMesh mesh, Point3D position, Point3D direction) {
-        return this.graphicWorld.createStaticObject(id, mesh, position, direction);
     }
 }

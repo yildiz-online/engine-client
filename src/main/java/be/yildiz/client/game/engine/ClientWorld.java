@@ -24,10 +24,95 @@
 
 package be.yildiz.client.game.engine;
 
-import be.yildiz.module.graphic.GraphicWorld;
+import be.yildiz.client.entity.ClientGameEntity;
+import be.yildiz.common.Color;
+import be.yildiz.common.id.EntityId;
+import be.yildiz.common.shape.Box;
+import be.yildiz.common.shape.Plane;
+import be.yildiz.common.shape.Sphere;
+import be.yildiz.common.vector.Point3D;
+import be.yildiz.module.graphic.*;
 
 /**
  * @author Grégory Van den Borre
  */
-public interface ClientWorld extends GraphicWorld {
+public interface ClientWorld {
+
+    ClientGameEntity createMovableDoodad(Box box, Material material);
+
+    ClientGameEntity createMovableDoodad(Sphere sphere, Material material);
+
+    ClientGameEntity createMovableDoodad(Plane plane, Material material);
+
+    ClientGameEntity createMovableDoodad(GraphicMesh mesh);
+
+    ClientGameEntity createStaticDoodad(Box box, Material material, Point3D position, Point3D direction);
+
+    ClientGameEntity createStaticDoodad(Plane plane, Material material, Point3D position, Point3D direction);
+
+    ClientGameEntity createStaticDoodad(Sphere sphere, Material material, Point3D position, Point3D direction);
+
+    ClientGameEntity createStaticDoodad(Sphere sphere, Material material, Point3D position);
+
+    ClientGameEntity createStaticDoodad(GraphicMesh mesh, Point3D position, Point3D direction);
+
+    ClientGameEntity createStaticObject(EntityId id, Box box, Material material, Point3D position, Point3D direction);
+
+    ClientGameEntity createStaticObject(EntityId id, Sphere sphere, Material material, Point3D position, Point3D direction);
+
+    ClientGameEntity createStaticObject(EntityId id, GraphicMesh shape, Point3D position);
+
+    ClientGameEntity createMovableObject(EntityId id, Box box, Material material, Point3D position);
+
+    ClientGameEntity createMovableObject(EntityId id, Sphere sphere, Material material, Point3D position);
+
+    ClientGameEntity createMovableObject(EntityId id, GraphicMesh shape, Point3D position);
+
+    AbstractCamera createCamera(String name);
+
+    void setSkybox(Skybox sky);
+
+    void setDebugMode();
+
+    void setAmbientLight(Color color);
+
+    PointLight createPointLight(String name, Point3D position);
+
+    ElectricArc createElectricArc(Point3D origin, Point3D end, float width);
+
+    Explosion createExplosion();
+
+    AbstractParticleSystem createParticleSystem();
+
+    Sky createSky();
+
+    Ocean createOcean();
+
+    AbstractCamera getDefaultCamera();
+
+    Line create3DLine();
+
+    LensFlare createLensFlare(LensFlare.LensFlareMaterial mat, Point3D position);
+
+    SpotLight createSpotLight(String name, Point3D position, Point3D direction);
+
+    DirectionalLight createDirectionalLight(String name, Point3D position, Point3D direction);
+
+    void serializeShapeFromMesh(String mesh, String file, String name);
+
+    boolean isDebug();
+
+    void deleteLight(AbstractLight light);
+
+    AbstractCamera getCamera(String name);
+
+    AbstractLight getLight(String name);
+
+    void deleteLight(String name);
+
+    MovableText createMovableText(String name, String text, Font font);
+
+    BillboardSet createBillboardSet(Material material);
+
+    ClientGameEntity createStaticObject(EntityId id, GraphicMesh mesh, Point3D position, Point3D direction);
 }
