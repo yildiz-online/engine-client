@@ -27,16 +27,16 @@ package be.yildiz.client.entity;
 import be.yildiz.common.gameobject.Movable;
 import be.yildiz.common.id.EntityId;
 import be.yildiz.common.vector.Point3D;
-import be.yildiz.module.graphic.BaseGraphicObject;
+import be.yildiz.module.graphic.GraphicObject;
 
 /**
  * @author Grégory Van den Borre
  */
 public class ClientGameEntityGraphic extends BaseClientGameEntity {
 
-    private final BaseGraphicObject graphicObject;
+    private final GraphicObject graphicObject;
 
-    public ClientGameEntityGraphic(BaseGraphicObject graphicObject) {
+    public ClientGameEntityGraphic(GraphicObject graphicObject) {
         super(graphicObject);
         this.graphicObject = graphicObject;
     }
@@ -103,11 +103,6 @@ public class ClientGameEntityGraphic extends BaseClientGameEntity {
     @Override
     public void setPosition(Point3D newPosition) {
         this.graphicObject.setPosition(newPosition);
-    }
-
-    @Override
-    public void setAbsolutePosition(Point3D pos) {
-        this.graphicObject.setAbsolutePosition(pos);
     }
 
     @Override

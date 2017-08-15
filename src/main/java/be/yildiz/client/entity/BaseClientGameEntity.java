@@ -25,7 +25,7 @@
 package be.yildiz.client.entity;
 
 import be.yildiz.common.vector.Point3D;
-import be.yildiz.module.graphic.BaseGraphicObject;
+import be.yildiz.module.graphic.GraphicObject;
 import be.yildiz.module.graphic.Material;
 
 /**
@@ -33,9 +33,9 @@ import be.yildiz.module.graphic.Material;
  */
 public abstract class BaseClientGameEntity implements ClientGameEntity {
 
-    private final BaseGraphicObject graphicObject;
+    private final GraphicObject graphicObject;
 
-    protected BaseClientGameEntity(BaseGraphicObject graphicObject) {
+    protected BaseClientGameEntity(GraphicObject graphicObject) {
         this.graphicObject = graphicObject;
     }
 

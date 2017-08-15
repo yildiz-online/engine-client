@@ -27,7 +27,7 @@ package be.yildiz.client.entity;
 import be.yildiz.common.gameobject.Movable;
 import be.yildiz.common.id.EntityId;
 import be.yildiz.common.vector.Point3D;
-import be.yildiz.module.graphic.BaseGraphicObject;
+import be.yildiz.module.graphic.GraphicObject;
 import be.yildiz.module.physics.BaseBody;
 
 /**
@@ -37,23 +37,23 @@ public class ClientGameEntityGraphicPhysic extends BaseClientGameEntity {
 
     private final BaseBody physicBody;
 
-    private final BaseGraphicObject graphicObject;
+    private final GraphicObject graphicObject;
 
     private final boolean physicMaster;
 
-    private ClientGameEntityGraphicPhysic(BaseBody physicBody, BaseGraphicObject graphicObject, boolean physicMaster) {
+    private ClientGameEntityGraphicPhysic(BaseBody physicBody, GraphicObject graphicObject, boolean physicMaster) {
         super(graphicObject);
         this.physicBody = physicBody;
         this.graphicObject = graphicObject;
         this.physicMaster = physicMaster;
     }
 
-    public static ClientGameEntityGraphicPhysic withDynamicMaster(BaseBody physicBody, BaseGraphicObject graphicObject) {
+    public static ClientGameEntityGraphicPhysic withDynamicMaster(BaseBody physicBody, GraphicObject graphicObject) {
         return new ClientGameEntityGraphicPhysic(physicBody, graphicObject, true);
     }
 
 
-    public static ClientGameEntityGraphicPhysic withGraphicMaster(BaseBody physicBody, BaseGraphicObject graphicObject) {
+    public static ClientGameEntityGraphicPhysic withGraphicMaster(BaseBody physicBody, GraphicObject graphicObject) {
         return new ClientGameEntityGraphicPhysic(physicBody, graphicObject, false);
     }
 

@@ -106,7 +106,7 @@ public class GraphicPhysicWorld implements ClientWorld {
                 .atPosition(position)
                 .withDirection(direction)
                 .buildStatic();
-        BaseGraphicObject object =  this.graphicWorld.createStaticObject(id, box, material, position, direction);
+        GraphicObject object =  this.graphicWorld.createStaticObject(id, box, material, position, direction);
         return ClientGameEntityGraphicPhysic.withGraphicMaster(body, object);
     }
 
@@ -119,7 +119,7 @@ public class GraphicPhysicWorld implements ClientWorld {
                 .atPosition(position)
                 .withDirection(direction)
                 .buildStatic();
-        BaseGraphicObject object = this.graphicWorld.createStaticObject(id, sphere, material, position, direction);
+        GraphicObject object = this.graphicWorld.createStaticObject(id, sphere, material, position, direction);
         return ClientGameEntityGraphicPhysic.withGraphicMaster(body, object);
     }
 
@@ -132,7 +132,7 @@ public class GraphicPhysicWorld implements ClientWorld {
                 .atPosition(position)
                 .withDirection(direction)
                 .buildStatic();
-        BaseGraphicObject object = this.graphicWorld.createStaticObject(id, shape, position, direction);
+        GraphicObject object = this.graphicWorld.createStaticObject(id, shape, position, direction);
         return ClientGameEntityGraphicPhysic.withGraphicMaster(body, object);
     }
 
@@ -149,7 +149,7 @@ public class GraphicPhysicWorld implements ClientWorld {
                 .withShape(box)
                 .atPosition(position)
                 .buildKinematic();
-        BaseGraphicObject object = this.graphicWorld.createMovableObject(id, box, material, position);
+        GraphicObject object = this.graphicWorld.createMovableObject(id, box, material, position);
         return ClientGameEntityGraphicPhysic.withGraphicMaster(body, object);
     }
 
@@ -161,7 +161,7 @@ public class GraphicPhysicWorld implements ClientWorld {
                 .withShape(sphere)
                 .atPosition(position)
                 .buildKinematic();
-        BaseGraphicObject object = this.graphicWorld.createMovableObject(id, sphere, material, position);
+        GraphicObject object = this.graphicWorld.createMovableObject(id, sphere, material, position);
         return ClientGameEntityGraphicPhysic.withGraphicMaster(body, object);
     }
 
@@ -173,7 +173,7 @@ public class GraphicPhysicWorld implements ClientWorld {
                 .withShape(new Sphere(100))
                 .atPosition(position)
                 .buildKinematic();
-        BaseGraphicObject object = this.graphicWorld.createMovableObject(id, shape, position);
+        GraphicObject object = this.graphicWorld.createMovableObject(id, shape, position);
         return ClientGameEntityGraphicPhysic.withGraphicMaster(body, object);
     }
 
