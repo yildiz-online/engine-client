@@ -86,18 +86,23 @@ public class ClientGameEntityGraphic extends BaseClientGameEntity {
     }
 
     @Override
-    public void detach(Movable other) {
-        this.graphicObject.detach(other);
-    }
-
-    @Override
     public void addChild(Movable other) {
         this.graphicObject.addChild(other);
     }
 
     @Override
+    public void removeChild(Movable child) {
+        this.graphicObject.removeChild(child);
+    }
+
+    @Override
     public void attachToOptional(Movable other) {
         this.graphicObject.attachToOptional(other);
+    }
+
+    @Override
+    public void detachFromParent() {
+        this.graphicObject.detachFromParent();
     }
 
     @Override
@@ -108,5 +113,20 @@ public class ClientGameEntityGraphic extends BaseClientGameEntity {
     @Override
     public void setDirection(Point3D newDirection) {
         this.graphicObject.setDirection(newDirection);
+    }
+
+    @Override
+    public void setPosition(float posX, float posY, float posZ) {
+        this.graphicObject.setPosition(posX, posY, posZ);
+    }
+
+    @Override
+    public void setDirection(float dirX, float dirY, float dirZ) {
+        this.graphicObject.setDirection(dirX, dirY, dirZ);
+    }
+
+    @Override
+    public void addOptionalChild(Movable child) {
+        this.graphicObject.addOptionalChild(child);
     }
 }

@@ -39,6 +39,9 @@ public class ClientGameEntityGraphicPhysic extends BaseClientGameEntity {
 
     private final GraphicObject graphicObject;
 
+    /**
+     * Means the physic body is leading the object, in case of dynamic body.
+     */
     private final boolean physicMaster;
 
     private ClientGameEntityGraphicPhysic(BaseBody physicBody, GraphicObject graphicObject, boolean physicMaster) {
@@ -108,21 +111,25 @@ public class ClientGameEntityGraphicPhysic extends BaseClientGameEntity {
         if(!physicMaster) {
             this.graphicObject.attachTo(other);
         }
-    }
-
-    @Override
-    public void detach(Movable other) {
-        if(!physicMaster) {
-            this.graphicObject.attachToOptional(other);
-        }
+        //a dynamic body cannot have parent.
     }
 
     @Override
     public void addChild(Movable other) {
         if(!physicMaster) {
             this.graphicObject.addChild(other);
+        } else {
+            this.physicBody.addChild(other);
         }
-        //FIXME implements for physics
+    }
+
+    @Override
+    public void removeChild(Movable child) {
+        if(!physicMaster) {
+            this.graphicObject.removeChild(child);
+        } else {
+            this.physicBody.removeChild(child);
+        }
     }
 
     @Override
@@ -130,19 +137,23 @@ public class ClientGameEntityGraphicPhysic extends BaseClientGameEntity {
         if(!physicMaster) {
             this.graphicObject.attachToOptional(other);
         }
+        //a dynamic body cannot have parent.
+    }
+
+    @Override
+    public void detachFromParent() {
+        if(!physicMaster) {
+            this.graphicObject.detachFromParent();
+        }
+        //a dynamic body cannot have parent.
     }
 
     @Override
     public void setPosition(Point3D newPosition) {
         if(!physicMaster) {
             this.graphicObject.setPosition(newPosition);
-        }
-    }
-
-    @Override
-    public void setAbsolutePosition(Point3D newPosition) {
-        if(!physicMaster) {
-            this.graphicObject.setAbsolutePosition(newPosition);
+        } else {
+            this.physicBody.setPosition(newPosition);
         }
     }
 
@@ -150,6 +161,35 @@ public class ClientGameEntityGraphicPhysic extends BaseClientGameEntity {
     public void setDirection(Point3D newDirection) {
         if(!physicMaster) {
             this.graphicObject.setDirection(newDirection);
+        } else {
+            this.physicBody.setDirection(newDirection);
+        }
+    }
+
+    @Override
+    public void setPosition(float posX, float posY, float posZ) {
+        if(!physicMaster) {
+            this.graphicObject.setPosition(posX, posY, posZ);
+        } else {
+            this.physicBody.setPosition(posX, posY, posZ);
+        }
+    }
+
+    @Override
+    public void setDirection(float dirX, float dirY, float dirZ) {
+        if(!physicMaster) {
+            this.graphicObject.setDirection(dirX, dirY, dirZ);
+        } else {
+            this.physicBody.setDirection(dirX, dirY, dirZ);
+        }
+    }
+
+    @Override
+    public void addOptionalChild(Movable child) {
+        if(!physicMaster) {
+            this.graphicObject.addOptionalChild(child);
+        } else {
+            this.physicBody.addOptionalChild(child);
         }
     }
 }
