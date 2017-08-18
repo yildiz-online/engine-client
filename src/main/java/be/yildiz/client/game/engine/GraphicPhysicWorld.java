@@ -194,10 +194,11 @@ public class GraphicPhysicWorld implements ClientWorld {
     }
 
     @Override
-    public ClientGameEntity createDynamicObject(EntityId id, GraphicMesh shape, Point3D position) {
+    public ClientGameEntity createDynamicObject(EntityId id, GraphicMesh shape, float mass, Point3D position) {
         DynamicBody body = this.physicWorld
                 .createObject()
                 .withId(id)
+                .withMass(mass)
                 .withShape(new Sphere(100))
                 .atPosition(position)
                 .buildDynamic();
@@ -206,9 +207,23 @@ public class GraphicPhysicWorld implements ClientWorld {
     }
 
     @Override
-    public ClientGameEntity createDynamicObject(EntityId id, Box shape, Material material, Point3D position) {
+    public ClientGameEntity createDynamicObject(EntityId id, Box shape, float mass, Material material, Point3D position) {
         DynamicBody body = this.physicWorld
                 .createObject()
+                .withId(id)
+                .withMass(mass)
+                .withShape(shape)
+                .atPosition(position)
+                .buildDynamic();
+        GraphicObject object = this.graphicWorld.createMovableObject(id, shape, material, position);
+        return ClientGameEntityGraphicPhysic.withDynamicMaster(body, object);
+    }
+
+    @Override
+    public ClientGameEntity createDynamicObject(EntityId id, Sphere shape, float mass, Material material, Point3D position) {
+        DynamicBody body = this.physicWorld
+                .createObject()
+                .withMass(mass)
                 .withId(id)
                 .withShape(shape)
                 .atPosition(position)
@@ -218,22 +233,11 @@ public class GraphicPhysicWorld implements ClientWorld {
     }
 
     @Override
-    public ClientGameEntity createDynamicObject(EntityId id, Sphere shape, Material material, Point3D position) {
+    public ClientGameEntity createDynamicObject(EntityId id, Plane shape, float mass, Material material, Point3D position) {
         DynamicBody body = this.physicWorld
                 .createObject()
                 .withId(id)
-                .withShape(shape)
-                .atPosition(position)
-                .buildDynamic();
-        GraphicObject object = this.graphicWorld.createMovableObject(id, shape, material, position);
-        return ClientGameEntityGraphicPhysic.withDynamicMaster(body, object);
-    }
-
-    @Override
-    public ClientGameEntity createDynamicObject(EntityId id, Plane shape, Material material, Point3D position) {
-        DynamicBody body = this.physicWorld
-                .createObject()
-                .withId(id)
+                .withMass(mass)
                 .withShape(shape)
                 .atPosition(position)
                 .buildDynamic();

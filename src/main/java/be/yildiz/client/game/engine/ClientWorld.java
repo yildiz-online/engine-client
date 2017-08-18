@@ -102,13 +102,13 @@ public interface ClientWorld {
 
     ClientGameEntity createMovableObject(EntityId id, Plane plane, Material material, Point3D position);
 
-    ClientGameEntity createDynamicObject(EntityId id, GraphicMesh shape, Point3D position);
+    ClientGameEntity createDynamicObject(EntityId id, GraphicMesh shape, float mass, Point3D position);
 
-    ClientGameEntity createDynamicObject(EntityId id, Box box, Material material, Point3D position);
+    ClientGameEntity createDynamicObject(EntityId id, Box box, float mass, Material material, Point3D position);
 
-    ClientGameEntity createDynamicObject(EntityId id, Sphere sphere, Material material, Point3D position);
+    ClientGameEntity createDynamicObject(EntityId id, Sphere sphere, float mass, Material material, Point3D position);
 
-    ClientGameEntity createDynamicObject(EntityId id, Plane plane, Material material, Point3D position);
+    ClientGameEntity createDynamicObject(EntityId id, Plane plane, float mass, Material material, Point3D position);
 
     AbstractCamera createCamera(String name);
 
