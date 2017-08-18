@@ -61,6 +61,24 @@ public class GraphicPhysicWorld implements ClientWorld {
     }
 
     @Override
+    public void addCollisionListener(CollisionListener l) {
+        this.physicWorld.addCollisionListener(l);
+    }
+
+    @Override
+    public void addGhostCollisionListener(CollisionListener l) {
+        this.physicWorld.addGhostCollisionListener(l);
+    }
+
+    @Override
+    public GhostObject createGhost(EntityId id, Sphere sphere) {
+        return this.physicWorld.createObject()
+                .withId(id)
+                .withShape(sphere)
+                .buildGhost();
+    }
+
+    @Override
     public ClientGameEntity createMovableDoodad(GraphicMesh mesh) {
         return new ClientGameEntityGraphic(graphicWorld.createMovableDoodad(mesh));
     }

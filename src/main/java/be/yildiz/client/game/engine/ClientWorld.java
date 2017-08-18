@@ -32,6 +32,8 @@ import be.yildiz.common.shape.Plane;
 import be.yildiz.common.shape.Sphere;
 import be.yildiz.common.vector.Point3D;
 import be.yildiz.module.graphic.*;
+import be.yildiz.module.physics.CollisionListener;
+import be.yildiz.module.physics.GhostObject;
 import be.yildiz.module.physics.Gravity;
 
 /**
@@ -42,6 +44,12 @@ public interface ClientWorld {
     void setGravity(float x, float y, float z);
 
     void setGravity(Gravity g);
+
+    void addCollisionListener(CollisionListener l);
+
+    void addGhostCollisionListener(CollisionListener l);
+
+    GhostObject createGhost(EntityId id, Sphere sphere);
 
     ClientGameEntity createMovableDoodad(GraphicMesh mesh);
 
