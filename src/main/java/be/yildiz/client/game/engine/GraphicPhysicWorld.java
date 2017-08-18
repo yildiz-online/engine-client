@@ -34,10 +34,7 @@ import be.yildiz.common.shape.Plane;
 import be.yildiz.common.shape.Sphere;
 import be.yildiz.common.vector.Point3D;
 import be.yildiz.module.graphic.*;
-import be.yildiz.module.physics.DynamicBody;
-import be.yildiz.module.physics.KinematicBody;
-import be.yildiz.module.physics.PhysicWorld;
-import be.yildiz.module.physics.StaticBody;
+import be.yildiz.module.physics.*;
 
 /**
  * @author Grégory Van den Borre
@@ -51,6 +48,16 @@ public class GraphicPhysicWorld implements ClientWorld {
     public GraphicPhysicWorld(GraphicWorld graphicWorld, PhysicWorld physicWorld) {
         this.graphicWorld = graphicWorld;
         this.physicWorld = physicWorld;
+    }
+
+    @Override
+    public void setGravity(float x, float y, float z) {
+        this.physicWorld.setGravity(x, y, z);
+    }
+
+    @Override
+    public void setGravity(Gravity g) {
+        this.physicWorld.setGravity(g);
     }
 
     @Override

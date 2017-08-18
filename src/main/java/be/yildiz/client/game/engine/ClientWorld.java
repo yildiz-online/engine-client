@@ -32,11 +32,16 @@ import be.yildiz.common.shape.Plane;
 import be.yildiz.common.shape.Sphere;
 import be.yildiz.common.vector.Point3D;
 import be.yildiz.module.graphic.*;
+import be.yildiz.module.physics.Gravity;
 
 /**
  * @author Grégory Van den Borre
  */
 public interface ClientWorld {
+
+    void setGravity(float x, float y, float z);
+
+    void setGravity(Gravity g);
 
     ClientGameEntity createMovableDoodad(GraphicMesh mesh);
 
