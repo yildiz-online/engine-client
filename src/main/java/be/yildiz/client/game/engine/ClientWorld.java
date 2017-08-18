@@ -38,35 +38,77 @@ import be.yildiz.module.graphic.*;
  */
 public interface ClientWorld {
 
+    ClientGameEntity createMovableDoodad(GraphicMesh mesh);
+
     ClientGameEntity createMovableDoodad(Box box, Material material);
 
     ClientGameEntity createMovableDoodad(Sphere sphere, Material material);
 
     ClientGameEntity createMovableDoodad(Plane plane, Material material);
 
-    ClientGameEntity createMovableDoodad(GraphicMesh mesh);
-
-    ClientGameEntity createStaticDoodad(Box box, Material material, Point3D position, Point3D direction);
-
-    ClientGameEntity createStaticDoodad(Plane plane, Material material, Point3D position, Point3D direction);
-
-    ClientGameEntity createStaticDoodad(Sphere sphere, Material material, Point3D position, Point3D direction);
-
-    ClientGameEntity createStaticDoodad(Sphere sphere, Material material, Point3D position);
+    default ClientGameEntity createStaticDoodad(GraphicMesh mesh, Point3D position) {
+        return createStaticDoodad(mesh, position, Point3D.BASE_DIRECTION);
+    }
 
     ClientGameEntity createStaticDoodad(GraphicMesh mesh, Point3D position, Point3D direction);
 
+    default ClientGameEntity createStaticDoodad(Box box, Material material, Point3D position) {
+        return createStaticDoodad(box, material, position, Point3D.BASE_DIRECTION);
+    }
+
+    ClientGameEntity createStaticDoodad(Box box, Material material, Point3D position, Point3D direction);
+
+    default ClientGameEntity createStaticDoodad(Sphere sphere, Material material, Point3D position) {
+        return createStaticDoodad(sphere, material, position, Point3D.BASE_DIRECTION);
+    }
+
+    ClientGameEntity createStaticDoodad(Sphere sphere, Material material, Point3D position, Point3D direction);
+
+    default ClientGameEntity createStaticDoodad(Plane plane, Material material, Point3D position) {
+        return createStaticDoodad(plane, material, position, Point3D.BASE_DIRECTION);
+    }
+
+    ClientGameEntity createStaticDoodad(Plane plane, Material material, Point3D position, Point3D direction);
+
+    default ClientGameEntity createStaticObject(EntityId id, GraphicMesh shape, Point3D position) {
+        return createStaticObject(id, shape, position, Point3D.BASE_DIRECTION);
+    }
+
+    ClientGameEntity createStaticObject(EntityId id, GraphicMesh shape, Point3D position, Point3D direction);
+
+    default ClientGameEntity createStaticObject(EntityId id, Box box, Material material, Point3D position) {
+        return createStaticObject(id, box, material, position, Point3D.BASE_DIRECTION);
+    }
+
     ClientGameEntity createStaticObject(EntityId id, Box box, Material material, Point3D position, Point3D direction);
+
+    default ClientGameEntity createStaticObject(EntityId id, Sphere sphere, Material material, Point3D position) {
+        return createStaticObject(id, sphere, material, position, Point3D.BASE_DIRECTION);
+    }
 
     ClientGameEntity createStaticObject(EntityId id, Sphere sphere, Material material, Point3D position, Point3D direction);
 
-    ClientGameEntity createStaticObject(EntityId id, GraphicMesh shape, Point3D position);
+    default ClientGameEntity createStaticObject(EntityId id, Plane plane, Material material, Point3D position) {
+        return createStaticObject(id, plane, material, position);
+    }
+
+    ClientGameEntity createStaticObject(EntityId id, Plane plane, Material material, Point3D position, Point3D direction);
+
+    ClientGameEntity createMovableObject(EntityId id, GraphicMesh shape, Point3D position);
 
     ClientGameEntity createMovableObject(EntityId id, Box box, Material material, Point3D position);
 
     ClientGameEntity createMovableObject(EntityId id, Sphere sphere, Material material, Point3D position);
 
-    ClientGameEntity createMovableObject(EntityId id, GraphicMesh shape, Point3D position);
+    ClientGameEntity createMovableObject(EntityId id, Plane plane, Material material, Point3D position);
+
+    ClientGameEntity createDynamicObject(EntityId id, GraphicMesh shape, Point3D position);
+
+    ClientGameEntity createDynamicObject(EntityId id, Box box, Material material, Point3D position);
+
+    ClientGameEntity createDynamicObject(EntityId id, Sphere sphere, Material material, Point3D position);
+
+    ClientGameEntity createDynamicObject(EntityId id, Plane plane, Material material, Point3D position);
 
     AbstractCamera createCamera(String name);
 
@@ -113,6 +155,4 @@ public interface ClientWorld {
     MovableText createMovableText(String name, String text, Font font);
 
     BillboardSet createBillboardSet(Material material);
-
-    ClientGameEntity createStaticObject(EntityId id, GraphicMesh mesh, Point3D position, Point3D direction);
 }
