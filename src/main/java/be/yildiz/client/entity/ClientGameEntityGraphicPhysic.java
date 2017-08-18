@@ -49,6 +49,10 @@ public class ClientGameEntityGraphicPhysic extends BaseClientGameEntity {
         this.physicBody = physicBody;
         this.graphicObject = graphicObject;
         this.physicMaster = physicMaster;
+        if(physicMaster) {
+            this.physicBody.addChild(graphicObject);
+        }
+        //FIXME will not work when implementation of dummy physic body -> todo this.graphic.addchild(physic);
     }
 
     public static ClientGameEntityGraphicPhysic withDynamicMaster(BaseBody physicBody, GraphicObject graphicObject) {
