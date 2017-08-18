@@ -192,4 +192,12 @@ public class ClientGameEntityGraphicPhysic extends BaseClientGameEntity {
             this.physicBody.addOptionalChild(child);
         }
     }
+
+    @Override
+    public Movable getInternal() {
+        if(!this.physicMaster) {
+            return this.graphicObject.getInternal();
+        }
+        return this.physicBody;
+    }
 }

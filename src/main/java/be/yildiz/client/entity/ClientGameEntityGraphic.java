@@ -129,4 +129,9 @@ public class ClientGameEntityGraphic extends BaseClientGameEntity {
     public void addOptionalChild(Movable child) {
         this.graphicObject.addOptionalChild(child);
     }
+
+    @Override
+    public Movable getInternal() {
+        return this.graphicObject.getInternal();
+    }
 }
