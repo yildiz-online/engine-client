@@ -47,8 +47,8 @@ import be.yildiz.module.network.protocol.MessageWrapper;
 import be.yildiz.module.network.protocol.NetworkMessage;
 import be.yildiz.module.physics.PhysicEngine;
 import be.yildiz.module.physics.PhysicWorld;
+import be.yildiz.module.sound.AudioEngine;
 import be.yildiz.module.sound.Playlist;
-import be.yildiz.module.sound.SoundEngine;
 import be.yildiz.module.sound.SoundSource;
 import be.yildiz.module.window.Cursor;
 import be.yildiz.module.window.WindowEngine;
@@ -81,7 +81,7 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
     /**
      * Sound logic.
      */
-    private final SoundEngine soundEngine;
+    private final AudioEngine soundEngine;
     /**
      * Network logic.
      */

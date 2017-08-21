@@ -30,9 +30,9 @@ import be.yildiz.common.resource.ResourceUtil;
 import be.yildiz.module.graphic.*;
 import be.yildiz.module.graphic.gui.ButtonMaterial;
 import be.yildiz.module.graphic.gui.GuiContainer;
+import be.yildiz.module.sound.AudioEngine;
 import be.yildiz.module.sound.Music;
 import be.yildiz.module.sound.Playlist;
-import be.yildiz.module.sound.SoundEngine;
 
 import java.io.File;
 import java.util.List;
@@ -62,9 +62,9 @@ public final class FileParser {
     /**
      * Create the music playlist.
      */
-    private final SoundEngine soundEngine;
+    private final AudioEngine soundEngine;
 
-    public FileParser(MaterialManager materialManager, GraphicEngine graphicEngine, SoundEngine soundEngine) {
+    FileParser(MaterialManager materialManager, GraphicEngine graphicEngine, AudioEngine soundEngine) {
         this.materialManager = materialManager;
         this.graphicEngine = graphicEngine;
         this.soundEngine = soundEngine;

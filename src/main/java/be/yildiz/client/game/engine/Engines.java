@@ -27,9 +27,9 @@ import be.yildiz.module.graphic.GraphicEngine;
 import be.yildiz.module.graphic.dummy.DummyGraphicEngine;
 import be.yildiz.module.network.client.AbstractNetworkEngineClient;
 import be.yildiz.module.network.client.DummyNetworkEngine;
-import be.yildiz.module.physics.PhysicEngine;
 import be.yildiz.module.physics.DummyPhysicEngine;
-import be.yildiz.module.sound.SoundEngine;
+import be.yildiz.module.physics.PhysicEngine;
+import be.yildiz.module.sound.AudioEngine;
 import be.yildiz.module.sound.dummy.DummyAudioEngine;
 
 /**
@@ -47,7 +47,7 @@ public class Engines {
     /**
      * Engine handling audio playing.
      */
-    private final SoundEngine audio;
+    private final AudioEngine audio;
 
     /**
      * Engine handling the network client part.
@@ -56,7 +56,7 @@ public class Engines {
 
     private final PhysicEngine physics;
 
-    private Engines(GraphicEngine graphic, SoundEngine audio, AbstractNetworkEngineClient network, PhysicEngine physicEngine) {
+    private Engines(GraphicEngine graphic, AudioEngine audio, AbstractNetworkEngineClient network, PhysicEngine physicEngine) {
         this.graphic = graphic;
         this.audio = audio;
         this.network = network;
@@ -71,7 +71,7 @@ public class Engines {
         return physics;
     }
 
-    public SoundEngine getAudio() {
+    public AudioEngine getAudio() {
         return audio;
     }
 
@@ -88,7 +88,7 @@ public class Engines {
 
         private GraphicEngine graphicEngine = new DummyGraphicEngine();
 
-        private SoundEngine audioEngine = new DummyAudioEngine();
+        private AudioEngine audioEngine = new DummyAudioEngine();
 
         private AbstractNetworkEngineClient networkEngine = new DummyNetworkEngine();
 
@@ -109,7 +109,7 @@ public class Engines {
          *
          * @return This object.
          */
-        public final EnginesBuilder withAudioEngine(SoundEngine engine) {
+        public final EnginesBuilder withAudioEngine(AudioEngine engine) {
             this.audioEngine = engine;
             return this;
         }
