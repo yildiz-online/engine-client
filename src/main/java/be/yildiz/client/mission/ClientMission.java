@@ -28,6 +28,7 @@ import be.yildiz.common.translation.Key;
 import be.yildiz.module.graphic.Material;
 import be.yildiz.shared.mission.Mission;
 import be.yildiz.shared.mission.MissionId;
+import be.yildiz.shared.mission.reward.RewardId;
 import be.yildiz.shared.mission.task.TaskId;
 
 import java.util.Set;
@@ -47,34 +48,39 @@ public class ClientMission implements Mission{
     }
 
     @Override
-    public boolean canStartFor(PlayerId p) {
+    public final boolean canStartFor(PlayerId p) {
         return this.mission.canStartFor(p);
     }
 
     @Override
-    public Set<TaskId> getTasks() {
+    public final Set<TaskId> getTasks() {
         return this.mission.getTasks();
     }
 
     @Override
-    public boolean hasTask(TaskId task) {
+    public final boolean hasTask(TaskId task) {
         return this.mission.hasTask(task);
     }
 
     @Override
-    public MissionId getId() {
+    public final MissionId getId() {
         return this.mission.getId();
     }
 
-    public Key getTitle() {
+    @Override
+    public final RewardId getReward() {
+        return this.mission.getReward();
+    }
+
+    public final Key getTitle() {
         return this.materialization.title;
     }
 
-    public Key getDescription() {
+    public final Key getDescription() {
         return this.materialization.description;
     }
 
-    public Material getIcon() {
+    public final Material getIcon() {
         return this.materialization.image;
     }
 }
