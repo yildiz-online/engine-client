@@ -32,7 +32,6 @@ import be.yildiz.common.client.debug.DebugListener;
 import be.yildiz.common.collections.Lists;
 import be.yildiz.common.config.Configuration;
 import be.yildiz.common.exeption.ResourceMissingException;
-import be.yildiz.common.log.Logger;
 import be.yildiz.common.resource.FileResource.FileType;
 import be.yildiz.common.resource.ResourcePath;
 import be.yildiz.common.util.StringUtil;
@@ -66,6 +65,7 @@ import java.util.List;
  */
 public class GameEngine extends AbstractGameEngine implements MessageSender {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(GameEngine.class);
 
     /**
      * Maximum frame per seconds.
@@ -148,7 +148,7 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
                       final Engines engines) {
         super(gameVersion);
         this.configuration = config;
-        Logger.info("Initializing client game engine...");
+        LOGGER.info("Initializing client game engine...");
         this.graphicEngine = engines.getGraphic();
         this.physicEngine = engines.getPhysics();
         this.windowEngine = graphicEngine.getWindowEngine();
@@ -163,7 +163,7 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
         this.guiManager = this.graphicEngine.getGuiBuilder();
         this.addFrameListener(this.graphicEngine.getGuiBuilder().getAnimationManager());
         this.windowEngine.registerInput(eventDispatcher);
-        Logger.info("Client game engine initialized.");
+        LOGGER.info("Client game engine initialized.");
     }
 
     public GameEngine(final Version gameVersion, final Engines engines) {
@@ -191,7 +191,7 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
      */
     @Override
     public final void start() {
-        Logger.info("Game engine started.");
+        LOGGER.info("Game engine started.");
         if (!this.running) {
             this.running = true;
             this.setFrameLimiter(GameEngine.FPS);
@@ -258,14 +258,14 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
             throw new ResourceMissingException(f.getAbsolutePath());
         }
         this.windowEngine.updateWindow();
-        Logger.info("Registering resource group " + name);
+        LOGGER.info("Registering resource group " + name);
         this.soundEngine.addResourcePath(type == FileType.VFS ? ResourcePath.vfs(path) : ResourcePath.directory(path));
         this.graphicEngine.addResourcePath(name, path, type);
         if (type == FileType.FILE) {
             new FileParser(this.materialManager, this.graphicEngine, this.soundEngine)
                     .addResourcePath(name, path);
         }
-        Logger.info("Resource group " + name + " registered.");
+        LOGGER.info("Resource group " + name + " registered.");
     }
 
     /**
@@ -276,7 +276,7 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
      * @return The newly built sky box.
      */
     public final Skybox createSkybox(final String name, final String path) {
-        Logger.info("Create skybox.");
+        LOGGER.info("Create skybox.");
         return this.graphicEngine.createSkybox(name, path);
     }
 
@@ -498,13 +498,13 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
      */
     public final void close() {
         if (!this.closed) {
-            Logger.info("Closing engines...");
+            LOGGER.info("Closing engines...");
             this.closed = true;
             this.graphicEngine.close();
             this.physicEngine.close();
             this.soundEngine.close();
             this.networkEngine.close();
-            Logger.info("Engines closed.");
+            LOGGER.info("Engines closed.");
         }
     }
 

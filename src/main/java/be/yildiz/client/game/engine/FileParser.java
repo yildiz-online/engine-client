@@ -25,7 +25,6 @@ package be.yildiz.client.game.engine;
 
 import be.yildiz.client.game.engine.parser.*;
 import be.yildiz.client.game.engine.parser.ParserFactory.ParserType;
-import be.yildiz.common.log.Logger;
 import be.yildiz.common.resource.ResourceUtil;
 import be.yildiz.module.graphic.*;
 import be.yildiz.module.graphic.gui.ButtonMaterial;
@@ -43,6 +42,8 @@ import java.util.List;
  * @author Grégory Van den Borre
  */
 public final class FileParser {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(FileParser.class);
 
     /**
      * Create the parser used to read the definition scripts.
@@ -87,7 +88,7 @@ public final class FileParser {
         FontParser fontParser = this.parserFactory.createFontParser();
         GuiParser guiParser = this.parserFactory.createGuiParser(this.graphicEngine.getScreenSize());
         files.stream().filter(s -> s.getName().endsWith(".mat")).forEach(s -> {
-            Logger.info("Parsing material script " + s);
+            LOGGER.info("Parsing material script " + s);
             final List<SimpleMaterialDefinition> matDef = materialParser.parse(s);
             for (final SimpleMaterialDefinition def : matDef) {
                 final Material m = this.materialManager.loadSimpleTexture(def.getName(), def.getPath(), def.getTransparency());
@@ -107,7 +108,7 @@ public final class FileParser {
             }
         });
         files.stream().filter(s -> s.getName().endsWith(".pll")).forEach(s -> {
-            Logger.info("Parsing playlist script " + s);
+            LOGGER.info("Parsing playlist script " + s);
             final List<PlayListDefinition> playListDef = musicParser.parse(s);
             for (final PlayListDefinition def : playListDef) {
                 final Playlist p = this.soundEngine.createPlaylist(def.getName());
@@ -126,11 +127,11 @@ public final class FileParser {
                                 this.graphicEngine.createFont(def.getName(), def.getPath(), def.getSize()).load()));
 
         files.stream().filter(s -> s.getName().endsWith(".vew")).forEach(s -> {
-            Logger.info("Parsing view script " + s);
+            LOGGER.info("Parsing view script " + s);
             try {
                 guiParser.parse(s).forEach(this::buildView);
             } catch (final ParserException pe) {
-                Logger.error(pe);
+                LOGGER.error("Error parsing", pe);
             }
         });
     }
