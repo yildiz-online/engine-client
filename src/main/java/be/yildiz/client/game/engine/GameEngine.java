@@ -250,24 +250,22 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
      * Add a resource path. This method also update the view to ensure the
      * application stays awake when multiple calls are made.
      *
-     * @param name Resource group name.
-     * @param path Path to the resource.
-     * @param type Resource type.
+     * @param resource Resource group data.
      */
-    public final void addResourcePath(final String name, final String path, final FileType type) {
-        File f = new File(path);
+    public final void addResourcePath(ResourcePath resource) {
+        File f = new File(resource.getPath());
         if (!f.exists()) {
             throw new ResourceMissingException(f.getAbsolutePath());
         }
         this.windowEngine.updateWindow();
-        LOGGER.info("Registering resource group " + name);
-        this.soundEngine.addResourcePath(type == FileType.VFS ? ResourcePath.vfs(path) : ResourcePath.directory(path));
-        this.graphicEngine.addResourcePath(name, path, type);
-        if (type == FileType.FILE) {
+        LOGGER.info("Registering resource group " + resource.getName());
+        this.soundEngine.addResourcePath(resource);
+        this.graphicEngine.addResourcePath(resource);
+        if (resource.getType() == FileType.FILE) {
             new FileParser(this.materialManager, this.graphicEngine, this.soundEngine)
-                    .addResourcePath(name, path);
+                    .addResourcePath(resource);
         }
-        LOGGER.info("Resource group " + name + " registered.");
+        LOGGER.info("Resource group " + resource.getName() + " registered.");
     }
 
     /**
@@ -548,13 +546,6 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
             throw new IllegalArgumentException("Already existing player");
         }
         this.player = player;
-    }
-
-    /**
-     * Load the additional resources group(needed for compositors...).
-     */
-    public final void addAdditionalResource() {
-        this.addResourcePath("additional", "media/opr.yzk", FileType.ZIP);
     }
 
     /**

@@ -25,6 +25,7 @@ package be.yildiz.client.game.engine;
 
 import be.yildiz.client.game.engine.parser.*;
 import be.yildiz.client.game.engine.parser.ParserFactory.ParserType;
+import be.yildiz.common.resource.ResourcePath;
 import be.yildiz.common.resource.ResourceUtil;
 import be.yildiz.module.graphic.*;
 import be.yildiz.module.graphic.gui.ButtonMaterial;
@@ -76,11 +77,10 @@ public final class FileParser {
     /**
      * Set the path to get graphic resources and parse the scripts in this folder.
      *
-     * @param name Name for this resource group.
-     * @param path Path used for the graphic resources.
+     * @param resource Resources for this resource group.
      */
-    void addResourcePath(final String name, final String path) {
-        final File folder = new File(path);
+    void addResourcePath(ResourcePath resource) {
+        final File folder = new File(resource.getPath());
         if (!folder.exists() || !folder.isDirectory()) {
             throw new IllegalArgumentException(folder.getAbsolutePath() + " is not a valid resource path.");
         }
