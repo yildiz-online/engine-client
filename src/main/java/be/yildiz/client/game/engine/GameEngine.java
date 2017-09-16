@@ -169,7 +169,7 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
     }
 
     public GameEngine(final Version gameVersion, final Engines engines) {
-        this(Configuration.empty(), gameVersion, engines);
+        this(Configuration.getInstance(), gameVersion, engines);
     }
 
     /**

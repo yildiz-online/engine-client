@@ -25,20 +25,21 @@ package be.yildiz.client.game.engine.parser;
 
 import be.yildiz.common.Size;
 import be.yildiz.module.graphic.Material;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * @author Grégory Van den Borre
  */
-public final class GuiButtonDefinitionTest {
+final class GuiButtonDefinitionTest {
 
     /***/
     @Test
     public void testButtonDefinition() {
         final ButtonDefinition def = new ButtonDefinition(Material.EMPTY_NAME, Material.EMPTY_NAME, "", new Size(0));
-        Assert.assertEquals(Material.EMPTY_NAME, def.getMaterial());
-        Assert.assertEquals(Material.EMPTY_NAME, def.getMaterialHighlight());
-        Assert.assertEquals("", def.getFont());
+        assertEquals(Material.EMPTY_NAME, def.getMaterial());
+        assertEquals(Material.EMPTY_NAME, def.getMaterialHighlight());
+        assertEquals("", def.getFont());
     }
 }

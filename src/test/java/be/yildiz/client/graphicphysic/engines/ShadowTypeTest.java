@@ -24,14 +24,14 @@
 package be.yildiz.client.graphicphysic.engines;
 
 import be.yildiz.module.graphic.GraphicEngine.ShadowType;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * @author Grégory Van den Borre
  */
-public class ShadowTypeTest {
+class ShadowTypeTest {
 
     //FIXME move to graphic
 

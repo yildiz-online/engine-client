@@ -23,79 +23,83 @@
 
 package be.yildiz.client.game.engine.parser;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.experimental.runners.Enclosed;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * @author Grégory Van den Borre
  */
-@RunWith(Enclosed.class)
-public final class FontDefinitionTest {
+final class FontDefinitionTest {
 
-    public static class Constructor {
+    @Nested
+    class Constructor {
 
         @Test
-        public void happyFlow() {
+        void happyFlow() {
             FontDefinition def = new FontDefinition();
-            Assert.assertEquals("Name should be ''", "", def.getName());
-            Assert.assertEquals("Path should be ''", "", def.getPath());
-            Assert.assertEquals("Size should be 0", 0, def.getSize());
+            assertEquals("", def.getName());
+            assertEquals("", def.getPath());
+            assertEquals( 0, def.getSize());
         }
     }
 
-    public static class SetSize {
+    @Nested
+    class SetSize {
 
         @Test
-        public void happyFlow() {
+        void happyFlow() {
             FontDefinition def = new FontDefinition();
             def.setSize("3");
-            Assert.assertEquals(3, def.getSize());
+            assertEquals(3, def.getSize());
         }
 
-        @Test(expected = IllegalArgumentException.class)
-        public void fromNull() {
+        @Test
+        void fromNull() {
             FontDefinition def = new FontDefinition();
-            def.setSize(null);
+            assertThrows(IllegalArgumentException.class, () -> def.setSize(null));
         }
 
-        @Test(expected = IllegalArgumentException.class)
-        public void fromInvalid() {
+        @Test
+        void fromInvalid() {
             FontDefinition def = new FontDefinition();
-            def.setSize("3.1");
+            assertThrows(IllegalArgumentException.class, () -> def.setSize("3.1"));
         }
     }
 
-    public static class SetPath {
+    @Nested
+    class SetPath {
 
         @Test
-        public void happyFlow() {
+        void happyFlow() {
             FontDefinition def = new FontDefinition();
             def.setPath("abc");
-            Assert.assertEquals("abc", def.getPath());
+            assertEquals("abc", def.getPath());
         }
 
-        @Test(expected = IllegalArgumentException.class)
-        public void fromNull() {
+        @Test
+        void fromNull() {
             FontDefinition def = new FontDefinition();
-            def.setPath(null);
+            assertThrows(IllegalArgumentException.class, () -> def.setPath(null));
         }
     }
 
-    public static class SetName {
+    @Nested
+    class SetName {
 
         @Test
-        public void happyFlow() {
+        void happyFlow() {
             FontDefinition def = new FontDefinition();
             def.setName("abc");
-            Assert.assertEquals("abc", def.getName());
+            assertEquals("abc", def.getName());
         }
 
-        @Test(expected = IllegalArgumentException.class)
-        public void fromNull() {
+        @Test
+        void fromNull() {
             FontDefinition def = new FontDefinition();
-            def.setName(null);
+            assertThrows(IllegalArgumentException.class, () -> def.setName(null));
         }
     }
 

@@ -29,30 +29,24 @@ import be.yildiz.common.collections.Lists;
 import be.yildiz.common.id.PlayerId;
 import be.yildiz.helper.Helper;
 import be.yildiz.shared.entity.Entity;
-import org.junit.Assert;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * @author Grégory Van den Borre
  */
-public class SelectionManagerTest {
-
-    @Rule
-    public final ExpectedException rule = ExpectedException.none();
+class SelectionManagerTest {
 
     @Test
-    public void test() {
+    void test() {
         SelectionManager s = new SelectionManager(12);
-        Assert.assertEquals(12, s.getMaxSelection());
-        this.rule.expect(AssertionError.class);
-        new SelectionManager(0);
-        this.rule.expect(AssertionError.class);
-        new SelectionManager(-1);
+        assertEquals(12, s.getMaxSelection());
+        assertThrows(AssertionError.class, () -> new SelectionManager(0));
+        assertThrows(AssertionError.class, () -> new SelectionManager(-1));
     }
 
     private ClientEntity aClientEntity(long id) {
@@ -61,109 +55,109 @@ public class SelectionManagerTest {
     }
 
     @Test
-    public void testAddToSelection() {
+    void testAddToSelection() {
         //FIXME test with other player!
         ClientEntity e1 = aClientEntity(1);
         SelectionManager m = new SelectionManager(3);
         m.setSelection(e1);
-        Assert.assertEquals(e1, m.getSelection().get());
+        assertEquals(e1, m.getSelection().get());
         ClientEntity e2 = aClientEntity(5);
         m.setSelection(e2);
-        Assert.assertEquals(1, m.getSelectionList().size());
-        Assert.assertEquals(e2, m.getSelection().get());
+        assertEquals(1, m.getSelectionList().size());
+        assertEquals(e2, m.getSelection().get());
         m.addToSelection(e1);
-        Assert.assertEquals(2, m.getSelectionList().size());
-        Assert.assertTrue(m.getSelectionList().contains(e1));
-        Assert.assertTrue(m.getSelectionList().contains(e2));
+        assertEquals(2, m.getSelectionList().size());
+        assertTrue(m.getSelectionList().contains(e1));
+        assertTrue(m.getSelectionList().contains(e2));
         m.addToSelection(e1);
-        Assert.assertEquals(2, m.getSelectionList().size());
-        Assert.assertTrue(m.getSelectionList().contains(e1));
-        Assert.assertTrue(m.getSelectionList().contains(e2));
+        assertEquals(2, m.getSelectionList().size());
+        assertTrue(m.getSelectionList().contains(e1));
+        assertTrue(m.getSelectionList().contains(e2));
         m.removeSelection(e1);
-        Assert.assertEquals(1, m.getSelectionList().size());
-        Assert.assertFalse(m.getSelectionList().contains(e1));
-        Assert.assertTrue(m.getSelectionList().contains(e2));
+        assertEquals(1, m.getSelectionList().size());
+        assertFalse(m.getSelectionList().contains(e1));
+        assertTrue(m.getSelectionList().contains(e2));
         m.addToSelection(e1);
         ClientEntity e3 = aClientEntity(3);
         ClientEntity e4 = aClientEntity(4);
         m.addToSelection(e3);
         m.addToSelection(e4);
-        Assert.assertEquals(3, m.getSelectionList().size());
-        Assert.assertTrue(m.getSelectionList().contains(e1));
-        Assert.assertTrue(m.getSelectionList().contains(e2));
-        Assert.assertTrue(m.getSelectionList().contains(e3));
+        assertEquals(3, m.getSelectionList().size());
+        assertTrue(m.getSelectionList().contains(e1));
+        assertTrue(m.getSelectionList().contains(e2));
+        assertTrue(m.getSelectionList().contains(e3));
         // MAX size = 3
-        Assert.assertFalse(m.getSelectionList().contains(e4));
+        assertFalse(m.getSelectionList().contains(e4));
     }
 
     @Test
-    public void testSetSelection() {
+    void testSetSelection() {
         SelectionManager m = new SelectionManager(5);
         ClientEntity e1 = aClientEntity(1);
         ClientEntity e2 = aClientEntity(2);
         ClientEntity e3 = aClientEntity(3);
         m.setSelection(e1);
-        Assert.assertEquals(1, m.getSelectionList().size());
-        Assert.assertTrue(m.getSelectionList().contains(e1));
+        assertEquals(1, m.getSelectionList().size());
+        assertTrue(m.getSelectionList().contains(e1));
         List<ClientEntity> l = Lists.newList();
         m.setSelection(l);
-        Assert.assertEquals(1, m.getSelectionList().size());
-        Assert.assertTrue(m.getSelectionList().contains(e1));
+        assertEquals(1, m.getSelectionList().size());
+        assertTrue(m.getSelectionList().contains(e1));
         l = Lists.newList();
         l.add(e2);
         l.add(e3);
         m.setSelection(l);
-        Assert.assertEquals(2, m.getSelectionList().size());
-        Assert.assertFalse(m.getSelectionList().contains(e1));
-        Assert.assertTrue(m.getSelectionList().contains(e2));
-        Assert.assertTrue(m.getSelectionList().contains(e3));
+        assertEquals(2, m.getSelectionList().size());
+        assertFalse(m.getSelectionList().contains(e1));
+        assertTrue(m.getSelectionList().contains(e2));
+        assertTrue(m.getSelectionList().contains(e3));
     }
 
     @Test
-    public void testIsSelected() {
+    void testIsSelected() {
         SelectionManager m = new SelectionManager(5);
         ClientEntity e1 = aClientEntity(1);
         ClientEntity e2 = aClientEntity(2);
         m.setSelection(e1);
-        Assert.assertEquals(1, m.getSelectionList().size());
-        Assert.assertTrue(m.getSelectionList().contains(e1));
-        Assert.assertFalse(m.isSelected(e2));
-        Assert.assertTrue(m.isSelected(e1));
+        assertEquals(1, m.getSelectionList().size());
+        assertTrue(m.getSelectionList().contains(e1));
+        assertFalse(m.isSelected(e2));
+        assertTrue(m.isSelected(e1));
     }
 
     @Test
-    public void testEntityDestroyed() {
+    void testEntityDestroyed() {
         SelectionManager m = new SelectionManager(5);
         ClientEntity e1 = aClientEntity(1);
         m.setSelection(e1);
-        Assert.assertEquals(1, m.getSelectionList().size());
-        Assert.assertTrue(m.getSelectionList().contains(e1));
+        assertEquals(1, m.getSelectionList().size());
+        assertTrue(m.getSelectionList().contains(e1));
         m.entityDestroyed(e1);
-        Assert.assertFalse(m.getSelectionList().contains(e1));
+        assertFalse(m.getSelectionList().contains(e1));
     }
 
     @Test
-    public void testGetSelection() {
+    void testGetSelection() {
         SelectionManager m = new SelectionManager(5);
         ClientEntity e1 = aClientEntity(1);
         ClientEntity e2 = aClientEntity(2);
         m.addToSelection(e1);
         m.addToSelection(e2);
-        Assert.assertEquals(e1, m.getSelection().get());
-        Assert.assertTrue(m.getSelection().isPresent());
+        assertEquals(e1, m.getSelection().get());
+        assertTrue(m.getSelection().isPresent());
         m.removeSelection(e1);
         m.removeSelection(e2);
-        Assert.assertFalse(m.getSelection().isPresent());
+        assertFalse(m.getSelection().isPresent());
     }
 
     @Test
-    public void testSetMultiSelection() {
+    void testSetMultiSelection() {
         SelectionManager m = new SelectionManager(10);
         ClientEntity e1 = aClientEntity(1);
         ClientEntity e2 = aClientEntity(2);
         m.setSelection(e1);
         m.setSelection(e2);
-        Assert.assertEquals(1, m.getSelectionList().size());
-        Assert.assertEquals(e2, m.getSelection().get());
+        assertEquals(1, m.getSelectionList().size());
+        assertEquals(e2, m.getSelection().get());
     }
 }
