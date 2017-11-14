@@ -24,9 +24,9 @@
 package be.yildiz.client.mission.task;
 
 import be.yildiz.common.translation.TranslatedValue;
-import be.yildiz.shared.mission.task.Task;
-import be.yildiz.shared.mission.task.TaskId;
-import be.yildiz.shared.mission.task.TaskStatusListener;
+import be.yildizgames.engine.feature.mission.task.Task;
+import be.yildizgames.engine.feature.mission.task.TaskId;
+import be.yildizgames.engine.feature.mission.task.TaskStatusListener;
 
 /**
  * @author Grégory Van den Borre

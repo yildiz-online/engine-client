@@ -28,8 +28,8 @@ import be.yildiz.common.translation.Key;
 import be.yildiz.module.graphic.Material;
 import be.yildiz.shared.mission.Mission;
 import be.yildiz.shared.mission.MissionId;
-import be.yildiz.shared.mission.reward.RewardId;
-import be.yildiz.shared.mission.task.TaskId;
+import be.yildizgames.engine.feature.mission.reward.RewardId;
+import be.yildizgames.engine.feature.mission.task.TaskId;
 
 import java.util.Set;
 
