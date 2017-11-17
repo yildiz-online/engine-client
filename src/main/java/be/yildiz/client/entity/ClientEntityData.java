@@ -24,17 +24,18 @@
 package be.yildiz.client.entity;
 
 import be.yildiz.client.data.ClientConstructionData;
+import be.yildiz.common.Instance;
+import be.yildiz.common.Level;
 import be.yildiz.common.translation.Key;
 import be.yildiz.module.graphic.Material;
 import be.yildiz.module.graphic.gui.ButtonMaterial;
 import be.yildiz.shared.data.EntityType;
-import be.yildiz.shared.data.Instance;
-import be.yildiz.shared.data.Level;
-import be.yildiz.shared.data.TimeToBuild;
 import be.yildiz.shared.entity.EntityData;
 import be.yildiz.shared.entity.GameEntityData;
 import be.yildiz.shared.entity.module.ModuleGroup;
-import be.yildiz.shared.resources.ResourceValue;
+import be.yildizgames.engine.feature.resource.ResourceValue;
+
+import java.time.Duration;
 
 /**
  * @author Grégory van den Borre
@@ -95,27 +96,22 @@ public class ClientEntityData implements ClientConstructionData, EntityData {
         return this.guiMaterialization.getDescriptionKey();
     }
 
-    @Override
     public ResourceValue getPrice() {
         return this.data.getPrice();
     }
 
-    @Override
-    public TimeToBuild getTimeToBuild() {
+    public Duration getTimeToBuild() {
         return this.data.getTimeToBuild();
     }
 
-    @Override
     public Level getRequiredLevel() {
         return this.data.getRequiredLevel();
     }
 
-    @Override
     public boolean isBuildable() {
         return this.data.isBuildable();
     }
 
-    @Override
     public Instance getMaxInstances() {
         return this.data.getMaxInstances();
     }

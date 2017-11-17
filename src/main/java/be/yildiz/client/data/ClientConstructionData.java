@@ -26,14 +26,13 @@ package be.yildiz.client.data;
 import be.yildiz.common.translation.Key;
 import be.yildiz.module.graphic.Material;
 import be.yildiz.module.graphic.gui.ButtonMaterial;
-import be.yildiz.shared.data.ConstructionData;
 
 /**
  * Construction data for a client. Contains the necessary data to display the construction information to the view.
  *
  * @author Grégory Van den Borre
  */
-public interface ClientConstructionData extends ConstructionData {
+public interface ClientConstructionData {
 
     /**
      * @return The translation key for the name of the item to build.
