@@ -29,10 +29,10 @@ import be.yildiz.common.Level;
 import be.yildiz.common.translation.Key;
 import be.yildiz.module.graphic.Material;
 import be.yildiz.module.graphic.gui.ButtonMaterial;
-import be.yildiz.shared.data.EntityType;
 import be.yildiz.shared.entity.EntityData;
 import be.yildiz.shared.entity.GameEntityData;
-import be.yildiz.shared.entity.module.ModuleGroup;
+import be.yildizgames.engine.feature.entity.data.EntityType;
+import be.yildizgames.engine.feature.entity.module.ModuleGroup;
 import be.yildizgames.engine.feature.resource.ResourceValue;
 
 import java.time.Duration;
