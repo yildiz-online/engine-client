@@ -24,10 +24,10 @@
 package be.yildiz.client.game.engine;
 
 import be.yildiz.client.entity.ClientEntity;
-import be.yildiz.common.collections.Lists;
-import be.yildiz.common.collections.Sets;
-import be.yildiz.common.util.Checker;
-import be.yildiz.shared.entity.DestructionListener;
+import be.yildizgames.common.collection.Lists;
+import be.yildizgames.common.collection.Sets;
+import be.yildizgames.common.util.Checker;
+import be.yildizgames.engine.feature.entity.DestructionListener;
 
 import java.util.Collections;
 import java.util.List;

@@ -23,8 +23,8 @@
 
 package be.yildiz.client.game.engine.parser;
 
-import be.yildiz.common.vector.Point3D;
 import be.yildiz.module.graphic.Material;
+import be.yildizgames.common.geometry.Point3D;
 
 /**
  * Data definition to create a light from an external resource(i.e parsing a

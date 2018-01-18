@@ -23,7 +23,7 @@
 
 package be.yildiz.client.game.engine.parser;
 
-import be.yildiz.common.Size;
+import be.yildiz.module.coordinate.Size;
 
 /**
  * Data definition for a text line gui widget.

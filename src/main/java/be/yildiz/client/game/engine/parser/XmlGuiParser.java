@@ -23,11 +23,11 @@
 
 package be.yildiz.client.game.engine.parser;
 
-import be.yildiz.common.Size;
-import be.yildiz.common.collections.Lists;
-import be.yildiz.common.resource.xml.XMLParser;
+import be.yildiz.module.coordinate.Size;
 import be.yildiz.module.graphic.Font;
 import be.yildiz.module.graphic.Material;
+import be.yildizgames.common.collection.Lists;
+import be.yildizgames.common.file.xml.XMLParser;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;

@@ -26,7 +26,7 @@ package be.yildiz.client.entity.action;
 
 import be.yildiz.client.entity.ClientEntity;
 import be.yildiz.client.entity.ClientEntityManager;
-import be.yildiz.shared.entity.ActionManager;
+import be.yildizgames.engine.feature.entity.ActionManager;
 
 /**
  * @author Grégory Van den Borre

@@ -25,16 +25,16 @@
 package be.yildiz.client.game.engine;
 
 import be.yildiz.client.entity.ClientGameEntity;
-import be.yildiz.common.Color;
-import be.yildiz.common.id.EntityId;
-import be.yildiz.common.shape.Box;
-import be.yildiz.common.shape.Plane;
-import be.yildiz.common.shape.Sphere;
-import be.yildiz.common.vector.Point3D;
+import be.yildiz.module.color.Color;
 import be.yildiz.module.graphic.*;
-import be.yildiz.module.physics.CollisionListener;
 import be.yildiz.module.physics.GhostObject;
 import be.yildiz.module.physics.Gravity;
+import be.yildizgames.common.gameobject.CollisionListener;
+import be.yildizgames.common.geometry.Point3D;
+import be.yildizgames.common.model.EntityId;
+import be.yildizgames.common.shape.Box;
+import be.yildizgames.common.shape.Plane;
+import be.yildizgames.common.shape.Sphere;
 
 /**
  * @author Grégory Van den Borre

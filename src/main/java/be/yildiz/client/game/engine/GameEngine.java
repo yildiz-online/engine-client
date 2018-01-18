@@ -24,17 +24,11 @@
 package be.yildiz.client.game.engine;
 
 import be.yildiz.client.entity.ClientEntity;
-import be.yildiz.common.Color;
-import be.yildiz.common.Size;
-import be.yildiz.common.Version;
 import be.yildiz.common.authentication.Credentials;
 import be.yildiz.common.client.debug.DebugListener;
-import be.yildiz.common.collections.Lists;
 import be.yildiz.common.config.Configuration;
-import be.yildiz.common.exeption.ResourceMissingException;
-import be.yildiz.common.resource.FileResource.FileType;
-import be.yildiz.common.resource.ResourcePath;
-import be.yildiz.common.util.StringUtil;
+import be.yildiz.module.color.Color;
+import be.yildiz.module.coordinate.Size;
 import be.yildiz.module.graphic.*;
 import be.yildiz.module.graphic.gui.EventBubblingDispatcher;
 import be.yildiz.module.graphic.gui.GuiBuilder;
@@ -52,8 +46,14 @@ import be.yildiz.module.sound.SoundSource;
 import be.yildiz.module.window.Cursor;
 import be.yildiz.module.window.WindowEngine;
 import be.yildiz.shared.game.engine.AbstractGameEngine;
-import be.yildiz.shared.player.Player;
 import be.yildiz.shared.protocol.EngineMessageFactory;
+import be.yildizgames.common.collection.Lists;
+import be.yildizgames.common.exception.technical.ResourceMissingException;
+import be.yildizgames.common.file.FileResource;
+import be.yildizgames.common.file.ResourcePath;
+import be.yildizgames.common.model.Version;
+import be.yildizgames.common.util.StringUtil;
+import be.yildizgames.engine.feature.player.Player;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -261,7 +261,7 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
         LOGGER.info("Registering resource group " + resource.getName());
         this.soundEngine.addResourcePath(resource);
         this.graphicEngine.addResourcePath(resource);
-        if (resource.getType() == FileType.FILE) {
+        if (resource.getType() == FileResource.FileType.FILE) {
             new FileParser(this.materialManager, this.graphicEngine, this.soundEngine)
                     .addResourcePath(resource);
         }

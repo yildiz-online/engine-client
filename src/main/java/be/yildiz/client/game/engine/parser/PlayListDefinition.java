@@ -23,7 +23,7 @@
 
 package be.yildiz.client.game.engine.parser;
 
-import be.yildiz.common.collections.Lists;
+import be.yildizgames.common.collection.Lists;
 
 import java.util.List;
 

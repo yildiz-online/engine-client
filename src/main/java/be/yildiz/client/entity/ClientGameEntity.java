@@ -24,10 +24,10 @@
 
 package be.yildiz.client.entity;
 
-import be.yildiz.common.gameobject.Deletable;
-import be.yildiz.common.gameobject.GameMaterialization;
-import be.yildiz.common.vector.Point3D;
 import be.yildiz.module.graphic.Material;
+import be.yildizgames.common.gameobject.Deletable;
+import be.yildizgames.common.gameobject.GameMaterialization;
+import be.yildizgames.common.geometry.Point3D;
 
 /**
  * Behavior for all game entities in client. Different implementations exists to

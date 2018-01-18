@@ -24,15 +24,15 @@
 package be.yildiz.client.game.helper.view;
 
 import be.yildiz.client.game.engine.GameEngine;
-import be.yildiz.common.Coordinates;
-import be.yildiz.common.Position;
-import be.yildiz.common.Size;
-import be.yildiz.common.collections.Lists;
-import be.yildiz.common.resource.Resource;
 import be.yildiz.common.translation.Key;
+import be.yildiz.module.coordinate.Coordinates;
+import be.yildiz.module.coordinate.Position;
+import be.yildiz.module.coordinate.Size;
 import be.yildiz.module.graphic.Font;
 import be.yildiz.module.graphic.Material;
 import be.yildiz.module.graphic.gui.*;
+import be.yildizgames.common.collection.Lists;
+import be.yildizgames.common.util.Resource;
 
 import java.util.List;
 

@@ -24,13 +24,13 @@
 package be.yildiz.client.entity;
 
 import be.yildiz.client.data.ClientConstructionData;
-import be.yildiz.common.Instance;
-import be.yildiz.common.Level;
 import be.yildiz.common.translation.Key;
 import be.yildiz.module.graphic.Material;
 import be.yildiz.module.graphic.gui.ButtonMaterial;
-import be.yildiz.shared.entity.EntityData;
-import be.yildiz.shared.entity.GameEntityData;
+import be.yildizgames.engine.feature.entity.EntityData;
+import be.yildizgames.engine.feature.entity.GameEntityData;
+import be.yildizgames.engine.feature.entity.Instance;
+import be.yildizgames.engine.feature.entity.Level;
 import be.yildizgames.engine.feature.entity.data.EntityType;
 import be.yildizgames.engine.feature.entity.module.ModuleGroup;
 import be.yildizgames.engine.feature.resource.ResourceValue;

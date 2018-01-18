@@ -25,14 +25,14 @@ package be.yildiz.client.game.engine;
 
 import be.yildiz.client.game.engine.parser.*;
 import be.yildiz.client.game.engine.parser.ParserFactory.ParserType;
-import be.yildiz.common.resource.ResourcePath;
-import be.yildiz.common.resource.ResourceUtil;
 import be.yildiz.module.graphic.*;
 import be.yildiz.module.graphic.gui.ButtonMaterial;
 import be.yildiz.module.graphic.gui.GuiContainer;
 import be.yildiz.module.sound.AudioEngine;
 import be.yildiz.module.sound.Music;
 import be.yildiz.module.sound.Playlist;
+import be.yildizgames.common.file.ResourcePath;
+import be.yildizgames.common.file.ResourceUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

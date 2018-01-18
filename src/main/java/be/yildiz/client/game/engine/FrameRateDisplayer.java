@@ -24,8 +24,8 @@
 package be.yildiz.client.game.engine;
 
 import be.yildiz.common.client.debug.DebugListener;
-import be.yildiz.common.framelistener.StartFrameListener;
 import be.yildiz.module.graphic.FpsProvider;
+import be.yildizgames.common.frame.StartFrameListener;
 
 /**
  * Provide the application current framerate.

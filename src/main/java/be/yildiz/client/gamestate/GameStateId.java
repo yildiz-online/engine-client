@@ -24,12 +24,12 @@
 
 package be.yildiz.client.gamestate;
 
-import be.yildiz.common.ValueObject;
+import be.yildizgames.common.util.ValueObject;
 
 /**
  * @author Grégory Van den Borre
  */
-public class GameStateId extends ValueObject{
+public class GameStateId extends ValueObject {
 
     private GameStateId(int value) {
         super(value);

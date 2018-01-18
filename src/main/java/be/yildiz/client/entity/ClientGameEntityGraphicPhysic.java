@@ -24,11 +24,11 @@
 
 package be.yildiz.client.entity;
 
-import be.yildiz.common.gameobject.Movable;
-import be.yildiz.common.id.EntityId;
-import be.yildiz.common.vector.Point3D;
 import be.yildiz.module.graphic.GraphicObject;
 import be.yildiz.module.physics.BaseBody;
+import be.yildizgames.common.gameobject.Movable;
+import be.yildizgames.common.geometry.Point3D;
+import be.yildizgames.common.model.EntityId;
 
 /**
  * @author Grégory Van den Borre

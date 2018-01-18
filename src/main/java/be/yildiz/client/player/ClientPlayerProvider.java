@@ -23,9 +23,9 @@
 
 package be.yildiz.client.player;
 
-import be.yildiz.common.collections.Lists;
-import be.yildiz.shared.player.Player;
-import be.yildiz.shared.player.PlayerProvider;
+import be.yildizgames.common.collection.Lists;
+import be.yildizgames.engine.feature.player.Player;
+import be.yildizgames.engine.feature.player.PlayerProvider;
 
 import java.util.Collections;
 import java.util.List;

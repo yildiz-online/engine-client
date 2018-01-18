@@ -24,12 +24,12 @@
 
 package be.yildiz.client.entity;
 
-import be.yildiz.shared.entity.EntityManager;
+import be.yildizgames.engine.feature.entity.EntityManager;
 
 /**
  * @author Grégory Van den Borre
  */
-public class ClientEntityManager extends EntityManager <ClientEntity> {
+public class ClientEntityManager extends EntityManager<ClientEntity> {
 
     private static final ClientEntityManager INSTANCE = new ClientEntityManager();
 
