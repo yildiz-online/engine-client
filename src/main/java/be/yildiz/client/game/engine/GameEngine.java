@@ -23,8 +23,6 @@
 
 package be.yildiz.client.game.engine;
 
-import be.yildiz.client.entity.ClientEntity;
-import be.yildiz.common.authentication.Credentials;
 import be.yildiz.common.client.debug.DebugListener;
 import be.yildiz.common.config.Configuration;
 import be.yildiz.module.color.Color;
@@ -51,9 +49,9 @@ import be.yildizgames.common.collection.Lists;
 import be.yildizgames.common.exception.technical.ResourceMissingException;
 import be.yildizgames.common.file.FileResource;
 import be.yildizgames.common.file.ResourcePath;
+import be.yildizgames.common.geometry.Point3D;
 import be.yildizgames.common.model.Version;
 import be.yildizgames.common.util.StringUtil;
-import be.yildizgames.engine.feature.player.Player;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -126,10 +124,7 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
      * Flag to check if the engines must run in debug mode or not.
      */
     private boolean debug;
-    /**
-     * Current player.
-     */
-    private Player player;
+
     /**
      * Flag to check if engine is closed.
      */
@@ -281,16 +276,6 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
     }
 
     /**
-     * Check if an entity belongs to the current player.
-     *
-     * @param e Entity to check.
-     * @return <code>true</code> if the entity belongs to the current player.
-     */
-    public final boolean isMine(final ClientEntity e) {
-        return e.getOwner().equals(this.player.id);
-    }
-
-    /**
      * Set a debug listener, it will receive the current framerate, as well as debug information.
      * The debug listener will only be registered if debug mode is true.
      *
@@ -348,17 +333,6 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
      */
     public final void addNetworkListener(final NetworkListener listener) {
         this.networkEngine.addNetworkListener(listener);
-    }
-
-    /**
-     * Try to authenticate to the server, if succeed, the NetworkListener will
-     * be notified.
-     *
-     * @param credential User credentials.
-     */
-    public final void login(final Credentials credential) {
-        this.networkEngine
-                .sendMessage(messageFactory.authenticationRequest(credential));
     }
 
     /**
@@ -487,10 +461,10 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
     /**
      * Set the currently active camera focusing on an Entity.
      *
-     * @param entity Entity to look at.
+     * @param position Where to look at.
      */
-    public final void focusCameraOnEntity(final ClientEntity entity) {
-        this.activeWorld.getDefaultCamera().setRelativePosition(entity.getPosition());
+    public final void focusCamera(final Point3D position) {
+        this.activeWorld.getDefaultCamera().setRelativePosition(position);
     }
 
     /**
@@ -533,19 +507,6 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
      */
     public final SoundSource createSound(final String file) {
         return this.soundEngine.createSound(file);
-    }
-
-    /**
-     * Set the current player.
-     *
-     * @param player Player to set.
-     */
-    public final void setPlayer(final Player player) {
-        assert player != null;
-        if (this.player != null) {
-            throw new IllegalArgumentException("Already existing player");
-        }
-        this.player = player;
     }
 
     /**
@@ -597,10 +558,6 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
 
     public final ClientWorld getActiveWorld() {
         return activeWorld;
-    }
-
-    public final Player getPlayer() {
-        return player;
     }
 
     public final boolean isClosed() {

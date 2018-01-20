@@ -23,8 +23,8 @@
 
 package be.yildiz.client.game.engine.parser;
 
-import be.yildiz.common.vector.Point3D;
 import be.yildiz.module.graphic.Material;
+import be.yildizgames.common.geometry.Point3D;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
