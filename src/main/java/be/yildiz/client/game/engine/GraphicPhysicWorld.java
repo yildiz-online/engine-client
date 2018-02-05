@@ -1,7 +1,7 @@
 /*
  * This file is part of the Yildiz-Engine project, licenced under the MIT License  (MIT)
  *
- *  Copyright (c) 2017 Grégory Van den Borre
+ *  Copyright (c) 2018 Grégory Van den Borre
  *
  *  More infos available: https://www.yildiz-games.be
  *
@@ -28,8 +28,32 @@ import be.yildiz.client.entity.ClientGameEntity;
 import be.yildiz.client.entity.ClientGameEntityGraphic;
 import be.yildiz.client.entity.ClientGameEntityGraphicPhysic;
 import be.yildiz.module.color.Color;
-import be.yildiz.module.graphic.*;
-import be.yildiz.module.physics.*;
+import be.yildiz.module.graphic.AbstractCamera;
+import be.yildiz.module.graphic.AbstractLight;
+import be.yildiz.module.graphic.AbstractParticleSystem;
+import be.yildiz.module.graphic.BillboardSet;
+import be.yildiz.module.graphic.DirectionalLight;
+import be.yildiz.module.graphic.ElectricArc;
+import be.yildiz.module.graphic.Explosion;
+import be.yildiz.module.graphic.Font;
+import be.yildiz.module.graphic.GraphicMesh;
+import be.yildiz.module.graphic.GraphicObject;
+import be.yildiz.module.graphic.GraphicWorld;
+import be.yildiz.module.graphic.LensFlare;
+import be.yildiz.module.graphic.Line;
+import be.yildiz.module.graphic.Material;
+import be.yildiz.module.graphic.MovableText;
+import be.yildiz.module.graphic.Ocean;
+import be.yildiz.module.graphic.PointLight;
+import be.yildiz.module.graphic.Sky;
+import be.yildiz.module.graphic.Skybox;
+import be.yildiz.module.graphic.SpotLight;
+import be.yildiz.module.physics.DynamicBody;
+import be.yildiz.module.physics.GhostObject;
+import be.yildiz.module.physics.Gravity;
+import be.yildiz.module.physics.KinematicBody;
+import be.yildiz.module.physics.PhysicWorld;
+import be.yildiz.module.physics.StaticBody;
 import be.yildizgames.common.gameobject.CollisionListener;
 import be.yildizgames.common.geometry.Point3D;
 import be.yildizgames.common.model.EntityId;
