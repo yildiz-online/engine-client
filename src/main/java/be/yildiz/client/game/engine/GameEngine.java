@@ -46,9 +46,6 @@ import be.yildiz.module.network.protocol.MessageWrapper;
 import be.yildiz.module.network.protocol.NetworkMessage;
 import be.yildiz.module.physics.PhysicEngine;
 import be.yildiz.module.physics.PhysicWorld;
-import be.yildiz.module.sound.AudioEngine;
-import be.yildiz.module.sound.Playlist;
-import be.yildiz.module.sound.SoundSource;
 import be.yildiz.module.window.Cursor;
 import be.yildiz.module.window.WindowEngine;
 import be.yildiz.shared.game.engine.AbstractGameEngine;
@@ -60,6 +57,9 @@ import be.yildizgames.common.file.ResourcePath;
 import be.yildizgames.common.geometry.Point3D;
 import be.yildizgames.common.model.Version;
 import be.yildizgames.common.util.StringUtil;
+import be.yildizgames.module.sound.AudioEngine;
+import be.yildizgames.module.sound.Playlist;
+import be.yildizgames.module.sound.SoundSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -414,7 +414,7 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
 
     /**
      * If a network message cannot be processed(i.e waiting for an other message
-     * that should come before this one), it can be delayed to the next frame.
+     * that should come before this one), it can be delayed to the playNext frame.
      *
      * @param message Message to delay.
      */
