@@ -30,8 +30,8 @@ import be.yildiz.module.network.client.AbstractNetworkEngineClient;
 import be.yildiz.module.network.client.DummyNetworkEngine;
 import be.yildiz.module.physics.DummyPhysicEngine;
 import be.yildiz.module.physics.PhysicEngine;
-import be.yildiz.module.sound.AudioEngine;
-import be.yildiz.module.sound.dummy.DummyAudioEngine;
+import be.yildizgames.module.sound.AudioEngine;
+import be.yildizgames.module.sound.dummy.DummyAudioEngine;
 
 /**
  * Provide the engines implementation to use.
