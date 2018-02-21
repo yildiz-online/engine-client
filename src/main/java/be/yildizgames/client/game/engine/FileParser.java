@@ -25,7 +25,16 @@
 
 package be.yildizgames.client.game.engine;
 
-import be.yildizgames.client.game.engine.parser.*;
+import be.yildizgames.client.game.engine.parser.ContainerDefinition;
+import be.yildizgames.client.game.engine.parser.FontParser;
+import be.yildizgames.client.game.engine.parser.GuiParser;
+import be.yildizgames.client.game.engine.parser.MaterialParser;
+import be.yildizgames.client.game.engine.parser.MusicDefinition;
+import be.yildizgames.client.game.engine.parser.MusicParser;
+import be.yildizgames.client.game.engine.parser.ParserException;
+import be.yildizgames.client.game.engine.parser.ParserFactory;
+import be.yildizgames.client.game.engine.parser.PlayListDefinition;
+import be.yildizgames.client.game.engine.parser.SimpleMaterialDefinition;
 import be.yildizgames.common.file.ResourcePath;
 import be.yildizgames.common.file.ResourceUtil;
 import be.yildizgames.module.audio.AudioEngine;
@@ -35,7 +44,6 @@ import be.yildizgames.module.graphic.Font;
 import be.yildizgames.module.graphic.GraphicEngine;
 import be.yildizgames.module.graphic.gui.button.ButtonMaterial;
 import be.yildizgames.module.graphic.gui.container.Container;
-import be.yildizgames.module.graphic.gui.internal.impl.SimpleContainer;
 import be.yildizgames.module.graphic.material.Material;
 import be.yildizgames.module.graphic.material.MaterialManager;
 import be.yildizgames.module.graphic.material.TextureUnit;
@@ -188,14 +196,16 @@ public final class FileParser {
 
         def.getInputBoxList().forEach(ibd ->
                 graphicEngine
-                        .getGuiBuilder().buildInputBox(
-                    ibd.getName(),
-                    ibd.getCoordinates(),
-                    ibd.getFont(),
-                    ibd.getMaterial(),
-                    ibd.getMaterialHighlight(),
-                    ibd.getMaterialCursor(),
-                    container));
+                        .getGuiBuilder()
+                        .inputBox()
+                        .withName(ibd.getName())
+                        .withCoordinates(ibd.getCoordinates())
+                        .withFont(ibd.getFont())
+                        .withCaptionFont(ibd.getFont())
+                        .withBackground(ibd.getMaterial())
+                        .withBackgroundHighlight(ibd.getMaterialHighlight())
+                        .withCursor(ibd.getMaterialCursor())
+                        .build(container));
 
         def.getTextAreaList().forEach(tad -> graphicEngine
                 .getGuiBuilder()
