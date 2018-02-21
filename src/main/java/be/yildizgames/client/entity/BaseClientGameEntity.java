@@ -25,9 +25,9 @@
 
 package be.yildizgames.client.entity;
 
+import be.yildizgames.common.geometry.Point3D;
 import be.yildizgames.module.graphic.GraphicObject;
 import be.yildizgames.module.graphic.material.Material;
-import be.yildizgames.common.geometry.Point3D;
 
 /**
  * @author Grégory Van den Borre

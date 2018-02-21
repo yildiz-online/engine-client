@@ -46,7 +46,6 @@ import be.yildizgames.module.graphic.NotRenderingListener;
 import be.yildizgames.module.graphic.gui.GuiEventManager;
 import be.yildizgames.module.graphic.gui.GuiFactory;
 import be.yildizgames.module.graphic.gui.View;
-import be.yildizgames.module.graphic.gui.internal.EventBubblingDispatcher;
 import be.yildizgames.module.graphic.material.Material;
 import be.yildizgames.module.graphic.material.MaterialManager;
 import be.yildizgames.module.graphic.misc.SelectionRectangle;
@@ -112,11 +111,6 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
     private final MaterialManager materialManager;
 
     /**
-     * Event dispatcher.
-     */
-    private final GuiEventManager eventDispatcher = new EventBubblingDispatcher();
-
-    /**
      * Current configuration.
      */
     private final Configuration configuration;
@@ -173,7 +167,7 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
         // this.addResourcePath("media/brs.yzk", "engine", FileType.ZIP);
         this.guiManager = this.graphicEngine.getGuiBuilder();
         this.addFrameListener(this.graphicEngine.getGuiBuilder().getAnimationManager());
-        this.windowEngine.registerInput(eventDispatcher);
+        this.windowEngine.registerInput(this.graphicEngine.getEventManager());
         LOGGER.info("Client game engine initialized.");
     }
 
@@ -235,7 +229,7 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
     }
 
     public final void registerMainView(final View v) {
-        this.eventDispatcher.setDefaultView(v);
+        this.graphicEngine.getEventManager().setDefaultView(v);
     }
 
     /**
@@ -244,7 +238,7 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
      * @param v View to unregister.
      */
     public final void unregisterView(final View v) {
-        this.eventDispatcher.removeView(v);
+        this.graphicEngine.getEventManager().removeView(v);
     }
 
     /**
@@ -299,7 +293,7 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
         assert listener != null;
         if(this.debug) {
             this.addFrameListener(new FrameRateDisplayer(listener, this.graphicEngine));
-            this.eventDispatcher.setDebugListener(listener);
+            this.graphicEngine.getEventManager().setDebugListener(listener);
         }
     }
 
@@ -559,7 +553,7 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
     }
 
     public final GuiEventManager getEventDispatcher() {
-        return eventDispatcher;
+        return this.graphicEngine.getEventManager();
     }
 
     public final Configuration getConfiguration() {

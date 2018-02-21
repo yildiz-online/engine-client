@@ -37,6 +37,7 @@ import be.yildizgames.client.game.engine.parser.PlayListDefinition;
 import be.yildizgames.client.game.engine.parser.SimpleMaterialDefinition;
 import be.yildizgames.common.file.ResourcePath;
 import be.yildizgames.common.file.ResourceUtil;
+import be.yildizgames.common.logging.LogFactory;
 import be.yildizgames.module.audio.AudioEngine;
 import be.yildizgames.module.audio.Music;
 import be.yildizgames.module.audio.Playlist;
@@ -48,7 +49,6 @@ import be.yildizgames.module.graphic.material.Material;
 import be.yildizgames.module.graphic.material.MaterialManager;
 import be.yildizgames.module.graphic.material.TextureUnit;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.util.List;
@@ -60,7 +60,7 @@ import java.util.List;
  */
 public final class FileParser {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(FileParser.class);
+    private static final Logger LOGGER = LogFactory.getInstance().getLogger(FileParser.class);
 
     /**
      * Create the parser used to read the definition scripts.

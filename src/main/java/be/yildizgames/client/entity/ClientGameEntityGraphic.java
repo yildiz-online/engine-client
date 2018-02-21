@@ -25,10 +25,10 @@
 
 package be.yildizgames.client.entity;
 
-import be.yildizgames.module.graphic.GraphicObject;
 import be.yildizgames.common.gameobject.Movable;
 import be.yildizgames.common.geometry.Point3D;
 import be.yildizgames.common.model.EntityId;
+import be.yildizgames.module.graphic.GraphicObject;
 
 /**
  * @author Grégory Van den Borre
