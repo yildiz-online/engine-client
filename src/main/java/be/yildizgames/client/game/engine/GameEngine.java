@@ -38,7 +38,6 @@ import be.yildizgames.module.audio.AudioEngine;
 import be.yildizgames.module.audio.Playlist;
 import be.yildizgames.module.audio.SoundSource;
 import be.yildizgames.module.color.Color;
-import be.yildizgames.module.coordinate.Size;
 import be.yildizgames.module.graphic.Font;
 import be.yildizgames.module.graphic.GraphicEngine;
 import be.yildizgames.module.graphic.GraphicWorld;
@@ -82,26 +81,26 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
      */
     private static final int FPS = 60;
 
-    private final ScriptInterpreter scriptInterpreter = ScriptInterpreter.getEngine();
+    private final ScriptInterpreter scriptInterpreter;
 
-    private final WindowEngine windowEngine = WindowEngine.getEngine();
+    private final WindowEngine windowEngine;
 
     /**
      * Graphic logic.
      */
-    private final GraphicEngine graphicEngine = GraphicEngine.getEngine(this.windowEngine);
+    private final GraphicEngine graphicEngine;
 
-    private final PhysicEngine physicEngine = PhysicEngine.getEngine();
+    private final PhysicEngine physicEngine;
 
     /**
      * Sound logic.
      */
-    private final AudioEngine soundEngine = AudioEngine.getEngine();
+    private final AudioEngine soundEngine;
 
     /**
      * Network logic.
      */
-    private final NetworkEngineClient networkEngine = NetworkEngineClient.getEngine();
+    private final NetworkEngineClient networkEngine;
 
     /**
      * Renderer to notify when the graphic engine is not active.
@@ -154,6 +153,12 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
         super(gameVersion);
         this.configuration = config;
         LOGGER.info("Initializing client game engine...");
+        this.windowEngine = WindowEngine.getEngine();
+        this.graphicEngine = GraphicEngine.getEngine(this.windowEngine);
+        this.soundEngine = AudioEngine.getEngine();
+        this.physicEngine = PhysicEngine.getEngine();
+        this.networkEngine = NetworkEngineClient.getEngine();
+        this.scriptInterpreter = ScriptInterpreter.getEngine();
         Cursor empty = new Cursor("empty", "empty.gif");
         //this.windowEngine.createCursor(empty);
         //this.windowEngine.setCursor(empty);
