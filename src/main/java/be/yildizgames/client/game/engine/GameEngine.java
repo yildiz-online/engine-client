@@ -84,10 +84,12 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
 
     private final ScriptInterpreter scriptInterpreter = ScriptInterpreter.getEngine();
 
+    private final WindowEngine windowEngine = WindowEngine.getEngine();
+
     /**
      * Graphic logic.
      */
-    private final GraphicEngine graphicEngine = GraphicEngine.getEngine();
+    private final GraphicEngine graphicEngine = GraphicEngine.getEngine(this.windowEngine);
 
     private final PhysicEngine physicEngine = PhysicEngine.getEngine();
 
@@ -110,8 +112,6 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
      * Current configuration.
      */
     private final Configuration configuration;
-
-    private final WindowEngine windowEngine;
 
     private final GuiFactory guiManager;
 
@@ -154,7 +154,6 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
         super(gameVersion);
         this.configuration = config;
         LOGGER.info("Initializing client game engine...");
-        this.windowEngine = graphicEngine.getWindowEngine();
         Cursor empty = new Cursor("empty", "empty.gif");
         //this.windowEngine.createCursor(empty);
         //this.windowEngine.setCursor(empty);
