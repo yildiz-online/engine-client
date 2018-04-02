@@ -32,22 +32,22 @@ import be.yildizgames.module.graphic.material.Material;
 /**
  * @author Grégory Van den Borre
  */
-public abstract class BaseClientGameEntity implements ClientGameEntity {
+public abstract class BaseClientGameObject implements ClientGameObject {
 
     private final GraphicObject graphicObject;
 
-    protected BaseClientGameEntity(GraphicObject graphicObject) {
+    protected BaseClientGameObject(GraphicObject graphicObject) {
         this.graphicObject = graphicObject;
     }
 
     @Override
-    public final BaseClientGameEntity show() {
+    public final BaseClientGameObject show() {
         this.graphicObject.show();
         return this;
     }
 
     @Override
-    public final BaseClientGameEntity hide() {
+    public final BaseClientGameObject hide() {
         this.graphicObject.hide();
         return this;
     }
@@ -58,19 +58,19 @@ public abstract class BaseClientGameEntity implements ClientGameEntity {
     }
 
     @Override
-    public final BaseClientGameEntity setCastShadow(boolean cast) {
+    public final BaseClientGameObject setCastShadow(boolean cast) {
         this.graphicObject.setCastShadow(cast);
         return this;
     }
 
     @Override
-    public final BaseClientGameEntity setMaterial(Material material) {
+    public final BaseClientGameObject setMaterial(Material material) {
         this.graphicObject.setMaterial(material);
         return this;
     }
 
     @Override
-    public final BaseClientGameEntity setUnpickable() {
+    public final BaseClientGameObject setUnpickable() {
         this.graphicObject.setUnpickable();
         return this;
     }
@@ -81,19 +81,19 @@ public abstract class BaseClientGameEntity implements ClientGameEntity {
     }
 
     @Override
-    public final BaseClientGameEntity setParameter(int index, float v1, float v2, float v3, float v4) {
+    public final BaseClientGameObject setParameter(int index, float v1, float v2, float v3, float v4) {
         this.graphicObject.setParameter(index, v1, v2, v3, v4);
         return this;
     }
 
     @Override
-    public final BaseClientGameEntity setRenderingDistance(int distance) {
+    public final BaseClientGameObject setRenderingDistance(int distance) {
         this.graphicObject.setRenderingDistance(distance);
         return this;
     }
 
     @Override
-    public final BaseClientGameEntity setRenderBehind() {
+    public final BaseClientGameObject setRenderBehind() {
         this.graphicObject.setRenderBehind();
         return this;
     }

@@ -34,7 +34,7 @@ import be.yildizgames.module.physics.BaseBody;
 /**
  * @author Grégory Van den Borre
  */
-public class ClientGameEntityGraphicPhysic extends BaseClientGameEntity {
+public class ClientGameObjectGraphicPhysic extends BaseClientGameObject {
 
     private final BaseBody physicBody;
 
@@ -45,7 +45,7 @@ public class ClientGameEntityGraphicPhysic extends BaseClientGameEntity {
      */
     private final boolean physicMaster;
 
-    private ClientGameEntityGraphicPhysic(BaseBody physicBody, GraphicObject graphicObject, boolean physicMaster) {
+    private ClientGameObjectGraphicPhysic(BaseBody physicBody, GraphicObject graphicObject, boolean physicMaster) {
         super(graphicObject);
         this.physicBody = physicBody;
         this.graphicObject = graphicObject;
@@ -56,17 +56,17 @@ public class ClientGameEntityGraphicPhysic extends BaseClientGameEntity {
         //FIXME will not work when implementation of dummy physic body -> todo this.graphic.addchild(physic);
     }
 
-    public static ClientGameEntityGraphicPhysic withDynamicMaster(BaseBody physicBody, GraphicObject graphicObject) {
-        return new ClientGameEntityGraphicPhysic(physicBody, graphicObject, true);
+    public static ClientGameObjectGraphicPhysic withDynamicMaster(BaseBody physicBody, GraphicObject graphicObject) {
+        return new ClientGameObjectGraphicPhysic(physicBody, graphicObject, true);
     }
 
 
-    public static ClientGameEntityGraphicPhysic withGraphicMaster(BaseBody physicBody, GraphicObject graphicObject) {
-        return new ClientGameEntityGraphicPhysic(physicBody, graphicObject, false);
+    public static ClientGameObjectGraphicPhysic withGraphicMaster(BaseBody physicBody, GraphicObject graphicObject) {
+        return new ClientGameObjectGraphicPhysic(physicBody, graphicObject, false);
     }
 
     @Override
-    public ClientGameEntityGraphicPhysic rotate(float yaw, float pitch) {
+    public ClientGameObjectGraphicPhysic rotate(float yaw, float pitch) {
         if(!physicMaster) {
             this.graphicObject.rotate(yaw, pitch);
         }
@@ -74,7 +74,7 @@ public class ClientGameEntityGraphicPhysic extends BaseClientGameEntity {
     }
 
     @Override
-    public ClientGameEntityGraphicPhysic lookAt(Point3D target) {
+    public ClientGameObjectGraphicPhysic lookAt(Point3D target) {
         if(!physicMaster) {
             this.graphicObject.lookAt(target);
         }

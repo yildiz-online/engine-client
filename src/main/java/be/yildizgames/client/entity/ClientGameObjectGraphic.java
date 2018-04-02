@@ -33,24 +33,24 @@ import be.yildizgames.module.graphic.GraphicObject;
 /**
  * @author Grégory Van den Borre
  */
-public class ClientGameEntityGraphic extends BaseClientGameEntity {
+public class ClientGameObjectGraphic extends BaseClientGameObject {
 
     private final GraphicObject graphicObject;
 
-    public ClientGameEntityGraphic(GraphicObject graphicObject) {
+    public ClientGameObjectGraphic(GraphicObject graphicObject) {
         super(graphicObject);
         this.graphicObject = graphicObject;
     }
 
 
     @Override
-    public final ClientGameEntity rotate(float yaw, float pitch) {
+    public final ClientGameObject rotate(float yaw, float pitch) {
         this.graphicObject.rotate(yaw, pitch);
         return this;
     }
 
     @Override
-    public final ClientGameEntity lookAt(Point3D target) {
+    public final ClientGameObject lookAt(Point3D target) {
         this.graphicObject.lookAt(target);
         return this;
     }

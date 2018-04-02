@@ -40,17 +40,17 @@ import be.yildizgames.module.graphic.material.Material;
  *
  * @author Grégory Van den Borre
  */
-public interface ClientGameEntity extends GameMaterialization, Deletable {
+public interface ClientGameObject extends GameMaterialization, Deletable {
 
     /**
      * Set the object visible on screen.
      */
-    ClientGameEntity show();
+    ClientGameObject show();
 
     /**
      * Set the object not visible on screen.
      */
-    ClientGameEntity hide();
+    ClientGameObject hide();
 
     /**
      * @return <code>true</code> if the object will be displayed,
@@ -63,7 +63,7 @@ public interface ClientGameEntity extends GameMaterialization, Deletable {
      *
      * @param visible <code>true</code> to show, <code>false</code> to hide.
      */
-    default ClientGameEntity setVisible(boolean visible) {
+    default ClientGameObject setVisible(boolean visible) {
         if (visible) {
             this.show();
         } else {
@@ -79,7 +79,7 @@ public interface ClientGameEntity extends GameMaterialization, Deletable {
      *             casting shadows.
      * @return This object.
      */
-    ClientGameEntity setCastShadow(boolean cast);
+    ClientGameObject setCastShadow(boolean cast);
 
     /**
      * Set the material to this 3d object.
@@ -87,12 +87,12 @@ public interface ClientGameEntity extends GameMaterialization, Deletable {
      * @param newMaterial New material to use.
      * @return This object.
      */
-    ClientGameEntity setMaterial(Material newMaterial);
+    ClientGameObject setMaterial(Material newMaterial);
 
     /**
      * The entity cannot be picked by the mouse.
      */
-    ClientGameEntity setUnpickable();
+    ClientGameObject setUnpickable();
 
     /**
      * @return <code>true</code> if the object cast shadows, <code>false</code>
@@ -106,14 +106,14 @@ public interface ClientGameEntity extends GameMaterialization, Deletable {
      * @param yaw   X axis rotation value.
      * @param pitch Y axis rotation value.
      */
-    ClientGameEntity rotate(float yaw, float pitch);
+    ClientGameObject rotate(float yaw, float pitch);
 
     /**
      * Set the object direction looking at a point.
      *
      * @param target Target coordinate.
      */
-    ClientGameEntity lookAt(Point3D target);
+    ClientGameObject lookAt(Point3D target);
 
     /**
      * Set a GPU program parameter.
@@ -125,7 +125,7 @@ public interface ClientGameEntity extends GameMaterialization, Deletable {
      * @param v4 Vector4 fourth value.
      * @return This object for chaining.
      */
-    ClientGameEntity setParameter(int index, float v1, float v2, float v3, float v4);
+    ClientGameObject setParameter(int index, float v1, float v2, float v3, float v4);
 
     /**
      * Set the distance from where the entity will no longer be visible.
@@ -133,12 +133,12 @@ public interface ClientGameEntity extends GameMaterialization, Deletable {
      * @param distance Distance to set.
      * @return This object for chaining.
      */
-    ClientGameEntity setRenderingDistance(int distance);
+    ClientGameObject setRenderingDistance(int distance);
 
     /**
      * Set the object to be rendered behind others.
      * @return This object for chaining.
      */
-    ClientGameEntity setRenderBehind();
+    ClientGameObject setRenderBehind();
 
 }

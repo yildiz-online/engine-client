@@ -46,7 +46,6 @@ import be.yildizgames.module.graphic.GraphicEngine;
 import be.yildizgames.module.graphic.gui.button.ButtonMaterial;
 import be.yildizgames.module.graphic.gui.container.Container;
 import be.yildizgames.module.graphic.material.Material;
-import be.yildizgames.module.graphic.material.MaterialManager;
 import be.yildizgames.module.graphic.material.TextureUnit;
 import org.slf4j.Logger;
 
@@ -68,11 +67,6 @@ public final class FileParser {
     private final ParserFactory parserFactory = new ParserFactory(ParserFactory.ParserType.XML);
 
     /**
-     * Create the materials.
-     */
-    private final MaterialManager materialManager;
-
-    /**
      * Create the lights,...
      */
     private final GraphicEngine graphicEngine;
@@ -82,8 +76,7 @@ public final class FileParser {
      */
     private final AudioEngine soundEngine;
 
-    FileParser(MaterialManager materialManager, GraphicEngine graphicEngine, AudioEngine soundEngine) {
-        this.materialManager = materialManager;
+    FileParser(GraphicEngine graphicEngine, AudioEngine soundEngine) {
         this.graphicEngine = graphicEngine;
         this.soundEngine = soundEngine;
     }
@@ -107,7 +100,7 @@ public final class FileParser {
             LOGGER.info("Parsing material script " + s);
             final List<SimpleMaterialDefinition> matDef = materialParser.parse(s);
             for (final SimpleMaterialDefinition def : matDef) {
-                final Material m = this.materialManager.loadSimpleTexture(def.getName(), def.getPath(), def.getTransparency());
+                final Material m = this.graphicEngine.getMaterialManager().loadSimpleTexture(def.getName(), def.getPath(), def.getTransparency());
                 if (!def.getPath2().isEmpty()) {
                     TextureUnit unit = m.getTechnique(0).createTexturePass().getUnit(0);
                     unit.setTexture(def.getPath2());

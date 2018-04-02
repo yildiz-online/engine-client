@@ -58,6 +58,7 @@ import be.yildizgames.module.physics.PhysicEngine;
 import be.yildizgames.module.physics.PhysicWorld;
 import be.yildizgames.module.script.ScriptInterpreter;
 import be.yildizgames.module.window.Cursor;
+import be.yildizgames.module.window.ScreenSize;
 import be.yildizgames.module.window.WindowEngine;
 import be.yildizgames.shared.game.engine.AbstractGameEngine;
 import be.yildizgames.shared.protocol.EngineMessageFactory;
@@ -104,11 +105,6 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
      * Renderer to notify when the graphic engine is not active.
      */
     private final List<NotRenderingListener> notRenderingListenerList = new ArrayList<>();
-
-    /**
-     * Manager for materials.
-     */
-    private final MaterialManager materialManager;
 
     /**
      * Current configuration.
@@ -163,7 +159,6 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
         //this.windowEngine.createCursor(empty);
         //this.windowEngine.setCursor(empty);
         this.createWorld();
-        this.materialManager = new MaterialManager(this.graphicEngine);
         // this.addResourcePath("media/brs.yzk", "engine", FileType.ZIP);
         this.guiManager = this.graphicEngine.getGuiBuilder();
         this.addFrameListener(this.graphicEngine.getGuiBuilder().getAnimationManager());
@@ -265,7 +260,7 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
         this.soundEngine.addResourcePath(resource);
         this.graphicEngine.addResourcePath(resource);
         if (resource.getType() == FileResource.FileType.FILE) {
-            new FileParser(this.materialManager, this.graphicEngine, this.soundEngine)
+            new FileParser(this.graphicEngine, this.soundEngine)
                     .addResourcePath(resource);
         }
         LOGGER.info("Resource group " + resource.getName() + " registered.");
@@ -503,7 +498,7 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
     /**
      * @return The game screen size.
      */
-    public final Size getScreenSize() {
+    public final ScreenSize getScreenSize() {
         return this.windowEngine.getScreenSize();
     }
 
@@ -549,7 +544,7 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
     }
 
     public final MaterialManager getMaterialManager() {
-        return materialManager;
+        return this.graphicEngine.getMaterialManager();
     }
 
     public final GuiEventManager getEventDispatcher() {
