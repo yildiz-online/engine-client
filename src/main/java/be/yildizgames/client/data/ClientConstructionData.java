@@ -25,7 +25,7 @@
 
 package be.yildizgames.client.data;
 
-import be.yildizgames.common.client.translation.Key;
+import be.yildizgames.common.client.translation.TranslationKey;
 import be.yildizgames.module.graphic.gui.button.ButtonMaterial;
 import be.yildizgames.module.graphic.material.Material;
 
@@ -40,13 +40,13 @@ public interface ClientConstructionData {
      * @return The translation key for the name of the item to build.
      */
     //@Ensures result != null
-    Key getNameKey();
+    TranslationKey getNameKey();
 
     /**
      * @return The translation key for the description of the item to build.
      */
     //@Ensures result != null
-    Key getDescriptionKey();
+    TranslationKey getDescriptionKey();
 
     /**
      * @return The material to display on the build icon.

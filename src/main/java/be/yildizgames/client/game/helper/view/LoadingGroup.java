@@ -26,7 +26,7 @@
 package be.yildizgames.client.game.helper.view;
 
 import be.yildizgames.client.game.engine.GameEngine;
-import be.yildizgames.common.client.translation.Key;
+import be.yildizgames.common.client.translation.TranslationKey;
 import be.yildizgames.common.util.Resource;
 import be.yildizgames.module.coordinate.Coordinates;
 import be.yildizgames.module.coordinate.Position;
@@ -94,7 +94,7 @@ public final class LoadingGroup {
                 .withCoordinates(new Coordinates(new Size(container.getWidth(), 20), new Position(0, engine.getGuiManager().getScreenSize().height >> 1)))
                 .withFont(font)
                 .build(container)
-                .setText(Key.get(message));
+                .setText(TranslationKey.get(message));
         this.text.setLeftFromParent(PositionRelativeLeft.CENTER);
         this.window = new SimpleView(container, new Zorder(10), null);
     }
