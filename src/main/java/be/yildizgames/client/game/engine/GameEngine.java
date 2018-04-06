@@ -38,6 +38,7 @@ import be.yildizgames.module.audio.AudioEngine;
 import be.yildizgames.module.audio.Playlist;
 import be.yildizgames.module.audio.SoundSource;
 import be.yildizgames.module.color.Color;
+import be.yildizgames.module.coordinate.Relative;
 import be.yildizgames.module.graphic.Font;
 import be.yildizgames.module.graphic.GraphicEngine;
 import be.yildizgames.module.graphic.GraphicWorld;
@@ -309,6 +310,32 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
     }
 
     /**
+     * Create a new font.
+     *
+     * @param name Font name, must be unique.
+     * @param path Path to the font file.
+     * @param size Size of the font.
+     * @return The newly created font.
+     */
+    public final Font createFont(final String name, final String path, final Relative size) {
+        return this.graphicEngine.createFont(name, path, (int)(size.of(this.getScreenSize().height)));
+    }
+
+
+    /**
+     * Create a new font with a given color.
+     *
+     * @param name  Font name, must be unique.
+     * @param path  Path to the font file.
+     * @param size  Size of the font.
+     * @param color Font color.
+     * @return The newly created font.
+     */
+    public final Font createFont(final String name, final String path, final Relative size, final Color color) {
+        return this.graphicEngine.createFont(name, path, (int)(size.of(this.getScreenSize().height)), color);
+    }
+
+    /**
      * Create a new font with a given color.
      *
      * @param name  Font name, must be unique.
@@ -331,6 +358,18 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
      */
     public final Font createFont(final String path, final int size, final Color color) {
         return this.graphicEngine.createFont(StringUtil.buildRandomString("font"), path, size, color);
+    }
+
+    /**
+     * Create a new font with a given color and a random name.
+     *
+     * @param path  Path to the font file.
+     * @param size  Size of the font.
+     * @param color Font color.
+     * @return The newly created font.
+     */
+    public final Font createFont(final String path, final Relative size, final Color color) {
+        return this.graphicEngine.createFont(StringUtil.buildRandomString("font"), path, (int)(size.of(this.getScreenSize().height)), color);
     }
 
     /**
