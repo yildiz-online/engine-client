@@ -12,7 +12,7 @@ The engine client library is the library to glue altogether the different client
 
 ## Requirements
 
-To build this module, you will need a java 9 JDK and Maven 3.
+To build this module, you will need the latest java JDK and Maven 3.
 
 ## Coding Style and other information
 
@@ -51,7 +51,7 @@ In your maven project, add the dependency
 <dependency>
     <groupId>be.yildiz-games</groupId>
     <artifactId>engine-client</artifactId>
-    <version>1.0.3</version>
+    <version>LATEST</version>
 </dependency>
 ```
 
