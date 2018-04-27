@@ -309,6 +309,10 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
         return this.graphicEngine.createFont(name, path, size);
     }
 
+    public final Font createFont(final String name, final String path, final Relative relativeSize) {
+        return this.createFont(name, path, (int)(this.getScreenSize().height * relativeSize.value));
+    }
+
     /**
      * Create a new font.
      *
@@ -348,6 +352,10 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
         return this.graphicEngine.createFont(name, path, size, color);
     }
 
+    public final Font createFont(final String name, final String path, final Relative relativeSize, final Color color) {
+        return this.createFont(name, path, (int)(this.getScreenSize().height * relativeSize.value), color);
+    }
+
     /**
      * Create a new font with a given color and a random name.
      *
@@ -358,6 +366,11 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
      */
     public final Font createFont(final String path, final int size, final Color color) {
         return this.graphicEngine.createFont(StringUtil.buildRandomString("font"), path, size, color);
+    }
+
+    public final Font createFont(final String path, final Relative relativeSize, final Color color) {
+        return this.createFont(StringUtil.buildRandomString("font"), path,
+                (int)(this.getScreenSize().height * relativeSize.value), color);
     }
 
     /**
