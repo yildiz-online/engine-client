@@ -50,7 +50,7 @@ import be.yildizgames.module.graphic.material.Material;
 import be.yildizgames.module.graphic.material.MaterialManager;
 import be.yildizgames.module.graphic.misc.SelectionRectangle;
 import be.yildizgames.module.graphic.misc.Skybox;
-import be.yildizgames.module.network.client.NetworkEngineClient;
+import be.yildizgames.module.network.client.Client;
 import be.yildizgames.module.network.client.NetworkListener;
 import be.yildizgames.module.network.protocol.MessageWrapper;
 import be.yildizgames.module.network.protocol.NetworkMessage;
@@ -101,7 +101,7 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
     /**
      * Network logic.
      */
-    private final NetworkEngineClient networkEngine;
+    private final Client networkEngine;
 
     /**
      * Renderer to notify when the graphic engine is not active.
@@ -158,7 +158,7 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
         this.graphicEngine = GraphicEngine.getEngine(this.windowEngine);
         this.soundEngine = AudioEngine.getEngine();
         this.physicEngine = PhysicEngine.getEngine();
-        this.networkEngine = NetworkEngineClient.getEngine();
+        this.networkEngine = Client.getEngine();
         this.scriptInterpreter = ScriptInterpreter.getEngine();
         Cursor empty = new Cursor("empty", "empty.gif");
         //this.windowEngine.createCursor(empty);
