@@ -32,7 +32,14 @@ import be.yildizgames.common.util.ValueObject;
  */
 public class GameStateId extends ValueObject {
 
-    private GameStateId(int value) {
+    /**
+     * Empty state id, used as default when no state is currently registered and active.
+     */
+    static final GameStateId NONE = GameStateId.valueOf(-1);
+
+    public static final GameStateId ANY = GameStateId.valueOf(0);
+
+    private GameStateId(final int value) {
         super(value);
     }
 

@@ -25,27 +25,75 @@
 
 package be.yildizgames.client.gamestate;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 /**
  * @author Grégory Van den Borre
  */
-public class GameStateManager {
+public class GameStateManager <T extends GameState> {
 
-    private GameStateId currentState;
+    /**
+     * The current activated game state, all other one are deactivated.
+     */
+    private GameStateId currentState = GameStateId.NONE;
 
-    private final Map<GameStateId, GameState> states = new HashMap<>();
+    /**
+     * The list of all registered game states.
+     */
+    private final Map<GameStateId, T> states = new HashMap<>();
 
-    public void registerGameState(GameState state) {
+    /**
+     * The list of all transitions between game states.
+     */
+    private final Map<GameStateId, List<GameStateFlow>> flows = new HashMap<>();
+
+    /**
+     * Register a new game state.
+     * @param state State to register.
+     */
+    public final void registerGameState(final T state) {
         this.states.put(state.getGameStateId(), state);
+        this.flows.put(state.getGameStateId(), new ArrayList<>());
         state.deactivate();
     }
 
-    public void setCurrentState(GameStateId id) {
+    public void processEvent(final GameStateFlowEvent event) {
+        this.flows.get(this.currentState)
+                .stream()
+                .filter(f -> f.isForEvent(event))
+                .findFirst()
+                .ifPresentOrElse(this::setCurrentStateFromFlow, () -> getFromAny(event));
+
+    }
+
+    public final void registerGameStateFlow(final GameStateFlow flow) {
+        this.flows.get(flow.state).add(flow);
+    }
+
+    public final T getCurrentState() {
+        return this.states.get(this.currentState);
+    }
+
+
+    private void setCurrentStateFromFlow(final GameStateFlow f) {
+        this.setCurrentState(f.nextState);
+    }
+
+    private void setCurrentState(final GameStateId id) {
         Optional.ofNullable(currentState).ifPresent(c -> states.get(this.currentState).deactivate());
-        states.get(id).activate();
+        this.states.get(id).activate();
         this.currentState = id;
+    }
+
+    private void getFromAny(final GameStateFlowEvent event) {
+        this.flows.get(GameStateId.ANY)
+                .stream()
+                .filter(f -> f.isForEvent(event))
+                .findFirst()
+                .ifPresent(this::setCurrentStateFromFlow);
     }
 }
