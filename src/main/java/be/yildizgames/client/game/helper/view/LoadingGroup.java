@@ -112,6 +112,14 @@ public final class LoadingGroup {
         this.toLoad.clear();
     }
 
+    public void show() {
+        this.window.show();
+    }
+
+    public void hide() {
+        this.window.hide();
+    }
+
     /**
      * Add a resource to load.
      *
