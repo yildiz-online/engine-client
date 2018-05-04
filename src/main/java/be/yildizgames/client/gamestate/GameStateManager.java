@@ -61,6 +61,17 @@ public class GameStateManager <T extends GameState> {
         state.deactivate();
     }
 
+    /**
+     * Register the initial game state, it will be activated directly.
+     * @param state Initial state to register.
+     */
+    public final void registerInitialGameState(final T state) {
+        this.states.put(state.getGameStateId(), state);
+        this.flows.put(state.getGameStateId(), new ArrayList<>());
+        state.activate();
+        this.currentState = state.getGameStateId();
+    }
+
     public void processEvent(final GameStateFlowEvent event) {
         this.flows.get(this.currentState)
                 .stream()
@@ -71,7 +82,9 @@ public class GameStateManager <T extends GameState> {
     }
 
     public final void registerGameStateFlow(final GameStateFlow flow) {
-        this.flows.get(flow.state).add(flow);
+        if(!flow.state.equals(GameStateId.ANY)) {
+            this.flows.get(flow.state).add(flow);
+        }
     }
 
     public final T getCurrentState() {
@@ -96,4 +109,6 @@ public class GameStateManager <T extends GameState> {
                 .findFirst()
                 .ifPresent(this::setCurrentStateFromFlow);
     }
+
+
 }
