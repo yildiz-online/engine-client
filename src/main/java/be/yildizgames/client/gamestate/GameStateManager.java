@@ -98,6 +98,9 @@ public class GameStateManager <T extends GameState> {
 
     private void setCurrentState(final GameStateId id) {
         Optional.ofNullable(currentState).ifPresent(c -> states.get(this.currentState).deactivate());
+        if(!this.states.containsKey(id)) {
+            throw new IllegalArgumentException("No state associated with " + id.value);
+        }
         this.states.get(id).activate();
         this.currentState = id;
     }
@@ -109,6 +112,4 @@ public class GameStateManager <T extends GameState> {
                 .findFirst()
                 .ifPresent(this::setCurrentStateFromFlow);
     }
-
-
 }
