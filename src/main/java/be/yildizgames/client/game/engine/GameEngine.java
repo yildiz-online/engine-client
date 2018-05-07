@@ -115,6 +115,8 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
 
     private final GuiFactory guiManager;
 
+    private final ActivePlayerProvider playerProvider;
+
     /**
      * True if the loop is currently running.
      */
@@ -152,6 +154,7 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
      */
     public GameEngine(final Configuration config, final Version gameVersion) {
         super(gameVersion);
+        this.playerProvider = new ActivePlayerProvider();
         this.configuration = config;
         LOGGER.info("Initializing client game engine...");
         this.windowEngine = WindowEngine.getEngine();
@@ -608,5 +611,9 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
 
     public final boolean isClosed() {
         return closed;
+    }
+
+    public ActivePlayerProvider getPlayerProvider() {
+        return playerProvider;
     }
 }
