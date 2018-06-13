@@ -36,7 +36,7 @@ import be.yildizgames.module.color.Color;
 import be.yildizgames.module.graphic.Font;
 import be.yildizgames.module.graphic.GraphicMesh;
 import be.yildizgames.module.graphic.billboard.BillboardSet;
-import be.yildizgames.module.graphic.camera.Camera;
+import be.yildizgames.module.graphic.camera.BehavioredCamera;
 import be.yildizgames.module.graphic.light.DirectionalLight;
 import be.yildizgames.module.graphic.light.LensFlare;
 import be.yildizgames.module.graphic.light.Light;
@@ -141,7 +141,7 @@ public interface ClientWorld {
 
     ClientGameObject createDynamicObject(EntityId id, Plane plane, float mass, Material material, Point3D position);
 
-    Camera createCamera(String name);
+    BehavioredCamera createCamera(String name);
 
     void setSkybox(Skybox sky);
 
@@ -161,7 +161,7 @@ public interface ClientWorld {
 
     Ocean createOcean();
 
-    Camera getDefaultCamera();
+    BehavioredCamera getDefaultCamera();
 
     Line create3DLine();
 
@@ -177,7 +177,7 @@ public interface ClientWorld {
 
     void deleteLight(Light light);
 
-    Camera getCamera(String name);
+    BehavioredCamera getCamera(String name);
 
     Light getLight(String name);
 

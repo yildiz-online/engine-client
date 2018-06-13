@@ -40,17 +40,31 @@ import be.yildizgames.module.graphic.GraphicMesh;
 import be.yildizgames.module.graphic.GraphicObject;
 import be.yildizgames.module.graphic.GraphicWorld;
 import be.yildizgames.module.graphic.billboard.BillboardSet;
+import be.yildizgames.module.graphic.camera.BehavioredCamera;
 import be.yildizgames.module.graphic.camera.Camera;
-import be.yildizgames.module.graphic.light.*;
+import be.yildizgames.module.graphic.light.DirectionalLight;
+import be.yildizgames.module.graphic.light.LensFlare;
+import be.yildizgames.module.graphic.light.Light;
+import be.yildizgames.module.graphic.light.PointLight;
+import be.yildizgames.module.graphic.light.SpotLight;
 import be.yildizgames.module.graphic.material.Material;
-import be.yildizgames.module.graphic.misc.*;
+import be.yildizgames.module.graphic.misc.ElectricArc;
+import be.yildizgames.module.graphic.misc.Explosion;
+import be.yildizgames.module.graphic.misc.Line;
+import be.yildizgames.module.graphic.misc.MovableText;
+import be.yildizgames.module.graphic.misc.Ocean;
+import be.yildizgames.module.graphic.misc.Sky;
+import be.yildizgames.module.graphic.misc.Skybox;
 import be.yildizgames.module.graphic.particle.ParticleSystem;
-import be.yildizgames.module.physics.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Grégory Van den Borre
  */
 public class GraphicPhysicWorld implements ClientWorld {
+
+    private final Map<Camera, BehavioredCamera> cameras = new HashMap<>();
 
     private final GraphicWorld graphicWorld;
 
@@ -59,6 +73,8 @@ public class GraphicPhysicWorld implements ClientWorld {
     public GraphicPhysicWorld(GraphicWorld graphicWorld, PhysicWorld physicWorld) {
         this.graphicWorld = graphicWorld;
         this.physicWorld = physicWorld;
+        this.cameras.put(this.graphicWorld.getDefaultCamera(), new BehavioredCamera(this.graphicWorld.getDefaultCamera()));
+
     }
 
     @Override
@@ -282,8 +298,11 @@ public class GraphicPhysicWorld implements ClientWorld {
     }
 
     @Override
-    public Camera createCamera(String name) {
-        return this.graphicWorld.createCamera(name);
+    public BehavioredCamera createCamera(String name) {
+        Camera cam = this.graphicWorld.createCamera(name);
+        BehavioredCamera bCam = new BehavioredCamera(cam);
+        this.cameras.put(cam, bCam);
+        return bCam;
     }
 
     @Override
@@ -332,8 +351,8 @@ public class GraphicPhysicWorld implements ClientWorld {
     }
 
     @Override
-    public Camera getDefaultCamera() {
-        return this.graphicWorld.getDefaultCamera();
+    public BehavioredCamera getDefaultCamera() {
+        return this.cameras.get(this.graphicWorld.getDefaultCamera());
     }
 
     @Override
@@ -372,8 +391,8 @@ public class GraphicPhysicWorld implements ClientWorld {
     }
 
     @Override
-    public Camera getCamera(String name) {
-        return this.graphicWorld.getCamera(name);
+    public BehavioredCamera getCamera(String name) {
+        return this.cameras.get(this.graphicWorld.getCamera(name));
     }
 
     @Override
