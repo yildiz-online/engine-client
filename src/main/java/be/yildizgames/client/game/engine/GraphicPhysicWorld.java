@@ -56,6 +56,12 @@ import be.yildizgames.module.graphic.misc.Ocean;
 import be.yildizgames.module.graphic.misc.Sky;
 import be.yildizgames.module.graphic.misc.Skybox;
 import be.yildizgames.module.graphic.particle.ParticleSystem;
+import be.yildizgames.module.physics.DynamicBody;
+import be.yildizgames.module.physics.GhostObject;
+import be.yildizgames.module.physics.Gravity;
+import be.yildizgames.module.physics.KinematicBody;
+import be.yildizgames.module.physics.PhysicWorld;
+import be.yildizgames.module.physics.StaticBody;
 import java.util.HashMap;
 import java.util.Map;
 
