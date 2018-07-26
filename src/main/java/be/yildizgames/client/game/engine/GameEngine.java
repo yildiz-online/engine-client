@@ -30,7 +30,6 @@ import be.yildizgames.common.client.debug.DebugListener;
 import be.yildizgames.common.exception.technical.ResourceMissingException;
 import be.yildizgames.common.file.FileResource;
 import be.yildizgames.common.file.ResourcePath;
-import be.yildizgames.common.geometry.Point3D;
 import be.yildizgames.common.logging.LogFactory;
 import be.yildizgames.common.model.Version;
 import be.yildizgames.common.util.StringUtil;
@@ -126,11 +125,6 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
      * Flag to check if the graphic engine must render the current frame.
      */
     private boolean rendering = true;
-
-    /**
-     * Currently active world.
-     */
-    private ClientWorld activeWorld;
 
     /**
      * Flag to check if the engines must run in debug mode or not.
@@ -503,17 +497,7 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
         if (this.debug) {
             world.setDebugMode();
         }
-        this.activeWorld = world;
         return world;
-    }
-
-    /**
-     * Set the currently active camera focusing on an Entity.
-     *
-     * @param position Where to look at.
-     */
-    public final void focusCamera(final Point3D position) {
-        this.activeWorld.getDefaultCamera().setRelativePosition(position);
     }
 
     /**
@@ -603,10 +587,6 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
 
     public final GuiFactory getGuiManager() {
         return guiManager;
-    }
-
-    public final ClientWorld getActiveWorld() {
-        return activeWorld;
     }
 
     public final boolean isClosed() {

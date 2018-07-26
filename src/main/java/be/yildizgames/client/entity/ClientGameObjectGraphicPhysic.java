@@ -56,17 +56,17 @@ public class ClientGameObjectGraphicPhysic extends BaseClientGameObject {
         //FIXME will not work when implementation of dummy physic body -> todo this.graphic.addchild(physic);
     }
 
-    public static ClientGameObjectGraphicPhysic withDynamicMaster(BaseBody physicBody, GraphicObject graphicObject) {
+    public static ClientGameObject withDynamicMaster(BaseBody physicBody, GraphicObject graphicObject) {
         return new ClientGameObjectGraphicPhysic(physicBody, graphicObject, true);
     }
 
 
-    public static ClientGameObjectGraphicPhysic withGraphicMaster(BaseBody physicBody, GraphicObject graphicObject) {
+    public static ClientGameObject withGraphicMaster(BaseBody physicBody, GraphicObject graphicObject) {
         return new ClientGameObjectGraphicPhysic(physicBody, graphicObject, false);
     }
 
     @Override
-    public ClientGameObjectGraphicPhysic rotate(float yaw, float pitch) {
+    public final ClientGameObject rotate(float yaw, float pitch) {
         if(!physicMaster) {
             this.graphicObject.rotate(yaw, pitch);
         }
@@ -74,7 +74,7 @@ public class ClientGameObjectGraphicPhysic extends BaseClientGameObject {
     }
 
     @Override
-    public ClientGameObjectGraphicPhysic lookAt(Point3D target) {
+    public final ClientGameObject lookAt(Point3D target) {
         if(!physicMaster) {
             this.graphicObject.lookAt(target);
         }
@@ -83,36 +83,36 @@ public class ClientGameObjectGraphicPhysic extends BaseClientGameObject {
 
 
     @Override
-    public EntityId getId() {
+    public final EntityId getId() {
         return this.physicBody.getId();
     }
 
     @Override
-    public void rotate(float x, float y, float z, float w) {
+    public final void rotate(float x, float y, float z, float w) {
         if(!physicMaster) {
             this.graphicObject.rotate(x, y, z, w);
         }
     }
 
     @Override
-    public void scale(float x, float y, float z) {
+    public final void scale(float x, float y, float z) {
         this.graphicObject.scale(x, y, z);
         this.physicBody.scale(x, y, z);
     }
 
     @Override
-    public void delete() {
+    public final void delete() {
         this.graphicObject.delete();
         this.physicBody.delete();
     }
 
     @Override
-    public void sleep(boolean b) {
+    public final void sleep(boolean b) {
         this.physicBody.sleep(b);
     }
 
     @Override
-    public void attachTo(Movable other) {
+    public final void attachTo(Movable other) {
         if(!physicMaster) {
             this.graphicObject.attachTo(other);
         }
@@ -120,7 +120,7 @@ public class ClientGameObjectGraphicPhysic extends BaseClientGameObject {
     }
 
     @Override
-    public void addChild(Movable other) {
+    public final void addChild(Movable other) {
         if(!physicMaster) {
             this.graphicObject.addChild(other);
         } else {
@@ -138,7 +138,7 @@ public class ClientGameObjectGraphicPhysic extends BaseClientGameObject {
     }
 
     @Override
-    public void attachToOptional(Movable other) {
+    public final void attachToOptional(Movable other) {
         if(!physicMaster) {
             this.graphicObject.attachToOptional(other);
         }
@@ -146,7 +146,7 @@ public class ClientGameObjectGraphicPhysic extends BaseClientGameObject {
     }
 
     @Override
-    public void detachFromParent() {
+    public final void detachFromParent() {
         if(!physicMaster) {
             this.graphicObject.detachFromParent();
         }
@@ -163,7 +163,7 @@ public class ClientGameObjectGraphicPhysic extends BaseClientGameObject {
     }
 
     @Override
-    public void setDirection(Point3D newDirection) {
+    public final void setDirection(Point3D newDirection) {
         if(!physicMaster) {
             this.graphicObject.setDirection(newDirection);
         } else {
@@ -172,7 +172,7 @@ public class ClientGameObjectGraphicPhysic extends BaseClientGameObject {
     }
 
     @Override
-    public void setPosition(float posX, float posY, float posZ) {
+    public final void setPosition(float posX, float posY, float posZ) {
         if(!physicMaster) {
             this.graphicObject.setPosition(posX, posY, posZ);
         } else {
@@ -181,7 +181,7 @@ public class ClientGameObjectGraphicPhysic extends BaseClientGameObject {
     }
 
     @Override
-    public void setDirection(float dirX, float dirY, float dirZ) {
+    public final void setDirection(float dirX, float dirY, float dirZ) {
         if(!physicMaster) {
             this.graphicObject.setDirection(dirX, dirY, dirZ);
         } else {
@@ -190,7 +190,7 @@ public class ClientGameObjectGraphicPhysic extends BaseClientGameObject {
     }
 
     @Override
-    public void addOptionalChild(Movable child) {
+    public final void addOptionalChild(Movable child) {
         if(!physicMaster) {
             this.graphicObject.addOptionalChild(child);
         } else {
@@ -199,7 +199,7 @@ public class ClientGameObjectGraphicPhysic extends BaseClientGameObject {
     }
 
     @Override
-    public Movable getInternal() {
+    public final Movable getInternal() {
         if(!this.physicMaster) {
             return this.graphicObject.getInternal();
         }
