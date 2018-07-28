@@ -67,72 +67,72 @@ public class ClientGameObjectGraphic extends BaseClientGameObject {
     }
 
     @Override
-    public void scale(float x, float y, float z) {
+    public final void scale(float x, float y, float z) {
         this.graphicObject.scale(x, y, z);
     }
 
     @Override
-    public void delete() {
+    public final void delete() {
         this.graphicObject.delete();
     }
 
     @Override
-    public void sleep(boolean b) {
+    public final void sleep(boolean b) {
         //does nothing.
     }
 
     @Override
-    public void attachTo(Movable other) {
+    public final void attachTo(Movable other) {
         this.graphicObject.attachTo(other);
     }
 
     @Override
-    public void addChild(Movable other) {
+    public final void addChild(Movable other) {
         this.graphicObject.addChild(other);
     }
 
     @Override
-    public void removeChild(Movable child) {
+    public final void removeChild(Movable child) {
         this.graphicObject.removeChild(child);
     }
 
     @Override
-    public void attachToOptional(Movable other) {
+    public final void attachToOptional(Movable other) {
         this.graphicObject.attachToOptional(other);
     }
 
     @Override
-    public void detachFromParent() {
+    public final void detachFromParent() {
         this.graphicObject.detachFromParent();
     }
 
     @Override
-    public void setPosition(Point3D newPosition) {
+    public final void setPosition(Point3D newPosition) {
         this.graphicObject.setPosition(newPosition);
     }
 
     @Override
-    public void setDirection(Point3D newDirection) {
+    public final void setDirection(Point3D newDirection) {
         this.graphicObject.setDirection(newDirection);
     }
 
     @Override
-    public void setPosition(float posX, float posY, float posZ) {
+    public final void setPosition(float posX, float posY, float posZ) {
         this.graphicObject.setPosition(posX, posY, posZ);
     }
 
     @Override
-    public void setDirection(float dirX, float dirY, float dirZ) {
+    public final void setDirection(float dirX, float dirY, float dirZ) {
         this.graphicObject.setDirection(dirX, dirY, dirZ);
     }
 
     @Override
-    public void addOptionalChild(Movable child) {
+    public final void addOptionalChild(Movable child) {
         this.graphicObject.addOptionalChild(child);
     }
 
     @Override
-    public Movable getInternal() {
+    public final Movable getInternal() {
         return this.graphicObject.getInternal();
     }
 }

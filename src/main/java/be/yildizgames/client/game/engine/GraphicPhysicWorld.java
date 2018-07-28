@@ -76,7 +76,7 @@ public class GraphicPhysicWorld implements ClientWorld {
 
     private final PhysicWorld physicWorld;
 
-    public GraphicPhysicWorld(GraphicWorld graphicWorld, PhysicWorld physicWorld) {
+    GraphicPhysicWorld(GraphicWorld graphicWorld, PhysicWorld physicWorld) {
         this.graphicWorld = graphicWorld;
         this.physicWorld = physicWorld;
         this.cameras.put(this.graphicWorld.getDefaultCamera(), new BehavioredCamera(this.graphicWorld.getDefaultCamera()));
