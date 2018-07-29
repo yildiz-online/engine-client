@@ -160,7 +160,6 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
         Cursor empty = new Cursor("empty", "empty.gif");
         //this.windowEngine.createCursor(empty);
         //this.windowEngine.setCursor(empty);
-        this.createWorld();
         // this.addResourcePath("media/brs.yzk", "engine", FileType.ZIP);
         this.guiManager = this.graphicEngine.getGuiBuilder();
         this.addFrameListener(this.graphicEngine.getGuiBuilder().getAnimationManager());
