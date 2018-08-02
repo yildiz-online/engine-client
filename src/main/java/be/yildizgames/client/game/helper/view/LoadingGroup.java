@@ -27,6 +27,7 @@ package be.yildizgames.client.game.helper.view;
 
 import be.yildizgames.client.game.engine.GameEngine;
 import be.yildizgames.common.client.translation.TranslationKey;
+import be.yildizgames.common.model.PlayerId;
 import be.yildizgames.common.util.Resource;
 import be.yildizgames.module.coordinate.Coordinates;
 import be.yildizgames.module.coordinate.Position;
@@ -75,21 +76,24 @@ public final class LoadingGroup {
      *
      * @param engine Game engine.
      * @param font   Font to use.
-     * @param background Background image to display.
      * @param message Message to display.
      */
-    public LoadingGroup(final GameEngine engine, final Font font, final Material background, final String message) {
+    public LoadingGroup(final GameEngine engine, final Font font, final String message) {
         super();
         this.engine = engine;
         this.toLoad = new ArrayList<>();
+
+        //FIXME remove and use message
+        engine.getPlayerProvider().registerPlayer1(PlayerId.valueOf(1));
+        //ENDOFFM
+
         Container container = engine.getGuiManager()
                 .container()
                 .withName("loading")
-                .withBackground(background)
                 .fullScreen()
                 .build();
-        this.text = engine.getGuiManager().
-                textLine()
+        this.text = engine.getGuiManager()
+                .textLine()
                 .withName("loadText")
                 .withCoordinates(new Coordinates(new Size(container.getWidth(), 20), new Position(0, engine.getGuiManager().getScreenSize().height >> 1)))
                 .withFont(font)

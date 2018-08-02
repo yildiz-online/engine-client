@@ -171,6 +171,10 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
         this(Configuration.getInstance(), gameVersion);
     }
 
+    public GameEngine() {
+        this(Configuration.getInstance(), new Version(Version.VersionType.RELEASE, 1,0,0,0));
+    }
+
     /**
      * Pause the rendering.
      */
