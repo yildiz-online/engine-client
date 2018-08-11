@@ -37,6 +37,8 @@ public class GameStateId extends ValueObject {
      */
     static final GameStateId NONE = GameStateId.valueOf(-1);
 
+    public static final GameStateId CLOSED = GameStateId.valueOf(-2);
+
     public static final GameStateId ANY = GameStateId.valueOf(0);
 
     private GameStateId(final int value) {
