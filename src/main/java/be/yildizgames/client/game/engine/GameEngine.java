@@ -504,9 +504,9 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
     }
 
     /**
-     * Close all engines.
+     * Close all engines, ensure that the game loop is no longer running before using this.
      */
-    public final void close() {
+    private void close() {
         if (!this.closed) {
             LOGGER.info("Closing engines...");
             this.closed = true;
