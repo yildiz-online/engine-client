@@ -39,6 +39,7 @@ import be.yildizgames.module.graphic.Font;
 import be.yildizgames.module.graphic.GraphicMesh;
 import be.yildizgames.module.graphic.GraphicObject;
 import be.yildizgames.module.graphic.GraphicWorld;
+import be.yildizgames.module.graphic.RayProvider;
 import be.yildizgames.module.graphic.billboard.BillboardSet;
 import be.yildizgames.module.graphic.camera.BehavioredCamera;
 import be.yildizgames.module.graphic.camera.Camera;
@@ -56,6 +57,8 @@ import be.yildizgames.module.graphic.misc.Ocean;
 import be.yildizgames.module.graphic.misc.Sky;
 import be.yildizgames.module.graphic.misc.Skybox;
 import be.yildizgames.module.graphic.particle.ParticleSystem;
+import be.yildizgames.module.graphic.query.GroundQuery;
+import be.yildizgames.module.graphic.query.Query;
 import be.yildizgames.module.physics.DynamicBody;
 import be.yildizgames.module.physics.GhostObject;
 import be.yildizgames.module.physics.Gravity;
@@ -419,5 +422,15 @@ public class GraphicPhysicWorld implements ClientWorld {
     @Override
     public BillboardSet createBillboardSet(Material material) {
         return this.graphicWorld.createBillboardSet(material);
+    }
+
+    @Override
+    public Query createQuery(RayProvider provider) {
+        return this.graphicWorld.createQuery(provider);
+    }
+
+    @Override
+    public GroundQuery createGroundQuery(RayProvider provider) {
+        return this.graphicWorld.createGroundQuery(provider);
     }
 }

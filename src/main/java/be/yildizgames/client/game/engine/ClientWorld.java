@@ -35,6 +35,7 @@ import be.yildizgames.common.shape.Sphere;
 import be.yildizgames.module.color.Color;
 import be.yildizgames.module.graphic.Font;
 import be.yildizgames.module.graphic.GraphicMesh;
+import be.yildizgames.module.graphic.RayProvider;
 import be.yildizgames.module.graphic.billboard.BillboardSet;
 import be.yildizgames.module.graphic.camera.BehavioredCamera;
 import be.yildizgames.module.graphic.light.DirectionalLight;
@@ -51,6 +52,8 @@ import be.yildizgames.module.graphic.misc.Ocean;
 import be.yildizgames.module.graphic.misc.Sky;
 import be.yildizgames.module.graphic.misc.Skybox;
 import be.yildizgames.module.graphic.particle.ParticleSystem;
+import be.yildizgames.module.graphic.query.GroundQuery;
+import be.yildizgames.module.graphic.query.Query;
 import be.yildizgames.module.physics.GhostObject;
 import be.yildizgames.module.physics.Gravity;
 
@@ -186,4 +189,8 @@ public interface ClientWorld {
     MovableText createMovableText(String name, String text, Font font);
 
     BillboardSet createBillboardSet(Material material);
+
+    Query createQuery(RayProvider provider);
+
+    GroundQuery createGroundQuery(RayProvider provider);
 }
