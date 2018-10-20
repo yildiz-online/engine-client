@@ -1,7 +1,7 @@
 package be.yildizgames.client.network;
 
+import be.yildizgames.common.exception.business.BusinessException;
 import be.yildizgames.common.mapping.MappingException;
-import be.yildizgames.module.network.exceptions.InvalidNetworkMessage;
 import be.yildizgames.module.network.protocol.MessageWrapper;
 
 /**
@@ -19,8 +19,8 @@ public interface NetworkMessageProcessor {
      *
      * @param message
      *            Message itself.
-     * @throws InvalidNetworkMessage
+     * @throws BusinessException
      *             If the message is not correctly understood or incomplete.
      */
-    void process(MessageWrapper message) throws InvalidNetworkMessage, MappingException;
+    void process(MessageWrapper message) throws BusinessException, MappingException;
 }
