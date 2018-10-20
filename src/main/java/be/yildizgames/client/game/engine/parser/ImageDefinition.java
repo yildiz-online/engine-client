@@ -25,8 +25,8 @@
 
 package be.yildizgames.client.game.engine.parser;
 
-import be.yildizgames.module.coordinate.Size;
 import be.yildizgames.module.graphic.material.Material;
+import be.yildizgames.module.window.ScreenSize;
 
 /**
  * Data definition for an image GUI widget.
@@ -45,7 +45,7 @@ public final class ImageDefinition extends GuiCommonDefinition {
      *
      * @param screen Contains the screen size data.
      */
-    ImageDefinition(final Size screen) {
+    ImageDefinition(final ScreenSize screen) {
         super(screen);
     }
 

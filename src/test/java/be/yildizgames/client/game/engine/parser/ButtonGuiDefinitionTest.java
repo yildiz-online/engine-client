@@ -27,6 +27,7 @@ package be.yildizgames.client.game.engine.parser;
 
 import be.yildizgames.module.coordinate.Size;
 import be.yildizgames.module.graphic.material.Material;
+import be.yildizgames.module.window.ScreenSize;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -39,7 +40,7 @@ final class ButtonGuiDefinitionTest {
     /***/
     @Test
     public void testButtonDefinition() {
-        final ButtonDefinition def = new ButtonDefinition(Material.EMPTY_NAME, Material.EMPTY_NAME, "", new Size(0));
+        final ButtonDefinition def = new ButtonDefinition(Material.EMPTY_NAME, Material.EMPTY_NAME, "", new ScreenSize(0,0));
         assertEquals(Material.EMPTY_NAME, def.getMaterial());
         assertEquals(Material.EMPTY_NAME, def.getMaterialHighlight());
         assertEquals("", def.getFont());

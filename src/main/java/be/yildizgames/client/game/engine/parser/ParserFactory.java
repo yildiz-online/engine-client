@@ -26,6 +26,7 @@
 package be.yildizgames.client.game.engine.parser;
 
 import be.yildizgames.module.coordinate.Size;
+import be.yildizgames.module.window.ScreenSize;
 
 import java.security.InvalidParameterException;
 
@@ -68,7 +69,7 @@ public final class ParserFactory {
      * @param screen Screen size data.
      * @return A new MaterialParser.
      */
-    public MaterialParser createMaterialParser(final Size screen) {
+    public MaterialParser createMaterialParser(final ScreenSize screen) {
         switch (this.parserType) {
             case XML:
                 return new XmlMaterialParser(screen);
@@ -97,7 +98,7 @@ public final class ParserFactory {
      * @param screen Screen size data.
      * @return A new GuiParser.
      */
-    public GuiParser createGuiParser(final Size screen) {
+    public GuiParser createGuiParser(final ScreenSize screen) {
         switch (this.parserType) {
             case XML:
                 return new XmlGuiParser(screen);

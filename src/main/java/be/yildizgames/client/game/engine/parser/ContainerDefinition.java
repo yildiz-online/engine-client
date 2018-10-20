@@ -25,8 +25,8 @@
 
 package be.yildizgames.client.game.engine.parser;
 
-import be.yildizgames.module.coordinate.Size;
 import be.yildizgames.module.graphic.material.Material;
+import be.yildizgames.module.window.ScreenSize;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,7 +73,7 @@ public final class ContainerDefinition extends GuiCommonDefinition {
      *
      * @param screen Screen size data.
      */
-    ContainerDefinition(final Size screen) {
+    ContainerDefinition(final ScreenSize screen) {
         super(screen);
     }
 

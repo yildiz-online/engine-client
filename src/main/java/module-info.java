@@ -43,4 +43,5 @@ module be.yildizgames.engine.client {
     requires java.xml;
     requires be.yildizgames.common.file.xml;
     requires be.yildizgames.module.window;
+    requires be.yildizgames.common.mapping;
 }
