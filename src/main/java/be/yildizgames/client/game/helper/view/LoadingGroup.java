@@ -100,7 +100,7 @@ public final class LoadingGroup {
                 .build(container)
                 .setText(TranslationKey.get(message));
         this.text.setLeftFromParent(PositionRelativeLeft.CENTER);
-        this.window = new SimpleView(container, new Zorder(10));
+        this.window = new SimpleView(container, new Zorder(10), engine.getScreenSize());
     }
 
     /**
