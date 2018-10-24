@@ -63,6 +63,7 @@ import be.yildizgames.shared.game.engine.AbstractGameEngine;
 import be.yildizgames.shared.protocol.EngineMessageFactory;
 import org.slf4j.Logger;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -258,15 +259,19 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
      */
     public final void addResourcePath(ResourcePath resource) {
         if (!Files.exists(Paths.get(resource.getPath()))) {
-            throw new ResourceMissingException(f.getAbsolutePath());
+            throw new ResourceMissingException(resource.getPath());
         }
         this.windowEngine.updateWindow();
         LOGGER.info("Registering resource group " + resource.getName());
         this.soundEngine.addResourcePath(resource);
         this.graphicEngine.addResourcePath(resource);
         if (resource.getType() == FileResource.FileType.FILE) {
-            new FileParser(this.graphicEngine, this.soundEngine)
-                    .addResourcePath(resource);
+            try {
+                new FileParser(this.graphicEngine, this.soundEngine)
+                        .addResourcePath(resource);
+            } catch (IOException e) {
+                LOGGER.error("Error reading path", e);
+            }
         }
         LOGGER.info("Resource group " + resource.getName() + " registered.");
     }

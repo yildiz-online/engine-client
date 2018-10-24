@@ -39,6 +39,7 @@ import be.yildizgames.module.graphic.material.Material;
 import be.yildizgames.module.graphic.material.TextureUnit;
 import org.slf4j.Logger;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -78,7 +79,7 @@ public final class FileParser {
      *
      * @param resource Resources for this resource group.
      */
-    void addResourcePath(ResourcePath resource) {
+    void addResourcePath(ResourcePath resource) throws IOException {
         final Path folder = Paths.get(resource.getPath());
         if (!Files.exists(folder) || !Files.isDirectory(folder)) {
             throw new IllegalArgumentException(folder.toAbsolutePath().toString() + " is not a valid resource path.");
@@ -87,7 +88,7 @@ public final class FileParser {
         MaterialParser materialParser = this.parserFactory.createMaterialParser(this.graphicEngine.getScreenSize());
         FontParser fontParser = this.parserFactory.createFontParser();
         GuiParser guiParser = this.parserFactory.createGuiParser(this.graphicEngine.getScreenSize());
-        Files.walk(folder).filter(s -> s.getName().endsWith(".mat")).forEach(s -> {
+        Files.walk(folder).filter(s -> s.toString().endsWith(".mat")).forEach(s -> {
             LOGGER.info("Parsing material script " + s);
             final List<SimpleMaterialDefinition> matDef = materialParser.parse(s);
             for (final SimpleMaterialDefinition def : matDef) {
@@ -107,7 +108,7 @@ public final class FileParser {
                 m.setSceneBlend(def.getSceneBlend1(), def.getSceneBlend2());
             }
         });
-        Files.walk(folder).filter(s -> s.getName().endsWith(".pll")).forEach(s -> {
+        Files.walk(folder).filter(s -> s.toString().endsWith(".pll")).forEach(s -> {
             LOGGER.info("Parsing playlist script " + s);
             final List<PlayListDefinition> playListDef = musicParser.parse(s);
             for (final PlayListDefinition def : playListDef) {
@@ -119,13 +120,13 @@ public final class FileParser {
             }
         });
         Files.walk(folder)
-                .filter(s -> s.getName().endsWith(".fnt"))
+                .filter(s -> s.toString().endsWith(".fnt"))
                 .map(fontParser::parse)
                 .forEach(l -> l.forEach(
                         def ->
                                 this.graphicEngine.createFont(def.getName(), def.getPath(), def.getSize()).load()));
 
-        Files.walk(folder).filter(s -> s.getName().endsWith(".vew")).forEach(s -> {
+        Files.walk(folder).filter(s -> s.toString().endsWith(".vew")).forEach(s -> {
             LOGGER.info("Parsing view script " + s);
             try {
                 guiParser.parse(s).forEach(this::buildView);
