@@ -26,6 +26,7 @@
 package be.yildizgames.client.game.engine.parser;
 
 import be.yildizgames.module.coordinate.Size;
+import be.yildizgames.module.window.ScreenSize;
 
 /**
  * Data definition for a text line gui widget.
@@ -44,7 +45,7 @@ public final class TextLineDefinition extends GuiCommonDefinition {
      *
      * @param screen Screen size data.
      */
-    TextLineDefinition(final Size screen) {
+    TextLineDefinition(final ScreenSize screen) {
         super(screen);
     }
 

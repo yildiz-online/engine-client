@@ -25,7 +25,7 @@
 
 package be.yildizgames.client.game.engine.parser;
 
-import be.yildizgames.module.coordinate.Size;
+import be.yildizgames.module.window.ScreenSize;
 
 /**
  * Data definition to create a GuiButton from an external resource(i.e parsing a
@@ -60,7 +60,7 @@ public final class ButtonDefinition extends GuiCommonDefinition {
      * @param captionFont Font name to use for the caption.
      * @param screen      Screen size data.
      */
-    ButtonDefinition(final String background, final String highlight, final String captionFont, final Size screen) {
+    ButtonDefinition(final String background, final String highlight, final String captionFont, final ScreenSize screen) {
         super(screen);
         this.material = background;
         this.materialHighlight = highlight;

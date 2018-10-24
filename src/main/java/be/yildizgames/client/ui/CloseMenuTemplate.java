@@ -22,26 +22,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE  SOFTWARE.
  */
+package be.yildizgames.client.ui;
 
-package be.yildizgames.client.game.engine.parser;
-
+import be.yildizgames.module.coordinate.Size;
+import be.yildizgames.module.graphic.Font;
+import be.yildizgames.module.graphic.gui.PositionRelative;
+import be.yildizgames.module.graphic.gui.button.ButtonTemplate;
+import be.yildizgames.module.graphic.gui.textline.TextLineTemplate;
 import be.yildizgames.module.graphic.material.Material;
-import be.yildizgames.module.window.ScreenSize;
-import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+public interface CloseMenuTemplate {
 
-/**
- * @author Grégory Van den Borre
- */
-final class ButtonGuiDefinitionTest {
+    Material getCloseMenuBackground();
 
-    /***/
-    @Test
-    public void testButtonDefinition() {
-        final ButtonDefinition def = new ButtonDefinition(Material.EMPTY_NAME, Material.EMPTY_NAME, "", new ScreenSize(1,1));
-        assertEquals(Material.EMPTY_NAME, def.getMaterial());
-        assertEquals(Material.EMPTY_NAME, def.getMaterialHighlight());
-        assertEquals("", def.getFont());
-    }
+    Size getCloseMenuSize();
+
+    Font getCloseMenuFont();
+
+    TextLineTemplate getTitleTemplate();
+
+    CloseMenuLocale getLocale();
+
+    PositionRelative getPosition();
+
+    ButtonTemplate getButtonTemplate();
 }

@@ -26,7 +26,7 @@
 package be.yildizgames.client.game.engine.parser;
 
 import be.yildizgames.common.file.xml.XMLParser;
-import be.yildizgames.module.coordinate.Size;
+import be.yildizgames.module.window.ScreenSize;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -45,14 +45,14 @@ final class XmlMaterialParser implements MaterialParser {
     /**
      * Screen size value.
      */
-    private final Size screenSize;
+    private final ScreenSize screenSize;
 
     /**
      * Full constructor.
      *
      * @param screenSize Screen size.
      */
-    XmlMaterialParser(final Size screenSize) {
+    XmlMaterialParser(final ScreenSize screenSize) {
         super();
         this.screenSize = screenSize;
     }

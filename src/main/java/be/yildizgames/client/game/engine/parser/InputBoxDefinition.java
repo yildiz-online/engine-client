@@ -25,9 +25,9 @@
 
 package be.yildizgames.client.game.engine.parser;
 
-import be.yildizgames.module.coordinate.Size;
 import be.yildizgames.module.graphic.Font;
 import be.yildizgames.module.graphic.material.Material;
+import be.yildizgames.module.window.ScreenSize;
 
 /**
  * Data definition to create an InputBoxGui from an external resource(i.e parsing a
@@ -60,7 +60,7 @@ public final class InputBoxDefinition extends GuiCommonDefinition {
      * @param boxFont    Font to use for caption and text.
      * @param screen     Screen size data.
      */
-    InputBoxDefinition(final Material background, final Material highlight, final Font boxFont, final Size screen) {
+    InputBoxDefinition(final Material background, final Material highlight, final Font boxFont, final ScreenSize screen) {
         super(screen);
         this.material = background;
         this.materialHighlight = highlight;

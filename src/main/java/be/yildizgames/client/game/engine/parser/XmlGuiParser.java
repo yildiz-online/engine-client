@@ -26,9 +26,9 @@
 package be.yildizgames.client.game.engine.parser;
 
 import be.yildizgames.common.file.xml.XMLParser;
-import be.yildizgames.module.coordinate.Size;
 import be.yildizgames.module.graphic.Font;
 import be.yildizgames.module.graphic.material.Material;
+import be.yildizgames.module.window.ScreenSize;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -104,14 +104,14 @@ final class XmlGuiParser implements GuiParser {
     /**
      * Contains the screen size data.
      */
-    private Size screen;
+    private ScreenSize screen;
 
     /**
      * Simple constructor.
      *
      * @param screen Screen size data.
      */
-    XmlGuiParser(final Size screen) {
+    XmlGuiParser(final ScreenSize screen) {
         super();
         this.screen = screen;
     }

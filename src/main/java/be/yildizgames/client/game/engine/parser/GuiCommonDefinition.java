@@ -26,7 +26,7 @@
 package be.yildizgames.client.game.engine.parser;
 
 import be.yildizgames.module.coordinate.Coordinates;
-import be.yildizgames.module.coordinate.Size;
+import be.yildizgames.module.window.ScreenSize;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -46,7 +46,7 @@ class GuiCommonDefinition {
     /**
      * Size of the screen.
      */
-    private final Size screenSize;
+    private final ScreenSize screenSize;
     /**
      * Widget left coordinate.
      */
@@ -97,7 +97,7 @@ class GuiCommonDefinition {
      *
      * @param screen Screen size.
      */
-    GuiCommonDefinition(final Size screen) {
+    GuiCommonDefinition(final ScreenSize screen) {
         super();
         this.screenSize = screen;
     }

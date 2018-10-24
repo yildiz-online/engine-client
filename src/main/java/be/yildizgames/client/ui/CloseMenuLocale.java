@@ -22,26 +22,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE  SOFTWARE.
  */
+package be.yildizgames.client.ui;
 
-package be.yildizgames.client.game.engine.parser;
+import be.yildizgames.common.client.translation.TranslationKey;
 
-import be.yildizgames.module.graphic.material.Material;
-import be.yildizgames.module.window.ScreenSize;
-import org.junit.jupiter.api.Test;
+public interface CloseMenuLocale {
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+    TranslationKey getTitle();
 
-/**
- * @author Grégory Van den Borre
- */
-final class ButtonGuiDefinitionTest {
-
-    /***/
-    @Test
-    public void testButtonDefinition() {
-        final ButtonDefinition def = new ButtonDefinition(Material.EMPTY_NAME, Material.EMPTY_NAME, "", new ScreenSize(1,1));
-        assertEquals(Material.EMPTY_NAME, def.getMaterial());
-        assertEquals(Material.EMPTY_NAME, def.getMaterialHighlight());
-        assertEquals("", def.getFont());
-    }
+    TranslationKey getConnectionLost();
 }

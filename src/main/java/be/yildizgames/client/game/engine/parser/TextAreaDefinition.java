@@ -25,8 +25,8 @@
 
 package be.yildizgames.client.game.engine.parser;
 
-import be.yildizgames.module.coordinate.Size;
 import be.yildizgames.module.graphic.material.Material;
+import be.yildizgames.module.window.ScreenSize;
 
 /**
  * Data definition to create a TextAreaGui from an external resource(i.e parsing a
@@ -51,7 +51,7 @@ public final class TextAreaDefinition extends GuiCommonDefinition {
      *
      * @param screen Screen size data
      */
-    TextAreaDefinition(final Size screen) {
+    TextAreaDefinition(final ScreenSize screen) {
         super(screen);
     }
 
