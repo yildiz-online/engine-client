@@ -63,7 +63,8 @@ import be.yildizgames.shared.game.engine.AbstractGameEngine;
 import be.yildizgames.shared.protocol.EngineMessageFactory;
 import org.slf4j.Logger;
 
-import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -256,8 +257,7 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
      * @param resource Resource group data.
      */
     public final void addResourcePath(ResourcePath resource) {
-        File f = new File(resource.getPath());
-        if (!f.exists()) {
+        if (!Files.exists(Paths.get(resource.getPath()))) {
             throw new ResourceMissingException(f.getAbsolutePath());
         }
         this.windowEngine.updateWindow();

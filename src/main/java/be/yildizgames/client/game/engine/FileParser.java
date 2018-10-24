@@ -25,18 +25,8 @@
 
 package be.yildizgames.client.game.engine;
 
-import be.yildizgames.client.game.engine.parser.ContainerDefinition;
-import be.yildizgames.client.game.engine.parser.FontParser;
-import be.yildizgames.client.game.engine.parser.GuiParser;
-import be.yildizgames.client.game.engine.parser.MaterialParser;
-import be.yildizgames.client.game.engine.parser.MusicDefinition;
-import be.yildizgames.client.game.engine.parser.MusicParser;
-import be.yildizgames.client.game.engine.parser.ParserException;
-import be.yildizgames.client.game.engine.parser.ParserFactory;
-import be.yildizgames.client.game.engine.parser.PlayListDefinition;
-import be.yildizgames.client.game.engine.parser.SimpleMaterialDefinition;
+import be.yildizgames.client.game.engine.parser.*;
 import be.yildizgames.common.file.ResourcePath;
-import be.yildizgames.common.file.ResourceUtil;
 import be.yildizgames.common.logging.LogFactory;
 import be.yildizgames.module.audio.AudioEngine;
 import be.yildizgames.module.audio.Music;
@@ -49,7 +39,9 @@ import be.yildizgames.module.graphic.material.Material;
 import be.yildizgames.module.graphic.material.TextureUnit;
 import org.slf4j.Logger;
 
-import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 /**
@@ -87,16 +79,15 @@ public final class FileParser {
      * @param resource Resources for this resource group.
      */
     void addResourcePath(ResourcePath resource) {
-        final File folder = new File(resource.getPath());
-        if (!folder.exists() || !folder.isDirectory()) {
-            throw new IllegalArgumentException(folder.getAbsolutePath() + " is not a valid resource path.");
+        final Path folder = Paths.get(resource.getPath());
+        if (!Files.exists(folder) || !Files.isDirectory(folder)) {
+            throw new IllegalArgumentException(folder.toAbsolutePath().toString() + " is not a valid resource path.");
         }
-        final List<File> files = ResourceUtil.listFile(folder);
         MusicParser musicParser = this.parserFactory.createMusicParser();
         MaterialParser materialParser = this.parserFactory.createMaterialParser(this.graphicEngine.getScreenSize());
         FontParser fontParser = this.parserFactory.createFontParser();
         GuiParser guiParser = this.parserFactory.createGuiParser(this.graphicEngine.getScreenSize());
-        files.stream().filter(s -> s.getName().endsWith(".mat")).forEach(s -> {
+        Files.walk(folder).filter(s -> s.getName().endsWith(".mat")).forEach(s -> {
             LOGGER.info("Parsing material script " + s);
             final List<SimpleMaterialDefinition> matDef = materialParser.parse(s);
             for (final SimpleMaterialDefinition def : matDef) {
@@ -116,7 +107,7 @@ public final class FileParser {
                 m.setSceneBlend(def.getSceneBlend1(), def.getSceneBlend2());
             }
         });
-        files.stream().filter(s -> s.getName().endsWith(".pll")).forEach(s -> {
+        Files.walk(folder).filter(s -> s.getName().endsWith(".pll")).forEach(s -> {
             LOGGER.info("Parsing playlist script " + s);
             final List<PlayListDefinition> playListDef = musicParser.parse(s);
             for (final PlayListDefinition def : playListDef) {
@@ -127,15 +118,14 @@ public final class FileParser {
                 }
             }
         });
-        files
-                .stream()
+        Files.walk(folder)
                 .filter(s -> s.getName().endsWith(".fnt"))
                 .map(fontParser::parse)
                 .forEach(l -> l.forEach(
                         def ->
                                 this.graphicEngine.createFont(def.getName(), def.getPath(), def.getSize()).load()));
 
-        files.stream().filter(s -> s.getName().endsWith(".vew")).forEach(s -> {
+        Files.walk(folder).filter(s -> s.getName().endsWith(".vew")).forEach(s -> {
             LOGGER.info("Parsing view script " + s);
             try {
                 guiParser.parse(s).forEach(this::buildView);

@@ -25,7 +25,7 @@
 
 package be.yildizgames.client.game.engine.parser;
 
-import java.io.File;
+import java.nio.file.Path;
 import java.util.List;
 
 /**
@@ -43,6 +43,6 @@ public interface GuiParser {
      * @return A list containing Extracted data.
      * @throws ParserException If an error occurs during the parsing.
      */
-    List<ContainerDefinition> parse(File file) throws ParserException;
+    List<ContainerDefinition> parse(Path file) throws ParserException;
 
 }

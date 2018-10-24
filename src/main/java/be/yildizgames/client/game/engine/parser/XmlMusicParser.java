@@ -30,7 +30,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import java.io.File;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,7 +56,7 @@ final class XmlMusicParser implements MusicParser {
      * @return A list of PlayList definitions.
      */
     @Override
-    public List<PlayListDefinition> parse(final File xmlFile) {
+    public List<PlayListDefinition> parse(final Path xmlFile) {
         final List<PlayListDefinition> playListDefinitionList = new ArrayList<>();
         final Document doc = XMLParser.getDocument(xmlFile);
 

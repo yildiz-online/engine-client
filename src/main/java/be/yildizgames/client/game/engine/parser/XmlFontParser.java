@@ -30,7 +30,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import java.io.File;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,7 +57,7 @@ final class XmlFontParser implements FontParser {
      * @return The list of font definition.
      */
     @Override
-    public List<FontDefinition> parse(final File xmlFile) {
+    public List<FontDefinition> parse(final Path xmlFile) {
         final List<FontDefinition> result = new ArrayList<>();
         final Document doc = XMLParser.getDocument(xmlFile);
         final NodeList fontList = doc.getElementsByTagName("font");

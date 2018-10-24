@@ -30,7 +30,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import java.io.File;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,7 +55,7 @@ final class XmlLightParser {
      * @param xmlFile XML file.
      * @return The list of light definition.
      */
-    public List<LightDefinition> parse(final File xmlFile) {
+    public List<LightDefinition> parse(final Path xmlFile) {
         final List<LightDefinition> result = new ArrayList<>();
         final Document doc = XMLParser.getDocument(xmlFile);
         final NodeList lightList = doc.getElementsByTagName("light");

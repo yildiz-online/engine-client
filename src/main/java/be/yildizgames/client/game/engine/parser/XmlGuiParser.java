@@ -34,6 +34,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import java.io.File;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -157,7 +158,7 @@ final class XmlGuiParser implements GuiParser {
      * @throws ParserException If an error occurs during the parsing.
      */
     @Override
-    public List<ContainerDefinition> parse(final File xmlFile) throws ParserException {
+    public List<ContainerDefinition> parse(final Path xmlFile) throws ParserException {
         final List<ContainerDefinition> resultList = new ArrayList<>();
         final Document doc = XMLParser.getDocument(xmlFile);
         final NodeList viewList = doc.getElementsByTagName(XmlGuiParser.CONTAINER);

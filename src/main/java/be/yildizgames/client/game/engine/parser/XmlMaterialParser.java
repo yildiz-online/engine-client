@@ -31,7 +31,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import java.io.File;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,7 +65,7 @@ final class XmlMaterialParser implements MaterialParser {
      * @return The list of material definition.
      */
     @Override
-    public List<SimpleMaterialDefinition> parse(final File xmlFile) {
+    public List<SimpleMaterialDefinition> parse(final Path xmlFile) {
         final List<SimpleMaterialDefinition> resultList = new ArrayList<>();
         final Document doc = XMLParser.getDocument(xmlFile);
 

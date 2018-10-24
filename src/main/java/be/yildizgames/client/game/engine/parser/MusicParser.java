@@ -25,7 +25,7 @@
 
 package be.yildizgames.client.game.engine.parser;
 
-import java.io.File;
+import java.nio.file.Path;
 import java.util.List;
 
 /**
@@ -42,5 +42,5 @@ public interface MusicParser {
      * @param file File to parse.
      * @return A list containing Extracted data.
      */
-    List<PlayListDefinition> parse(final File file);
+    List<PlayListDefinition> parse(final Path file);
 }

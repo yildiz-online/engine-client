@@ -25,7 +25,7 @@
 
 package be.yildizgames.client.game.engine.parser;
 
-import java.io.File;
+import java.nio.file.Path;
 import java.util.List;
 
 /**
@@ -42,6 +42,6 @@ public interface MaterialParser {
      * @param file File to parse.
      * @return A list containing Extracted data.
      */
-    List<SimpleMaterialDefinition> parse(File file);
+    List<SimpleMaterialDefinition> parse(Path file);
 
 }
