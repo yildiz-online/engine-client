@@ -258,7 +258,7 @@ public class GameEngine extends AbstractGameEngine implements MessageSender {
      * @param resource Resource group data.
      */
     public final void addResourcePath(ResourcePath resource) {
-        if (!Files.exists(Paths.get(resource.getPath()))) {
+        if (!resource.exists()) {
             throw new ResourceMissingException(resource.getPath());
         }
         this.windowEngine.updateWindow();
