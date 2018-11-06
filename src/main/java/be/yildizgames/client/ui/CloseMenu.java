@@ -110,6 +110,7 @@ public final class CloseMenu extends Window {
      */
     @Override
     protected void setVisibleImpl(final boolean show) {
+        //Does nothing
     }
 
     /**
@@ -119,5 +120,6 @@ public final class CloseMenu extends Window {
      */
     @Override
     protected void setActiveImpl(final boolean active) {
+        //Does nothing
     }
 }

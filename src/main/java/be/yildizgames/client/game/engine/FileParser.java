@@ -89,7 +89,7 @@ public final class FileParser {
         FontParser fontParser = this.parserFactory.createFontParser();
         GuiParser guiParser = this.parserFactory.createGuiParser(this.graphicEngine.getScreenSize());
         Files.walk(folder).filter(s -> s.toString().endsWith(".mat")).forEach(s -> {
-            LOGGER.info("Parsing material script " + s);
+            LOGGER.info("Parsing material script {}", s);
             final List<SimpleMaterialDefinition> matDef = materialParser.parse(s);
             for (final SimpleMaterialDefinition def : matDef) {
                 final Material m = this.graphicEngine.getMaterialManager().loadSimpleTexture(def.getName(), def.getPath(), def.getTransparency());
@@ -109,7 +109,7 @@ public final class FileParser {
             }
         });
         Files.walk(folder).filter(s -> s.toString().endsWith(".pll")).forEach(s -> {
-            LOGGER.info("Parsing playlist script " + s);
+            LOGGER.info("Parsing playlist script {}", s);
             final List<PlayListDefinition> playListDef = musicParser.parse(s);
             for (final PlayListDefinition def : playListDef) {
                 final Playlist p = this.soundEngine.createPlaylist(def.getName());
@@ -127,7 +127,7 @@ public final class FileParser {
                                 this.graphicEngine.createFont(def.getName(), def.getPath(), def.getSize()).load()));
 
         Files.walk(folder).filter(s -> s.toString().endsWith(".vew")).forEach(s -> {
-            LOGGER.info("Parsing view script " + s);
+            LOGGER.info("Parsing view script {}", s);
             try {
                 guiParser.parse(s).forEach(this::buildView);
             } catch (final ParserException pe) {

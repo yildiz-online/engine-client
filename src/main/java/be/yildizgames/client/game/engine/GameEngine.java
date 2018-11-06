@@ -64,8 +64,6 @@ import be.yildizgames.shared.protocol.EngineMessageFactory;
 import org.slf4j.Logger;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 

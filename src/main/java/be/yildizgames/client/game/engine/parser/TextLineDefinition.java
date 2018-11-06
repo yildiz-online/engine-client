@@ -25,7 +25,6 @@
 
 package be.yildizgames.client.game.engine.parser;
 
-import be.yildizgames.module.coordinate.Size;
 import be.yildizgames.module.window.ScreenSize;
 
 /**
