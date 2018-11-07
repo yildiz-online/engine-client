@@ -44,6 +44,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * Helper class to parse script file to create widgets, views, materials, playlist...
@@ -88,52 +89,60 @@ public final class FileParser {
         MaterialParser materialParser = this.parserFactory.createMaterialParser(this.graphicEngine.getScreenSize());
         FontParser fontParser = this.parserFactory.createFontParser();
         GuiParser guiParser = this.parserFactory.createGuiParser(this.graphicEngine.getScreenSize());
-        Files.walk(folder).filter(s -> s.toString().endsWith(".mat")).forEach(s -> {
-            LOGGER.info("Parsing material script {}", s);
-            final List<SimpleMaterialDefinition> matDef = materialParser.parse(s);
-            for (final SimpleMaterialDefinition def : matDef) {
-                final Material m = this.graphicEngine.getMaterialManager().loadSimpleTexture(def.getName(), def.getPath(), def.getTransparency());
-                if (!def.getPath2().isEmpty()) {
-                    TextureUnit unit = m.getTechnique(0).createTexturePass().getUnit(0);
-                    unit.setTexture(def.getPath2());
-                    m.getTechnique(0).getPass(1).setTransparency(def.getTransparency());
+        try(Stream<Path> files = Files.walk(folder)) {
+            files.filter(s -> s.toString().endsWith(".mat")).forEach(s -> {
+                LOGGER.info("Parsing material script {}", s);
+                final List<SimpleMaterialDefinition> matDef = materialParser.parse(s);
+                for (final SimpleMaterialDefinition def : matDef) {
+                    final Material m = this.graphicEngine.getMaterialManager().loadSimpleTexture(def.getName(), def.getPath(), def.getTransparency());
+                    if (!def.getPath2().isEmpty()) {
+                        TextureUnit unit = m.getTechnique(0).createTexturePass().getUnit(0);
+                        unit.setTexture(def.getPath2());
+                        m.getTechnique(0).getPass(1).setTransparency(def.getTransparency());
+                    }
+                    if (!def.getGlowFile().isEmpty()) {
+                        m.addGlowTechnique(def.getGlowFile());
+                    }
+                    if (!def.isAffectedByLight()) {
+                        m.disableLight();
+                    }
+                    m.setBlendMode(def.getBlend());
+                    m.setSceneBlend(def.getSceneBlend1(), def.getSceneBlend2());
                 }
-                if (!def.getGlowFile().isEmpty()) {
-                    m.addGlowTechnique(def.getGlowFile());
+            });
+        }
+        try(Stream<Path> files = Files.walk(folder)) {
+            files.filter(s -> s.toString().endsWith(".pll")).forEach(s -> {
+                LOGGER.info("Parsing playlist script {}", s);
+                final List<PlayListDefinition> playListDef = musicParser.parse(s);
+                for (final PlayListDefinition def : playListDef) {
+                    final Playlist p = this.soundEngine.createPlaylist(def.getName());
+                    for (final MusicDefinition musicDef : def.getMusicList()) {
+                        final Music m = Music.withName(musicDef.getFile(), musicDef.getName());
+                        p.addMusic(m);
+                    }
                 }
-                if (!def.isAffectedByLight()) {
-                    m.disableLight();
-                }
-                m.setBlendMode(def.getBlend());
-                m.setSceneBlend(def.getSceneBlend1(), def.getSceneBlend2());
-            }
-        });
-        Files.walk(folder).filter(s -> s.toString().endsWith(".pll")).forEach(s -> {
-            LOGGER.info("Parsing playlist script {}", s);
-            final List<PlayListDefinition> playListDef = musicParser.parse(s);
-            for (final PlayListDefinition def : playListDef) {
-                final Playlist p = this.soundEngine.createPlaylist(def.getName());
-                for (final MusicDefinition musicDef : def.getMusicList()) {
-                    final Music m = Music.withName(musicDef.getFile(), musicDef.getName());
-                    p.addMusic(m);
-                }
-            }
-        });
-        Files.walk(folder)
-                .filter(s -> s.toString().endsWith(".fnt"))
-                .map(fontParser::parse)
-                .forEach(l -> l.forEach(
-                        def ->
-                                this.graphicEngine.createFont(def.getName(), def.getPath(), def.getSize()).load()));
+            });
+        }
+        try(Stream<Path> files = Files.walk(folder)) {
+            files
+                    .filter(s -> s.toString().endsWith(".fnt"))
+                    .map(fontParser::parse)
+                    .forEach(l -> l.forEach(
+                            def ->
+                                    this.graphicEngine.createFont(def.getName(), def.getPath(), def.getSize()).load()));
+        }
 
-        Files.walk(folder).filter(s -> s.toString().endsWith(".vew")).forEach(s -> {
-            LOGGER.info("Parsing view script {}", s);
-            try {
-                guiParser.parse(s).forEach(this::buildView);
-            } catch (final ParserException pe) {
-                LOGGER.error("Error parsing", pe);
-            }
-        });
+        try(Stream<Path> files = Files.walk(folder)) {
+            files.filter(s -> s.toString().endsWith(".vew")).forEach(s -> {
+                LOGGER.info("Parsing view script {}", s);
+                try {
+                    guiParser.parse(s).forEach(this::buildView);
+                } catch (final ParserException pe) {
+                    LOGGER.error("Error parsing", pe);
+                }
+            });
+        }
     }
 
     /**
