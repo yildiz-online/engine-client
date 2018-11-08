@@ -22,27 +22,21 @@
  *
  */
 
-module be.yildizgames.engine.client {
+package be.yildizgames.engine.client.exception;
 
-    requires be.yildizgames.common.client;
-    requires be.yildizgames.module.graphic;
-    requires be.yildizgames.common.geometry;
-    requires be.yildizgames.common.gameobject;
-    requires be.yildizgames.common.model;
-    requires be.yildizgames.module.physics;
-    requires be.yildizgames.common.shape;
-    requires be.yildizgames.common.file;
-    requires be.yildizgames.module.audio;
-    requires be.yildizgames.common.logging;
-    requires slf4j.api;
-    requires be.yildizgames.common.frame;
-    requires be.yildizgames.engine.shared;
-    requires be.yildizgames.module.scripting;
-    requires be.yildizgames.module.network;
-    requires be.yildizgames.common.exception;
-    requires be.yildizgames.common.util;
-    requires be.yildizgames.module.window;
-    requires be.yildizgames.common.mapping;
+import be.yildizgames.common.exception.business.BusinessException;
+import be.yildizgames.common.model.Version;
 
-    exports be.yildizgames.engine.client;
+/**
+ * @author Grégory Van den Borre
+ */
+public class InvalidClientVersionException extends BusinessException {
+
+    InvalidClientVersionException(String message) {
+        super(message);
+    }
+
+    InvalidClientVersionException(Version expected, Version current) {
+        super("Invalid version, expected: " + expected + " current: " + current);
+    }
 }
