@@ -26,25 +26,28 @@ package be.yildizgames.engine.client;
 
 import be.yildizgames.common.client.config.Configuration;
 import be.yildizgames.common.file.ResourcePath;
+import be.yildizgames.common.frame.FrameManager;
+import be.yildizgames.common.model.Version;
+import be.yildizgames.common.util.Engine;
 import be.yildizgames.engine.client.world.ClientWorld;
 import be.yildizgames.module.audio.AudioEngine;
 import be.yildizgames.module.graphic.GraphicEngine;
-import be.yildizgames.module.network.client.Client;
-import be.yildizgames.module.physics.PhysicEngine;
+import be.yildizgames.module.network.client.NetworkClient;
 import be.yildizgames.module.script.ScriptInterpreter;
-import be.yildizgames.common.util.Engine;
+import be.yildizgames.module.window.Cursor;
+import be.yildizgames.module.window.WindowEngine;
 
-public interface GameEngine extends Engine {
+public interface GameEngine extends Engine, FrameManager {
 
     ScriptInterpreter getScriptingEngine();
 
-    PhysicEngine getPhysicEngine();
-
     AudioEngine getAudioEngine();
 
-    Client getNetworkEngine();
+    NetworkClient getNetworkEngine();
 
     GraphicEngine getGraphicEngine();
+
+    WindowEngine getWindowEngine();
 
     /**
      * Create a new World to build graphic and physic object, a default Camera
@@ -63,4 +66,8 @@ public interface GameEngine extends Engine {
     void addResourcePath(ResourcePath resource);
 
     Configuration getConfiguration();
+
+    void checkVersion(Version version);
+
+    void createAndSetDefaultCursor(Cursor center);
 }

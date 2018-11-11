@@ -49,7 +49,6 @@ class SimpleGameEngineTest {
             SimpleGameEngine engine = new SimpleGameEngine();
             Assertions.assertNotNull(engine.getAudioEngine());
             Assertions.assertNotNull(engine.getGraphicEngine());
-            Assertions.assertNotNull(engine.getPhysicEngine());
             Assertions.assertNotNull(engine.getScriptingEngine());
             Assertions.assertNotNull(engine.getNetworkEngine());
             Assertions.assertNotNull(engine.getConfiguration());

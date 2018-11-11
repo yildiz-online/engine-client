@@ -36,7 +36,7 @@ public class InvalidClientVersionException extends BusinessException {
         super(message);
     }
 
-    InvalidClientVersionException(Version expected, Version current) {
+    public InvalidClientVersionException(Version expected, Version current) {
         super("Invalid version, expected: " + expected + " current: " + current);
     }
 }

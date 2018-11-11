@@ -33,10 +33,11 @@ import be.yildizgames.common.file.ResourcePath;
 import be.yildizgames.common.logging.LogFactory;
 import be.yildizgames.common.model.Version;
 import be.yildizgames.engine.client.GameEngine;
+import be.yildizgames.engine.client.exception.InvalidClientVersionException;
 import be.yildizgames.engine.client.world.ClientWorld;
 import be.yildizgames.engine.client.world.internal.GraphicPhysicWorld;
 import be.yildizgames.module.audio.AudioEngine;
-import be.yildizgames.module.graphic.GraphicEngine;
+import be.yildizgames.module.graphic.BaseGraphicEngine;
 import be.yildizgames.module.graphic.GraphicWorld;
 import be.yildizgames.module.graphic.NotRenderingListener;
 import be.yildizgames.module.graphic.gui.View;
@@ -44,8 +45,8 @@ import be.yildizgames.module.network.client.Client;
 import be.yildizgames.module.physics.PhysicEngine;
 import be.yildizgames.module.physics.PhysicWorld;
 import be.yildizgames.module.script.ScriptInterpreter;
+import be.yildizgames.module.window.BaseWindowEngine;
 import be.yildizgames.module.window.Cursor;
-import be.yildizgames.module.window.WindowEngine;
 import be.yildizgames.shared.game.engine.AbstractGameEngine;
 import be.yildizgames.shared.protocol.EngineMessageFactory;
 import org.slf4j.Logger;
@@ -69,12 +70,12 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
 
     private final ScriptInterpreter scriptInterpreter;
 
-    private final WindowEngine windowEngine;
+    private final BaseWindowEngine windowEngine;
 
     /**
      * Graphic logic.
      */
-    private final GraphicEngine graphicEngine;
+    private final BaseGraphicEngine graphicEngine;
 
     private final PhysicEngine physicEngine;
 
@@ -132,8 +133,8 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
         super(gameVersion);
         this.configuration = config;
         LOGGER.info("Initializing client game engine...");
-        this.windowEngine = WindowEngine.getEngine();
-        this.graphicEngine = GraphicEngine.getEngine(this.windowEngine);
+        this.windowEngine = BaseWindowEngine.getEngine();
+        this.graphicEngine = BaseGraphicEngine.getEngine(this.windowEngine);
         this.soundEngine = AudioEngine.getEngine();
         this.physicEngine = PhysicEngine.getEngine();
         this.networkEngine = Client.getEngine();
@@ -142,7 +143,7 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
         //this.windowEngine.createCursor(empty);
         //this.windowEngine.setCursor(empty);
         // this.addResourcePath("media/brs.yzk", "engine", FileType.ZIP);
-        this.addFrameListener(this.graphicEngine.getGuiBuilder().getAnimationManager());
+        this.addFrameListener(this.graphicEngine.getGuiFactory().getAnimationManager());
         this.windowEngine.registerInput(this.graphicEngine.getEventManager());
         LOGGER.info("Client game engine initialized.");
     }
@@ -177,11 +178,6 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
     }
 
     @Override
-    public PhysicEngine getPhysicEngine() {
-        return this.physicEngine;
-    }
-
-    @Override
     public AudioEngine getAudioEngine() {
         return this.soundEngine;
     }
@@ -192,7 +188,7 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
     }
 
     @Override
-    public GraphicEngine getGraphicEngine() {
+    public BaseGraphicEngine getGraphicEngine() {
         return this.graphicEngine;
     }
 
@@ -320,10 +316,12 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
         this.notRenderingListenerList.add(listener);
     }
 
+
     public final Cursor getDefaultCursor() {
         return this.defaultCursor;
     }
 
+    @Override
     public final void createAndSetDefaultCursor(Cursor cursor) {
         this.windowEngine.createCursor(cursor);
         this.defaultCursor = cursor;
@@ -333,6 +331,18 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
     @Override
     public final Configuration getConfiguration() {
         return configuration;
+    }
+
+    @Override
+    public void checkVersion(Version version) {
+        if (!this.getGameVersion().equals(version)) {
+            throw new InvalidClientVersionException(version, this.getGameVersion());
+        }
+    }
+
+    @Override
+    public BaseWindowEngine getWindowEngine() {
+        return this.graphicEngine.getWindowEngine();
     }
 
     public final boolean isClosed() {

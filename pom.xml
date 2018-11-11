@@ -65,8 +65,12 @@
     </dependency>
     <dependency>
       <groupId>be.yildiz-games</groupId>
+      <artifactId>module-network</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>be.yildiz-games</groupId>
       <artifactId>common-util</artifactId>
-      <version>1.0.2-SNAPSHOT</version>
+      <version>1.0.2</version>
     </dependency>
   </dependencies>
 </project>

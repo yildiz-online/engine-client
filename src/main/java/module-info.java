@@ -38,10 +38,10 @@ module be.yildizgames.engine.client {
     requires be.yildizgames.common.frame;
     requires be.yildizgames.engine.shared;
     requires be.yildizgames.module.scripting;
-    requires be.yildizgames.module.network;
     requires be.yildizgames.common.exception;
     requires be.yildizgames.common.util;
     requires be.yildizgames.module.window;
+    requires be.yildizgames.module.network;
     requires be.yildizgames.common.mapping;
 
     exports be.yildizgames.engine.client;
