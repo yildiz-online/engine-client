@@ -37,6 +37,7 @@ import be.yildizgames.engine.client.exception.InvalidClientVersionException;
 import be.yildizgames.engine.client.world.ClientWorld;
 import be.yildizgames.engine.client.world.internal.GraphicPhysicWorld;
 import be.yildizgames.module.audio.AudioEngine;
+import be.yildizgames.module.audio.BaseAudioEngine;
 import be.yildizgames.module.graphic.BaseGraphicEngine;
 import be.yildizgames.module.graphic.GraphicWorld;
 import be.yildizgames.module.graphic.NotRenderingListener;
@@ -82,7 +83,7 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
     /**
      * Sound logic.
      */
-    private final AudioEngine soundEngine;
+    private final BaseAudioEngine soundEngine;
 
     /**
      * Network logic.
@@ -135,7 +136,7 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
         LOGGER.info("Initializing client game engine...");
         this.windowEngine = BaseWindowEngine.getEngine();
         this.graphicEngine = BaseGraphicEngine.getEngine(this.windowEngine);
-        this.soundEngine = AudioEngine.getEngine();
+        this.soundEngine = BaseAudioEngine.getEngine();
         this.physicEngine = PhysicEngine.getEngine();
         this.networkEngine = Client.getEngine();
         this.scriptInterpreter = ScriptInterpreter.getEngine();
