@@ -25,6 +25,8 @@
 package be.yildizgames.engine.client;
 
 import be.yildizgames.common.client.config.Configuration;
+import be.yildizgames.common.exception.implementation.ImplementationException;
+import be.yildizgames.common.exception.technical.ResourceMissingException;
 import be.yildizgames.common.file.ResourcePath;
 import be.yildizgames.common.frame.FrameManager;
 import be.yildizgames.common.model.Version;
@@ -34,26 +36,45 @@ import be.yildizgames.module.audio.AudioEngine;
 import be.yildizgames.module.graphic.GraphicEngine;
 import be.yildizgames.module.network.client.NetworkClient;
 import be.yildizgames.module.script.ScriptInterpreter;
-import be.yildizgames.module.window.Cursor;
 import be.yildizgames.module.window.WindowEngine;
 
 public interface GameEngine extends Engine, FrameManager {
 
     ScriptInterpreter getScriptingEngine();
 
+    /**
+     * Provide the audio engine implementation.
+     *
+     * @return The audio engine implementation [ensure not null].
+     */
     AudioEngine getAudioEngine();
 
+    /**
+     * Provide the network client implementation.
+     *
+     * @return The network client implementation [ensure not null].
+     */
     NetworkClient getNetworkEngine();
 
+    /**
+     * Provide the graphic engine implementation.
+     *
+     * @return The graphic engine implementation [ensure not null].
+     */
     GraphicEngine getGraphicEngine();
 
+    /**
+     * Provide the window engine implementation.
+     *
+     * @return The window engine implementation [ensure not null].
+     */
     WindowEngine getWindowEngine();
 
     /**
      * Create a new World to build graphic and physic object, a default Camera
      * and view port is also built.
      *
-     * @return The newly built world.
+     * @return The newly built world [ensure not null].
      */
     ClientWorld createWorld();
 
@@ -62,12 +83,16 @@ public interface GameEngine extends Engine, FrameManager {
      * application stays awake when multiple calls are made.
      *
      * @param resource Resource group data.
+     * @throws ImplementationException If resource is null.
+     * @throws ResourceMissingException If the path does not exists.
      */
     void addResourcePath(ResourcePath resource);
 
+    /**
+     * Provide the configuration.
+     * @return The configuration data [ensure not null].
+     */
     Configuration getConfiguration();
 
     void checkVersion(Version version);
-
-    void createAndSetDefaultCursor(Cursor center);
 }

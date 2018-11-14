@@ -23,48 +23,9 @@
  * THE  SOFTWARE.
  */
 
-package be.yildizgames.engine.client.internal;
-
-import be.yildizgames.common.client.debug.DebugListener;
-import be.yildizgames.common.frame.StartFrameListener;
-import be.yildizgames.module.graphic.FpsProvider;
-
 /**
- * Provide the application current framerate.
+ * Internal package containing the classes used by the engine.
  *
  * @author Grégory Van den Borre
  */
-public final class FrameRateDisplayer extends StartFrameListener {
-
-    /**
-     * Registered DebugListener.
-     */
-    private final DebugListener debugListener;
-
-    /**
-     * Object providing the frame rate.
-     */
-    private final FpsProvider provider;
-
-    /**
-     * Create a new instance of frame rate displayer.
-     * @param debugListener To display the frame rate value. [Requires not null].
-     * @param provider Provide the frame rate value. [Requires not null].
-     */
-    public FrameRateDisplayer(DebugListener debugListener, FpsProvider provider) {
-        super();
-        this.debugListener = debugListener;
-        this.provider = provider;
-    }
-
-    /**
-     * Update the FPS and notify the debug listener.
-     * @return true.
-     */
-    @Override
-    public boolean frameStarted() {
-        this.debugListener.updateFps(this.provider.getFPS());
-        return true;
-    }
-
-}
+package be.yildizgames.engine.client.internal;

@@ -27,6 +27,7 @@ package be.yildizgames.engine.client.internal;
 
 import be.yildizgames.common.client.config.Configuration;
 import be.yildizgames.common.client.debug.DebugListener;
+import be.yildizgames.common.exception.implementation.ImplementationException;
 import be.yildizgames.common.exception.technical.ResourceMissingException;
 import be.yildizgames.common.file.FileResource;
 import be.yildizgames.common.file.ResourcePath;
@@ -132,6 +133,7 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
      */
     public SimpleGameEngine(final Configuration config, final Version gameVersion) {
         super(gameVersion);
+        ImplementationException.throwForNull(config);
         this.configuration = config;
         LOGGER.info("Initializing client game engine...");
         this.windowEngine = BaseWindowEngine.getEngine();
@@ -155,22 +157,6 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
 
     public SimpleGameEngine() {
         this(Configuration.getInstance(), new Version(Version.VersionType.RELEASE, 1,0,0,0));
-    }
-
-    /**
-     * Pause the rendering.
-     */
-    //@ensures rendering = false
-    public final void pauseRender() {
-        this.rendering = false;
-    }
-
-    /**
-     * Restart the rendering.
-     */
-    //@ensures rendering = true
-    public final void startRender() {
-        this.rendering = true;
     }
 
     @Override
@@ -212,9 +198,11 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
     @Override
     public final void runOneFrameImpl() {
         this.networkEngine.update();
+        //TODO rename into update()
         this.windowEngine.updateWindow();
         this.soundEngine.update();
         this.physicEngine.update();
+        //TODO move this login in graphicengine.update()
         if (this.rendering) {
             this.graphicEngine.update();
         } else {
@@ -227,19 +215,6 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
         }
     }
 
-    public final void registerMainView(final View v) {
-        this.graphicEngine.getEventManager().setDefaultView(v);
-    }
-
-    /**
-     * Unregister a view to receive inputs.
-     *
-     * @param v View to unregister.
-     */
-    public final void unregisterView(final View v) {
-        this.graphicEngine.getEventManager().removeView(v);
-    }
-
     @Override
     public final void stop() {
         this.networkEngine.sendMessage(messageFactory.closeSession());
@@ -247,7 +222,8 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
     }
 
     @Override
-    public final void addResourcePath(ResourcePath resource) {
+    public final void addResourcePath(final ResourcePath resource) {
+        ImplementationException.throwForNull(resource);
         if (!resource.exists("")) {
             throw new ResourceMissingException(resource.getPath());
         }
@@ -255,15 +231,37 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
         LOGGER.info("Registering resource group " + resource.getName());
         this.soundEngine.addResourcePath(resource);
         this.graphicEngine.addResourcePath(resource);
-        if (resource.getType() == FileResource.FileType.FILE) {
-            /*try {
-                new FileParser(this.graphicEngine, this.soundEngine)
-                        .addResourcePath(resource);
-            } catch (IOException e) {
-                LOGGER.error("Error reading path", e);
-            }*/
-        }
         LOGGER.info("Resource group {} registered.", resource.getName());
+    }
+
+    @Override
+    public final ClientWorld createWorld() {
+        GraphicWorld graphic = this.graphicEngine.createWorld();
+        PhysicWorld physic = this.physicEngine.createWorld();
+
+        ClientWorld world = new GraphicPhysicWorld(graphic, physic);
+        if (this.debug) {
+            world.setDebugMode();
+        }
+        return world;
+    }
+
+    @Override
+    public final Configuration getConfiguration() {
+        return this.configuration;
+    }
+
+    @Override
+    public final void checkVersion(final Version version) {
+        //TODO just make a call to the server and retrieve the expected version from there.
+        if (!this.getGameVersion().equals(version)) {
+            throw new InvalidClientVersionException(version, this.getGameVersion());
+        }
+    }
+
+    @Override
+    public final BaseWindowEngine getWindowEngine() {
+        return this.graphicEngine.getWindowEngine();
     }
 
     /**
@@ -280,16 +278,15 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
         }
     }
 
-    @Override
-    public final ClientWorld createWorld() {
-        GraphicWorld graphic = this.graphicEngine.createWorld();
-        PhysicWorld physic = this.physicEngine.createWorld();
-
-        ClientWorld world = new GraphicPhysicWorld(graphic, physic);
-        if (this.debug) {
-            world.setDebugMode();
-        }
-        return world;
+    /**
+     * Add a new NotRenderingListener to be executed when the rendering is
+     * paused.
+     *
+     * @param listener Listener to add.
+     */
+    public final void addNotRenderingListener(final NotRenderingListener listener) {
+        ImplementationException.throwForNull(listener);
+        this.notRenderingListenerList.add(listener);
     }
 
     /**
@@ -305,49 +302,6 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
             this.networkEngine.close();
             LOGGER.info("Engines closed.");
         }
-    }
-
-    /**
-     * Add a new NotRenderingListener to be executed when the rendering is
-     * paused.
-     *
-     * @param listener Listener to add.
-     */
-    public final void addNotRenderingListener(final NotRenderingListener listener) {
-        this.notRenderingListenerList.add(listener);
-    }
-
-
-    public final Cursor getDefaultCursor() {
-        return this.defaultCursor;
-    }
-
-    @Override
-    public final void createAndSetDefaultCursor(Cursor cursor) {
-        this.windowEngine.createCursor(cursor);
-        this.defaultCursor = cursor;
-        this.windowEngine.setCursor(defaultCursor);
-    }
-
-    @Override
-    public final Configuration getConfiguration() {
-        return configuration;
-    }
-
-    @Override
-    public void checkVersion(Version version) {
-        if (!this.getGameVersion().equals(version)) {
-            throw new InvalidClientVersionException(version, this.getGameVersion());
-        }
-    }
-
-    @Override
-    public BaseWindowEngine getWindowEngine() {
-        return this.graphicEngine.getWindowEngine();
-    }
-
-    public final boolean isClosed() {
-        return closed;
     }
 
 }

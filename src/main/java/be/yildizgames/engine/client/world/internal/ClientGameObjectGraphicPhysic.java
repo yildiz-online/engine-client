@@ -46,7 +46,7 @@ class ClientGameObjectGraphicPhysic extends BaseClientGameObject {
      */
     private final boolean physicMaster;
 
-    ClientGameObjectGraphicPhysic(BaseBody physicBody, GraphicObject graphicObject, boolean physicMaster) {
+    private ClientGameObjectGraphicPhysic(BaseBody physicBody, GraphicObject graphicObject, boolean physicMaster) {
         super(graphicObject);
         this.physicBody = physicBody;
         this.graphicObject = graphicObject;

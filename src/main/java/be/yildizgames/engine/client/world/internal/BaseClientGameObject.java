@@ -38,6 +38,7 @@ abstract class BaseClientGameObject implements ClientGameObject {
     private final GraphicObject graphicObject;
 
     protected BaseClientGameObject(GraphicObject graphicObject) {
+        super();
         this.graphicObject = graphicObject;
     }
 

@@ -32,10 +32,6 @@ import be.yildizgames.common.model.Version;
  */
 public class InvalidClientVersionException extends BusinessException {
 
-    InvalidClientVersionException(String message) {
-        super(message);
-    }
-
     public InvalidClientVersionException(Version expected, Version current) {
         super("Invalid version, expected: " + expected + " current: " + current);
     }

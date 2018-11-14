@@ -201,6 +201,7 @@ public class GraphicPhysicWorld implements ClientWorld {
                 .atPosition(position)
                 .withDirection(direction)
                 .buildStatic();
+        //TODO provide builder as physic engine
         GraphicObject object = this.graphicWorld.createStaticObject(id, plane, material, position, direction);
         return ClientGameObjectGraphicPhysic.withGraphicMaster(body, object);
     }

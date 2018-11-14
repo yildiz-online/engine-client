@@ -45,4 +45,5 @@ module be.yildizgames.engine.client {
     requires be.yildizgames.common.mapping;
 
     exports be.yildizgames.engine.client;
+    exports be.yildizgames.engine.client.world;
 }
