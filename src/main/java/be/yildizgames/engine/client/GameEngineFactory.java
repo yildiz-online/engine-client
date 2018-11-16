@@ -24,6 +24,7 @@
  */
 package be.yildizgames.engine.client;
 
+import be.yildizgames.common.client.config.Configuration;
 import be.yildizgames.common.model.Version;
 import be.yildizgames.engine.client.internal.SimpleGameEngine;
 
@@ -35,11 +36,12 @@ public class GameEngineFactory {
 
     /**
      * Create a new instance of the game engine.
+     * @param config Client configuration.
      * @param version Game version.
      * @return The created instance.
      */
-    public static GameEngine getWithGameVersion(Version version) {
-        return new SimpleGameEngine(version);
+    public static GameEngine build(Configuration config, Version version) {
+        return new SimpleGameEngine(config, version);
     }
 
 }
