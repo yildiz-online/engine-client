@@ -302,4 +302,8 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
         }
     }
 
+    @Override
+    public final boolean isClosed() {
+        return this.closed;
+    }
 }

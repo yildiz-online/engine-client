@@ -95,4 +95,8 @@ public interface GameEngine extends Engine, FrameManager {
     Configuration getConfiguration();
 
     void checkVersion(Version version);
+
+    boolean isClosed();
+
+    Version getGameVersion();
 }
