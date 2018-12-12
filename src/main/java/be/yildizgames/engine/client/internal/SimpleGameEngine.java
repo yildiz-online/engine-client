@@ -28,8 +28,8 @@ package be.yildizgames.engine.client.internal;
 import be.yildizgames.common.client.config.Configuration;
 import be.yildizgames.common.client.debug.DebugListener;
 import be.yildizgames.common.exception.implementation.ImplementationException;
-import be.yildizgames.common.exception.technical.ResourceMissingException;
 import be.yildizgames.common.file.ResourcePath;
+import be.yildizgames.common.file.exception.FileMissingException;
 import be.yildizgames.common.logging.LogFactory;
 import be.yildizgames.common.model.Version;
 import be.yildizgames.engine.client.GameEngine;
@@ -223,7 +223,7 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
     public final void addResourcePath(final ResourcePath resource) {
         ImplementationException.throwForNull(resource);
         if (!resource.exists("")) {
-            throw new ResourceMissingException(resource.getPath());
+            throw new FileMissingException(resource.getPath());
         }
         this.windowEngine.updateWindow();
         LOGGER.info("Registering resource group " + resource.getName());

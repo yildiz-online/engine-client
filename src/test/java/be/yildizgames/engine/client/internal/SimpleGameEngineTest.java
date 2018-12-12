@@ -25,8 +25,8 @@
 package be.yildizgames.engine.client.internal;
 
 import be.yildizgames.common.client.config.Configuration;
-import be.yildizgames.common.exception.technical.ResourceMissingException;
 import be.yildizgames.common.file.ResourcePath;
+import be.yildizgames.common.file.exception.FileMissingException;
 import be.yildizgames.common.model.Version;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Nested;
@@ -85,7 +85,7 @@ class SimpleGameEngineTest {
         @Test
         void fileNotExists() {
             SimpleGameEngine engine = new SimpleGameEngine();
-            Assertions.assertThrows(ResourceMissingException.class, () -> engine.addResourcePath(ResourcePath.directory("azerty", "azerty")));
+            Assertions.assertThrows(FileMissingException.class, () -> engine.addResourcePath(ResourcePath.directory("azerty", "azerty")));
         }
 
     }
