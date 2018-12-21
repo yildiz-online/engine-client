@@ -30,7 +30,6 @@ import be.yildizgames.common.client.debug.DebugListener;
 import be.yildizgames.common.exception.implementation.ImplementationException;
 import be.yildizgames.common.file.ResourcePath;
 import be.yildizgames.common.file.exception.FileMissingException;
-import be.yildizgames.common.logging.LogFactory;
 import be.yildizgames.common.model.Version;
 import be.yildizgames.engine.client.GameEngine;
 import be.yildizgames.engine.client.exception.InvalidClientVersionException;
@@ -50,6 +49,7 @@ import be.yildizgames.module.window.Cursor;
 import be.yildizgames.shared.game.engine.AbstractGameEngine;
 import be.yildizgames.shared.protocol.EngineMessageFactory;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +61,7 @@ import java.util.List;
  */
 public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
 
-    private static final Logger LOGGER = LogFactory.getInstance().getLogger(SimpleGameEngine.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(SimpleGameEngine.class);
 
     /**
      * Maximum frame per seconds.
