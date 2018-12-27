@@ -63,9 +63,5 @@
       <groupId>be.yildiz-games</groupId>
       <artifactId>module-scripting</artifactId>
     </dependency>
-    <dependency>
-      <groupId>be.yildiz-games</groupId>
-      <artifactId>module-network</artifactId>
-    </dependency>
   </dependencies>
 </project>
