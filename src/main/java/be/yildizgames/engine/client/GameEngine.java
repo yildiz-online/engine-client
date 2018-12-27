@@ -26,7 +26,6 @@ package be.yildizgames.engine.client;
 
 import be.yildizgames.common.client.config.Configuration;
 import be.yildizgames.common.exception.implementation.ImplementationException;
-import be.yildizgames.common.exception.technical.ResourceMissingException;
 import be.yildizgames.common.file.ResourcePath;
 import be.yildizgames.common.frame.FrameManager;
 import be.yildizgames.common.model.Version;
@@ -84,7 +83,7 @@ public interface GameEngine extends Engine, FrameManager {
      *
      * @param resource Resource group data.
      * @throws ImplementationException If resource is null.
-     * @throws ResourceMissingException If the path does not exists.
+     * @throws be.yildizgames.common.file.exception.FileMissingException If the path does not exists.
      */
     void addResourcePath(ResourcePath resource);
 
@@ -95,4 +94,8 @@ public interface GameEngine extends Engine, FrameManager {
     Configuration getConfiguration();
 
     void checkVersion(Version version);
+
+    boolean isClosed();
+
+    Version getGameVersion();
 }

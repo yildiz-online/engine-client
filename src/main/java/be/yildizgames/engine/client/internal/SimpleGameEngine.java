@@ -28,10 +28,8 @@ package be.yildizgames.engine.client.internal;
 import be.yildizgames.common.client.config.Configuration;
 import be.yildizgames.common.client.debug.DebugListener;
 import be.yildizgames.common.exception.implementation.ImplementationException;
-import be.yildizgames.common.exception.technical.ResourceMissingException;
-import be.yildizgames.common.file.FileResource;
 import be.yildizgames.common.file.ResourcePath;
-import be.yildizgames.common.logging.LogFactory;
+import be.yildizgames.common.file.exception.FileMissingException;
 import be.yildizgames.common.model.Version;
 import be.yildizgames.engine.client.GameEngine;
 import be.yildizgames.engine.client.exception.InvalidClientVersionException;
@@ -42,9 +40,8 @@ import be.yildizgames.module.audio.BaseAudioEngine;
 import be.yildizgames.module.graphic.BaseGraphicEngine;
 import be.yildizgames.module.graphic.GraphicWorld;
 import be.yildizgames.module.graphic.NotRenderingListener;
-import be.yildizgames.module.graphic.gui.View;
 import be.yildizgames.module.network.client.Client;
-import be.yildizgames.module.physics.PhysicEngine;
+import be.yildizgames.module.physics.BasePhysicEngine;
 import be.yildizgames.module.physics.PhysicWorld;
 import be.yildizgames.module.script.ScriptInterpreter;
 import be.yildizgames.module.window.BaseWindowEngine;
@@ -52,6 +49,7 @@ import be.yildizgames.module.window.Cursor;
 import be.yildizgames.shared.game.engine.AbstractGameEngine;
 import be.yildizgames.shared.protocol.EngineMessageFactory;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +61,7 @@ import java.util.List;
  */
 public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
 
-    private static final Logger LOGGER = LogFactory.getInstance().getLogger(SimpleGameEngine.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(SimpleGameEngine.class);
 
     /**
      * Maximum frame per seconds.
@@ -79,7 +77,7 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
      */
     private final BaseGraphicEngine graphicEngine;
 
-    private final PhysicEngine physicEngine;
+    private final BasePhysicEngine physicEngine;
 
     /**
      * Sound logic.
@@ -139,7 +137,7 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
         this.windowEngine = BaseWindowEngine.getEngine();
         this.graphicEngine = BaseGraphicEngine.getEngine(this.windowEngine);
         this.soundEngine = BaseAudioEngine.getEngine();
-        this.physicEngine = PhysicEngine.getEngine();
+        this.physicEngine = BasePhysicEngine.getEngine();
         this.networkEngine = Client.getEngine();
         this.scriptInterpreter = ScriptInterpreter.getEngine();
         Cursor empty = new Cursor("empty", "empty.gif");
@@ -225,7 +223,7 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
     public final void addResourcePath(final ResourcePath resource) {
         ImplementationException.throwForNull(resource);
         if (!resource.exists("")) {
-            throw new ResourceMissingException(resource.getPath());
+            throw new FileMissingException(resource.getPath());
         }
         this.windowEngine.updateWindow();
         LOGGER.info("Registering resource group " + resource.getName());
@@ -304,4 +302,8 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
         }
     }
 
+    @Override
+    public final boolean isClosed() {
+        return this.closed;
+    }
 }
