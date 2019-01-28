@@ -1,9 +1,9 @@
 /*
  * This file is part of the Yildiz-Engine project, licenced under the MIT License  (MIT)
  *
- * Copyright (c) 2018 Grégory Van den Borre
+ * Copyright (c) 2019 Grégory Van den Borre
  *
- * More infos available: https://www.yildiz-games.be
+ * More infos available: https://engine.yildiz-games.be
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this
  * software and associated documentation files (the "Software"), to deal in the Software
@@ -25,18 +25,20 @@
 
 package be.yildizgames.engine.client.world.internal;
 
-import be.yildizgames.engine.client.world.ClientGameObject;
 import be.yildizgames.common.gameobject.CollisionListener;
 import be.yildizgames.common.geometry.Point3D;
 import be.yildizgames.common.model.EntityId;
 import be.yildizgames.common.shape.Box;
 import be.yildizgames.common.shape.Plane;
 import be.yildizgames.common.shape.Sphere;
+import be.yildizgames.engine.client.world.ClientGameObject;
+import be.yildizgames.engine.client.world.ClientGameObjectBuilder;
 import be.yildizgames.engine.client.world.ClientWorld;
 import be.yildizgames.module.color.Color;
 import be.yildizgames.module.graphic.Font;
 import be.yildizgames.module.graphic.GraphicMesh;
 import be.yildizgames.module.graphic.GraphicObject;
+import be.yildizgames.module.graphic.GraphicObjectBuilder;
 import be.yildizgames.module.graphic.GraphicWorld;
 import be.yildizgames.module.graphic.RayProvider;
 import be.yildizgames.module.graphic.billboard.BillboardSet;
@@ -64,6 +66,7 @@ import be.yildizgames.module.physics.Gravity;
 import be.yildizgames.module.physics.KinematicBody;
 import be.yildizgames.module.physics.PhysicWorld;
 import be.yildizgames.module.physics.StaticBody;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -103,6 +106,11 @@ public class GraphicPhysicWorld implements ClientWorld {
     @Override
     public void addGhostCollisionListener(CollisionListener l) {
         this.physicWorld.addGhostCollisionListener(l);
+    }
+
+    @Override
+    public final ClientGameObjectBuilder createObjectBuilder() {
+        return new ClientObjectBuilder(this.physicWorld.createObject(), this.graphicWorld.createObject());
     }
 
     @Override
@@ -304,6 +312,11 @@ public class GraphicPhysicWorld implements ClientWorld {
                 .buildDynamic();
         GraphicObject object = this.graphicWorld.createMovableObject(id, shape, material, position);
         return ClientGameObjectGraphicPhysic.withDynamicMaster(body, object);
+    }
+
+    @Override
+    public ClientGameObjectBuilder createObject() {
+        return new ClientObjectBuilder(this.physicWorld.createObject(), this.graphicWorld.createObject());
     }
 
     @Override
