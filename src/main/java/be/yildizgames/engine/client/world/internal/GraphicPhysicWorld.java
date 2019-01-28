@@ -108,8 +108,9 @@ public class GraphicPhysicWorld implements ClientWorld {
         this.physicWorld.addGhostCollisionListener(l);
     }
 
+    @Override
     public final ClientGameObjectBuilder createObjectBuilder() {
-        return new ClientObjectBuilder(this.physicWorld.createObject(), new GraphicObjectBuilder());
+        return new ClientObjectBuilder(this.physicWorld.createObject(), this.graphicWorld.createObject());
     }
 
     @Override

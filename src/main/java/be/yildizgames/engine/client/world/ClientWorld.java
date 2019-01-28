@@ -69,6 +69,8 @@ public interface ClientWorld {
 
     void addGhostCollisionListener(CollisionListener l);
 
+    ClientGameObjectBuilder createObjectBuilder();
+
     /**
      * @deprecated Use createObject instead
      */
