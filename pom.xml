@@ -52,6 +52,10 @@
     </dependency>
     <dependency>
       <groupId>be.yildiz-games</groupId>
+      <artifactId>module-graphic</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>be.yildiz-games</groupId>
       <artifactId>module-audio</artifactId>
     </dependency>
     <dependency>
