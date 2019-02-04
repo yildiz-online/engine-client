@@ -24,5 +24,5 @@
  */
 package be.yildizgames.engine.client.exception;
 
-class InvalidClientVersionExceptionTest {
+public class InvalidClientVersionExceptionTest {
 }

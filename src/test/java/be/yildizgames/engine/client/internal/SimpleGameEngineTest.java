@@ -39,13 +39,13 @@ import java.nio.file.Path;
 /**
  * @author Grégory Van den Borre
  */
-class SimpleGameEngineTest {
+public class SimpleGameEngineTest {
 
     @Nested
-    class Constructor {
+    public class Constructor {
 
         @Test
-        void happyFlow() {
+        public void happyFlow() {
             SimpleGameEngine engine = new SimpleGameEngine();
             Assertions.assertNotNull(engine.getAudioEngine());
             Assertions.assertNotNull(engine.getGraphicEngine());
@@ -58,13 +58,13 @@ class SimpleGameEngineTest {
         }
 
         @Test
-        void versionHappyFlow() {
+        public void versionHappyFlow() {
             SimpleGameEngine engine = new SimpleGameEngine(Version.release(1,1,1,1));
             Assertions.assertEquals(Version.release(1,1,1,1), engine.getGameVersion());
         }
 
         @Test
-        void versionConfigHappyFlow() {
+        public void versionConfigHappyFlow() {
             SimpleGameEngine engine = new SimpleGameEngine(Configuration.getInstance(), Version.release(1,1,1,1));
             Assertions.assertEquals(Version.release(1,1,1,1), engine.getGameVersion());
             Assertions.assertEquals(Configuration.getInstance(), engine.getConfiguration());
@@ -73,17 +73,17 @@ class SimpleGameEngineTest {
     }
 
     @Nested
-    class AddResourcePath {
+    public class AddResourcePath {
 
         @Test
-        void happyFlow() throws IOException {
+        public void happyFlow() throws IOException {
             Path temp = Files.createTempDirectory("resource");
             SimpleGameEngine engine = new SimpleGameEngine();
             engine.addResourcePath(ResourcePath.directory("temp", temp.toString()));
         }
 
         @Test
-        void fileNotExists() {
+        public void fileNotExists() {
             SimpleGameEngine engine = new SimpleGameEngine();
             Assertions.assertThrows(FileMissingException.class, () -> engine.addResourcePath(ResourcePath.directory("azerty", "azerty")));
         }

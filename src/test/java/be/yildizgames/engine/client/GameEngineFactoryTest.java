@@ -7,19 +7,19 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-class GameEngineFactoryTest {
+public class GameEngineFactoryTest {
 
     @Nested
     class Build {
 
         @Test
-        void happyFlow() {
+        public void happyFlow() {
             GameEngine engine = GameEngineFactory.build(Configuration.getInstance(), Version.release(1,0,0,0));
             Assertions.assertNotNull(engine);
         }
 
         @Test
-        void withNullVersion() {
+        public void withNullVersion() {
             Assertions.assertThrows(ImplementationException.class, () -> GameEngineFactory.build(Configuration.getInstance(), null));
         }
 
