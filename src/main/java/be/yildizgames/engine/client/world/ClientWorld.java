@@ -71,6 +71,97 @@ public interface ClientWorld {
 
     ClientGameObjectBuilder createObjectBuilder();
 
+
+    /**
+     * Create a new game object builder.
+     * @return The game object builder.
+     */
+    ClientGameObjectBuilder createObject();
+
+    /**
+     * Create a new camera.
+     * @param name Camera name, must be unique.
+     * @return The created camera.
+     */
+    BehavioredCamera createCamera(String name);
+
+    /**
+     * Set the current skybox.
+     * @param sky Skybox to set.
+     */
+    void setSkybox(Skybox sky);
+
+    void setDebugMode();
+
+    /**
+     * Set the ambiant light color.
+     * @param color Color to use.
+     */
+    void setAmbientLight(Color color);
+
+
+
+    ElectricArc createElectricArc(Point3D origin, Point3D end, float width);
+
+    Explosion createExplosion();
+
+    /**
+     * Create a new particle system.
+     * @return The created particle system.
+     */
+    ParticleSystem createParticleSystem();
+
+    Sky createSky();
+
+    Ocean createOcean();
+
+    Line create3DLine();
+
+    LensFlare createLensFlare(LensFlare.LensFlareMaterial mat, Point3D position);
+
+    PointLight createPointLight(String name, Point3D position);
+
+    SpotLight createSpotLight(String name, Point3D position, Point3D direction);
+
+    DirectionalLight createDirectionalLight(String name, Point3D position, Point3D direction);
+
+    void serializeShapeFromMesh(String mesh, String file, String name);
+
+    boolean isDebug();
+
+    BehavioredCamera getCamera(String name);
+
+    Light getLight(String name);
+
+    MovableText createMovableText(String name, String text, Font font);
+
+    BillboardSet createBillboardSet(Material material);
+
+    Query createQuery(RayProvider provider);
+
+    GroundQuery createGroundQuery(RayProvider provider);
+
+    /**
+     * @deprecated Create explicitly the camera.
+     * @return the created camera.
+     */
+    @Deprecated(since = "2.1.2", forRemoval = true)
+    BehavioredCamera getDefaultCamera();
+
+    /**
+     * @deprecated Should be deleted in the light
+     * @param light light.
+     */
+    @Deprecated(since = "2.1.2", forRemoval = true)
+    void deleteLight(Light light);
+
+    /**
+     * @deprecated Should be deleted in the light
+     * @param name light name.
+     */
+    @Deprecated(since = "2.1.2", forRemoval = true)
+    void deleteLight(String name);
+
     /**
      * @deprecated Use createObject instead
      */
@@ -203,14 +294,6 @@ public interface ClientWorld {
      * @deprecated Use createObject instead
      */
     @Deprecated(since = "2.1.1", forRemoval = true)
-    default ClientGameObject createStaticObject(EntityId id, Plane plane, Material material, Point3D position) {
-        return createStaticObject(id, plane, material, position);
-    }
-
-    /**
-     * @deprecated Use createObject instead
-     */
-    @Deprecated(since = "2.1.1", forRemoval = true)
     ClientGameObject createStaticObject(EntityId id, Plane plane, Material material, Point3D position, Point3D direction);
 
     /**
@@ -260,56 +343,4 @@ public interface ClientWorld {
      */
     @Deprecated(since = "2.1.1", forRemoval = true)
     ClientGameObject createDynamicObject(EntityId id, Plane plane, float mass, Material material, Point3D position);
-
-    ClientGameObjectBuilder createObject();
-
-    BehavioredCamera createCamera(String name);
-
-    void setSkybox(Skybox sky);
-
-    void setDebugMode();
-
-    void setAmbientLight(Color color);
-
-    PointLight createPointLight(String name, Point3D position);
-
-    ElectricArc createElectricArc(Point3D origin, Point3D end, float width);
-
-    Explosion createExplosion();
-
-    ParticleSystem createParticleSystem();
-
-    Sky createSky();
-
-    Ocean createOcean();
-
-    BehavioredCamera getDefaultCamera();
-
-    Line create3DLine();
-
-    LensFlare createLensFlare(LensFlare.LensFlareMaterial mat, Point3D position);
-
-    SpotLight createSpotLight(String name, Point3D position, Point3D direction);
-
-    DirectionalLight createDirectionalLight(String name, Point3D position, Point3D direction);
-
-    void serializeShapeFromMesh(String mesh, String file, String name);
-
-    boolean isDebug();
-
-    void deleteLight(Light light);
-
-    BehavioredCamera getCamera(String name);
-
-    Light getLight(String name);
-
-    void deleteLight(String name);
-
-    MovableText createMovableText(String name, String text, Font font);
-
-    BillboardSet createBillboardSet(Material material);
-
-    Query createQuery(RayProvider provider);
-
-    GroundQuery createGroundQuery(RayProvider provider);
 }

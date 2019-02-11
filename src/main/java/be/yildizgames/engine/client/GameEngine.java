@@ -37,6 +37,10 @@ import be.yildizgames.module.network.client.NetworkClient;
 import be.yildizgames.module.script.ScriptInterpreter;
 import be.yildizgames.module.window.WindowEngine;
 
+/**
+ * Game engine API.
+ * @author Grégory Van den Borre
+ */
 public interface GameEngine extends Engine, FrameManager {
 
     ScriptInterpreter getScriptingEngine();
@@ -93,9 +97,21 @@ public interface GameEngine extends Engine, FrameManager {
      */
     Configuration getConfiguration();
 
+    /**
+     * Check if the version is the latest one.
+     * @param version Expected application version.
+     */
     void checkVersion(Version version);
 
+    /**
+     * Flag if the engine is closed or not.
+     * @return True if the engine is closed, false if it is running.
+     */
     boolean isClosed();
 
+    /**
+     * Provide the current application version.
+     * @return The version.
+     */
     Version getGameVersion();
 }

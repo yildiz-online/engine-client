@@ -140,10 +140,6 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
         this.physicEngine = BasePhysicEngine.getEngine();
         this.networkEngine = Client.getEngine();
         this.scriptInterpreter = ScriptInterpreter.getEngine();
-        Cursor empty = new Cursor("empty", "empty.gif");
-        //this.windowEngine.createCursor(empty);
-        //this.windowEngine.setCursor(empty);
-        // this.addResourcePath("media/brs.yzk", "engine", FileType.ZIP);
         this.addFrameListener(this.graphicEngine.getGuiFactory().getAnimationManager());
         this.windowEngine.registerInput(this.graphicEngine.getEventManager());
         LOGGER.info("Client game engine initialized.");
