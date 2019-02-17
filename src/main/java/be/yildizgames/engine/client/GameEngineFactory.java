@@ -35,6 +35,13 @@ import be.yildizgames.engine.client.internal.SimpleGameEngine;
 public class GameEngineFactory {
 
     /**
+     * Private constructor as no instance is expected.
+     */
+    private GameEngineFactory() {
+        super();
+    }
+
+    /**
      * Create a new instance of the game engine.
      * @param config Client configuration.
      * @param version Game version.

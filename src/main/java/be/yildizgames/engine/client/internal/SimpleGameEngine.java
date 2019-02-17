@@ -39,20 +39,15 @@ import be.yildizgames.module.audio.AudioEngine;
 import be.yildizgames.module.audio.BaseAudioEngine;
 import be.yildizgames.module.graphic.BaseGraphicEngine;
 import be.yildizgames.module.graphic.GraphicWorld;
-import be.yildizgames.module.graphic.NotRenderingListener;
 import be.yildizgames.module.network.client.Client;
 import be.yildizgames.module.physics.BasePhysicEngine;
 import be.yildizgames.module.physics.PhysicWorld;
 import be.yildizgames.module.script.ScriptInterpreter;
 import be.yildizgames.module.window.BaseWindowEngine;
-import be.yildizgames.module.window.Cursor;
 import be.yildizgames.shared.game.engine.AbstractGameEngine;
 import be.yildizgames.shared.protocol.EngineMessageFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Controller for all game logic, all other engines are called from here.
@@ -90,11 +85,6 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
     private final Client networkEngine;
 
     /**
-     * Renderer to notify when the graphic engine is not active.
-     */
-    private final List<NotRenderingListener> notRenderingListenerList = new ArrayList<>();
-
-    /**
      * Current configuration.
      */
     private final Configuration configuration;
@@ -105,11 +95,6 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
     private boolean running;
 
     /**
-     * Flag to check if the graphic engine must render the current frame.
-     */
-    private boolean rendering = true;
-
-    /**
      * Flag to check if the engines must run in debug mode or not.
      */
     private boolean debug;
@@ -118,8 +103,6 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
      * Flag to check if engine is closed.
      */
     private boolean closed = false;
-
-    private Cursor defaultCursor;
 
     private final EngineMessageFactory messageFactory = new EngineMessageFactory();
 
@@ -192,21 +175,10 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
     @Override
     public final void runOneFrameImpl() {
         this.networkEngine.update();
-        //TODO rename into update()
         this.windowEngine.updateWindow();
         this.soundEngine.update();
         this.physicEngine.update();
-        //TODO move this login in graphicengine.update()
-        if (this.rendering) {
-            this.graphicEngine.update();
-        } else {
-            for (int i = 0; i < this.notRenderingListenerList.size(); i++) {
-                if (!this.notRenderingListenerList.get(i).renderingStopped()) {
-                    this.notRenderingListenerList.remove(i);
-                    i--;
-                }
-            }
-        }
+        this.graphicEngine.update();
     }
 
     @Override
@@ -222,7 +194,7 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
             throw new FileMissingException(resource.getPath());
         }
         this.windowEngine.updateWindow();
-        LOGGER.info("Registering resource group " + resource.getName());
+        LOGGER.info("Registering resource group {} ...", resource.getName());
         this.soundEngine.addResourcePath(resource);
         this.graphicEngine.addResourcePath(resource);
         LOGGER.info("Resource group {} registered.", resource.getName());
@@ -265,22 +237,11 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
      * @param listener Listener to set.
      */
     public final void setDebugListener(final DebugListener listener) {
-        assert listener != null;
+        ImplementationException.throwForNull(listener);
         if(this.debug) {
             this.addFrameListener(new FrameRateDisplayer(listener, this.graphicEngine));
             this.graphicEngine.getEventManager().setDebugListener(listener);
         }
-    }
-
-    /**
-     * Add a new NotRenderingListener to be executed when the rendering is
-     * paused.
-     *
-     * @param listener Listener to add.
-     */
-    public final void addNotRenderingListener(final NotRenderingListener listener) {
-        ImplementationException.throwForNull(listener);
-        this.notRenderingListenerList.add(listener);
     }
 
     /**
