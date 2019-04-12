@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 public class GameEngineFactoryTest {
 
     @Nested
-    class Build {
+    public class Build {
 
         @Test
         public void happyFlow() {
