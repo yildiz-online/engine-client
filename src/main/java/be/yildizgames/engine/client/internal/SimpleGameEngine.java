@@ -43,6 +43,8 @@ import be.yildizgames.module.network.client.Client;
 import be.yildizgames.module.physics.BasePhysicEngine;
 import be.yildizgames.module.physics.PhysicWorld;
 import be.yildizgames.module.script.ScriptInterpreter;
+import be.yildizgames.module.vfs.Vfs;
+import be.yildizgames.module.vfs.VfsFactory;
 import be.yildizgames.module.window.BaseWindowEngine;
 import be.yildizgames.shared.game.engine.AbstractGameEngine;
 import be.yildizgames.shared.protocol.EngineMessageFactory;
@@ -117,9 +119,10 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
         ImplementationException.throwForNull(config);
         this.configuration = config;
         LOGGER.info("Initializing client game engine...");
+        Vfs vfs = VfsFactory.getVfs();
         this.windowEngine = BaseWindowEngine.getEngine();
         this.graphicEngine = BaseGraphicEngine.getEngine(this.windowEngine);
-        this.soundEngine = BaseAudioEngine.getEngine();
+        this.soundEngine = BaseAudioEngine.getEngine(vfs);
         this.physicEngine = BasePhysicEngine.getEngine();
         this.networkEngine = Client.getEngine();
         this.scriptInterpreter = ScriptInterpreter.getEngine();
@@ -175,7 +178,7 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
     @Override
     public final void runOneFrameImpl() {
         this.networkEngine.update();
-        this.windowEngine.updateWindow();
+        this.windowEngine.update();
         this.soundEngine.update();
         this.physicEngine.update();
         this.graphicEngine.update();
@@ -193,7 +196,7 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
         if (!resource.exists("")) {
             throw new FileMissingException(resource.getPath());
         }
-        this.windowEngine.updateWindow();
+        this.windowEngine.update();
         LOGGER.info("Registering resource group {} ...", resource.getName());
         this.soundEngine.addResourcePath(resource);
         this.graphicEngine.addResourcePath(resource);
