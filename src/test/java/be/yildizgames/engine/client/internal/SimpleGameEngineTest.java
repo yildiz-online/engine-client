@@ -24,24 +24,12 @@
  */
 package be.yildizgames.engine.client.internal;
 
-import be.yildizgames.common.client.config.Configuration;
-import be.yildizgames.common.file.ResourcePath;
-import be.yildizgames.common.file.exception.FileMissingException;
-import be.yildizgames.common.model.Version;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-
 /**
  * @author Grégory Van den Borre
  */
 public class SimpleGameEngineTest {
 
-    @Nested
+   /* @Nested
     public class Constructor {
 
         @Test
@@ -88,5 +76,5 @@ public class SimpleGameEngineTest {
             Assertions.assertThrows(FileMissingException.class, () -> engine.addResourcePath(ResourcePath.directory("azerty", "azerty")));
         }
 
-    }
+    }*/
 }
