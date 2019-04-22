@@ -44,11 +44,13 @@ public interface ClientGameObject extends GameMaterialization, Deletable {
 
     /**
      * Set the object visible on screen.
+     * @return This object for chaining.
      */
     ClientGameObject show();
 
     /**
      * Set the object not visible on screen.
+     * @return This object for chaining.
      */
     ClientGameObject hide();
 
@@ -62,6 +64,7 @@ public interface ClientGameObject extends GameMaterialization, Deletable {
      * Show or hide the object.
      *
      * @param visible <code>true</code> to show, <code>false</code> to hide.
+     * @return This object for chaining.
      */
     default ClientGameObject setVisible(boolean visible) {
         if (visible) {
@@ -77,7 +80,7 @@ public interface ClientGameObject extends GameMaterialization, Deletable {
      *
      * @param cast <code>true</code> to cast shadows, <code>false</code> to stop
      *             casting shadows.
-     * @return This object.
+     * @return This object for chaining.
      */
     ClientGameObject setCastShadow(boolean cast);
 
@@ -85,12 +88,13 @@ public interface ClientGameObject extends GameMaterialization, Deletable {
      * Set the material to this 3d object.
      *
      * @param newMaterial New material to use.
-     * @return This object.
+     * @return This object for chaining.
      */
     ClientGameObject setMaterial(Material newMaterial);
 
     /**
      * The gameobject cannot be picked by the mouse.
+     * @return This object for chaining.
      */
     ClientGameObject setUnpickable();
 
@@ -105,6 +109,7 @@ public interface ClientGameObject extends GameMaterialization, Deletable {
      *
      * @param yaw   X axis rotation value.
      * @param pitch Y axis rotation value.
+     * @return This object for chaining.
      */
     ClientGameObject rotate(float yaw, float pitch);
 
@@ -112,6 +117,7 @@ public interface ClientGameObject extends GameMaterialization, Deletable {
      * Set the object direction looking at a point.
      *
      * @param target Target coordinate.
+     * @return This object for chaining.
      */
     ClientGameObject lookAt(Point3D target);
 
