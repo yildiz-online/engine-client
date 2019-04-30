@@ -36,12 +36,21 @@ import be.yildizgames.module.graphic.GraphicEngine;
 import be.yildizgames.module.network.client.NetworkClient;
 import be.yildizgames.module.script.ScriptInterpreter;
 import be.yildizgames.module.window.WindowEngine;
+import be.yildizgames.shared.game.engine.Initializable;
 
 /**
  * Game engine API.
  * @author Grégory Van den Borre
  */
 public interface GameEngine extends Engine, FrameManager {
+
+
+    /**
+     * Add logic to be initialized before the engine starts.
+     *
+     * @param init Object to initialize before the engine starts.
+     */
+    void addInitializable(Initializable init);
 
     ScriptInterpreter getScriptingEngine();
 

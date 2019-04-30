@@ -158,6 +158,7 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
 
     @Override
     public final void start() {
+        this.initialize();
         LOGGER.info("Game engine started.");
         if (!this.running) {
             this.running = true;
