@@ -43,7 +43,6 @@ module be.yildizgames.engine.client {
     requires be.yildizgames.module.window;
     requires be.yildizgames.module.network;
     requires be.yildizgames.common.mapping;
-    requires be.yildizgames.module.vfs;
 
     exports be.yildizgames.engine.client;
     exports be.yildizgames.engine.client.world;
