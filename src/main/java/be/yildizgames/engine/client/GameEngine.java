@@ -123,4 +123,6 @@ public interface GameEngine extends Engine, FrameManager {
      * @return The version.
      */
     Version getGameVersion();
+
+    void close();
 }

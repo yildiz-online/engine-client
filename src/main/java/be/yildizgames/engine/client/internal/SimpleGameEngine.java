@@ -248,7 +248,7 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
     /**
      * Close all engines, ensure that the game loop is no longer running before using this.
      */
-    private void close() {
+    public final void close() {
         if (!this.closed) {
             LOGGER.info("Closing engines...");
             this.closed = true;
