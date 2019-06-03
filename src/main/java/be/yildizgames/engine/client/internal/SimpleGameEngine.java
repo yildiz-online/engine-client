@@ -46,8 +46,6 @@ import be.yildizgames.module.script.ScriptInterpreter;
 import be.yildizgames.module.window.BaseWindowEngine;
 import be.yildizgames.shared.game.engine.AbstractGameEngine;
 import be.yildizgames.shared.protocol.EngineMessageFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Controller for all game logic, all other engines are called from here.
@@ -56,7 +54,7 @@ import org.slf4j.LoggerFactory;
  */
 public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(SimpleGameEngine.class);
+    private static final System.Logger LOGGER = System.getLogger(SimpleGameEngine.class.getName());
 
     /**
      * Maximum frame per seconds.
@@ -116,7 +114,7 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
         super(gameVersion);
         ImplementationException.throwForNull(config);
         this.configuration = config;
-        LOGGER.info("Initializing client game engine...");
+        LOGGER.log(System.Logger.Level.INFO,"Initializing client game engine...");
         this.windowEngine = BaseWindowEngine.getEngine();
         this.graphicEngine = BaseGraphicEngine.getEngine(this.windowEngine);
         this.soundEngine = BaseAudioEngine.getEngine();
@@ -125,7 +123,7 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
         this.scriptInterpreter = ScriptInterpreter.getEngine();
         this.addFrameListener(this.graphicEngine.getGuiFactory().getAnimationManager());
         this.windowEngine.registerInput(this.graphicEngine.getEventManager());
-        LOGGER.info("Client game engine initialized.");
+        LOGGER.log(System.Logger.Level.INFO,"Initializing client game engine complete.");
     }
 
     public SimpleGameEngine(final Version gameVersion) {
@@ -159,7 +157,7 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
     @Override
     public final void start() {
         this.initialize();
-        LOGGER.info("Game engine started.");
+        LOGGER.log(System.Logger.Level.INFO,"Game engine started.");
         if (!this.running) {
             this.running = true;
             this.setFrameLimiter(SimpleGameEngine.FPS);
@@ -195,10 +193,10 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
             throw new FileMissingException(resource.getPath());
         }
         this.windowEngine.update();
-        LOGGER.info("Registering resource group {} ...", resource.getName());
+        LOGGER.log(System.Logger.Level.INFO,"Registering resource group {} ...", resource.getName());
         this.soundEngine.addResourcePath(resource);
         this.graphicEngine.addResourcePath(resource);
-        LOGGER.info("Resource group {} registered.", resource.getName());
+        LOGGER.log(System.Logger.Level.INFO,"Resource group {} registered.", resource.getName());
     }
 
     @Override
@@ -250,13 +248,13 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
      */
     public final void close() {
         if (!this.closed) {
-            LOGGER.info("Closing engines...");
+            LOGGER.log(System.Logger.Level.INFO,"Closing engines...");
             this.closed = true;
             this.graphicEngine.close();
             this.physicEngine.close();
             this.soundEngine.close();
             this.networkEngine.close();
-            LOGGER.info("Engines closed.");
+            LOGGER.log(System.Logger.Level.INFO,"Engines closed.");
         }
     }
 

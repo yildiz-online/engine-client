@@ -34,7 +34,6 @@ module be.yildizgames.engine.client {
     requires be.yildizgames.common.file;
     requires be.yildizgames.module.audio;
     requires be.yildizgames.common.logging;
-    requires slf4j.api;
     requires be.yildizgames.common.frame;
     requires be.yildizgames.engine.shared;
     requires be.yildizgames.module.scripting;
