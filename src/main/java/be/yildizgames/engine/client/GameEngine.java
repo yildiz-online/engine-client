@@ -96,7 +96,7 @@ public interface GameEngine extends FrameManager {
      * application stays awake when multiple calls are made.
      *
      * @param resource Resource group data.
-     * @throws ImplementationException If resource is null.
+     * @throws NullPointerException If resource is null.
      * @throws IllegalStateException If the path does not exists.
      */
     void addResourcePath(ResourcePath resource);
