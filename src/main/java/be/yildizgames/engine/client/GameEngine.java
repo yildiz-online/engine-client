@@ -25,11 +25,9 @@
 package be.yildizgames.engine.client;
 
 import be.yildizgames.common.client.config.Configuration;
-import be.yildizgames.common.exception.implementation.ImplementationException;
 import be.yildizgames.common.file.ResourcePath;
 import be.yildizgames.common.frame.FrameManager;
 import be.yildizgames.common.model.Version;
-import be.yildizgames.common.util.Engine;
 import be.yildizgames.engine.client.world.ClientWorld;
 import be.yildizgames.module.audio.AudioEngine;
 import be.yildizgames.module.graphic.GraphicEngine;
@@ -42,8 +40,11 @@ import be.yildizgames.shared.game.engine.Initializable;
  * Game engine API.
  * @author Grégory Van den Borre
  */
-public interface GameEngine extends Engine, FrameManager {
+public interface GameEngine extends FrameManager {
 
+    void start();
+
+    void stop();
 
     /**
      * Add logic to be initialized before the engine starts.
@@ -96,7 +97,7 @@ public interface GameEngine extends Engine, FrameManager {
      *
      * @param resource Resource group data.
      * @throws ImplementationException If resource is null.
-     * @throws be.yildizgames.common.file.exception.FileMissingException If the path does not exists.
+     * @throws IllegalStateException If the path does not exists.
      */
     void addResourcePath(ResourcePath resource);
 

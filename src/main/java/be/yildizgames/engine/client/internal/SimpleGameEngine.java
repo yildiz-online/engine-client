@@ -27,9 +27,7 @@ package be.yildizgames.engine.client.internal;
 
 import be.yildizgames.common.client.config.Configuration;
 import be.yildizgames.common.client.debug.DebugListener;
-import be.yildizgames.common.exception.implementation.ImplementationException;
 import be.yildizgames.common.file.ResourcePath;
-import be.yildizgames.common.file.exception.FileMissingException;
 import be.yildizgames.common.model.Version;
 import be.yildizgames.engine.client.GameEngine;
 import be.yildizgames.engine.client.exception.InvalidClientVersionException;
@@ -46,6 +44,8 @@ import be.yildizgames.module.script.ScriptInterpreter;
 import be.yildizgames.module.window.BaseWindowEngine;
 import be.yildizgames.shared.game.engine.AbstractGameEngine;
 import be.yildizgames.shared.protocol.EngineMessageFactory;
+
+import java.util.Objects;
 
 /**
  * Controller for all game logic, all other engines are called from here.
@@ -112,7 +112,7 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
      */
     public SimpleGameEngine(final Configuration config, final Version gameVersion) {
         super(gameVersion);
-        ImplementationException.throwForNull(config);
+        Objects.requireNonNull(config);
         this.configuration = config;
         LOGGER.log(System.Logger.Level.INFO,"Initializing client game engine...");
         this.windowEngine = BaseWindowEngine.getEngine();
@@ -188,9 +188,9 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
 
     @Override
     public final void addResourcePath(final ResourcePath resource) {
-        ImplementationException.throwForNull(resource);
+        Objects.requireNonNull(resource);
         if (!resource.exists("")) {
-            throw new FileMissingException(resource.getPath());
+            throw new IllegalStateException("File not found: " + resource.getPath());
         }
         this.windowEngine.update();
         LOGGER.log(System.Logger.Level.INFO,"Registering resource group {} ...", resource.getName());
@@ -236,7 +236,7 @@ public class SimpleGameEngine extends AbstractGameEngine implements GameEngine {
      * @param listener Listener to set.
      */
     public final void setDebugListener(final DebugListener listener) {
-        ImplementationException.throwForNull(listener);
+        Objects.requireNonNull(listener);
         if(this.debug) {
             this.addFrameListener(new FrameRateDisplayer(listener, this.graphicEngine));
             this.graphicEngine.getEventManager().setDebugListener(listener);

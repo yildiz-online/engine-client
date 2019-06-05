@@ -24,13 +24,12 @@
 
 package be.yildizgames.engine.client.exception;
 
-import be.yildizgames.common.exception.business.BusinessException;
 import be.yildizgames.common.model.Version;
 
 /**
  * @author Grégory Van den Borre
  */
-public class InvalidClientVersionException extends BusinessException {
+public class InvalidClientVersionException extends IllegalArgumentException {
 
     public InvalidClientVersionException(Version expected, Version current) {
         super("Invalid version, expected: " + expected + " current: " + current);
