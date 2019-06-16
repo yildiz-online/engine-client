@@ -27,17 +27,12 @@ package be.yildizgames.engine.client.world.internal;
 
 import be.yildizgames.common.gameobject.CollisionListener;
 import be.yildizgames.common.geometry.Point3D;
-import be.yildizgames.common.model.EntityId;
-import be.yildizgames.common.shape.Box;
-import be.yildizgames.common.shape.Plane;
-import be.yildizgames.common.shape.Sphere;
 import be.yildizgames.engine.client.world.ClientGameObject;
 import be.yildizgames.engine.client.world.ClientGameObjectBuilder;
+import be.yildizgames.engine.client.world.ClientGameObjectTemplate;
 import be.yildizgames.engine.client.world.ClientWorld;
 import be.yildizgames.module.color.Color;
 import be.yildizgames.module.graphic.Font;
-import be.yildizgames.module.graphic.GraphicMesh;
-import be.yildizgames.module.graphic.GraphicObject;
 import be.yildizgames.module.graphic.GraphicWorld;
 import be.yildizgames.module.graphic.RayProvider;
 import be.yildizgames.module.graphic.billboard.BillboardSet;
@@ -59,12 +54,8 @@ import be.yildizgames.module.graphic.misc.Skybox;
 import be.yildizgames.module.graphic.particle.ParticleSystem;
 import be.yildizgames.module.graphic.query.GroundQuery;
 import be.yildizgames.module.graphic.query.Query;
-import be.yildizgames.module.physics.DynamicBody;
-import be.yildizgames.module.physics.GhostObject;
 import be.yildizgames.module.physics.Gravity;
-import be.yildizgames.module.physics.KinematicBody;
 import be.yildizgames.module.physics.PhysicWorld;
-import be.yildizgames.module.physics.StaticBody;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -108,214 +99,20 @@ public class GraphicPhysicWorld implements ClientWorld {
     }
 
     @Override
-    public final ClientGameObjectBuilder createObjectBuilder() {
-        return new ClientObjectBuilder(this.physicWorld.createObject(), this.graphicWorld.createObject());
-    }
-
-    @Override
-    public GhostObject createGhost(EntityId id, Sphere sphere) {
-        return this.physicWorld.createObject()
-                .withId(id)
-                .withShape(sphere)
-                .buildGhost();
-    }
-
-    @Override
-    public ClientGameObject createMovableDoodad(GraphicMesh mesh) {
-        return new ClientGameObjectGraphic(graphicWorld.createMovableDoodad(mesh));
-    }
-
-    @Override
-    public ClientGameObject createMovableDoodad(Box box, Material material) {
-        return new ClientGameObjectGraphic(graphicWorld.createMovableDoodad(box, material));
-    }
-
-    @Override
-    public ClientGameObject createMovableDoodad(Sphere sphere, Material material) {
-        return new ClientGameObjectGraphic(graphicWorld.createMovableDoodad(sphere, material));
-    }
-
-    @Override
-    public ClientGameObject createMovableDoodad(Plane plane, Material material) {
-        return new ClientGameObjectGraphic(graphicWorld.createMovableDoodad(plane, material));
-    }
-
-    @Override
-    public ClientGameObject createStaticDoodad(GraphicMesh mesh, Point3D position, Point3D direction) {
-        return new ClientGameObjectGraphic(graphicWorld.createStaticDoodad(mesh, position, direction));
-    }
-
-    @Override
-    public ClientGameObject createStaticDoodad(Box box, Material material, Point3D position, Point3D direction) {
-        return new ClientGameObjectGraphic(graphicWorld.createStaticDoodad(box, material, position, direction));
-    }
-
-    @Override
-    public ClientGameObject createStaticDoodad(Sphere sphere, Material material, Point3D position, Point3D direction) {
-        return new ClientGameObjectGraphic(graphicWorld.createStaticDoodad(sphere, material, position, direction));
-    }
-
-    @Override
-    public ClientGameObject createStaticDoodad(Plane plane, Material material, Point3D position, Point3D direction) {
-        return new ClientGameObjectGraphic(graphicWorld.createStaticDoodad(plane, material, position, direction));
-    }
-
-    @Override
-    public ClientGameObject createStaticObject(EntityId id, GraphicMesh shape, Point3D position, Point3D direction) {
-        StaticBody body = this.physicWorld
-                .createObject()
-                .withId(id)
-                .withShape(Sphere.fromRadius(100))
-                .atPosition(position)
-                .withDirection(direction)
-                .buildStatic();
-        GraphicObject object = this.graphicWorld.createStaticObject(id, shape, position, direction);
-        return ClientGameObjectGraphicPhysic.withGraphicMaster(body, object);
-    }
-
-    @Override
-    public ClientGameObject createStaticObject(EntityId id, Box box, Material material, Point3D position, Point3D direction) {
-        StaticBody body = this.physicWorld
-                .createObject()
-                .withId(id)
-                .withShape(box)
-                .atPosition(position)
-                .withDirection(direction)
-                .buildStatic();
-        GraphicObject object =  this.graphicWorld.createStaticObject(id, box, material, position, direction);
-        return ClientGameObjectGraphicPhysic.withGraphicMaster(body, object);
-    }
-
-    @Override
-    public ClientGameObject createStaticObject(EntityId id, Sphere sphere, Material material, Point3D position, Point3D direction) {
-        StaticBody body = this.physicWorld
-                .createObject()
-                .withId(id)
-                .withShape(sphere)
-                .atPosition(position)
-                .withDirection(direction)
-                .buildStatic();
-        GraphicObject object = this.graphicWorld.createStaticObject(id, sphere, material, position, direction);
-        return ClientGameObjectGraphicPhysic.withGraphicMaster(body, object);
-    }
-
-    @Override
-    public ClientGameObject createStaticObject(EntityId id, Plane plane, Material material, Point3D position, Point3D direction) {
-        StaticBody body = this.physicWorld
-                .createObject()
-                .withId(id)
-                .withShape(plane)
-                .atPosition(position)
-                .withDirection(direction)
-                .buildStatic();
-        //TODO provide builder as physic engine
-        GraphicObject object = this.graphicWorld.createStaticObject(id, plane, material, position, direction);
-        return ClientGameObjectGraphicPhysic.withGraphicMaster(body, object);
-    }
-
-    @Override
-    public ClientGameObject createMovableObject(EntityId id, GraphicMesh shape, Point3D position) {
-        KinematicBody body = this.physicWorld
-                .createObject()
-                .withId(id)
-                .withShape(Sphere.fromRadius(100))
-                .atPosition(position)
-                .buildKinematic();
-        GraphicObject object = this.graphicWorld.createMovableObject(id, shape, position);
-        return ClientGameObjectGraphicPhysic.withGraphicMaster(body, object);
-    }
-
-    @Override
-    public ClientGameObject createMovableObject(EntityId id, Box box, Material material, Point3D position) {
-        KinematicBody body = this.physicWorld
-                .createObject()
-                .withId(id)
-                .withShape(box)
-                .atPosition(position)
-                .buildKinematic();
-        GraphicObject object = this.graphicWorld.createMovableObject(id, box, material, position);
-        return ClientGameObjectGraphicPhysic.withGraphicMaster(body, object);
-    }
-
-    @Override
-    public ClientGameObject createMovableObject(EntityId id, Sphere sphere, Material material, Point3D position) {
-        KinematicBody body = this.physicWorld
-                .createObject()
-                .withId(id)
-                .withShape(sphere)
-                .atPosition(position)
-                .buildKinematic();
-        GraphicObject object = this.graphicWorld.createMovableObject(id, sphere, material, position);
-        return ClientGameObjectGraphicPhysic.withGraphicMaster(body, object);
-    }
-
-    @Override
-    public ClientGameObject createMovableObject(EntityId id, Plane plane, Material material, Point3D position) {
-        KinematicBody body = this.physicWorld
-                .createObject()
-                .withId(id)
-                .withShape(plane)
-                .atPosition(position)
-                .buildKinematic();
-        GraphicObject object = this.graphicWorld.createMovableObject(id, plane, material, position);
-        return ClientGameObjectGraphicPhysic.withGraphicMaster(body, object);
-    }
-
-    @Override
-    public ClientGameObject createDynamicObject(EntityId id, GraphicMesh shape, float mass, Point3D position) {
-        DynamicBody body = this.physicWorld
-                .createObject()
-                .withId(id)
-                .withMass(mass)
-                .withShape(Sphere.fromRadius(100))
-                .atPosition(position)
-                .buildDynamic();
-        GraphicObject object = this.graphicWorld.createMovableObject(id, shape, position);
-        return ClientGameObjectGraphicPhysic.withDynamicMaster(body, object);
-    }
-
-    @Override
-    public ClientGameObject createDynamicObject(EntityId id, Box shape, float mass, Material material, Point3D position) {
-        DynamicBody body = this.physicWorld
-                .createObject()
-                .withId(id)
-                .withMass(mass)
-                .withShape(shape)
-                .atPosition(position)
-                .buildDynamic();
-        GraphicObject object = this.graphicWorld.createMovableObject(id, shape, material, position);
-        return ClientGameObjectGraphicPhysic.withDynamicMaster(body, object);
-    }
-
-    @Override
-    public ClientGameObject createDynamicObject(EntityId id, Sphere shape, float mass, Material material, Point3D position) {
-        DynamicBody body = this.physicWorld
-                .createObject()
-                .withMass(mass)
-                .withId(id)
-                .withShape(shape)
-                .atPosition(position)
-                .buildDynamic();
-        GraphicObject object = this.graphicWorld.createMovableObject(id, shape, material, position);
-        return ClientGameObjectGraphicPhysic.withDynamicMaster(body, object);
-    }
-
-    @Override
-    public ClientGameObject createDynamicObject(EntityId id, Plane shape, float mass, Material material, Point3D position) {
-        DynamicBody body = this.physicWorld
-                .createObject()
-                .withId(id)
-                .withMass(mass)
-                .withShape(shape)
-                .atPosition(position)
-                .buildDynamic();
-        GraphicObject object = this.graphicWorld.createMovableObject(id, shape, material, position);
-        return ClientGameObjectGraphicPhysic.withDynamicMaster(body, object);
-    }
-
-    @Override
     public ClientGameObjectBuilder createObject() {
         return new ClientObjectBuilder(this.physicWorld.createObject(), this.graphicWorld.createObject());
+    }
+
+    @Override
+    public ClientGameObject createObject(ClientGameObjectTemplate template) {
+        ClientGameObjectBuilder builder = this.createObject();
+        if(template.isDynamic()) {
+            return builder.buildDynamicObject();
+        } else if (template.isMovable()) {
+            return builder.buildMovableObject();
+        } else {
+            return builder.buildStaticObject();
+        }
     }
 
     @Override
