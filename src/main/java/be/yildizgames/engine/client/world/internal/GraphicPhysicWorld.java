@@ -50,7 +50,7 @@ import be.yildizgames.module.graphic.misc.Line;
 import be.yildizgames.module.graphic.misc.MovableText;
 import be.yildizgames.module.graphic.misc.Ocean;
 import be.yildizgames.module.graphic.misc.Sky;
-import be.yildizgames.module.graphic.misc.Skybox;
+import be.yildizgames.module.graphic.misc.SkyBox;
 import be.yildizgames.module.graphic.particle.ParticleSystem;
 import be.yildizgames.module.graphic.query.GroundQuery;
 import be.yildizgames.module.graphic.query.Query;
@@ -124,7 +124,7 @@ public class GraphicPhysicWorld implements ClientWorld {
     }
 
     @Override
-    public void setSkybox(Skybox sky) {
+    public void setSkyBox(SkyBox sky) {
         this.graphicWorld.setSkybox(sky);
     }
 

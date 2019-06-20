@@ -44,7 +44,7 @@ import be.yildizgames.module.graphic.misc.Line;
 import be.yildizgames.module.graphic.misc.MovableText;
 import be.yildizgames.module.graphic.misc.Ocean;
 import be.yildizgames.module.graphic.misc.Sky;
-import be.yildizgames.module.graphic.misc.Skybox;
+import be.yildizgames.module.graphic.misc.SkyBox;
 import be.yildizgames.module.graphic.particle.ParticleSystem;
 import be.yildizgames.module.graphic.query.GroundQuery;
 import be.yildizgames.module.graphic.query.Query;
@@ -80,10 +80,10 @@ public interface ClientWorld {
     BehavioredCamera createCamera(String name);
 
     /**
-     * Set the current skybox.
-     * @param sky Skybox to set.
+     * Set the current sky box.
+     * @param sky Sky box to set.
      */
-    void setSkybox(Skybox sky);
+    void setSkyBox(SkyBox sky);
 
     void setDebugMode();
 
